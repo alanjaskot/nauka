@@ -49,7 +49,7 @@ namespace nauka
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.datePicker_HolidayEnd = new System.Windows.Forms.DateTimePicker();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listView_vacation = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // label1
@@ -222,21 +222,21 @@ namespace nauka
             this.datePicker_HolidayEnd.Size = new System.Drawing.Size(300, 31);
             this.datePicker_HolidayEnd.TabIndex = 21;
             // 
-            // listView1
+            // listView_vacation
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(665, 562);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(542, 213);
-            this.listView1.TabIndex = 22;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView_vacation.HideSelection = false;
+            this.listView_vacation.Location = new System.Drawing.Point(665, 562);
+            this.listView_vacation.Name = "listView_vacation";
+            this.listView_vacation.Size = new System.Drawing.Size(542, 213);
+            this.listView_vacation.TabIndex = 22;
+            this.listView_vacation.UseCompatibleStateImageBehavior = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1520, 933);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.listView_vacation);
             this.Controls.Add(this.datePicker_HolidayEnd);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -287,7 +287,7 @@ namespace nauka
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DateTimePicker datePicker_HolidayEnd;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listView_vacation;
     }
 }
 

@@ -56,7 +56,6 @@ namespace nauka
             string firstName = txt_firstName.Text;
             string lastName = txt_lastName.Text;
             employeeList.Add(new Pracownik(firstName, lastName));
-            label2.Text = firstName;
             ShowEmployee();
             MessageBox.Show("Pracownik został dodany");
         }
@@ -99,8 +98,16 @@ namespace nauka
             {
                 employeeList[listboxIndexNumber].SetVacationHours(allHours);
                 string employee = employeeList[listboxIndexNumber].GetFullName().ToString();
-                string newPass = "pracownikowi " + employee + " pozostało " + (allHours / 8) + " dni oraz " + (allHours % 8) + " godz.";
-                MessageBox.Show(newPass);
+                string newVacation = "pracownikowi " + employee + " pozostało " + (allHours / 8) + " dni oraz " + (allHours % 8) + " godz.";
+                MessageBox.Show(newVacation);
+                newVacation = "pracownik " + employee + " wział urlop od " + datePicker_hollidayStart.Value.ToString("dd.MM.yyyy")
+                    + " do " + datePicker_HolidayEnd.Value.ToString("dd.MM.yyyy") + " w wymiarze " + vacationDays + " dni.";
+                listView_vacation.Items.Add(newVacation);
+
+            }
+            else
+            {
+                MessageBox.Show("Urlop mniejszt niż jeden dzień...");
             }
         }
 
