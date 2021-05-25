@@ -16,10 +16,6 @@ namespace nauka
 
         List<Pracownik> employeeList = new List<Pracownik>();
         int listboxIndexNumber;
-        DateTime[] dateTime = new DateTime[0]
-        {
-
-        };
 
         public Form1()
         {
@@ -81,10 +77,10 @@ namespace nauka
             {
                 employeeList[listboxIndexNumber].SetVacationHours(allHours);
                 string employee = employeeList[listboxIndexNumber].GetFullName().ToString();
-                string newPass = "pracownikowi " + employee + " pozostało " + (allHours / 8) + " dni oraz " + (allHours % 8) + " godzin";
+                string newPass = "pracownikowi " + employee + " pozostało " + (allHours / 8) + " dni oraz " + (allHours % 8) + " godz.";
                 MessageBox.Show(newPass);
 
-                String passDate = passDatePicker.Value.ToString("dd mm yyyy");
+                String passDate = passDatePicker.Value.ToString("dd.MM.yyyy");
                 newPass = employee + ": przepustka na " + passHours + "godzin - " + passDate;
                 list_passView.Items.Add(newPass);
 
@@ -95,48 +91,42 @@ namespace nauka
             }
         }
 
-        public static int BusinessDaysUntil(this DateTime firstDay, DateTime lastDay, params DateTime[] bankHolidays)
+        private void button_addVacation_Click(object sender, EventArgs e)
         {
-            firstDay = firstDay.Date;
-            lastDay = lastDay.Date;
-            if (firstDay > lastDay)
-                throw new ArgumentException("Incorrect last day " + lastDay);
-
-            TimeSpan span = lastDay - firstDay;
-            int businessDays = span.Days + 1;
-            int fullWeekCount = businessDays / 7;
-            // find out if there are weekends during the time exceedng the full weeks
-            if (businessDays > fullWeekCount * 7)
+           int vacationDays = DaysOfVacations(datePicker_hollidayStart.Value, datePicker_HolidayEnd.Value);
+            int allHours = employeeList[listboxIndexNumber].GetVacationHours() - (vacationDays * 8);
+            if (vacationDays > 0)
             {
-                // we are here to find out if there is a 1-day or 2-days weekend
-                // in the time interval remaining after subtracting the complete weeks
-                int firstDayOfWeek = (int)firstDay.DayOfWeek;
-                int lastDayOfWeek = (int)lastDay.DayOfWeek;
-                if (lastDayOfWeek < firstDayOfWeek)
-                    lastDayOfWeek += 7;
-                if (firstDayOfWeek <= 6)
-                {
-                    if (lastDayOfWeek >= 7)// Both Saturday and Sunday are in the remaining time interval
-                        businessDays -= 2;
-                    else if (lastDayOfWeek >= 6)// Only Saturday is in the remaining time interval
-                        businessDays -= 1;
-                }
-                else if (firstDayOfWeek <= 7 && lastDayOfWeek >= 7)// Only Sunday is in the remaining time interval
-                    businessDays -= 1;
+                employeeList[listboxIndexNumber].SetVacationHours(allHours);
+                string employee = employeeList[listboxIndexNumber].GetFullName().ToString();
+                string newPass = "pracownikowi " + employee + " pozostało " + (allHours / 8) + " dni oraz " + (allHours % 8) + " godz.";
+                MessageBox.Show(newPass);
             }
-
-            // subtract the weekends during the full weeks in the interval
-            businessDays -= fullWeekCount + fullWeekCount;
-
-            // subtract the number of bank holidays during the time interval
-            foreach (DateTime bankHoliday in bankHolidays)
-            {
-                DateTime bh = bankHoliday.Date;
-                if (firstDay <= bh && bh <= lastDay)
-                    --businessDays;
-            }
-
-            return businessDays;
         }
+
+        public int DaysOfVacations(DateTime start, DateTime end)
+        {
+            if (end < start)
+            {
+                throw new ArgumentException("Urlop nie może zaczynać się po zakończeniu", nameof(end));
+            }
+            if(end.Date == start.Date)
+            {
+                return 0;
+            }
+            int days = 0;
+            DateTime nextDate = start;
+            while (nextDate <= end.Date)
+            {
+                if(nextDate.DayOfWeek != DayOfWeek.Saturday && nextDate.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    days++;
+                }
+                nextDate = nextDate.AddDays(1);
+            }
+            return days;
+        }
+
     }
 }
+

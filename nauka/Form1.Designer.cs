@@ -45,10 +45,10 @@ namespace nauka
             this.list_passView = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
             this.passDatePicker = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.datePicker_hollidayStart = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.datePicker_HolidayEnd = new System.Windows.Forms.DateTimePicker();
             this.listView1 = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
@@ -89,6 +89,7 @@ namespace nauka
             this.button_addVacation.TabIndex = 3;
             this.button_addVacation.Text = "dodaj urlop";
             this.button_addVacation.UseVisualStyleBackColor = true;
+            this.button_addVacation.Click += new System.EventHandler(this.button_addVacation_Click);
             // 
             // newEmloyee
             // 
@@ -189,12 +190,12 @@ namespace nauka
             this.passDatePicker.Size = new System.Drawing.Size(178, 31);
             this.passDatePicker.TabIndex = 17;
             // 
-            // dateTimePicker1
+            // datePicker_hollidayStart
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(710, 496);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(300, 31);
-            this.dateTimePicker1.TabIndex = 18;
+            this.datePicker_hollidayStart.Location = new System.Drawing.Point(710, 496);
+            this.datePicker_hollidayStart.Name = "datePicker_hollidayStart";
+            this.datePicker_hollidayStart.Size = new System.Drawing.Size(300, 31);
+            this.datePicker_hollidayStart.TabIndex = 18;
             // 
             // label7
             // 
@@ -214,12 +215,12 @@ namespace nauka
             this.label8.TabIndex = 20;
             this.label8.Text = "do";
             // 
-            // dateTimePicker2
+            // datePicker_HolidayEnd
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(1078, 495);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(300, 31);
-            this.dateTimePicker2.TabIndex = 21;
+            this.datePicker_HolidayEnd.Location = new System.Drawing.Point(1078, 495);
+            this.datePicker_HolidayEnd.Name = "datePicker_HolidayEnd";
+            this.datePicker_HolidayEnd.Size = new System.Drawing.Size(300, 31);
+            this.datePicker_HolidayEnd.TabIndex = 21;
             // 
             // listView1
             // 
@@ -236,10 +237,10 @@ namespace nauka
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1520, 933);
             this.Controls.Add(this.listView1);
-            this.Controls.Add(this.dateTimePicker2);
+            this.Controls.Add(this.datePicker_HolidayEnd);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.datePicker_hollidayStart);
             this.Controls.Add(this.passDatePicker);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.list_passView);
@@ -282,10 +283,10 @@ namespace nauka
         private System.Windows.Forms.ListBox list_passView;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker passDatePicker;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker datePicker_hollidayStart;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker datePicker_HolidayEnd;
         private System.Windows.Forms.ListView listView1;
     }
 }
