@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\alanj\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\alanj\\.nuget\\packages"
+    ]
+  }
+}
