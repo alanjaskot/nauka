@@ -38,7 +38,18 @@ namespace nauka
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txt_lastName = new System.Windows.Forms.TextBox();
+            this.txt_hourStart = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txt_hourStop = new System.Windows.Forms.TextBox();
+            this.list_passView = new System.Windows.Forms.ListBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.passDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // label1
@@ -58,19 +69,21 @@ namespace nauka
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(403, 679);
             this.listBox1.TabIndex = 1;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // button_addPass
             // 
-            this.button_addPass.Location = new System.Drawing.Point(719, 165);
+            this.button_addPass.Location = new System.Drawing.Point(665, 165);
             this.button_addPass.Name = "button_addPass";
             this.button_addPass.Size = new System.Drawing.Size(204, 34);
             this.button_addPass.TabIndex = 2;
             this.button_addPass.Text = "przepustka";
             this.button_addPass.UseVisualStyleBackColor = true;
+            this.button_addPass.Click += new System.EventHandler(this.button_addPass_Click);
             // 
             // button_addVacation
             // 
-            this.button_addVacation.Location = new System.Drawing.Point(719, 299);
+            this.button_addVacation.Location = new System.Drawing.Point(665, 431);
             this.button_addVacation.Name = "button_addVacation";
             this.button_addVacation.Size = new System.Drawing.Size(204, 34);
             this.button_addVacation.TabIndex = 3;
@@ -119,30 +132,125 @@ namespace nauka
             this.txt_lastName.Size = new System.Drawing.Size(207, 31);
             this.txt_lastName.TabIndex = 10;
             // 
+            // txt_hourStart
+            // 
+            this.txt_hourStart.Location = new System.Drawing.Point(947, 167);
+            this.txt_hourStart.Name = "txt_hourStart";
+            this.txt_hourStart.Size = new System.Drawing.Size(86, 31);
+            this.txt_hourStart.TabIndex = 11;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1000, 294);
+            this.label2.Location = new System.Drawing.Point(895, 170);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 25);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "label2";
+            this.label2.Size = new System.Drawing.Size(34, 25);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "od";
             // 
-            // button_show_emp
+            // label5
             // 
-
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(1065, 170);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(34, 25);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "do";
+            // 
+            // txt_hourStop
+            // 
+            this.txt_hourStop.Location = new System.Drawing.Point(1121, 168);
+            this.txt_hourStop.Name = "txt_hourStop";
+            this.txt_hourStop.Size = new System.Drawing.Size(86, 31);
+            this.txt_hourStop.TabIndex = 14;
+            // 
+            // list_passView
+            // 
+            this.list_passView.FormattingEnabled = true;
+            this.list_passView.ItemHeight = 25;
+            this.list_passView.Location = new System.Drawing.Point(665, 240);
+            this.list_passView.Name = "list_passView";
+            this.list_passView.Size = new System.Drawing.Size(542, 154);
+            this.list_passView.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(1345, 165);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(59, 25);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "label6";
+            // 
+            // passDatePicker
+            // 
+            this.passDatePicker.Location = new System.Drawing.Point(1247, 170);
+            this.passDatePicker.Name = "passDatePicker";
+            this.passDatePicker.Size = new System.Drawing.Size(178, 31);
+            this.passDatePicker.TabIndex = 17;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(710, 496);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(300, 31);
+            this.dateTimePicker1.TabIndex = 18;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(666, 497);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(34, 25);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "od";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(1032, 498);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(34, 25);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "do";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(1078, 495);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(300, 31);
+            this.dateTimePicker2.TabIndex = 21;
+            // 
+            // listView1
+            // 
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(665, 562);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(542, 213);
+            this.listView1.TabIndex = 22;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1520, 933);
+            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.dateTimePicker2);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.passDatePicker);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.list_passView);
+            this.Controls.Add(this.txt_hourStop);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.txt_hourStart);
             this.Controls.Add(this.txt_lastName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txt_firstName);
-
             this.Controls.Add(this.newEmloyee);
             this.Controls.Add(this.button_addVacation);
             this.Controls.Add(this.button_addPass);
@@ -167,7 +275,18 @@ namespace nauka
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txt_lastName;
+        private System.Windows.Forms.TextBox txt_hourStart;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txt_hourStop;
+        private System.Windows.Forms.ListBox list_passView;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DateTimePicker passDatePicker;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.ListView listView1;
     }
 }
 

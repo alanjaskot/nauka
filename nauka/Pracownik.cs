@@ -9,7 +9,6 @@ namespace nauka
         private string firstName, lastName;
         private int  vacationHours;
         private int deafualtVacationHours = 176;
-        private int toManyHours;
 
         public Pracownik() { }
 
@@ -17,6 +16,7 @@ namespace nauka
         {
             this.firstName = firstName;
             this.lastName = lastName;
+            this.vacationHours = 176;
         }
 
         public void SetFirstName (string firstName)   {this.firstName = firstName;}
@@ -33,37 +33,11 @@ namespace nauka
             vacationHours = deafualtVacationHours;
             return vacationHours;
         }
-
-        public int PlanningVacation (int planningVacationDays)
+      
+        public string GetFullName()
         {
-            int planningVacationHours = planningVacationDays * 8;
-
-            if (vacationHours >= planningVacationHours)
-            {
-                vacationHours -= planningVacationHours;
-                return vacationHours;
-            }
-            return -1;
-        }
-
-        public int PlanningPass (int planningPassHours)
-        {
-            if(planningPassHours >= vacationHours)
-            {
-                vacationHours -= planningPassHours;
-            }
-            return -1;
-        }
-
-        public Pracownik AddNewPracownik(string firstName, string lastName)
-        {
-            return new Pracownik(firstName, lastName);
-        }
-
-        public string DisplayPracownik(Pracownik pracownik)
-        {
-            string displayPracownik = pracownik.GetFirstName() + " " + pracownik.GetLastName() + "/n";
-            return displayPracownik;
+            string fullName = GetFirstName() + " " + GetLastName();
+            return fullName;
         }
 
     }
