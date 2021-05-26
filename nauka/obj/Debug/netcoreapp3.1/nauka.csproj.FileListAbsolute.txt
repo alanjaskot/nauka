@@ -1,0 +1,15 @@
+D:\nauka\nauka\bin\Debug\netcoreapp3.1\nauka.exe
+D:\nauka\nauka\bin\Debug\netcoreapp3.1\nauka.deps.json
+D:\nauka\nauka\bin\Debug\netcoreapp3.1\nauka.runtimeconfig.json
+D:\nauka\nauka\bin\Debug\netcoreapp3.1\nauka.runtimeconfig.dev.json
+D:\nauka\nauka\bin\Debug\netcoreapp3.1\nauka.dll
+D:\nauka\nauka\bin\Debug\netcoreapp3.1\nauka.pdb
+D:\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.csprojAssemblyReference.cache
+D:\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.Form1.resources
+D:\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.csproj.GenerateResource.cache
+D:\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.AssemblyInfoInputs.cache
+D:\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.AssemblyInfo.cs
+D:\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.csproj.CoreCompileInputs.cache
+D:\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.dll
+D:\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.pdb
+D:\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.genruntimeconfig.cache
