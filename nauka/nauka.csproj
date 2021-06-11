@@ -6,4 +6,8 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="V2\Views\Test\" />
+  </ItemGroup>
+
 </Project>

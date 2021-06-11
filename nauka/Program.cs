@@ -1,3 +1,4 @@
+using nauka.V2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,22 @@ namespace nauka
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            var showView = MessageBox.Show("Czy nowy widok?", "Info", MessageBoxButtons.YesNo);
+
+            var view = default(Form);
+
+            switch(showView)
+            {
+                case DialogResult.Yes:
+                    view = new V2.Views.MainView.Views.MainViewView();
+                    break;
+                default:
+                    view = new Form1();
+                    break;
+            }
+
+            Application.Run(view);
         }
     }
 }
