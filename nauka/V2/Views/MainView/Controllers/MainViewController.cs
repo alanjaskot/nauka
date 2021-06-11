@@ -20,6 +20,7 @@ namespace nauka.V2.Views.MainView.Controllers
 
         private List<Employee> _employees;
         private Timer _timeTimerUpdater;
+        private bool logged = false;
 
         public MainViewController(MainViewView mainView)
         {
@@ -108,12 +109,55 @@ namespace nauka.V2.Views.MainView.Controllers
 
             _mainView.buttonUserAdd.Click += (object sender, EventArgs e) =>
             {
-                AddNewUser();
+                if (!logged)
+                {
+                    NotLogged();
+                }
+                else
+                {
+                    AddNewUser();
+                } 
             };
 
             _mainView.buttonUserEdit.Click += (object sender, EventArgs e) =>
             {
-               EditUser();
+                if (!logged)
+                {
+                    NotLogged();
+                }
+                else
+                {
+                    EditUser();
+                }
+            };
+
+            _mainView.buttonUserRemove.Click += (object sender, EventArgs e) =>
+            {
+                if (!logged)
+                {
+                    NotLogged();
+                }
+                else
+                {
+                    RemoveUser();
+                }
+            };
+
+            _mainView.dataGridViewUsers.DoubleClick += (object sender, EventArgs e) =>
+            {
+                if (!logged)
+                {
+                    NotLogged();
+                }
+                else
+                {
+                    EditUser();
+                }
+            };
+
+            _mainView.buttonLogin.Click += (object sender, EventArgs e) =>
+            {
+                LoginIn();
             };
 
             await Task.CompletedTask;
@@ -121,7 +165,6 @@ namespace nauka.V2.Views.MainView.Controllers
 
         private void EditUser() 
         {
-            // tu dodac edycje
             
             var editedEmployee = _employees[_mainView.dataGridViewUsers.CurrentRow.Index];
             var view = new Employees.Views.EmployeeView();
@@ -130,13 +173,6 @@ namespace nauka.V2.Views.MainView.Controllers
             if (view.ShowDialog() == DialogResult.OK)
             {
                 var selectedEmlpoyee2 = view.SetObjectToEdit;
-
-                Task.Run(async () =>
-                {
-                   
-
-                }).Wait();
-
                 RefreshView();
             }
         }
@@ -159,7 +195,33 @@ namespace nauka.V2.Views.MainView.Controllers
                 }).Wait();
 
                 RefreshView();
+            }
+        }
 
+        public void RemoveUser()
+        {
+            var employeeToRemove = _employees[_mainView.dataGridViewUsers.CurrentRow.Index];
+            const string message = "Czy na pewno chcesz usunąć pracownika?";
+            const string caption = "Usunięcie pracownika";
+            var result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if(result == DialogResult.Yes)
+            {
+                _employees.Remove(employeeToRemove);
+            }
+
+            RefreshView();
+        }
+
+        public void LoginIn()
+        {
+            var newEmployee = new Employee();
+            var view = new Logins.Views.LoginView();
+            view.SetObjectToEdit = newEmployee;
+
+            if (view.ShowDialog() == DialogResult.OK)
+            {
+                Logged();
             }
         }
 
@@ -192,6 +254,16 @@ namespace nauka.V2.Views.MainView.Controllers
             _mainViewModel = new MainViewModel();
             
             await Task.CompletedTask;
+        }
+
+        public void NotLogged()
+        {
+            MessageBox.Show("Proszę się zalogować!");
+        }
+
+        public void Logged()
+        {
+            logged = true;
         }
 
     }

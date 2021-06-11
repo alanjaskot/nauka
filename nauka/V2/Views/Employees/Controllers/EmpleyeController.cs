@@ -3,6 +3,7 @@ using nauka.V2.Views.Employees.Models;
 using nauka.V2.Views.Employees.Views;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,6 +36,9 @@ namespace nauka.V2.Views.Employees.Controllers
             };
             _view.buttonOk.Click += (object sender, EventArgs e) =>
             {
+                if (!ValidateModel())
+                    return;
+
                 _view.DialogResult = System.Windows.Forms.DialogResult.OK;
             };
 
@@ -52,12 +56,10 @@ namespace nauka.V2.Views.Employees.Controllers
 
         private async Task InitViewModel()
         {
-
             if (_model == null)
             {
                 _model = new EmployeModel();
             } else 
-
 
             await Task.CompletedTask;
         }
@@ -81,14 +83,52 @@ namespace nauka.V2.Views.Employees.Controllers
             }
         }
 
-        private void UpdateModel()
+        private bool ValidateModel()
         {
+            var result = true;
+
+            if (result)
+            {
+                if (_view.comboBoxSection.SelectedIndex == 0)
+                {
+                    MessageBox.Show("Wybierz sekcje");
+                    result = false;
+                }
+            }
+
+            if (result)
+            {
+                var sectionList = _sectionService.GetSections().Result;
+
+                var sectionText = (string)_view.comboBoxSection.SelectedItem;
+
+                var section = sectionList.Where(p => p.Name == sectionText).FirstOrDefault();
+
+                if (section == null)
+                {
+                    MessageBox.Show("Błąd sekcji");
+                    result = false;
+                }
+            }
+
+            return result;
+        }
+
+
+        private void UpdateModel()
+        {   
             _model.Employee.Name = _view.textBoxName.Text;
             _model.Employee.Surname = _view.textBoxSurname.Text;
             _model.Employee.LoginName = _view.textBoxLogin.Text ;
             _model.Employee.Password = _view.textBoxPassword.Text ;
-            _model.Employee.Section.Name = _view.comboBoxSection.GetItemText(_view.comboBoxSection.SelectedText);
 
+            var  sectionList = _sectionService.GetSections().Result;
+
+            var section = sectionList.Where(p => p.Name == (string)_view.comboBoxSection.SelectedItem).First();
+
+            _model.Employee.Section = section;
+            // to jest zapytanie przez linq 
+            // masaz liste, na niej robisz zapytanie jak na sql, skladnia podobna.
 
         }
 
@@ -102,18 +142,19 @@ namespace nauka.V2.Views.Employees.Controllers
                 _view.comboBoxSection.SelectedText = _model.Employee.Section.Name;
         }
 
-        private async Task DisplaySection()
+        private void DisplaySection()
         {
-            _view.comboBoxSection.SelectedText = " --wybierz-- ";
+            _view.comboBoxSection.Items.Clear();
+            _view.comboBoxSection.Items.Add("-- wybierz --");
 
+            var sectionList = _sectionService.GetSections().Result;
 
-            List<Section> newSectionList = await _sectionService.GetSections();
-
-            foreach (var item in newSectionList)
+            foreach (var item in sectionList)
             {
                 _view.comboBoxSection.Items.Add(item.Name);
             }
 
+            _view.comboBoxSection.SelectedIndex = 0;
         }
 
     }

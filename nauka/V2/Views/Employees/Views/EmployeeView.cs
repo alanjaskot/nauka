@@ -13,8 +13,7 @@ namespace nauka.V2.Views.Employees.Views
     public partial class EmployeeView : Form
     {
         private readonly EmpleyeController _empleyeController; // zeby dodac referencje to ctrl + . 
-        V2.Services.Employee.EmployeeService _employeeService;
-
+       
         public EmployeeView()
         {
             InitializeComponent();

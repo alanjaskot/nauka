@@ -37,6 +37,7 @@ namespace nauka.V2.Views.MainView.Views
             this.buttonUserAdd = new System.Windows.Forms.Button();
             this.labelTimer = new System.Windows.Forms.Label();
             this.buttonInfo = new System.Windows.Forms.Button();
+            this.buttonLogin = new System.Windows.Forms.Button();
             this.groupBoxUsers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUsers)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -74,6 +75,7 @@ namespace nauka.V2.Views.MainView.Views
             this.flowLayoutPanel1.Controls.Add(this.buttonUserAdd);
             this.flowLayoutPanel1.Controls.Add(this.labelTimer);
             this.flowLayoutPanel1.Controls.Add(this.buttonInfo);
+            this.flowLayoutPanel1.Controls.Add(this.buttonLogin);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 662);
@@ -85,7 +87,6 @@ namespace nauka.V2.Views.MainView.Views
             // 
             // buttonUserRemove
             // 
-            this.buttonUserRemove.Enabled = false;
             this.buttonUserRemove.Location = new System.Drawing.Point(968, 22);
             this.buttonUserRemove.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonUserRemove.Name = "buttonUserRemove";
@@ -96,7 +97,6 @@ namespace nauka.V2.Views.MainView.Views
             // 
             // buttonUserEdit
             // 
-            this.buttonUserEdit.Enabled = true;
             this.buttonUserEdit.Location = new System.Drawing.Point(817, 22);
             this.buttonUserEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonUserEdit.Name = "buttonUserEdit";
@@ -107,7 +107,6 @@ namespace nauka.V2.Views.MainView.Views
             // 
             // buttonUserAdd
             // 
-            this.buttonUserAdd.Enabled = true;
             this.buttonUserAdd.Location = new System.Drawing.Point(666, 22);
             this.buttonUserAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonUserAdd.Name = "buttonUserAdd";
@@ -115,7 +114,6 @@ namespace nauka.V2.Views.MainView.Views
             this.buttonUserAdd.TabIndex = 12;
             this.buttonUserAdd.Text = "Dodaj";
             this.buttonUserAdd.UseVisualStyleBackColor = true;
-
             // 
             // labelTimer
             // 
@@ -137,6 +135,16 @@ namespace nauka.V2.Views.MainView.Views
             this.buttonInfo.TabIndex = 14;
             this.buttonInfo.Text = "Info";
             this.buttonInfo.UseVisualStyleBackColor = true;
+            // 
+            // buttonLogin
+            // 
+            this.buttonLogin.Location = new System.Drawing.Point(92, 22);
+            this.buttonLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonLogin.Name = "buttonLogin";
+            this.buttonLogin.Size = new System.Drawing.Size(143, 50);
+            this.buttonLogin.TabIndex = 15;
+            this.buttonLogin.Text = "Logowanie";
+            this.buttonLogin.UseVisualStyleBackColor = true;
             // 
             // MainViewView
             // 
@@ -166,5 +174,6 @@ namespace nauka.V2.Views.MainView.Views
         protected internal System.Windows.Forms.Button buttonUserEdit;
         protected internal System.Windows.Forms.Label labelTimer;
         protected internal System.Windows.Forms.Button buttonInfo;
+        protected internal System.Windows.Forms.Button buttonLogin;
     }
 }

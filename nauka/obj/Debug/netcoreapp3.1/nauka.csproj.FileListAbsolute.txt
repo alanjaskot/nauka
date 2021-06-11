@@ -31,3 +31,4 @@ C:\Tmp\!alan\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V2.Views.MainView.View.Ma
 D:\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.csproj.AssemblyReference.cache
 D:\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V2.Views.Employees.Views.EmployeeView.resources
 D:\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V2.Views.MainView.Views.MainViewView.resources
+D:\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V2.Views.Logins.Views.LoginView.resources
