@@ -14,9 +14,6 @@ namespace nauka.V2.Views.MainView.Views
     {
         private readonly IMainViewController _mainViewController;
         
-        /// <summary>
-        /// ala ma kota
-        /// </summary>
         public MainViewView()
         {
             InitializeComponent();
