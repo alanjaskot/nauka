@@ -1,4 +1,5 @@
 using nauka.V2;
+using nauka.V2.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,10 @@ namespace nauka
             switch(showView)
             {
                 case DialogResult.Yes:
-                    view = new V2.Views.MainView.View.MainViewView();
+                    
+                    ServiceManager.Init();
+
+                    view = new V2.Views.MainView.Views.MainViewView();
                     break;
                 default:
                     view = new Form1();

@@ -13,13 +13,31 @@ namespace nauka.V2.Services.Employee
 {
     public class EmployeeService : BaseService
     {
+        private List<Models.Employee> _employees;
+
         private List<Models.Section> _sections;
         private AppSettings _appSettings;
         public EmployeeService()
         {
+
         }
 
         public async Task<List<Models.Employee>> GetEmployees()
+        {
+            await InitDemos();
+
+            return _employees; 
+        }
+        
+        private async Task InitDemos()
+        {
+            if (_employees == null)
+            {
+                _employees = await GenerateDemos();
+            }
+            await Task.CompletedTask;
+        }
+        private async Task<List<Models.Employee>> GenerateDemos()
         {
             var result = default(List<Models.Employee>);
             try
@@ -34,6 +52,7 @@ namespace nauka.V2.Services.Employee
 
                 var employees = new List<V2.Models.Employee>
                 {
+
                     new Models.Employee
                     {
                         Id = 1,
@@ -45,7 +64,7 @@ namespace nauka.V2.Services.Employee
                         Vacation = new Vacation{
                             VacationDaysCount = _appSettings.VacationDaysCount,
                         },
-                        VacationDays = new List<VacationDays>(),
+                        //VacationDays = new List<VacationDays>(),
                     },
                     new Models.Employee
                     {
@@ -58,7 +77,7 @@ namespace nauka.V2.Services.Employee
                         Vacation = new Vacation{
                             VacationDaysCount = _appSettings.VacationDaysCount,
                         },
-                        VacationDays = new List<VacationDays>(),
+                        //VacationDays = new List<VacationDays>(),
                     },
                     new Models.Employee
                     {
@@ -71,8 +90,9 @@ namespace nauka.V2.Services.Employee
                         Vacation = new Vacation{
                             VacationDaysCount = _appSettings.VacationDaysCount,
                         },
-                        VacationDays = new List<VacationDays>(),
+                        //VacationDays = new List<VacationDays>(),
                     },
+                    
                 };
 
                 result = employees;
@@ -85,6 +105,42 @@ namespace nauka.V2.Services.Employee
             return await Task.FromResult(result);
         }
 
+        private async Task<bool> Validate(Models.Employee employee)
+        {
+            // tu robimy validacje, czyli jak czegos nie bedzie to sie wywala na tym 
+            var result = true;
+            
+            if (employee.Section == null)
+            {
+                employee.Section = _sections.First();
+            }
+
+            if (employee.Vacation == null)
+            {
+                employee.Vacation = new Vacation
+                {
+                    VacationDaysCount = _appSettings.VacationDaysCount,
+                };
+            }
+
+            if (employee.VacationDays == null)
+                employee.VacationDays = new List<nauka.V2.Models.VacationDays>();
+
+
+            return await Task.FromResult(result);
+        }
+        public async Task Add(Models.Employee employee)
+        {
+            await InitDemos();
+
+            if(! await Validate(employee))
+            {
+                throw new Exception("Błąd walidacji");
+            }            
+
+            _employees.Add(employee);
+        }
+
         private async Task InitSections()
         {
             var _sectionService = new SectionService();
@@ -95,10 +151,12 @@ namespace nauka.V2.Services.Employee
 
         private async Task InitAppSettings()
         {
-            var _settingsService = new SettingsService();
+            var _settingsService = ServiceManager.Settings;
             _appSettings = await _settingsService.GetAppSettings();
 
             await Task.CompletedTask;
         }
+
+        
     }
 }

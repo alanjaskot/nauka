@@ -5,6 +5,7 @@ namespace nauka.V2.Views.MainView.Controllers
 {
     public interface IMainViewController
     {
-        Task RefreshView();
+        void RefreshView();
     }
+    
 }

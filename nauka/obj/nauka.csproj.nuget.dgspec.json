@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Tmp\\!alan\\nauka\\nauka\\nauka.csproj": {}
+    "D:\\nauka\\nauka\\nauka\\nauka.csproj": {}
   },
   "projects": {
-    "C:\\Tmp\\!alan\\nauka\\nauka\\nauka.csproj": {
+    "D:\\nauka\\nauka\\nauka\\nauka.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Tmp\\!alan\\nauka\\nauka\\nauka.csproj",
+        "projectUniqueName": "D:\\nauka\\nauka\\nauka\\nauka.csproj",
         "projectName": "nauka",
-        "projectPath": "C:\\Tmp\\!alan\\nauka\\nauka\\nauka.csproj",
-        "packagesPath": "C:\\Users\\Robert Ruszel\\.nuget\\packages\\",
-        "outputPath": "C:\\Tmp\\!alan\\nauka\\nauka\\obj\\",
+        "projectPath": "D:\\nauka\\nauka\\nauka\\nauka.csproj",
+        "packagesPath": "C:\\Users\\alanj\\.nuget\\packages\\",
+        "outputPath": "D:\\nauka\\nauka\\nauka\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Robert Ruszel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\alanj\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -27,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://172.16.0.3:8888/api/odata": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -63,7 +61,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

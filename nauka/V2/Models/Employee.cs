@@ -26,11 +26,11 @@ namespace nauka.V2.Models
             }     
         }
 
-        public virtual string GetSectionName
+        public string GetSectionName
         {
             get
             {
-                return $@"{Section.Name}";
+                return Section.Name;
             }
         }
 
