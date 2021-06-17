@@ -1,12 +1,15 @@
-﻿using nauka.V2.Models;
-using nauka.V2.Views.Employees.Models;
-using nauka.V2.Views.Employees.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using nauka.V2.Models;
+using nauka.V2.Services.Sections;
+using nauka.V2.Views.Employees.Models;
+using nauka.V2.Views.Employees.Views;
+using nauka.V2.Views.Sections.Views;
 
 namespace nauka.V2.Views.Employees.Controllers
 {
@@ -14,13 +17,11 @@ namespace nauka.V2.Views.Employees.Controllers
     {
         private readonly EmployeeView _view;
         private EmployeModel _model;
-        private V2.Services.Sections.SectionService _sectionService;
-
+        
         public EmpleyeController(EmployeeView employeeView)
         {
             _view= employeeView;
-            _sectionService = new Services.Sections.SectionService();
-
+            
             Task.Run(async () =>
             {
                 await InitViewModel();
@@ -32,34 +33,41 @@ namespace nauka.V2.Views.Employees.Controllers
         {
             _view.buttonCancel.Click += (object sender, EventArgs e) =>
             {
-                _view.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+                _view.DialogResult = DialogResult.Cancel;
             };
+            
             _view.buttonOk.Click += (object sender, EventArgs e) =>
             {
                 if (!ValidateModel())
                     return;
 
-                _view.DialogResult = System.Windows.Forms.DialogResult.OK;
+                _view.DialogResult = DialogResult.OK;
             };
 
-            _view.Load += _view_Load;
+            _view.buttonAddSection.Click += (object sender, EventArgs e) =>
+            {
+                AddNewSection();
+            };
+
+            _view.Load += (object sender, EventArgs e) =>
+            {
+                RefreshView();
+
+                RefresSection();
+            };
 
             await Task.CompletedTask;
         }
 
-        private void _view_Load(object sender, EventArgs e)
-        {
-            RefreshView();
-
-            DisplaySection();
-        }
-
         private async Task InitViewModel()
         {
-            if (_model == null)
-            {
+
+            //to ma byc zawsze inicjacja 
+            // dbez if 
+            //if (_model == null)
+           // {
                 _model = new EmployeModel();
-            } else 
+            //} 
 
             await Task.CompletedTask;
         }
@@ -98,7 +106,7 @@ namespace nauka.V2.Views.Employees.Controllers
 
             if (result)
             {
-                var sectionList = _sectionService.GetSections().Result;
+                var sectionList = _model.GetSections();
 
                 var sectionText = (string)_view.comboBoxSection.SelectedItem;
 
@@ -114,26 +122,25 @@ namespace nauka.V2.Views.Employees.Controllers
             return result;
         }
 
-
         private void UpdateModel()
-        {   
+        {
             _model.Employee.Name = _view.textBoxName.Text;
             _model.Employee.Surname = _view.textBoxSurname.Text;
-            _model.Employee.LoginName = _view.textBoxLogin.Text ;
-            _model.Employee.Password = _view.textBoxPassword.Text ;
+            _model.Employee.LoginName = _view.textBoxLogin.Text;
+            _model.Employee.Password = _view.textBoxPassword.Text;
 
-            var  sectionList = _sectionService.GetSections().Result;
+            var sectionList = _model.GetSections();
 
-            var section = sectionList.Where(p => p.Name == (string)_view.comboBoxSection.SelectedItem).First();
+            var section = sectionList.Where(p => p.Name == (string)_view.comboBoxSection.SelectedItem).FirstOrDefault();
 
-            _model.Employee.Section = section;
-            // to jest zapytanie przez linq 
-            // masaz liste, na niej robisz zapytanie jak na sql, skladnia podobna.
-
+            if (section != null)
+                _model.Employee.Section = section;
         }
 
         private void RefreshView()
         {
+            RefresSection();
+
             _view.textBoxName.Text = _model.Employee.Name;
             _view.textBoxSurname.Text = _model.Employee.Surname;
             _view.textBoxLogin.Text = _model.Employee.LoginName;
@@ -142,12 +149,12 @@ namespace nauka.V2.Views.Employees.Controllers
                 _view.comboBoxSection.SelectedText = _model.Employee.Section.Name;
         }
 
-        private void DisplaySection()
+        private void RefresSection()
         {
             _view.comboBoxSection.Items.Clear();
             _view.comboBoxSection.Items.Add("-- wybierz --");
 
-            var sectionList = _sectionService.GetSections().Result;
+            var sectionList = _model.GetSections();
 
             foreach (var item in sectionList)
             {
@@ -157,5 +164,21 @@ namespace nauka.V2.Views.Employees.Controllers
             _view.comboBoxSection.SelectedIndex = 0;
         }
 
+        private void AddNewSection()
+        {
+            UpdateModel(); 
+         
+            var newSection = new Section();
+            var view = new SectionView();
+            view.SetObjectToEdit = newSection;
+
+            if (view.ShowDialog() == DialogResult.OK)
+            {
+                RefreshView();
+                _view.comboBoxSection.SelectedIndex = _view.comboBoxSection.Items.IndexOf(newSection.Name); 
+            }
+        }
+
+        
     }
 }

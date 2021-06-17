@@ -42,6 +42,7 @@ namespace nauka.V2.Views.Employees.Views
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelSection = new System.Windows.Forms.Label();
             this.comboBoxSection = new System.Windows.Forms.ComboBox();
+            this.buttonAddSection = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelName
@@ -111,11 +112,11 @@ namespace nauka.V2.Views.Employees.Views
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(257, 433);
+            this.buttonOk.Location = new System.Drawing.Point(327, 433);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(112, 34);
             this.buttonOk.TabIndex = 8;
-            this.buttonOk.Text = "ok";
+            this.buttonOk.Text = "Ok";
             this.buttonOk.UseVisualStyleBackColor = true;
             // 
             // buttonCancel
@@ -144,11 +145,21 @@ namespace nauka.V2.Views.Employees.Views
             this.comboBoxSection.Size = new System.Drawing.Size(182, 33);
             this.comboBoxSection.TabIndex = 11;
             // 
+            // buttonAddSection
+            // 
+            this.buttonAddSection.Location = new System.Drawing.Point(124, 433);
+            this.buttonAddSection.Name = "buttonAddSection";
+            this.buttonAddSection.Size = new System.Drawing.Size(149, 34);
+            this.buttonAddSection.TabIndex = 12;
+            this.buttonAddSection.Text = "Nowy wydział";
+            this.buttonAddSection.UseVisualStyleBackColor = true;
+            // 
             // EmployeeView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(675, 541);
+            this.Controls.Add(this.buttonAddSection);
             this.Controls.Add(this.comboBoxSection);
             this.Controls.Add(this.labelSection);
             this.Controls.Add(this.buttonCancel);
@@ -182,5 +193,6 @@ namespace nauka.V2.Views.Employees.Views
         protected internal System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label labelSection;
         protected internal System.Windows.Forms.ComboBox comboBoxSection;
+        protected internal System.Windows.Forms.Button buttonAddSection;
     }
 }

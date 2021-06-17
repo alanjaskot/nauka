@@ -110,9 +110,9 @@ namespace nauka.V2.Views.Logins.Views
 
         private System.Windows.Forms.Label labelLogin;
         private System.Windows.Forms.Label labelPassword;
-        private System.Windows.Forms.TextBox textBoxLogin;
-        private System.Windows.Forms.TextBox textBoxPassword;
         protected internal System.Windows.Forms.Button buttonLogin;
         protected internal System.Windows.Forms.Button buttonCancel;
+        protected internal System.Windows.Forms.TextBox textBoxLogin;
+        protected internal System.Windows.Forms.TextBox textBoxPassword;
     }
 }

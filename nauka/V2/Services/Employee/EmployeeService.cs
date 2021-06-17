@@ -64,7 +64,7 @@ namespace nauka.V2.Services.Employee
                         Vacation = new Vacation{
                             VacationDaysCount = _appSettings.VacationDaysCount,
                         },
-                        VacationDays = new List<VacationDays>(),
+                        //VacationDays = new List<VacationDays>(),
                     },
                     new Models.Employee
                     {
@@ -77,7 +77,7 @@ namespace nauka.V2.Services.Employee
                         Vacation = new Vacation{
                             VacationDaysCount = _appSettings.VacationDaysCount,
                         },
-                        VacationDays = new List<VacationDays>(),
+                        //VacationDays = new List<VacationDays>(),
                     },
                     new Models.Employee
                     {
@@ -90,7 +90,7 @@ namespace nauka.V2.Services.Employee
                         Vacation = new Vacation{
                             VacationDaysCount = _appSettings.VacationDaysCount,
                         },
-                        VacationDays = new List<VacationDays>(),
+                        //VacationDays = new List<VacationDays>(),
                     },
                     
                 };
@@ -124,7 +124,7 @@ namespace nauka.V2.Services.Employee
             }
 
             if (employee.VacationDays == null)
-                employee.VacationDays = new List<VacationDays>();
+                employee.VacationDays = new List<nauka.V2.Models.VacationDays>();
 
 
             return await Task.FromResult(result);
@@ -151,7 +151,7 @@ namespace nauka.V2.Services.Employee
 
         private async Task InitAppSettings()
         {
-            var _settingsService = new SettingsService();
+            var _settingsService = ServiceManager.Settings;
             _appSettings = await _settingsService.GetAppSettings();
 
             await Task.CompletedTask;

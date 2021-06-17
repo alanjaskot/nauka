@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\nauka\\nauka\\nauka.csproj",
+      "projectUniqueName": "D:\\nauka\\nauka\\nauka\\nauka.csproj",
       "projectName": "nauka",
-      "projectPath": "D:\\nauka\\nauka\\nauka.csproj",
+      "projectPath": "D:\\nauka\\nauka\\nauka\\nauka.csproj",
       "packagesPath": "C:\\Users\\alanj\\.nuget\\packages\\",
-      "outputPath": "D:\\nauka\\nauka\\obj\\",
+      "outputPath": "D:\\nauka\\nauka\\nauka\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"

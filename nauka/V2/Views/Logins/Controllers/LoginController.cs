@@ -7,6 +7,7 @@ using nauka.V2.Views.MainView.Controllers;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using nauka.V2.Models;
+using System.Diagnostics;
 
 namespace nauka.V2.Views.Logins.Controllers
 {
@@ -14,8 +15,7 @@ namespace nauka.V2.Views.Logins.Controllers
     {
         private readonly LoginView _view;
         private LoginModel _model;
-        private readonly MainViewController _mainViewController;
-
+        
         public LoginController(LoginView loginView)
         {
             _view = loginView;
@@ -29,9 +29,10 @@ namespace nauka.V2.Views.Logins.Controllers
 
         private async Task InitView()
         {
+
             _view.buttonCancel.Click += (object sender, EventArgs e) =>
             {
-                _view.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+                _view.DialogResult = DialogResult.Cancel;
             };
             _view.buttonLogin.Click += (object sender, EventArgs e) =>
             {
@@ -41,11 +42,22 @@ namespace nauka.V2.Views.Logins.Controllers
                 }
                 else
                 {
-                      _view.DialogResult = System.Windows.Forms.DialogResult.OK;
+                    _view.DialogResult = DialogResult.OK;
                 }
             };
 
+            AutoLogininDebugger();
+
             await Task.CompletedTask;
+        }
+
+        private void AutoLogininDebugger()
+        {
+            if(Debugger.IsAttached)
+            {
+                _view.textBoxLogin.Text = "user1";
+                _view.textBoxPassword.Text = "123";
+            }
         }
 
         private async Task InitViewModel()
@@ -55,13 +67,12 @@ namespace nauka.V2.Views.Logins.Controllers
                 _model = new LoginModel();
             }
             else
-
                 await Task.CompletedTask;
         }
 
         private void LoginSucces()
         {
-            
+            MessageBox.Show($"Użytkownik {_model.Employee.GetFullName} został zalogowany");
         }
 
         private void LoginFailed()
@@ -70,16 +81,22 @@ namespace nauka.V2.Views.Logins.Controllers
         }
 
         private bool Valid()
-        {
-            return true;
+        {  
+            if(_model.Employee.LoginName.Equals(_view.textBoxLogin.Text) && _model.Employee.Password.Equals(_view.textBoxPassword.Text))
+            {
+                LoginSucces();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public Employee SetEployee
         {
             get
             {
-                LoginSucces();
-
                 return _model.Employee;
             }
             set
@@ -88,8 +105,6 @@ namespace nauka.V2.Views.Logins.Controllers
                     return;
 
                 _model.Employee = value;
-
-                LoginSucces();
             }
         }
 

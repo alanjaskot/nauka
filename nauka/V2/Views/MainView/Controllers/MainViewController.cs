@@ -4,6 +4,7 @@ using nauka.V2.Services.Employee;
 using nauka.V2.Services.Sections;
 using nauka.V2.Views.MainView.Models;
 using nauka.V2.Views.MainView.Views;
+using nauka.V2.Views.Vacations.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace nauka.V2.Views.MainView.Controllers
     {
         private readonly MainViewView _mainView;
         private MainViewModel _mainViewModel;
-
+        private int indexNumber = -1;
         private List<Employee> _employees;
         private Timer _timeTimerUpdater;
         private bool logged = false;
@@ -143,7 +144,7 @@ namespace nauka.V2.Views.MainView.Controllers
                 }
             };
 
-            _mainView.dataGridViewUsers.DoubleClick += (object sender, EventArgs e) =>
+            _mainView.buttonVacations.Click += (object sender, EventArgs e) =>
             {
                 if (!logged)
                 {
@@ -151,7 +152,7 @@ namespace nauka.V2.Views.MainView.Controllers
                 }
                 else
                 {
-                    EditUser();
+                    VacationEditor();
                 }
             };
 
@@ -160,22 +161,49 @@ namespace nauka.V2.Views.MainView.Controllers
                 LoginIn();
             };
 
+            _mainView.buttonLogout.Click += (object sender, EventArgs e) =>
+            {
+                Logout();
+            };
+
+            _mainView.Load += (object sender, EventArgs e) =>
+            {
+                RefreshView();
+            };
+
             await Task.CompletedTask;
+        }
+
+        private void VacationEditor()
+        {
+            var vacationOfEmpoloyee = _employees[_mainView.dataGridViewUsers.CurrentRow.Index].Vacation;
+            var view = new VacationView();
+            view.SetObjectToEdit = vacationOfEmpoloyee;
+            if(view.ShowDialog() == DialogResult.OK)
+            {
+                RefreshView();
+            }
         }
 
         private void EditUser() 
         {
-            
             var editedEmployee = _employees[_mainView.dataGridViewUsers.CurrentRow.Index];
             var view = new Employees.Views.EmployeeView();
             view.SetObjectToEdit = editedEmployee;
-
-            if (view.ShowDialog() == DialogResult.OK)
+            if (indexNumber == _mainView.dataGridViewUsers.CurrentRow.Index)
             {
-                var selectedEmlpoyee2 = view.SetObjectToEdit;
-                RefreshView();
+                if (view.ShowDialog() == DialogResult.OK)
+                {
+                    var selectedEmlpoyee2 = view.SetObjectToEdit;
+                    RefreshView();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nie można edytować innego użytkownika");
             }
         }
+
 
         private void AddNewUser()
         {
@@ -198,31 +226,47 @@ namespace nauka.V2.Views.MainView.Controllers
             }
         }
 
-        public void RemoveUser()
+        private void RemoveUser()
         {
             var employeeToRemove = _employees[_mainView.dataGridViewUsers.CurrentRow.Index];
-            const string message = "Czy na pewno chcesz usunąć pracownika?";
-            const string caption = "Usunięcie pracownika";
-            var result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if(result == DialogResult.Yes)
+            if(indexNumber == _mainView.dataGridViewUsers.CurrentRow.Index)
             {
-                _employees.Remove(employeeToRemove);
-            }
+                const string message = "Czy na pewno chcesz usunąć pracownika?";
+                const string caption = "Usunięcie pracownika";
+                var result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+                if (result == DialogResult.Yes)
+                {
+                    _employees.Remove(employeeToRemove);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nie można usunąć innego użytkownika");
+            }
             RefreshView();
         }
 
-        public void LoginIn()
+        private void LoginIn()
         {
-            var newEmployee = new Employee();
+            var employeeToLogin = _employees[_mainView.dataGridViewUsers.CurrentRow.Index];
             var view = new Logins.Views.LoginView();
-            view.SetObjectToEdit = newEmployee;
-
+            view.SetObjectToEdit = employeeToLogin;
+            indexNumber = _mainView.dataGridViewUsers.CurrentRow.Index;
             if (view.ShowDialog() == DialogResult.OK)
             {
                 Logged();
             }
+        }
+
+        private void Logout()
+        {
+            logged = false;
+            _mainView.buttonUserAdd.Enabled = false;
+            _mainView.buttonUserEdit.Enabled = false;
+            _mainView.buttonUserRemove.Enabled = false;
+            _mainView.buttonLogin.Enabled = true;
+
         }
 
         public void RefreshView()
@@ -256,14 +300,18 @@ namespace nauka.V2.Views.MainView.Controllers
             await Task.CompletedTask;
         }
 
-        public void NotLogged()
+        private void NotLogged()
         {
             MessageBox.Show("Proszę się zalogować!");
         }
 
-        public void Logged()
+        private void Logged()
         {
             logged = true;
+            _mainView.buttonUserAdd.Enabled = true;
+            _mainView.buttonUserEdit.Enabled = true;
+            _mainView.buttonUserRemove.Enabled = true;
+            _mainView.buttonLogin.Enabled = false;
         }
 
     }

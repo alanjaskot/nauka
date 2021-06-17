@@ -13,5 +13,14 @@
     <Compile Update="V2\Views\MainView\Views\MainViewView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="V2\Views\Sections\Views\SectionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="V2\Views\VacationDays\Views\VacationDaysView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="V2\Views\Vacations\Views\VacationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

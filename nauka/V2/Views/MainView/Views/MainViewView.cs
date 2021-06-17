@@ -18,14 +18,7 @@ namespace nauka.V2.Views.MainView.Views
         {
             InitializeComponent();
 
-            Shown += MainViewView_Load;
-
             _mainViewController = new MainViewController(this);
-        }
-
-        private void MainViewView_Load(object sender, EventArgs e)
-        {    
-            _mainViewController.RefreshView();    
         }
 
     }

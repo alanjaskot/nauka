@@ -43,17 +43,11 @@ namespace nauka.V2.Services.Sections
             await Task.CompletedTask;
         }
 
-        public void AddSection(string sectionName)
-        {
-            _sections.Add(
-                new Section 
-                { 
-                    Name = sectionName 
-                }
-           );
+        public void AddSection(Section section)
+        { 
+            _sections.Add(section);
         }
  
-
         public async Task<List<Section>> GetSections()
         {
             Thread.Sleep(1000);
@@ -64,5 +58,6 @@ namespace nauka.V2.Services.Sections
             return await Task.FromResult(_sections);
         }
 
+        
     }
 }

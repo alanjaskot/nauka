@@ -1,4 +1,5 @@
 ﻿using nauka.V2.Models;
+using nauka.V2.Services;
 using nauka.V2.Services.Employee;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace nauka.V2.Views.MainView.Models
 
         public MainViewModel()
         {
-            _employeeService = new EmployeeService();
+            _employeeService = ServiceManager.Employees;
         }
 
         public async Task<List <Employee>> GetEmployees()
