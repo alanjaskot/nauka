@@ -22,7 +22,7 @@ namespace nauka.V2.Views.VacationDays.Models
             var result = default(List<V2.Models.VacationDays>);
             try
             {
-                result = _vacationsDaysService.GetVacationDays(); //.Result;
+                result = _vacationsDaysService.GetVacationDays().Result;
             }
             catch
             {

@@ -80,8 +80,8 @@ namespace nauka.V2.Views.Vacations.Controllers
 
             if (view.ShowDialog() == DialogResult.OK)
             {
-                long newDays = _vacationDayController.CountingDays();
-                _model.Vacation.VacationDaysCount += newDays; ;
+                //long newDays = _vacationDayController.CountingDays();
+                _model.Vacation.VacationDaysCount += 0; 
             }
         }
 

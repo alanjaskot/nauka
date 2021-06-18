@@ -37,12 +37,14 @@ namespace nauka.V2.Views.VacationDays.Views
             this.dateTimePickerEndVacation = new System.Windows.Forms.DateTimePicker();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.dataGridViewVacationDays = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVacationDays)).BeginInit();
             this.SuspendLayout();
             // 
             // labelStartVacation
             // 
             this.labelStartVacation.AutoSize = true;
-            this.labelStartVacation.Location = new System.Drawing.Point(83, 78);
+            this.labelStartVacation.Location = new System.Drawing.Point(29, 36);
             this.labelStartVacation.Name = "labelStartVacation";
             this.labelStartVacation.Size = new System.Drawing.Size(34, 25);
             this.labelStartVacation.TabIndex = 0;
@@ -51,7 +53,7 @@ namespace nauka.V2.Views.VacationDays.Views
             // labelEndVacation
             // 
             this.labelEndVacation.AutoSize = true;
-            this.labelEndVacation.Location = new System.Drawing.Point(83, 140);
+            this.labelEndVacation.Location = new System.Drawing.Point(29, 98);
             this.labelEndVacation.Name = "labelEndVacation";
             this.labelEndVacation.Size = new System.Drawing.Size(34, 25);
             this.labelEndVacation.TabIndex = 1;
@@ -60,7 +62,7 @@ namespace nauka.V2.Views.VacationDays.Views
             // labelDescription
             // 
             this.labelDescription.AutoSize = true;
-            this.labelDescription.Location = new System.Drawing.Point(83, 203);
+            this.labelDescription.Location = new System.Drawing.Point(29, 161);
             this.labelDescription.Name = "labelDescription";
             this.labelDescription.Size = new System.Drawing.Size(49, 25);
             this.labelDescription.TabIndex = 2;
@@ -68,28 +70,28 @@ namespace nauka.V2.Views.VacationDays.Views
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.Location = new System.Drawing.Point(197, 203);
+            this.textBoxDescription.Location = new System.Drawing.Point(143, 161);
             this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(545, 31);
+            this.textBoxDescription.Size = new System.Drawing.Size(300, 31);
             this.textBoxDescription.TabIndex = 3;
             // 
             // dateTimePickerStartVacation
             // 
-            this.dateTimePickerStartVacation.Location = new System.Drawing.Point(197, 78);
+            this.dateTimePickerStartVacation.Location = new System.Drawing.Point(143, 36);
             this.dateTimePickerStartVacation.Name = "dateTimePickerStartVacation";
             this.dateTimePickerStartVacation.Size = new System.Drawing.Size(300, 31);
             this.dateTimePickerStartVacation.TabIndex = 4;
             // 
             // dateTimePickerEndVacation
             // 
-            this.dateTimePickerEndVacation.Location = new System.Drawing.Point(197, 140);
+            this.dateTimePickerEndVacation.Location = new System.Drawing.Point(143, 98);
             this.dateTimePickerEndVacation.Name = "dateTimePickerEndVacation";
             this.dateTimePickerEndVacation.Size = new System.Drawing.Size(300, 31);
             this.dateTimePickerEndVacation.TabIndex = 5;
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(197, 279);
+            this.buttonOk.Location = new System.Drawing.Point(143, 331);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(112, 34);
             this.buttonOk.TabIndex = 6;
@@ -98,18 +100,32 @@ namespace nauka.V2.Views.VacationDays.Views
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(349, 279);
+            this.buttonCancel.Location = new System.Drawing.Point(295, 331);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(112, 34);
             this.buttonCancel.TabIndex = 7;
             this.buttonCancel.Text = "Annuluj";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewVacationDays
+            // 
+            this.dataGridViewVacationDays.AllowUserToAddRows = false;
+            this.dataGridViewVacationDays.AllowUserToDeleteRows = false;
+            this.dataGridViewVacationDays.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewVacationDays.Location = new System.Drawing.Point(482, 36);
+            this.dataGridViewVacationDays.Name = "dataGridViewVacationDays";
+            this.dataGridViewVacationDays.ReadOnly = true;
+            this.dataGridViewVacationDays.RowHeadersWidth = 62;
+            this.dataGridViewVacationDays.RowTemplate.Height = 33;
+            this.dataGridViewVacationDays.Size = new System.Drawing.Size(524, 329);
+            this.dataGridViewVacationDays.TabIndex = 8;
+            // 
             // VacationDaysView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1026, 376);
+            this.Controls.Add(this.dataGridViewVacationDays);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.dateTimePickerEndVacation);
@@ -120,6 +136,7 @@ namespace nauka.V2.Views.VacationDays.Views
             this.Controls.Add(this.labelStartVacation);
             this.Name = "VacationDaysView";
             this.Text = "VacationDaysView";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVacationDays)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,5 +152,6 @@ namespace nauka.V2.Views.VacationDays.Views
         protected internal System.Windows.Forms.Button buttonOk;
         protected internal System.Windows.Forms.Button buttonCancel;
         protected internal System.Windows.Forms.TextBox textBoxDescription;
+        protected internal System.Windows.Forms.DataGridView dataGridViewVacationDays;
     }
 }
