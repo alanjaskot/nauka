@@ -110,47 +110,35 @@ namespace nauka.V2.Views.VacationDays.Controllers
 
         private bool ValidateDays()
         {
-            var result = false;
+            var result = true;
             var start = _view.dateTimePickerStartVacation.Value;
             var end = _view.dateTimePickerEndVacation.Value;
             if (end < start)
             {
-                MessageBox.Show($"Wakacje nie mogą się kończyć przed {end}.");
+                MessageBox.Show($"Wakacje nie mogą się kończyć przed {start}.");
                 result = false;
             }
-            
-            var nextDate = start;
-            var VacationDaysList = _model.GetVacationDays();
-            
-            if (!result)
-            {
-                bool temp = false;
-                while (!temp)
-                {
-                    foreach (var item in VacationDaysList)
-                    {
-                        var controlDate = item.Start;
-                        Console.WriteLine(controlDate.ToString("dd"));
-                        var endDate = item.End;
-                        Console.WriteLine(endDate.ToString("dd"));
-                        while (controlDate <= endDate)
-                        {
-                            if (nextDate == controlDate)
-                            {
-                                result = false;
-                                temp = true;
-                                break;
-                            }
-                            controlDate.AddDays(1);
-                        }
 
+            var VacationDaysList = _model.GetVacationDays();
+
+            if (result)
+            {
+                foreach (var item in VacationDaysList)
+                {
+                    var nextDate = start;
+                    while (nextDate <= end)
+                    {
+                        if ((nextDate == item.Start) || (nextDate == item.End))
+                        {
+                            result = false;
+                            break;
+                            MessageBox.Show("Urlop pokrywa się z innym dniem");
+                        }
+                        nextDate.AddDays(1);
                     }
-                    nextDate.AddDays(1);
                 }
-                MessageBox.Show("Urlop pokrywa się z innym urlopem");
             }
-            else
-                result = true;
+            
             return result;
 
         }
