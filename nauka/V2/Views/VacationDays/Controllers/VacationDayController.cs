@@ -125,18 +125,37 @@ namespace nauka.V2.Views.VacationDays.Controllers
             {
                 foreach (var item in VacationDaysList)
                 {
-                    var nextDate = start;
+                    /*if ((start >= item.Start) && (end <= item.End))
+                    {
+                        result = false;
+                        break;
+                    }*/
+
+                    if ((start<= item.Start)&&(start >= item.End))
+                    {
+                        result = false;
+                        break;
+                    }
+
+                    if ((end <= item.Start) && (end >= item.End))
+                    {
+                        result = false;
+                        break;
+                    }
+
+
+                    /*var nextDate = _view.dateTimePickerStartVacation.Value;
                     while (nextDate <= end)
                     {
                         if ((nextDate == item.Start) || (nextDate == item.End))
                         {
                             result = false;
                             break;
-                            MessageBox.Show("Urlop pokrywa się z innym dniem");
                         }
                         nextDate.AddDays(1);
-                    }
+                    }*/
                 }
+                MessageBox.Show("Urlop pokrywa się z innym dniem");
             }
             
             return result;
