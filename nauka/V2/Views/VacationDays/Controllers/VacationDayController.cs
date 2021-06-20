@@ -14,6 +14,7 @@ namespace nauka.V2.Views.VacationDays.Controllers
     {
         private readonly VacationDaysView _view;
         private VacationDaysModel _model;
+        private Vacations.Controllers.VacationController _vacationController;
 
         public nauka.V2.Models.VacationDays SetVacationDays
         {
@@ -49,18 +50,14 @@ namespace nauka.V2.Views.VacationDays.Controllers
             };
             _view.buttonOk.Click += (object sender, EventArgs e) =>
             {
-                if (ValidateDays())
+                if (!ValidateDays())
                 {
                     UpdateModel();
                     RefreshList();
                     AddVacationDays();
+                    _vacationController.AddVacation(CountingDays());
                     _view.DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    MessageBox.Show("fddd");
-                }
-                
+                }              
 
             };
 
@@ -91,26 +88,15 @@ namespace nauka.V2.Views.VacationDays.Controllers
             _model.Save();
         }
 
-        public int CountingDays()
+        public long CountingDays()
         {
             return CountVacationDays(_view.dateTimePickerStartVacation.Value, _view.dateTimePickerEndVacation.Value);
         }
 
-        private bool Validate()
-        {
-            var result = false;
-
-            var vacationDaysList = _model.GetVacationDays();
-
-            if (!vacationDaysList.Any(p => p.Description == _model.VacationDays.Description))
-                return true;
-
-            return result;
-        }
 
         private bool ValidateDays()
         {
-            var result = true;
+            var result = false;
             var start = _view.dateTimePickerStartVacation.Value;
             var end = _view.dateTimePickerEndVacation.Value;
             if (end < start)
@@ -121,48 +107,30 @@ namespace nauka.V2.Views.VacationDays.Controllers
 
             var VacationDaysList = _model.GetVacationDays();
 
-            if (result)
+            if (!result)
             {
                 foreach (var item in VacationDaysList)
                 {
-                    /*if ((start >= item.Start) && (end <= item.End))
+                    if ((start >= item.Start) && (start <= item.End))
                     {
-                        result = false;
-                        break;
-                    }*/
-
-                    if ((start<= item.Start)&&(start >= item.End))
-                    {
-                        result = false;
+                        result = true;
+                        MessageBox.Show("Urlop pokrywa się z innym urlopem");
                         break;
                     }
 
-                    if ((end <= item.Start) && (end >= item.End))
+                    if ((end >= item.Start) && (end <= item.End))
                     {
-                        result = false;
+                        result = true;
+                        MessageBox.Show("Urlop pokrywa się z innym urlopem");
                         break;
                     }
-
-
-                    /*var nextDate = _view.dateTimePickerStartVacation.Value;
-                    while (nextDate <= end)
-                    {
-                        if ((nextDate == item.Start) || (nextDate == item.End))
-                        {
-                            result = false;
-                            break;
-                        }
-                        nextDate.AddDays(1);
-                    }*/
-                }
-                MessageBox.Show("Urlop pokrywa się z innym dniem");
+                }             
             }
             
             return result;
-
         }
 
-        private int CountVacationDays(DateTime from, DateTime to)
+        private long CountVacationDays(DateTime from, DateTime to)
         {
             if (to < from)
                 throw new ArgumentException("Wakacje nie mogą się kończyć przed.", nameof(to));

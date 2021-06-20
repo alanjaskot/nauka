@@ -15,7 +15,6 @@ namespace nauka.V2.Views.Vacations.Controllers
     {
         private readonly VacationView _view;
         private VacationModel _model;
-        private VacationDayController _vacationDayController;
 
         public Vacation SetVacation
         {
@@ -80,9 +79,14 @@ namespace nauka.V2.Views.Vacations.Controllers
 
             if (view.ShowDialog() == DialogResult.OK)
             {
-                //long newDays = _vacationDayController.CountingDays();
-                _model.Vacation.VacationDaysCount += 0; 
+                //_model.Save();
             }
+        }
+
+        public void AddVacation(long days)
+        {
+            _model.Vacation.VacationDaysCount = days;
+            _model.Save();
         }
 
         public void RefreshView()
