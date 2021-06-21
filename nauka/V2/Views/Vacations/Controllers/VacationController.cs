@@ -83,9 +83,13 @@ namespace nauka.V2.Views.Vacations.Controllers
             }
         }
 
-        public void AddVacation(long days)
+        public void SetVacationDaysCount(long days)
         {
             _model.Vacation.VacationDaysCount = days;
+        }
+
+        public void AddVacation()
+        {
             _model.Save();
         }
 

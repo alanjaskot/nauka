@@ -37,13 +37,12 @@ namespace nauka.V2.Services.VacationDays
 
         public void Add(Models.VacationDays vacationDays)
         {
-            var ddd = vacationDays;
-            _vacationDays.Add(ddd);
+            _vacationDays.Add(vacationDays);
         }
 
-        public void Remove(Models.VacationDays vacationDays)
+        public void Remove(int indexNumber)
         {
-            _vacationDays.Remove(vacationDays);
+            _vacationDays.RemoveAt(indexNumber);
         }
                         
     }

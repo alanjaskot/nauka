@@ -204,7 +204,6 @@ namespace nauka.V2.Views.MainView.Controllers
             }
         }
 
-
         private void AddNewUser()
         {
             var newEmployee = new Employee();

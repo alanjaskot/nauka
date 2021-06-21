@@ -1,5 +1,6 @@
 ﻿using nauka.V2.Services;
 using nauka.V2.Services.VacationDays;
+using nauka.V2.Views.VacationDays.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,8 @@ namespace nauka.V2.Views.VacationDays.Models
     class VacationDaysModel
     {
         private VacationsDaysService _vacationsDaysService;
+        private readonly VacationDayController _vacationDayController;
+
 
         public VacationDaysModel()
         {
@@ -38,7 +41,7 @@ namespace nauka.V2.Views.VacationDays.Models
 
         internal void Delete()
         {
-            _vacationsDaysService.Remove(VacationDays);
+            _vacationsDaysService.Remove(_vacationDayController.SelectedVacationDays());
         }
     }
 }

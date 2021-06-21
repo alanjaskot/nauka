@@ -54,11 +54,21 @@ namespace nauka.V2.Views.VacationDays.Controllers
                 {
                     UpdateModel();
                     RefreshList();
-                    AddVacationDays();
-                    _vacationController.AddVacation(CountingDays());
+                    Add();
+                    //_vacationController.SetVacationDaysCount
+                    //(CountVacationDays(_view.dateTimePickerStartVacation.Value, _view.dateTimePickerEndVacation.Value));
                     _view.DialogResult = DialogResult.OK;
                 }              
+            };
 
+            _view.buttonDelete.Click += (object sender, EventArgs e) =>
+            {
+                Delete();
+            };
+
+            _view.buttonEdit.Click += (object sender, EventArgs e) =>
+            {
+                Edit();
             };
 
             await Task.CompletedTask;
@@ -83,16 +93,28 @@ namespace nauka.V2.Views.VacationDays.Controllers
             _model.VacationDays.Description = (string)_view.textBoxDescription.Text;           
         }
 
-        public void AddVacationDays()
+        public void Delete()
+        {
+            _model.Delete();
+        }
+
+        public int SelectedVacationDays()
+        {
+            int selectedVacationDays = _view.dataGridViewVacationDays.CurrentRow.Index;
+            return selectedVacationDays;
+        }
+
+        public void Add()
         {
             _model.Save();
         }
 
-        public long CountingDays()
+        public void Edit()
         {
-            return CountVacationDays(_view.dateTimePickerStartVacation.Value, _view.dateTimePickerEndVacation.Value);
+            _view.dateTimePickerStartVacation.Value = _model.VacationDays.Start;
+            _view.dateTimePickerEndVacation.Value = _model.VacationDays.End;
+            _view.textBoxDescription.Text = _model.VacationDays.Description;
         }
-
 
         private bool ValidateDays()
         {

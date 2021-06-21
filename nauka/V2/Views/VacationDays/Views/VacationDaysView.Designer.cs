@@ -38,6 +38,8 @@ namespace nauka.V2.Views.VacationDays.Views
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.dataGridViewVacationDays = new System.Windows.Forms.DataGridView();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVacationDays)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,11 +122,31 @@ namespace nauka.V2.Views.VacationDays.Views
             this.dataGridViewVacationDays.Size = new System.Drawing.Size(524, 329);
             this.dataGridViewVacationDays.TabIndex = 8;
             // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(143, 258);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(112, 34);
+            this.buttonDelete.TabIndex = 9;
+            this.buttonDelete.Text = "Usuń";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            // 
+            // buttonEdit
+            // 
+            this.buttonEdit.Location = new System.Drawing.Point(295, 258);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(112, 34);
+            this.buttonEdit.TabIndex = 10;
+            this.buttonEdit.Text = "Edit";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            // 
             // VacationDaysView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1026, 376);
+            this.Controls.Add(this.buttonEdit);
+            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.dataGridViewVacationDays);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
@@ -153,5 +175,7 @@ namespace nauka.V2.Views.VacationDays.Views
         protected internal System.Windows.Forms.Button buttonCancel;
         protected internal System.Windows.Forms.TextBox textBoxDescription;
         protected internal System.Windows.Forms.DataGridView dataGridViewVacationDays;
+        protected internal System.Windows.Forms.Button buttonDelete;
+        protected internal System.Windows.Forms.Button buttonEdit;
     }
 }
