@@ -1,8 +1,11 @@
-﻿using System;
+﻿using nauka.V2.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace nauka.V2.Services.VacationDays
 {
@@ -40,9 +43,31 @@ namespace nauka.V2.Services.VacationDays
             _vacationDays.Add(vacationDays);
         }
 
-        public void Remove(int indexNumber)
+        public void Remove(Models.VacationDays vacationDays)
         {
-            _vacationDays.RemoveAt(indexNumber);
+            // tu pewnie masz inny obiekt
+            // jak uzywasz listy to wpier musisz znalesc obiekt z listy zeby go osunac 
+            // to na dole ze zapytanie w technologi linq 
+            //mozesz sobie poczytac o tym 
+            // jeszcze cos ?? 
+            //edycje tez tak zrobic, prawda?
+            //tak dokladnie tak same wszysto robisz tak samo, jak robie jednym sposobme to potem robisz tak caly czaas 
+            // musi byc spojne podejscie 
+            //ok, wielkie dzieki, to robie dalej :)
+            var itemToRemove = _vacationDays
+                .Where(p =>
+                    p.Description == vacationDays.Description &&
+                    p.End == vacationDays.End &&
+                    p.Start == vacationDays.Start)
+                .FirstOrDefault();
+
+            if(itemToRemove == null)
+            {
+                MessageBox.Show("Nieznaleziono");
+                return;
+            }
+            
+            _vacationDays.Remove(itemToRemove);
         }
                         
     }

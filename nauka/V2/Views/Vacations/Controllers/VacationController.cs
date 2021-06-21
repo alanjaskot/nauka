@@ -52,9 +52,9 @@ namespace nauka.V2.Views.Vacations.Controllers
                 _view.DialogResult = DialogResult.OK;
             };
 
-            _view.buttonNew.Click += (object sender, EventArgs e) =>
+            _view.buttonMenagerVacations.Click += (object sender, EventArgs e) =>
             {
-                AddVacationDays();
+                MenageVacationDays();
             };
 
             await Task.CompletedTask;
@@ -71,7 +71,7 @@ namespace nauka.V2.Views.Vacations.Controllers
             RefreshView();
         }
 
-        private void AddVacationDays()
+        private void MenageVacationDays()
         {
             var newVacationDays = new V2.Models.VacationDays();
             var view = new VacationDaysView();
@@ -86,6 +86,7 @@ namespace nauka.V2.Views.Vacations.Controllers
         public void SetVacationDaysCount(long days)
         {
             _model.Vacation.VacationDaysCount = days;
+            AddVacation();
         }
 
         public void AddVacation()

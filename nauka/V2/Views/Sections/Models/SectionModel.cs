@@ -35,7 +35,7 @@ namespace nauka.V2.Views.Sections.Models
         /// controler robi logike 
         /// laczy model i vidokiem 
         /// i obrabia zarzadzanie danychmi 
-        /// podsrawa do dobry model 
+        /// podstawa do dobry model 
         /// 
         /// vidok ma miec jak najmniej kodu, mozesz miec rozne widoku tego samego wiec najepiej jak ma malo kodu 
         /// dziel jak najwieecej na metody, get set na wartosci 

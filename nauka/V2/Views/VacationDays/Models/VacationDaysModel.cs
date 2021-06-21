@@ -10,8 +10,7 @@ namespace nauka.V2.Views.VacationDays.Models
     class VacationDaysModel
     {
         private VacationsDaysService _vacationsDaysService;
-        private readonly VacationDayController _vacationDayController;
-
+       
 
         public VacationDaysModel()
         {
@@ -41,7 +40,9 @@ namespace nauka.V2.Views.VacationDays.Models
 
         internal void Delete()
         {
-            _vacationsDaysService.Remove(_vacationDayController.SelectedVacationDays());
+            _vacationsDaysService.Remove(VacationDays);
         }
+
+       
     }
 }

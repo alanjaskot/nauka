@@ -1,12 +1,9 @@
-﻿using nauka.V2.Models;
-using nauka.V2.Views.VacationDays.Models;
+﻿using nauka.V2.Views.VacationDays.Models;
 using nauka.V2.Views.VacationDays.Views;
+using nauka.V2.Views.Vacations.Controllers;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Linq;
 
 namespace nauka.V2.Views.VacationDays.Controllers
 {
@@ -14,9 +11,9 @@ namespace nauka.V2.Views.VacationDays.Controllers
     {
         private readonly VacationDaysView _view;
         private VacationDaysModel _model;
-        private Vacations.Controllers.VacationController _vacationController;
+        private VacationController _vacationController;
 
-        public nauka.V2.Models.VacationDays SetVacationDays
+        public V2.Models.VacationDays SetVacationDays
         {
             get
             {
@@ -55,20 +52,20 @@ namespace nauka.V2.Views.VacationDays.Controllers
                     UpdateModel();
                     RefreshList();
                     Add();
-                    //_vacationController.SetVacationDaysCount
-                    //(CountVacationDays(_view.dateTimePickerStartVacation.Value, _view.dateTimePickerEndVacation.Value));
+                    _vacationController.SetVacationDaysCount
+                    (CountVacationDays(_view.dateTimePickerStartVacation.Value, _view.dateTimePickerEndVacation.Value));
                     _view.DialogResult = DialogResult.OK;
                 }              
             };
 
             _view.buttonDelete.Click += (object sender, EventArgs e) =>
             {
-                Delete();
+                Delete(_view.dataGridViewVacationDays.CurrentRow.Index);
             };
 
             _view.buttonEdit.Click += (object sender, EventArgs e) =>
             {
-                Edit();
+                Edit(_view.dataGridViewVacationDays.CurrentRow.Index);
             };
 
             await Task.CompletedTask;
@@ -93,15 +90,15 @@ namespace nauka.V2.Views.VacationDays.Controllers
             _model.VacationDays.Description = (string)_view.textBoxDescription.Text;           
         }
 
-        public void Delete()
+        public void Delete(int selectedVacationDays)
         {
+            DataGridViewRow row = _view.dataGridViewVacationDays.Rows[selectedVacationDays];
+            _model.VacationDays.Description = row.Cells[0].Value.ToString();
+            _model.VacationDays.Start = DateTime.Parse(row.Cells[1].Value.ToString());
+            _model.VacationDays.End = DateTime.Parse(row.Cells[2].Value.ToString());
             _model.Delete();
-        }
 
-        public int SelectedVacationDays()
-        {
-            int selectedVacationDays = _view.dataGridViewVacationDays.CurrentRow.Index;
-            return selectedVacationDays;
+            RefreshList();
         }
 
         public void Add()
@@ -109,11 +106,23 @@ namespace nauka.V2.Views.VacationDays.Controllers
             _model.Save();
         }
 
-        public void Edit()
+        public void Edit(int selectedVacationDays)
         {
-            _view.dateTimePickerStartVacation.Value = _model.VacationDays.Start;
-            _view.dateTimePickerEndVacation.Value = _model.VacationDays.End;
-            _view.textBoxDescription.Text = _model.VacationDays.Description;
+            const string message = "Czy na pewno chcesz zmienić termin urlopu?";
+            const string caption = "Edycja urlopu";
+
+            MessageBox.Show(message, caption, MessageBoxButtons.YesNo);
+
+            DataGridViewRow row = _view.dataGridViewVacationDays.Rows[selectedVacationDays];
+
+            Delete(selectedVacationDays);
+
+            _model.VacationDays.Description = _view.textBoxDescription.Text;
+            _model.VacationDays.Start = _view.dateTimePickerEndVacation.Value;
+            _model.VacationDays.End = _view.dateTimePickerEndVacation.Value;
+            Add();
+
+            RefreshList();
         }
 
         private bool ValidateDays()

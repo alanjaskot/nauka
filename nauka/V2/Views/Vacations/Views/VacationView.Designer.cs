@@ -29,35 +29,25 @@ namespace nauka.V2.Views.Vacations.Views
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonNew = new System.Windows.Forms.Button();
-            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonMenagerVacations = new System.Windows.Forms.Button();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelRestOfVacationDays = new System.Windows.Forms.Label();
             this.labelShowDays = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // buttonNew
+            // buttonMenagerVacations
             // 
-            this.buttonNew.Location = new System.Drawing.Point(328, 13);
-            this.buttonNew.Name = "buttonNew";
-            this.buttonNew.Size = new System.Drawing.Size(250, 34);
-            this.buttonNew.TabIndex = 2;
-            this.buttonNew.Text = "Nowy urlop";
-            this.buttonNew.UseVisualStyleBackColor = true;
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.Location = new System.Drawing.Point(328, 81);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(250, 34);
-            this.buttonDelete.TabIndex = 4;
-            this.buttonDelete.Text = "Zrezygnuj z urlopu";
-            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonMenagerVacations.Location = new System.Drawing.Point(328, 13);
+            this.buttonMenagerVacations.Name = "buttonMenagerVacations";
+            this.buttonMenagerVacations.Size = new System.Drawing.Size(250, 34);
+            this.buttonMenagerVacations.TabIndex = 2;
+            this.buttonMenagerVacations.Text = "Zarządzaj urlopami";
+            this.buttonMenagerVacations.UseVisualStyleBackColor = true;
             // 
             // buttonOk
             // 
-            this.buttonOk.Location = new System.Drawing.Point(25, 81);
+            this.buttonOk.Location = new System.Drawing.Point(328, 78);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(112, 34);
             this.buttonOk.TabIndex = 5;
@@ -66,7 +56,7 @@ namespace nauka.V2.Views.Vacations.Views
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(163, 81);
+            this.buttonCancel.Location = new System.Drawing.Point(466, 78);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(112, 34);
             this.buttonCancel.TabIndex = 6;
@@ -99,8 +89,7 @@ namespace nauka.V2.Views.Vacations.Views
             this.Controls.Add(this.labelRestOfVacationDays);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
-            this.Controls.Add(this.buttonDelete);
-            this.Controls.Add(this.buttonNew);
+            this.Controls.Add(this.buttonMenagerVacations);
             this.Name = "VacationView";
             this.Text = "VacationView";
             this.ResumeLayout(false);
@@ -109,8 +98,7 @@ namespace nauka.V2.Views.Vacations.Views
         }
 
         #endregion
-        protected internal System.Windows.Forms.Button buttonNew;
-        protected internal System.Windows.Forms.Button buttonDelete;
+        protected internal System.Windows.Forms.Button buttonMenagerVacations;
         protected internal System.Windows.Forms.Button buttonOk;
         protected internal System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label labelRestOfVacationDays;
