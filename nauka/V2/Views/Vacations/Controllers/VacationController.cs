@@ -106,17 +106,6 @@ namespace nauka.V2.Views.Vacations.Controllers
             long restOfDays = 26 - usedDays;
             _view.labelShowDays.Text = restOfDays.ToString();
         }
-
-        /*public void RefreshView()
-        {
-            var vacationList = _model.GetVacations();
-
-            foreach (var item in vacationList)
-            {
-                _view.listViewVacations.Items.Add(item.VacationDaysCount.ToString());
-            }
-
-        }*/
     }
 
     

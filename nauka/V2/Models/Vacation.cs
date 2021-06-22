@@ -7,7 +7,9 @@ using System.Text;
 namespace nauka.V2.Models
 {
     public class Vacation : BaseModel
-    {        
+    {
+        public Guid Id { get; set; }
+
         public long VacationDaysCount { get; set; }
     }
 }

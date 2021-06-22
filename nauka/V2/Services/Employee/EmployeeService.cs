@@ -55,7 +55,7 @@ namespace nauka.V2.Services.Employee
 
                     new Models.Employee
                     {
-                        Id = 1,
+                        Id = Guid.NewGuid(),
                         LoginName = "user1",
                         Name = "name1",
                         Password = "123",
@@ -68,7 +68,7 @@ namespace nauka.V2.Services.Employee
                     },
                     new Models.Employee
                     {
-                        Id = 2,
+                        Id = Guid.NewGuid(),
                         LoginName = "user2",
                         Name = "name2",
                         Password = "123",
@@ -81,7 +81,7 @@ namespace nauka.V2.Services.Employee
                     },
                     new Models.Employee
                     {
-                        Id = 3,
+                        Id = Guid.NewGuid(),
                         LoginName = "user3",
                         Name = "name3",
                         Password = "123",

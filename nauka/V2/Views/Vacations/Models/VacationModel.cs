@@ -31,7 +31,7 @@ namespace nauka.V2.Views.Vacations.Models
 
         public Vacation Vacation { get; set; }
 
-        internal List<Vacation> GetVacations()
+        public List<Vacation> GetVacations()
         {
             var result = default(List<Vacation>);
             try

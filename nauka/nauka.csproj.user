@@ -22,5 +22,53 @@
     <Compile Update="V2\Views\Vacations\Views\VacationView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="V3\Views\BaseViews\baseView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="V3\Views\EmplyeeViews\EmloyeeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="V3\Views\LoginViews\LoginView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="V3\Views\MainViews\MainView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="V3\Views\RegisterViews\RegisterView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\EmployeeUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\LeftPanelUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\LoginMainUserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\MenageEmployeeUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\MenageVacationUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\RegisterUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\VacationDaysUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\VacationListUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\VacationUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\ViewEmployeeUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\VacationViews\VacationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

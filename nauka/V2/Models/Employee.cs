@@ -7,7 +7,7 @@ namespace nauka.V2.Models
 {
     public class Employee : BaseModel
     {
-        public long Id { get; set; }
+        public Guid Id { get; set; }
         public string LoginName { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }

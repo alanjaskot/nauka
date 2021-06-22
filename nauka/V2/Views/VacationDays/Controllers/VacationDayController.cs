@@ -1,6 +1,9 @@
-﻿using nauka.V2.Views.VacationDays.Models;
+﻿using nauka.V2.Services;
+using nauka.V2.Views.VacationDays.Models;
 using nauka.V2.Views.VacationDays.Views;
 using nauka.V2.Views.Vacations.Controllers;
+using nauka.V2.Views.Vacations.Models;
+using nauka.V2.Views.Vacations.Views;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,6 +28,11 @@ namespace nauka.V2.Views.VacationDays.Controllers
             }
         }
 
+
+        // tak nie powinno byc 
+        // ten kontroler mozesz tworzyc tam gdzie go potrzebujesz 
+        // np. addCostam -> to tu tworzy ten kontroler, dodajesz, zamukasz i koniec, nie jest potrzebny globalny
+
         public VacationDayController(VacationDaysView vacationDaysView)
         {
             _view = vacationDaysView;
@@ -34,6 +42,7 @@ namespace nauka.V2.Views.VacationDays.Controllers
                 await InitViewModel();
                 await InitView();
             }).Wait();
+
         }
 
         private async Task InitView()
@@ -52,8 +61,8 @@ namespace nauka.V2.Views.VacationDays.Controllers
                     UpdateModel();
                     RefreshList();
                     Add();
-                    _vacationController.SetVacationDaysCount
-                    (CountVacationDays(_view.dateTimePickerStartVacation.Value, _view.dateTimePickerEndVacation.Value));
+                    //_vacationController.SetVacationDaysCount
+                    //(CountVacationDays(_view.dateTimePickerStartVacation.Value, _view.dateTimePickerEndVacation.Value));
                     _view.DialogResult = DialogResult.OK;
                 }              
             };
@@ -98,12 +107,29 @@ namespace nauka.V2.Views.VacationDays.Controllers
             _model.VacationDays.End = DateTime.Parse(row.Cells[2].Value.ToString());
             _model.Delete();
 
+
             RefreshList();
         }
 
         public void Add()
         {
             _model.Save();
+
+            // nie mozesz dodawac do dwuch 
+            // nie wiem jak to wymysliles, ale powinno dzialac to tak 
+            // rejstrujesz w serwisie urlop i potem odycztujesz to juz zsumowane
+            // mozesz dodac metody do serwisu ktore zwroca zsumowane dla danego uzysera 
+            // ok
+            // dobra, to zrobie to w ten sposob
+            // var x = new VacationController(); 
+            // teraz tu mielisc co potrzebujesz 
+            // sprawdzasz czy np. modelJestValud i kasujesz
+            // musze to sciagna i zoabczyc jak to robisz
+            // narazie chce zobacyzc co umiesz 
+            // wiesz co to dziedziczenie ?? 
+            // to jest przyjmowanie funkcjonalnosci metod z klasy wyższej
+            // no cos takiego 
+            // pokaze ci 
         }
 
         public void Edit(int selectedVacationDays)
