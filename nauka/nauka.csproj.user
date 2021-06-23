@@ -22,6 +22,24 @@
     <Compile Update="V2\Views\Vacations\Views\VacationView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="V3\Views\AdministrationsViewsViews\AdministrationViews\AdministrationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="V3\Views\AdministrationsViewsViews\EmployeeViews\ListAdministrationEmployeeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="V3\Views\AdministrationsViewsViews\AdministrationViews\UserControlls\NoPermissionUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\AdministrationsViewsViews\AdministrationViews\UserControlls\PermittedUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\AdministrationsViewsViews\MenagePermissonViews\MenagePermissonView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="V3\Views\AdministrationsViewsViews\MenagePermissonViews\UserController\MenagePermissonUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="V3\Views\BaseViews\baseView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -31,10 +49,13 @@
     <Compile Update="V3\Views\MenageVacationApplicationViews\MenageVacationApplication.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\MenageVacationApplicatoinUserControl.cs">
+    <Compile Update="V3\Views\UserControllers\DefaultController.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\VacationDisplayUserControl.cs">
+    <Compile Update="V3\Views\VacationApplicationViews\UserController\MenageVacationApplicatoinUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\VacationViews\UserContoller\VacationDisplayUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="V3\Views\VacationApplicationViews\VacationApplicationView.cs">
@@ -49,49 +70,43 @@
     <Compile Update="V3\Views\RegisterViews\RegisterView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\ListVacationApplicationUserControl.cs">
+    <Compile Update="V3\Views\VacationApplicationViews\UserController\ListVacationApplicationUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\SectionUserControl.cs">
+    <Compile Update="V3\Views\SectionViews\UserController\SectionUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="V3\Views\SectionViews\SectionView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\SetEmployeeUserControl.cs">
+    <Compile Update="V3\Views\AdministrationsViewsViews\EmployeeViews\UserController\SetEmployeeUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\LeftPanelUserControl.cs">
+    <Compile Update="V3\Views\BaseViews\UserController\LeftPanelUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\LoginMainUserControl1.cs">
+    <Compile Update="V3\Views\LoginViews\LoginViewsUserController\LoginMainUserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\MainPanelUserControl.cs">
+    <Compile Update="V3\Views\MainViews\UserController\MainPanelUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\MenageEmployeeUserControl.cs">
+    <Compile Update="V3\Views\AdministrationsViewsViews\EmployeeViews\UserController\MenageEmployeeUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\MenageVacationUserControl.cs">
+    <Compile Update="V3\Views\MenageVacationApplicationViews\UserController\MenageVacationUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\RegisterUserControl.cs">
+    <Compile Update="V3\Views\RegisterViews\RegisterViewsUserController\RegisterUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\SingleEmployeeUserControl.cs">
+    <Compile Update="V3\Views\EmplyeeViews\UserController\SingleEmployeeUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\VacationDaysUserControl.cs">
+    <Compile Update="V3\Views\VacationViews\UserContoller\VacationListUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\VacationListUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\UserControllers\VacationUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\UserControllers\ViewEmployeeUserControl.cs">
+    <Compile Update="V3\Views\AdministrationsViewsViews\EmployeeViews\UserController\ViewEmployeeUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="V3\Views\VacationViews\VacationViews.cs">

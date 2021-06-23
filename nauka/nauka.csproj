@@ -7,8 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="V3\Views\AdministrationsViewsViews\UserControllers\PermissionDenyUserControl.cs" />
+    <Compile Remove="V3\Views\AdministrationsViewsViews\UserControllers\PermissionDenyUserControl.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="V3\Views\AdministrationsViewsViews\UserControllers\PermissionDenyUserControl.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="V2\Views\AppSettings\" />
     <Folder Include="V2\Views\Test\" />
+    <Folder Include="V3\Views\AdministrationsViewsViews\UserControllers\" />
   </ItemGroup>
 
 </Project>
