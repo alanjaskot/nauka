@@ -144,3 +144,7 @@ D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.Administration
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationsViewsViews.ListAdministrationEmployeeViews.ListAdministrationEmployeeView.resources
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationsViewsViews.MenagePermissonViews.MenagePermissonView.resources
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationsViewsViews.MenagePermissonViews.UserController.MenagePermissonUserControl.resources
+D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationsViewsViews.AdministrationVacationViews.AdministrationVacationView.resources
+D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationsViewsViews.AdministrationVacationViews.UserController.AdministrationVacationUserControl.resources
+D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.csproj.AssemblyReference.cache
+D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationsViewsViews.AdministrationVacationViews.UserController.MenageAdmnistrtationVacationApplicationUserControl.resources

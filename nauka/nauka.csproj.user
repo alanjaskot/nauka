@@ -22,6 +22,15 @@
     <Compile Update="V2\Views\Vacations\Views\VacationView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="V3\Views\AdministrationsViewsViews\AdministrationVacationViews\AdministrationVacationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="V3\Views\AdministrationsViewsViews\AdministrationVacationViews\UserController\AdministrationVacationUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\AdministrationsViewsViews\AdministrationVacationViews\UserController\MenageAdmnistrtationVacationApplicationUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="V3\Views\AdministrationsViewsViews\AdministrationViews\AdministrationView.cs">
       <SubType>Form</SubType>
     </Compile>
