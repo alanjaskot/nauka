@@ -28,6 +28,18 @@
     <Compile Update="V3\Views\EmplyeeViews\EmloyeeView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="V3\Views\MenageVacationApplicationViews\MenageVacationApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\MenageVacationApplicatoinUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\VacationDisplayUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\VacationApplicationViews\VacationApplicationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="V3\Views\LoginViews\LoginView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -37,13 +49,25 @@
     <Compile Update="V3\Views\RegisterViews\RegisterView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\EmployeeUserControl.cs">
+    <Compile Update="V3\Views\UserControllers\ListVacationApplicationUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\SectionUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\SectionViews\SectionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\SetEmployeeUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="V3\Views\UserControllers\LeftPanelUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="V3\Views\UserControllers\LoginMainUserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\MainPanelUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="V3\Views\UserControllers\MenageEmployeeUserControl.cs">
@@ -53,6 +77,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="V3\Views\UserControllers\RegisterUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\UserControllers\SingleEmployeeUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="V3\Views\UserControllers\VacationDaysUserControl.cs">
@@ -67,7 +94,7 @@
     <Compile Update="V3\Views\UserControllers\ViewEmployeeUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\VacationViews\VacationView.cs">
+    <Compile Update="V3\Views\VacationViews\VacationViews.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
