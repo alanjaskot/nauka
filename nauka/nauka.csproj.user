@@ -28,7 +28,7 @@
     <Compile Update="V3\Views\AdministrationsViewsViews\AdministrationVacationViews\UserController\AdministrationVacationUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\AdministrationsViewsViews\AdministrationVacationViews\UserController\MenageAdmnistrtationVacationApplicationUserControl.cs">
+    <Compile Update="V3\Views\AdministrationsViewsViews\MenageVacationApplicationViews\UserController\MenageAdmnistrtationVacationApplicationUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="V3\Views\AdministrationsViewsViews\AdministrationViews\AdministrationView.cs">
@@ -56,6 +56,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="V3\Views\MenageVacationApplicationViews\MenageVacationApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="V3\Views\MenageVacationApplicationViews\MenageVacationApplicationView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="V3\Views\UserControllers\DefaultController.cs">
