@@ -1,5 +1,6 @@
 using nauka.V2;
 using nauka.V2.Services;
+using nauka.V3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,14 +24,13 @@ namespace nauka
             var showView = MessageBox.Show("Czy nowy widok?", "Info", MessageBoxButtons.YesNo);
 
             var view = default(Form);
-
+                         
             switch(showView)
             {
                 case DialogResult.Yes:
                     
                     ServiceManager.Init();
-
-                    view = new V2.Views.MainView.Views.MainViewView();
+                    view = new V3.Views.LoginRegisterViews.Views.LoginView();
                     break;
                 default:
                     view = new Form1();

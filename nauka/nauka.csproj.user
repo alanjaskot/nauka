@@ -22,107 +22,65 @@
     <Compile Update="V2\Views\Vacations\Views\VacationView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="V3\Views\AdministrationsViewsViews\AdministrationVacationViews\AdministrationVacationView.cs">
+    <Compile Update="V3\Views\AdministrationViews\AdminMainViews\Views\AdminMainView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="V3\Views\AdministrationsViewsViews\AdministrationVacationViews\UserController\AdministrationVacationUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\AdministrationsViewsViews\MenageVacationApplicationViews\UserController\MenageAdmnistrtationVacationApplicationUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\AdministrationsViewsViews\AdministrationViews\AdministrationView.cs">
+    <Compile Update="V3\Views\AdministrationViews\RegisterVIews\Views\RegisterView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="V3\Views\AdministrationsViewsViews\EmployeeViews\ListAdministrationEmployeeView.cs">
+    <Compile Update="V3\Views\AdministrationViews\UsereControls\AdminLeftPanelMenuUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\AdministrationViews\UsereControls\MenageSectionUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\AdministrationViews\UsereControls\EmployeesUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\AdministrationViews\UsereControls\PermissionUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\AdministrationViews\UsereControls\MenageVacationsUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\AdministrationViews\UsereControls\VacationPermissionUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="V3\Views\AdministrationViews\VacationViews\Views\VacationView.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="V3\Views\AdministrationsViewsViews\AdministrationViews\UserControlls\NoPermissionUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\AdministrationsViewsViews\AdministrationViews\UserControlls\PermittedUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\AdministrationsViewsViews\MenagePermissonViews\MenagePermissonView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="V3\Views\AdministrationsViewsViews\MenagePermissonViews\UserController\MenagePermissonUserControl.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="V3\Views\BaseViews\baseView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="V3\Views\EmplyeeViews\EmloyeeView.cs">
+    <Compile Update="V3\Views\UserViews\LoginViews\Views\LoginView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="V3\Views\MenageVacationApplicationViews\MenageVacationApplication.cs">
+    <Compile Update="V3\Views\UserViews\MainViews\Views\MainView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="V3\Views\MenageVacationApplicationViews\MenageVacationApplicationView.cs">
+    <Compile Update="V3\Views\AdministrationViews\SectionAddViews\Views\SectionAddView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserControllers\DefaultController.cs">
+    <Compile Update="V3\Views\UserViews\UserControls\DashboardUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\VacationApplicationViews\UserController\MenageVacationApplicatoinUserControl.cs">
+    <Compile Update="V3\Views\UserViews\UserControls\LoginUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\VacationViews\UserContoller\VacationDisplayUserControl.cs">
+    <Compile Update="V3\Views\UserViews\UserControls\MenageVacationApplicationUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\VacationApplicationViews\VacationApplicationView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="V3\Views\LoginViews\LoginView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="V3\Views\MainViews\MainView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="V3\Views\RegisterViews\RegisterView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="V3\Views\VacationApplicationViews\UserController\ListVacationApplicationUserControl.cs">
+    <Compile Update="V3\Views\UserViews\UserControls\NoPermissionUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\SectionViews\UserController\SectionUserControl.cs">
+    <Compile Update="V3\Views\UserViews\UserControls\UserLeftPanelMenuUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\SectionViews\SectionView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="V3\Views\AdministrationsViewsViews\EmployeeViews\UserController\SetEmployeeUserControl.cs">
+    <Compile Update="V3\Views\UserViews\UserControls\VacationUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\BaseViews\UserController\LeftPanelUserControl.cs">
+    <Compile Update="V3\Views\UserViews\UserControls\SingleEmployeeUC.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\LoginViews\LoginViewsUserController\LoginMainUserControl1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\MainViews\UserController\MainPanelUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\AdministrationsViewsViews\EmployeeViews\UserController\MenageEmployeeUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\MenageVacationApplicationViews\UserController\MenageVacationUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\RegisterViews\RegisterViewsUserController\RegisterUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\EmplyeeViews\UserController\SingleEmployeeUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\VacationViews\UserContoller\VacationListUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\AdministrationsViewsViews\EmployeeViews\UserController\ViewEmployeeUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\VacationViews\VacationViews.cs">
-      <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
 </Project>

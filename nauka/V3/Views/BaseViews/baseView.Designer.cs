@@ -36,10 +36,8 @@ namespace nauka.V3.BaseViews
             this.labelTitle = new System.Windows.Forms.Label();
             this.panelLeftMenu = new System.Windows.Forms.Panel();
             this.panelMain = new System.Windows.Forms.Panel();
-            this.leftPanelUserControl1 = new nauka.V3.Views.UserControllers.LeftPanelUserControl();
             this.panelBottom.SuspendLayout();
             this.panelTop.SuspendLayout();
-            this.panelLeftMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelBottom
@@ -48,14 +46,14 @@ namespace nauka.V3.BaseViews
             this.panelBottom.Controls.Add(this.buttonCancel);
             this.panelBottom.Controls.Add(this.buttonOK);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 655);
+            this.panelBottom.Location = new System.Drawing.Point(0, 930);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(1543, 94);
+            this.panelBottom.Size = new System.Drawing.Size(1898, 94);
             this.panelBottom.TabIndex = 0;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(1151, 35);
+            this.buttonCancel.Location = new System.Drawing.Point(1552, 35);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(112, 34);
             this.buttonCancel.TabIndex = 1;
@@ -64,7 +62,7 @@ namespace nauka.V3.BaseViews
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(1300, 35);
+            this.buttonOK.Location = new System.Drawing.Point(1701, 35);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(112, 34);
             this.buttonOK.TabIndex = 0;
@@ -77,7 +75,7 @@ namespace nauka.V3.BaseViews
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1543, 150);
+            this.panelTop.Size = new System.Drawing.Size(1898, 150);
             this.panelTop.TabIndex = 1;
             // 
             // labelTitle
@@ -86,18 +84,17 @@ namespace nauka.V3.BaseViews
             this.labelTitle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelTitle.Location = new System.Drawing.Point(0, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(1543, 150);
+            this.labelTitle.Size = new System.Drawing.Size(1898, 150);
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "AppTitle";
             this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelLeftMenu
             // 
-            this.panelLeftMenu.Controls.Add(this.leftPanelUserControl1);
             this.panelLeftMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeftMenu.Location = new System.Drawing.Point(0, 150);
             this.panelLeftMenu.Name = "panelLeftMenu";
-            this.panelLeftMenu.Size = new System.Drawing.Size(300, 505);
+            this.panelLeftMenu.Size = new System.Drawing.Size(300, 780);
             this.panelLeftMenu.TabIndex = 2;
             // 
             // panelMain
@@ -105,21 +102,14 @@ namespace nauka.V3.BaseViews
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(300, 150);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1243, 505);
+            this.panelMain.Size = new System.Drawing.Size(1598, 780);
             this.panelMain.TabIndex = 3;
-            // 
-            // leftPanelUserControl1
-            // 
-            this.leftPanelUserControl1.Location = new System.Drawing.Point(0, 0);
-            this.leftPanelUserControl1.Name = "leftPanelUserControl1";
-            this.leftPanelUserControl1.Size = new System.Drawing.Size(300, 505);
-            this.leftPanelUserControl1.TabIndex = 0;
             // 
             // baseView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1543, 749);
+            this.ClientSize = new System.Drawing.Size(1898, 1024);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelLeftMenu);
             this.Controls.Add(this.panelTop);
@@ -128,7 +118,6 @@ namespace nauka.V3.BaseViews
             this.Text = "baseView";
             this.panelBottom.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
-            this.panelLeftMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -142,6 +131,5 @@ namespace nauka.V3.BaseViews
         private System.Windows.Forms.Label labelTitle;
         protected internal System.Windows.Forms.Panel panelLeftMenu;
         protected internal System.Windows.Forms.Panel panelMain;
-        private Views.UserControllers.LeftPanelUserControl leftPanelUserControl1;
     }
 }
