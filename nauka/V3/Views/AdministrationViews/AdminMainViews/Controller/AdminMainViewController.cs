@@ -154,7 +154,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
         private void DisplayEmployees(string selectedSection)
         {
-            int i = 1;
+            int i = 1;//
             CreateDataGridEmployee();           
             foreach (var item in _model.GetEmployees().Where(e => e.Section.Name == selectedSection))
             {
