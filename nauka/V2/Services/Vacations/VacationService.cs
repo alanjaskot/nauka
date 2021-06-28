@@ -11,7 +11,7 @@ namespace nauka.V2.Services.Vacations
 {
     public class VacationService : BaseService
     {
-        private VacationsDaysService _vacationDaysService;
+        //private VacationsDaysService _vacationDaysService;
         private List<Vacation> _vacations;
         public VacationService()
         {
@@ -21,16 +21,16 @@ namespace nauka.V2.Services.Vacations
         // dobra pokaze ci jeszcze cos 
         // do kazdego obiektu ktory chcesz zapamietac dodasz unikalne id, bedzie to szlo potem uzuc do bazy dnayhch 
 
-        public void SumVacation()
+        /*public void SumVacation()
         {
             var vacationDaysList = _vacationDaysService.GetVacationDays();
-            /*
+            *//*
             foreach (item in vacationDaysList)
             {
                 item
             }
-            */
-        }
+            *//*
+        }*/
 
         
         public void AddVacation(Vacation vacation)

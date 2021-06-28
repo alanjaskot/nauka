@@ -1,4 +1,5 @@
 ﻿using nauka.V3.BaseViews;
+using nauka.V3.Models;
 using nauka.V3.Views.MainViews.Controller;
 using System;
 using System.Collections.Generic;
@@ -23,5 +24,18 @@ namespace nauka.V3.Views.MianViews
 
             _mainViewController = new MainViewController(this);
         }
+
+        public Employee SetObjectToEdit
+        {
+            get
+            {
+                return _mainViewController.SetEployee;
+            }
+            set
+            {
+                _mainViewController.SetEployee = value;
+            }
+        }
+
     }
 }

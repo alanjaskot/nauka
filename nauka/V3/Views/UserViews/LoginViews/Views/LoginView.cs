@@ -1,4 +1,5 @@
 ﻿using nauka.V3.BaseViews;
+using nauka.V3.Models;
 using nauka.V3.Views.UserViews.LoginRegisterViews.Controllers;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,5 @@ namespace nauka.V3.Views.LoginRegisterViews.Views
             _controller = new LoginController(this);
         }
 
-        
     }
 }

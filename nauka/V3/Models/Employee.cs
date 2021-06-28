@@ -5,9 +5,9 @@ using System.Text;
 
 namespace nauka.V3.Models
 {
-    class Employee
+    public class Employee
     {
-        public int Id { get; set; }
+        public Guid EmployeeId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Username { get; set; }
@@ -16,6 +16,7 @@ namespace nauka.V3.Models
         public char Sex { get; set; }
         public bool EmployeePermisson { get; set; }
         public bool VacationPermisson { get; set; }
+        public Section Section { get; set; }
 
         public virtual string FullName
         {

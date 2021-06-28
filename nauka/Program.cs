@@ -1,6 +1,6 @@
-using nauka.V2;
-using nauka.V2.Services;
+
 using nauka.V3;
+using nauka.V3.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +29,7 @@ namespace nauka
             {
                 case DialogResult.Yes:
                     
-                    ServiceManager.Init();
+                    ManageService.Init();
                     view = new V3.Views.LoginRegisterViews.Views.LoginView();
                     break;
                 default:

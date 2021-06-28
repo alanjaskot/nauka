@@ -12,7 +12,7 @@ namespace nauka.V2.Models
         public string Password { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-
+        public char Sex { get; set; }
         public Section Section { get; set; }
         public Vacation Vacation { get; set; }
 

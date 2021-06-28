@@ -29,24 +29,24 @@ namespace nauka.V3.Views.AdministrationViews.UsereControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewEmployees = new System.Windows.Forms.DataGridView();
             this.labelSections = new System.Windows.Forms.Label();
             this.comboBoxSections = new System.Windows.Forms.ComboBox();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployees)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridViewEmployees
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(277, 156);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 33;
-            this.dataGridView1.Size = new System.Drawing.Size(481, 535);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridViewEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEmployees.Location = new System.Drawing.Point(277, 156);
+            this.dataGridViewEmployees.Name = "dataGridViewEmployees";
+            this.dataGridViewEmployees.RowHeadersWidth = 150;
+            this.dataGridViewEmployees.RowTemplate.Height = 33;
+            this.dataGridViewEmployees.Size = new System.Drawing.Size(450, 500);
+            this.dataGridViewEmployees.TabIndex = 0;
             // 
             // labelSections
             // 
@@ -108,10 +108,10 @@ namespace nauka.V3.Views.AdministrationViews.UsereControls
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.comboBoxSections);
             this.Controls.Add(this.labelSections);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridViewEmployees);
             this.Name = "EmployeesUC";
             this.Size = new System.Drawing.Size(1598, 780);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployees)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,6 +123,6 @@ namespace nauka.V3.Views.AdministrationViews.UsereControls
         protected internal System.Windows.Forms.Button buttonAdd;
         protected internal System.Windows.Forms.Button buttonEdit;
         protected internal System.Windows.Forms.Button buttonDelete;
-        protected internal System.Windows.Forms.DataGridView dataGridView1;
+        protected internal System.Windows.Forms.DataGridView dataGridViewEmployees;
     }
 }

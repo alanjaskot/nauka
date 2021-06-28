@@ -4,9 +4,8 @@ using System.Text;
 
 namespace nauka.V3.Models
 {
-    public class Section
+    class AppSettings
     {
-        public Guid SectionId { get; set; }
-        public string Name { get; set; }
+        private long AvaibleVacationDays { get; set; }
     }
 }

@@ -21,6 +21,8 @@ namespace nauka.V3.Views.LoginRegisterViews.Views
             base.Dispose(disposing);
         }
 
+
+
         #region Windows Form Designer generated code
 
         /// <summary>

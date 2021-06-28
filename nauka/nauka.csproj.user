@@ -28,22 +28,22 @@
     <Compile Update="V3\Views\AdministrationViews\RegisterVIews\Views\RegisterView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="V3\Views\AdministrationViews\UsereControls\AdminLeftPanelMenuUC.cs">
+    <Compile Update="V3\Views\AdministrationViews\UserControls\AdminLeftPanelMenuUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\AdministrationViews\UsereControls\MenageSectionUC.cs">
+    <Compile Update="V3\Views\AdministrationViews\UserControls\MenageSectionUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\AdministrationViews\UsereControls\EmployeesUC.cs">
+    <Compile Update="V3\Views\AdministrationViews\UserControls\EmployeesUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\AdministrationViews\UsereControls\PermissionUC.cs">
+    <Compile Update="V3\Views\AdministrationViews\UserControls\PermissionUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\AdministrationViews\UsereControls\MenageVacationsUC.cs">
+    <Compile Update="V3\Views\AdministrationViews\UserControls\MenageVacationsUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\AdministrationViews\UsereControls\VacationPermissionUC.cs">
+    <Compile Update="V3\Views\AdministrationViews\UserControls\VacationPermissionUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="V3\Views\AdministrationViews\VacationViews\Views\VacationView.cs">

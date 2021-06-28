@@ -14,7 +14,7 @@ namespace nauka.V2.Views.VacationDays.Controllers
     {
         private readonly VacationDaysView _view;
         private VacationDaysModel _model;
-        private VacationController _vacationController;
+        //private VacationController _vacationController;
 
         public V2.Models.VacationDays SetVacationDays
         {

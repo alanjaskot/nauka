@@ -1,4 +1,5 @@
 ﻿using nauka.V3.BaseViews;
+using nauka.V3.Models;
 using nauka.V3.Views.AdministrationViews.AdminMainViews.Controller;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,18 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
                 return;
 
             _controller = new AdminMainViewController(this);
+        }
+
+        public Employee SetObjectToEdit
+        {
+            get
+            {
+                return _controller.SetEployee;
+            }
+            set
+            {
+                _controller.SetEployee = value;
+            }
         }
     }
 }

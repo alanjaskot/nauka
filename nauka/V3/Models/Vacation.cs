@@ -4,11 +4,12 @@ using System.Text;
 
 namespace nauka.V3.Models
 {
-    class Vacation
+    public class Vacation
     {
-        public int Id { get; set; }
+        public Guid VacationId { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public string Description { get; set; }
+        public bool Approve { get; set; }
     }
 }

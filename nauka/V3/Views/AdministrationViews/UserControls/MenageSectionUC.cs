@@ -15,11 +15,5 @@ namespace nauka.V3.Views.AdministrationViews.UsereControls
         {
             InitializeComponent();
         }
-
-        private void buttonAdd_Click(object sender, EventArgs e)
-        {
-            SectionAddView sectionAddView = new SectionAddView();
-            sectionAddView.Show();
-        }
     }
 }
