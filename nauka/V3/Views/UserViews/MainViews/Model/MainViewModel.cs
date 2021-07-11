@@ -11,10 +11,14 @@ namespace nauka.V3.Views.MainViews.Model
     {
         private EmployeeService _employeeService;
         private SectionService _sectionService;
+        private VacationService _vacationService;
+
 
         public MainViewModel()
         {
             _employeeService = ManageService.Employees;
+            _sectionService = ManageService.Sections;
+            _vacationService = ManageService.Vacations;
         }
 
         public Employee Employee { get; set; }
@@ -31,6 +35,27 @@ namespace nauka.V3.Views.MainViews.Model
                 throw;
             }
             return result;
+        }
+
+        internal List<Vacation> GetVacations()
+        {
+            var result = default(List<Vacation>);
+            try
+            {
+                result = _employeeService.GetVacations();
+            }
+            catch
+            {
+                throw;
+            }
+
+            return result;
+            
+        }
+
+        internal void DeleteVacation(Vacation vacation)
+        {
+            _employeeService.DeleteVacation(Employee, vacation);
         }
     }
 }

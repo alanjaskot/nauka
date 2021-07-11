@@ -25,10 +25,12 @@ namespace nauka.V3.Services
             {
                 new Section
                 {
+                    SectionId = Guid.NewGuid(),
                     Name = "HR"
                 },
                 new Section
                 {
+                    SectionId = Guid.NewGuid(),
                     Name = "IT"
                 }
             };

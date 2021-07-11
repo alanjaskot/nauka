@@ -30,8 +30,8 @@ namespace nauka.V3.BaseViews
         private void InitializeComponent()
         {
             this.panelBottom = new System.Windows.Forms.Panel();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonOK = new System.Windows.Forms.Button();
+            this.buttonLogout = new System.Windows.Forms.Button();
+            this.buttonExit = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
             this.labelTitle = new System.Windows.Forms.Label();
             this.panelLeftMenu = new System.Windows.Forms.Panel();
@@ -43,31 +43,31 @@ namespace nauka.V3.BaseViews
             // panelBottom
             // 
             this.panelBottom.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.panelBottom.Controls.Add(this.buttonCancel);
-            this.panelBottom.Controls.Add(this.buttonOK);
+            this.panelBottom.Controls.Add(this.buttonLogout);
+            this.panelBottom.Controls.Add(this.buttonExit);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.Location = new System.Drawing.Point(0, 930);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(1898, 94);
             this.panelBottom.TabIndex = 0;
             // 
-            // buttonCancel
+            // buttonLogout
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(1552, 35);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(112, 34);
-            this.buttonCancel.TabIndex = 1;
-            this.buttonCancel.Text = "Anuluj";
-            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonLogout.Location = new System.Drawing.Point(1552, 35);
+            this.buttonLogout.Name = "buttonLogout";
+            this.buttonLogout.Size = new System.Drawing.Size(112, 34);
+            this.buttonLogout.TabIndex = 1;
+            this.buttonLogout.Text = "Anuluj";
+            this.buttonLogout.UseVisualStyleBackColor = true;
             // 
-            // buttonOK
+            // buttonExit
             // 
-            this.buttonOK.Location = new System.Drawing.Point(1701, 35);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(112, 34);
-            this.buttonOK.TabIndex = 0;
-            this.buttonOK.Text = "OK";
-            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonExit.Location = new System.Drawing.Point(1701, 35);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(112, 34);
+            this.buttonExit.TabIndex = 0;
+            this.buttonExit.Text = "OK";
+            this.buttonExit.UseVisualStyleBackColor = true;
             // 
             // panelTop
             // 
@@ -125,8 +125,8 @@ namespace nauka.V3.BaseViews
         #endregion
 
         protected internal System.Windows.Forms.Panel panelBottom;
-        protected internal System.Windows.Forms.Button buttonCancel;
-        protected internal System.Windows.Forms.Button buttonOK;
+        protected internal System.Windows.Forms.Button buttonLogout;
+        protected internal System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Label labelTitle;
         protected internal System.Windows.Forms.Panel panelLeftMenu;

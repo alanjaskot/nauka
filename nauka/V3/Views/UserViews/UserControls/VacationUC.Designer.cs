@@ -45,7 +45,7 @@ namespace nauka.V3.Views.UserViews.UserControls
             this.dataGridViewVacations.ReadOnly = true;
             this.dataGridViewVacations.RowHeadersWidth = 62;
             this.dataGridViewVacations.RowTemplate.Height = 33;
-            this.dataGridViewVacations.Size = new System.Drawing.Size(460, 532);
+            this.dataGridViewVacations.Size = new System.Drawing.Size(550, 532);
             this.dataGridViewVacations.TabIndex = 0;
             // 
             // labelVacationList
@@ -60,7 +60,7 @@ namespace nauka.V3.Views.UserViews.UserControls
             // monthCalendar1
             // 
             this.monthCalendar1.CalendarDimensions = new System.Drawing.Size(2, 2);
-            this.monthCalendar1.Location = new System.Drawing.Point(665, 152);
+            this.monthCalendar1.Location = new System.Drawing.Point(726, 152);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 2;
             // 

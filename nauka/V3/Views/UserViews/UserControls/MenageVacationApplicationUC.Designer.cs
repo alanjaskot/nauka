@@ -32,7 +32,6 @@ namespace nauka.V3.Views.UserViews.UserControls
             this.dataGridViewVacAppList = new System.Windows.Forms.DataGridView();
             this.labelVacationApplicationList = new System.Windows.Forms.Label();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVacAppList)).BeginInit();
             this.SuspendLayout();
@@ -47,7 +46,7 @@ namespace nauka.V3.Views.UserViews.UserControls
             this.dataGridViewVacAppList.ReadOnly = true;
             this.dataGridViewVacAppList.RowHeadersWidth = 62;
             this.dataGridViewVacAppList.RowTemplate.Height = 33;
-            this.dataGridViewVacAppList.Size = new System.Drawing.Size(441, 538);
+            this.dataGridViewVacAppList.Size = new System.Drawing.Size(550, 538);
             this.dataGridViewVacAppList.TabIndex = 0;
             // 
             // labelVacationApplicationList
@@ -63,27 +62,17 @@ namespace nauka.V3.Views.UserViews.UserControls
             // buttonAdd
             // 
             this.buttonAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAdd.Location = new System.Drawing.Point(855, 148);
+            this.buttonAdd.Location = new System.Drawing.Point(943, 148);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(211, 82);
             this.buttonAdd.TabIndex = 2;
             this.buttonAdd.Text = "Wniosek o urlop";
             this.buttonAdd.UseVisualStyleBackColor = true;
             // 
-            // buttonEdit
-            // 
-            this.buttonEdit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonEdit.Location = new System.Drawing.Point(855, 300);
-            this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(211, 82);
-            this.buttonEdit.TabIndex = 3;
-            this.buttonEdit.Text = "Zmień wniosek";
-            this.buttonEdit.UseVisualStyleBackColor = true;
-            // 
             // buttonDelete
             // 
             this.buttonDelete.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonDelete.Location = new System.Drawing.Point(855, 448);
+            this.buttonDelete.Location = new System.Drawing.Point(943, 309);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(211, 103);
             this.buttonDelete.TabIndex = 4;
@@ -95,7 +84,6 @@ namespace nauka.V3.Views.UserViews.UserControls
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.buttonDelete);
-            this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.labelVacationApplicationList);
             this.Controls.Add(this.dataGridViewVacAppList);
@@ -112,7 +100,6 @@ namespace nauka.V3.Views.UserViews.UserControls
         protected internal System.Windows.Forms.DataGridView dataGridViewVacAppList;
         private System.Windows.Forms.Label labelVacationApplicationList;
         protected internal System.Windows.Forms.Button buttonAdd;
-        protected internal System.Windows.Forms.Button buttonEdit;
         protected internal System.Windows.Forms.Button buttonDelete;
     }
 }

@@ -4,8 +4,8 @@ using System.Text;
 
 namespace nauka.V3.Models
 {
-    class AppSettings
+    public class AppSettings
     {
-        private long AvaibleVacationDays { get; set; }
+        public long AvaibleVacationDays { get; set; }
     }
 }

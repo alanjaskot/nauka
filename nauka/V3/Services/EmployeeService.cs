@@ -11,7 +11,8 @@ namespace nauka.V3.Services
     {
         private List<Employee> _employees;
         private List<Section> _sections;
-        private AppSettings _appSettings;
+        private List<VacationDay> _vacationDays;
+        private List<Vacation> _vacations;
 
         public EmployeeService() { }
 
@@ -37,11 +38,15 @@ namespace nauka.V3.Services
             var result = default(List<Employee>);
             try
             {
-               // if (_appSettings == null)
-               //     await InitAppSettings();
 
                 if (_sections == null)
                     await InitSection();
+
+                if (_vacations == null)
+                    await InitVacation();
+
+                if (_vacationDays == null)
+                    await InitVacationDays();
 
                 var employees = new List<Employee>
                 {
@@ -56,8 +61,26 @@ namespace nauka.V3.Services
                         Sex = 'M',
                         Section = _sections.Where(s => s.Name == "HR").FirstOrDefault(),
                         EmployeePermisson = true,
-                        VacationPermisson = true
-
+                        VacationPermisson = true,
+                        Vacation = _vacations,
+                        AppSettings = new AppSettings{ AvaibleVacationDays = 24 },
+                        VacationDays = new List<VacationDay> { new VacationDay { VacationDays = 0 } }
+                    },
+                    new Employee
+                    {
+                        EmployeeId = Guid.NewGuid(),
+                        Name = "Adam",
+                        Surname = "Nowak",
+                        Username = "anowak",
+                        Password = "123",
+                        Email = "a.nowak@aa.a",
+                        Sex = 'M',
+                        Section = _sections.Where(s => s.Name == "HR").FirstOrDefault(),
+                        EmployeePermisson = true,
+                        VacationPermisson = false,
+                        Vacation = new List<Vacation>(),
+                        AppSettings = new AppSettings{ AvaibleVacationDays = 24 },
+                        VacationDays = new List<VacationDay> { new VacationDay { VacationDays = 0 } }
                     },
                     new Employee
                     {
@@ -70,8 +93,10 @@ namespace nauka.V3.Services
                         Sex = 'M',
                         Section = _sections.Where(s => s.Name == "IT").FirstOrDefault(),
                         EmployeePermisson = false,
-                        VacationPermisson = false
-
+                        VacationPermisson = false,
+                        Vacation = new List<Vacation>(),
+                        AppSettings = new AppSettings{ AvaibleVacationDays = 24 },
+                        VacationDays = new List<VacationDay> { new VacationDay { VacationDays = 0 } }
                     }
                 };
                 result = employees;
@@ -80,7 +105,6 @@ namespace nauka.V3.Services
             {
                 throw;
             }
-
             return await Task.FromResult(result);
         }
 
@@ -90,6 +114,49 @@ namespace nauka.V3.Services
             _sections = await _sectionService.GetSections();
 
             await Task.CompletedTask;
+        }
+
+        private async Task InitVacationDays()
+        {
+            var _vacationDaysService = new VacationDaysService();
+            _vacationDays = await _vacationDaysService.GetVacationDays();
+
+            await Task.CompletedTask;
+        }
+
+        private async Task InitVacation()
+        {
+            var _vacationService = new VacationService();
+            _vacations = await _vacationService.GetVacations() ;
+
+            await Task.CompletedTask;
+        }
+
+        public List<Vacation> GetVacations()
+        {
+            return _vacations;
+            //await Task.CompletedTask;
+        }
+
+        public void Add(Employee employee)
+        {
+            _employees.Add(employee);
+        }
+
+        public void Update(Employee employee)
+        {
+            int index = _employees.FindIndex(e => e.EmployeeId == employee.EmployeeId);
+            _employees[index] = employee;
+        }
+
+        public void Delete(Employee employee)
+        {
+            _employees.Remove(employee);
+        }
+
+        public void DeleteVacation(Employee employee, Vacation vacation)
+        {
+            employee.Vacation.Remove(vacation);
         }
     }
 }

@@ -32,8 +32,8 @@ namespace nauka.V3.Views.AdministrationViews.UsereControls
             this.listViewSections = new System.Windows.Forms.ListView();
             this.labelSectionList = new System.Windows.Forms.Label();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listViewSections
@@ -44,9 +44,10 @@ namespace nauka.V3.Views.AdministrationViews.UsereControls
             this.listViewSections.Margin = new System.Windows.Forms.Padding(4);
             this.listViewSections.Name = "listViewSections";
             this.listViewSections.ShowGroups = false;
-            this.listViewSections.Size = new System.Drawing.Size(296, 569);
+            this.listViewSections.Size = new System.Drawing.Size(309, 569);
             this.listViewSections.TabIndex = 0;
             this.listViewSections.UseCompatibleStateImageBehavior = false;
+            this.listViewSections.View = System.Windows.Forms.View.List;
             // 
             // labelSectionList
             // 
@@ -54,7 +55,7 @@ namespace nauka.V3.Views.AdministrationViews.UsereControls
             this.labelSectionList.Location = new System.Drawing.Point(372, 102);
             this.labelSectionList.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelSectionList.Name = "labelSectionList";
-            this.labelSectionList.Size = new System.Drawing.Size(135, 30);
+            this.labelSectionList.Size = new System.Drawing.Size(120, 25);
             this.labelSectionList.TabIndex = 1;
             this.labelSectionList.Text = "Lista działów";
             // 
@@ -69,17 +70,6 @@ namespace nauka.V3.Views.AdministrationViews.UsereControls
             this.buttonAdd.Text = "Nowy  dział";
             this.buttonAdd.UseVisualStyleBackColor = true;
             // 
-            // buttonEdit
-            // 
-            this.buttonEdit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonEdit.Location = new System.Drawing.Point(1001, 364);
-            this.buttonEdit.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(218, 89);
-            this.buttonEdit.TabIndex = 3;
-            this.buttonEdit.Text = "Zmień nazwę";
-            this.buttonEdit.UseVisualStyleBackColor = true;
-            // 
             // buttonDelete
             // 
             this.buttonDelete.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -91,9 +81,20 @@ namespace nauka.V3.Views.AdministrationViews.UsereControls
             this.buttonDelete.Text = "Usuń dział";
             this.buttonDelete.UseVisualStyleBackColor = true;
             // 
+            // buttonEdit
+            // 
+            this.buttonEdit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonEdit.Location = new System.Drawing.Point(1001, 364);
+            this.buttonEdit.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(218, 89);
+            this.buttonEdit.TabIndex = 3;
+            this.buttonEdit.Text = "Zmień nazwę";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            // 
             // MenageSectionUC
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonEdit);
@@ -114,7 +115,7 @@ namespace nauka.V3.Views.AdministrationViews.UsereControls
         protected internal System.Windows.Forms.ListView listViewSections;
         private System.Windows.Forms.Label labelSectionList;
         protected internal System.Windows.Forms.Button buttonAdd;
-        protected internal System.Windows.Forms.Button buttonEdit;
         protected internal System.Windows.Forms.Button buttonDelete;
+        protected internal System.Windows.Forms.Button buttonEdit;
     }
 }

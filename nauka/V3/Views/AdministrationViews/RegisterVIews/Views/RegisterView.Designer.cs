@@ -33,7 +33,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             this.comboBoxSection = new System.Windows.Forms.ComboBox();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.textBoxEmail = new System.Windows.Forms.TextBox();
-            this.textBoxUsernaem = new System.Windows.Forms.TextBox();
+            this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.textBoxSurname = new System.Windows.Forms.TextBox();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.labelSex = new System.Windows.Forms.Label();
@@ -43,15 +43,17 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             this.labelUserName = new System.Windows.Forms.Label();
             this.labelSurname = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
-            this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.textBoxAppSetting = new System.Windows.Forms.TextBox();
+            this.labelFreeDays = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBoxSex
             // 
             this.comboBoxSex.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxSex.FormattingEnabled = true;
-            this.comboBoxSex.Location = new System.Drawing.Point(284, 484);
+            this.comboBoxSex.Location = new System.Drawing.Point(284, 556);
             this.comboBoxSex.Name = "comboBoxSex";
             this.comboBoxSex.Size = new System.Drawing.Size(377, 38);
             this.comboBoxSex.TabIndex = 27;
@@ -61,11 +63,10 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             this.comboBoxSection.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxSection.FormattingEnabled = true;
-            this.comboBoxSection.Location = new System.Drawing.Point(284, 337);
+            this.comboBoxSection.Location = new System.Drawing.Point(284, 484);
             this.comboBoxSection.Name = "comboBoxSection";
             this.comboBoxSection.Size = new System.Drawing.Size(377, 38);
             this.comboBoxSection.TabIndex = 26;
-            this.comboBoxSection.Text = "   dział";
             // 
             // textBoxPassword
             // 
@@ -78,18 +79,18 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // textBoxEmail
             // 
             this.textBoxEmail.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxEmail.Location = new System.Drawing.Point(284, 409);
+            this.textBoxEmail.Location = new System.Drawing.Point(284, 335);
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(377, 37);
             this.textBoxEmail.TabIndex = 24;
             // 
-            // textBoxUsernaem
+            // textBoxUsername
             // 
-            this.textBoxUsernaem.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxUsernaem.Location = new System.Drawing.Point(284, 189);
-            this.textBoxUsernaem.Name = "textBoxUsernaem";
-            this.textBoxUsernaem.Size = new System.Drawing.Size(377, 37);
-            this.textBoxUsernaem.TabIndex = 23;
+            this.textBoxUsername.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxUsername.Location = new System.Drawing.Point(284, 189);
+            this.textBoxUsername.Name = "textBoxUsername";
+            this.textBoxUsername.Size = new System.Drawing.Size(377, 37);
+            this.textBoxUsername.TabIndex = 23;
             // 
             // textBoxSurname
             // 
@@ -111,7 +112,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             this.labelSex.AutoSize = true;
             this.labelSex.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSex.Location = new System.Drawing.Point(57, 487);
+            this.labelSex.Location = new System.Drawing.Point(57, 559);
             this.labelSex.Name = "labelSex";
             this.labelSex.Size = new System.Drawing.Size(54, 30);
             this.labelSex.TabIndex = 20;
@@ -121,7 +122,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             this.labelEmail.AutoSize = true;
             this.labelEmail.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelEmail.Location = new System.Drawing.Point(57, 412);
+            this.labelEmail.Location = new System.Drawing.Point(57, 338);
             this.labelEmail.Name = "labelEmail";
             this.labelEmail.Size = new System.Drawing.Size(74, 30);
             this.labelEmail.TabIndex = 19;
@@ -131,7 +132,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             this.labelSection.AutoSize = true;
             this.labelSection.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSection.Location = new System.Drawing.Point(51, 340);
+            this.labelSection.Location = new System.Drawing.Point(51, 487);
             this.labelSection.Name = "labelSection";
             this.labelSection.Size = new System.Drawing.Size(58, 30);
             this.labelSection.TabIndex = 18;
@@ -177,38 +178,58 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             this.labelName.TabIndex = 14;
             this.labelName.Text = "imie";
             // 
-            // buttonAdd
+            // buttonOk
             // 
-            this.buttonAdd.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAdd.Location = new System.Drawing.Point(149, 588);
-            this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(153, 57);
-            this.buttonAdd.TabIndex = 28;
-            this.buttonAdd.Text = "Dodaj";
-            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonOk.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonOk.Location = new System.Drawing.Point(136, 662);
+            this.buttonOk.Name = "buttonOk";
+            this.buttonOk.Size = new System.Drawing.Size(153, 57);
+            this.buttonOk.TabIndex = 28;
+            this.buttonOk.Text = "Ok";
+            this.buttonOk.UseVisualStyleBackColor = true;
             // 
             // buttonCancel
             // 
             this.buttonCancel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonCancel.Location = new System.Drawing.Point(376, 588);
+            this.buttonCancel.Location = new System.Drawing.Point(363, 662);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(153, 57);
             this.buttonCancel.TabIndex = 29;
             this.buttonCancel.Text = "Anuluj";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
+            // textBoxAppSetting
+            // 
+            this.textBoxAppSetting.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxAppSetting.Location = new System.Drawing.Point(334, 409);
+            this.textBoxAppSetting.Name = "textBoxAppSetting";
+            this.textBoxAppSetting.Size = new System.Drawing.Size(327, 37);
+            this.textBoxAppSetting.TabIndex = 31;
+            // 
+            // labelFreeDays
+            // 
+            this.labelFreeDays.AutoSize = true;
+            this.labelFreeDays.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelFreeDays.Location = new System.Drawing.Point(57, 412);
+            this.labelFreeDays.Name = "labelFreeDays";
+            this.labelFreeDays.Size = new System.Drawing.Size(245, 30);
+            this.labelFreeDays.TabIndex = 30;
+            this.labelFreeDays.Text = "przysługujące dni wolne";
+            // 
             // RegisterView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(701, 697);
+            this.ClientSize = new System.Drawing.Size(701, 800);
+            this.Controls.Add(this.textBoxAppSetting);
+            this.Controls.Add(this.labelFreeDays);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonAdd);
+            this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.comboBoxSex);
             this.Controls.Add(this.comboBoxSection);
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.textBoxEmail);
-            this.Controls.Add(this.textBoxUsernaem);
+            this.Controls.Add(this.textBoxUsername);
             this.Controls.Add(this.textBoxSurname);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.labelSex);
@@ -231,7 +252,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
         protected internal System.Windows.Forms.ComboBox comboBoxSection;
         protected internal System.Windows.Forms.TextBox textBoxPassword;
         protected internal System.Windows.Forms.TextBox textBoxEmail;
-        protected internal System.Windows.Forms.TextBox textBoxUsernaem;
+        protected internal System.Windows.Forms.TextBox textBoxUsername;
         protected internal System.Windows.Forms.TextBox textBoxSurname;
         protected internal System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label labelSex;
@@ -241,7 +262,9 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
         private System.Windows.Forms.Label labelUserName;
         private System.Windows.Forms.Label labelSurname;
         private System.Windows.Forms.Label labelName;
-        protected internal System.Windows.Forms.Button buttonAdd;
+        protected internal System.Windows.Forms.Button buttonOk;
         protected internal System.Windows.Forms.Button buttonCancel;
+        protected internal System.Windows.Forms.TextBox textBoxAppSetting;
+        private System.Windows.Forms.Label labelFreeDays;
     }
 }

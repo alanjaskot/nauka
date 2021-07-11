@@ -41,13 +41,15 @@ namespace nauka.V3.Views.UserControllers
             this.labelSexEmployee = new System.Windows.Forms.Label();
             this.labelSection = new System.Windows.Forms.Label();
             this.labelSectionEmployee = new System.Windows.Forms.Label();
+            this.labelFreeDays = new System.Windows.Forms.Label();
+            this.labelFreeDaysLeft = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelEmail
             // 
             this.labelEmail.AutoSize = true;
             this.labelEmail.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelEmail.Location = new System.Drawing.Point(320, 478);
+            this.labelEmail.Location = new System.Drawing.Point(320, 423);
             this.labelEmail.Name = "labelEmail";
             this.labelEmail.Size = new System.Drawing.Size(73, 30);
             this.labelEmail.TabIndex = 17;
@@ -57,7 +59,7 @@ namespace nauka.V3.Views.UserControllers
             // 
             this.labelSex.AutoSize = true;
             this.labelSex.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSex.Location = new System.Drawing.Point(320, 561);
+            this.labelSex.Location = new System.Drawing.Point(320, 506);
             this.labelSex.Name = "labelSex";
             this.labelSex.Size = new System.Drawing.Size(54, 30);
             this.labelSex.TabIndex = 16;
@@ -67,7 +69,7 @@ namespace nauka.V3.Views.UserControllers
             // 
             this.labelUser.AutoSize = true;
             this.labelUser.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelUser.Location = new System.Drawing.Point(320, 399);
+            this.labelUser.Location = new System.Drawing.Point(320, 344);
             this.labelUser.Name = "labelUser";
             this.labelUser.Size = new System.Drawing.Size(121, 30);
             this.labelUser.TabIndex = 14;
@@ -77,7 +79,7 @@ namespace nauka.V3.Views.UserControllers
             // 
             this.labelSurname.AutoSize = true;
             this.labelSurname.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSurname.Location = new System.Drawing.Point(320, 246);
+            this.labelSurname.Location = new System.Drawing.Point(320, 191);
             this.labelSurname.Name = "labelSurname";
             this.labelSurname.Size = new System.Drawing.Size(100, 30);
             this.labelSurname.TabIndex = 13;
@@ -87,7 +89,7 @@ namespace nauka.V3.Views.UserControllers
             // 
             this.labelName.AutoSize = true;
             this.labelName.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelName.Location = new System.Drawing.Point(320, 173);
+            this.labelName.Location = new System.Drawing.Point(320, 118);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(54, 30);
             this.labelName.TabIndex = 12;
@@ -96,7 +98,7 @@ namespace nauka.V3.Views.UserControllers
             // labelNameEmployee
             // 
             this.labelNameEmployee.AutoSize = true;
-            this.labelNameEmployee.Location = new System.Drawing.Point(482, 173);
+            this.labelNameEmployee.Location = new System.Drawing.Point(482, 118);
             this.labelNameEmployee.Name = "labelNameEmployee";
             this.labelNameEmployee.Size = new System.Drawing.Size(0, 25);
             this.labelNameEmployee.TabIndex = 18;
@@ -104,7 +106,7 @@ namespace nauka.V3.Views.UserControllers
             // labelSurnameEmployee
             // 
             this.labelSurnameEmployee.AutoSize = true;
-            this.labelSurnameEmployee.Location = new System.Drawing.Point(482, 246);
+            this.labelSurnameEmployee.Location = new System.Drawing.Point(482, 191);
             this.labelSurnameEmployee.Name = "labelSurnameEmployee";
             this.labelSurnameEmployee.Size = new System.Drawing.Size(0, 25);
             this.labelSurnameEmployee.TabIndex = 19;
@@ -112,7 +114,7 @@ namespace nauka.V3.Views.UserControllers
             // labelUsernameEmployee
             // 
             this.labelUsernameEmployee.AutoSize = true;
-            this.labelUsernameEmployee.Location = new System.Drawing.Point(482, 399);
+            this.labelUsernameEmployee.Location = new System.Drawing.Point(482, 344);
             this.labelUsernameEmployee.Name = "labelUsernameEmployee";
             this.labelUsernameEmployee.Size = new System.Drawing.Size(0, 25);
             this.labelUsernameEmployee.TabIndex = 20;
@@ -120,7 +122,7 @@ namespace nauka.V3.Views.UserControllers
             // labelEmailEmployee
             // 
             this.labelEmailEmployee.AutoSize = true;
-            this.labelEmailEmployee.Location = new System.Drawing.Point(482, 478);
+            this.labelEmailEmployee.Location = new System.Drawing.Point(482, 423);
             this.labelEmailEmployee.Name = "labelEmailEmployee";
             this.labelEmailEmployee.Size = new System.Drawing.Size(0, 25);
             this.labelEmailEmployee.TabIndex = 21;
@@ -128,7 +130,7 @@ namespace nauka.V3.Views.UserControllers
             // labelSexEmployee
             // 
             this.labelSexEmployee.AutoSize = true;
-            this.labelSexEmployee.Location = new System.Drawing.Point(482, 561);
+            this.labelSexEmployee.Location = new System.Drawing.Point(482, 506);
             this.labelSexEmployee.Name = "labelSexEmployee";
             this.labelSexEmployee.Size = new System.Drawing.Size(0, 25);
             this.labelSexEmployee.TabIndex = 22;
@@ -137,7 +139,7 @@ namespace nauka.V3.Views.UserControllers
             // 
             this.labelSection.AutoSize = true;
             this.labelSection.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSection.Location = new System.Drawing.Point(320, 330);
+            this.labelSection.Location = new System.Drawing.Point(320, 275);
             this.labelSection.Name = "labelSection";
             this.labelSection.Size = new System.Drawing.Size(60, 30);
             this.labelSection.TabIndex = 23;
@@ -147,15 +149,35 @@ namespace nauka.V3.Views.UserControllers
             // 
             this.labelSectionEmployee.AutoSize = true;
             this.labelSectionEmployee.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSectionEmployee.Location = new System.Drawing.Point(482, 330);
+            this.labelSectionEmployee.Location = new System.Drawing.Point(482, 275);
             this.labelSectionEmployee.Name = "labelSectionEmployee";
             this.labelSectionEmployee.Size = new System.Drawing.Size(0, 30);
             this.labelSectionEmployee.TabIndex = 24;
+            // 
+            // labelFreeDays
+            // 
+            this.labelFreeDays.AutoSize = true;
+            this.labelFreeDays.Location = new System.Drawing.Point(482, 579);
+            this.labelFreeDays.Name = "labelFreeDays";
+            this.labelFreeDays.Size = new System.Drawing.Size(0, 25);
+            this.labelFreeDays.TabIndex = 26;
+            // 
+            // labelFreeDaysLeft
+            // 
+            this.labelFreeDaysLeft.AutoSize = true;
+            this.labelFreeDaysLeft.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelFreeDaysLeft.Location = new System.Drawing.Point(320, 579);
+            this.labelFreeDaysLeft.Name = "labelFreeDaysLeft";
+            this.labelFreeDaysLeft.Size = new System.Drawing.Size(107, 30);
+            this.labelFreeDaysLeft.TabIndex = 25;
+            this.labelFreeDaysLeft.Text = "wolne dni";
             // 
             // SingleEmployeeUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.labelFreeDays);
+            this.Controls.Add(this.labelFreeDaysLeft);
             this.Controls.Add(this.labelSectionEmployee);
             this.Controls.Add(this.labelSection);
             this.Controls.Add(this.labelSexEmployee);
@@ -189,5 +211,7 @@ namespace nauka.V3.Views.UserControllers
         protected internal System.Windows.Forms.Label labelSexEmployee;
         private System.Windows.Forms.Label labelSection;
         protected internal System.Windows.Forms.Label labelSectionEmployee;
+        protected internal System.Windows.Forms.Label labelFreeDays;
+        protected internal System.Windows.Forms.Label labelFreeDaysLeft;
     }
 }

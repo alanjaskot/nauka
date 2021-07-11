@@ -47,7 +47,7 @@ namespace nauka.V3.Views.UserViews.LoginRegisterViews.Controllers
             _view.panelMain.Controls.Add(login);
             await Task.CompletedTask;
 
-            _view.buttonOK.Click += (object sender, EventArgs e) =>
+            _view.buttonExit.Click += (object sender, EventArgs e) =>
             {
                 if (Validate())
                 {
@@ -67,8 +67,8 @@ namespace nauka.V3.Views.UserViews.LoginRegisterViews.Controllers
 
         private void Login()
         {
-            var logedEmployee = _model.GetEmployee().FirstOrDefault(e => (e.Username == login.textBoxUsername.Text)
-                && (e.Password == login.textBoxPassword.Text));
+            var logedEmployee = _model.GetEmployee().Where(e => (e.Username == login.textBoxUsername.Text)
+                && (e.Password == login.textBoxPassword.Text)).First();
             var view = new MainView();
             view.SetObjectToEdit = logedEmployee;
             _view.Hide();
@@ -81,6 +81,8 @@ namespace nauka.V3.Views.UserViews.LoginRegisterViews.Controllers
         private bool Validate()
         {
             var result = false;
+            /*if (_model.GetEmployee().Where(e => (e.Username == login.textBoxUsername.Text)
+                 && (e.Password == login.textBoxPassword.Text).First*/
             var employees = _model.GetEmployee();
             foreach(var item in employees)
             {

@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace nauka.V3.Views.AdministrationViews.SectionAddViews.Models
+namespace nauka.V3.Views.AdministrationViews.SectionViews.Models
 {
-    class SectionAddModel
+    class SectionModel
     {
         private readonly SectionService _sectionService;
 
-        public SectionAddModel()
+        public SectionModel()
         {
             _sectionService = ManageService.Sections;
         }

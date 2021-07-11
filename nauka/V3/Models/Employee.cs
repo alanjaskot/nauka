@@ -17,13 +17,10 @@ namespace nauka.V3.Models
         public bool EmployeePermisson { get; set; }
         public bool VacationPermisson { get; set; }
         public Section Section { get; set; }
+        public List<Vacation> Vacation { get; set; }
+        public List<VacationDay> VacationDays { get; set; }
+        public AppSettings AppSettings { get; set; }
 
-        public virtual string FullName
-        {
-            get
-            {
-                return $"{Name + Surname}";
-            }
-        }
+
     }
 }

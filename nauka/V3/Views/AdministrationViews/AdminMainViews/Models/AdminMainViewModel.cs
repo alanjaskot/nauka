@@ -2,7 +2,9 @@
 using nauka.V3.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Text;
+using System.Linq;
 
 namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
 {
@@ -20,15 +22,23 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
             _sectionService = ManageService.Sections;
         }
 
+        #region Vacations
+
+        internal void AddVacation(Employee employee)
+        {
+            _employeeService.Update(employee);
+        }
+
+        #endregion
 
         #region sections
 
-        internal void Add()
+        internal void AddSection(Section section)
         {
             _sectionService.Add(Section);
         }
 
-        internal void Delete(Section section)
+        internal void DeleteSection(Section section)
         {
             _sectionService.Delete(Section);
         }
@@ -49,6 +59,11 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
         #endregion
 
         #region Employees
+
+        internal void DeleteEmployee(Employee employee)
+        {
+            _employeeService.Delete(employee);
+        }
 
         internal List<Employee> GetEmployees()
         {

@@ -36,11 +36,11 @@ namespace nauka.V3.Views.MianViews
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Text = "Wyloguj";
+            this.buttonLogout.Text = "Wyloguj";
             // 
             // buttonOK
             // 
-            this.buttonOK.Text = "Wyjście";
+            this.buttonExit.Text = "Wyjście";
             // 
             // panelLeftMenu
             // 

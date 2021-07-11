@@ -1,5 +1,5 @@
 ﻿using nauka.V3.Models;
-using nauka.V3.Views.SectionViews.Controllers;
+using nauka.V3.Views.AdministrationViews.SectionViews.Controllers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,20 +8,20 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace nauka.V3.Views.SectionViews.Views
+namespace nauka.V3.Views.AdministrationViews.SectionViews.SectionViews
 {
-    public partial class SectionAddView : Form
+    public partial class SectionView : Form
     {
-        private readonly SectionAddController _controller;
-        
-        public SectionAddView()
+        private SectionController _controller;
+
+        public SectionView()
         {
             InitializeComponent();
 
             if (DesignMode)
                 return;
 
-            //_controller = new SectionAddController(this);
+            _controller = new SectionController(this);
         }
 
         public Section SetObjectToEdit

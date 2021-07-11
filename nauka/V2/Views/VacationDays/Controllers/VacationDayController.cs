@@ -47,7 +47,7 @@ namespace nauka.V2.Views.VacationDays.Controllers
 
         private async Task InitView()
         {
-            DataGridList();
+            await DataGridList();
             RefreshList();
 
             _view.buttonCancel.Click += (object sender, EventArgs e) =>

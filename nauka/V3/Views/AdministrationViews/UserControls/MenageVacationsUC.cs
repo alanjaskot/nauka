@@ -14,11 +14,5 @@ namespace nauka.V3.Views.AdministrationViews.UsereControls
         {
             InitializeComponent();
         }
-
-        private void buttonNew_Click(object sender, EventArgs e)
-        {
-            VacationView vacationView = new VacationView();
-            vacationView.Show();
-        }
     }
 }
