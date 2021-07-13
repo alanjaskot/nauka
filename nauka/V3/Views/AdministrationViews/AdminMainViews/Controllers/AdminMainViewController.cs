@@ -334,7 +334,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             {
                 if((item.Section.Name == (string)employeesUC.comboBoxSections.SelectedItem) && (item.Section.Name != null))
                 {
-                    employeesUC.dataGridViewEmployees.Rows.Add(item.EmployeeId, i, item.Surname, item.Name);
+                    employeesUC.dataGridViewEmployees.Rows.Add(item.Id, i, item.Surname, item.Name);
                     i++;
                 }
             }
@@ -354,7 +354,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             {
                 Guid id = Guid.Parse(employeesUC.dataGridViewEmployees[0, employeesUC.dataGridViewEmployees.CurrentRow.Index].Value.ToString());
                 _employees = _model.GetEmployees();
-                var employeeToEdit = _employees.Where(e => e.EmployeeId == id).FirstOrDefault();
+                var employeeToEdit = _employees.Where(e => e.Id == id).FirstOrDefault();
                 var view = new RegisterView();
                 view.SetObjectToEdit = employeeToEdit;
                 if (view.ShowDialog() == DialogResult.OK)
@@ -370,7 +370,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
         {
             Guid id = Guid.Parse(employeesUC.dataGridViewEmployees[0, employeesUC.dataGridViewEmployees.CurrentRow.Index].Value.ToString());
             _employees = _model.GetEmployees();
-            var employeeToDelete = _employees.Where(e => e.EmployeeId == id).FirstOrDefault();
+            var employeeToDelete = _employees.Where(e => e.Id == id).FirstOrDefault();
             _model.DeleteEmployee(employeeToDelete);
             DisplayEmployees();
 
@@ -438,8 +438,8 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             Guid idVacation = Guid.Parse(menageVacationsUC.dataGridViewVacations
                 [7, vacationPermissionUC.dataGridViewVacationApplications.CurrentRow.Index].Value.ToString());
 
-            int employeeIndex = _model.GetEmployees().FindIndex(e => e.EmployeeId == Guid.Parse(idEmployee));
-            int vacationIndex = _model.GetEmployees()[employeeIndex].Vacation.FindIndex(v => v.VacationId == idVacation);
+            int employeeIndex = _model.GetEmployees().FindIndex(e => e.Id == Guid.Parse(idEmployee));
+            int vacationIndex = _model.GetEmployees()[employeeIndex].Vacation.FindIndex(v => v.Id == idVacation);
             _model.GetEmployees()[employeeIndex].Vacation.RemoveAt(vacationIndex);
 
             DisplayVacationPermisson();
@@ -461,8 +461,8 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
                         {
                             if (item.Approve == true)
                             {
-                                menageVacationsUC.dataGridViewVacations.Rows.Add(itemEmployee.EmployeeId, i, itemEmployee.Surname, itemEmployee.Name, 
-                                    item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"), item.Description, item.VacationId, "Edytuj");
+                                menageVacationsUC.dataGridViewVacations.Rows.Add(itemEmployee.Id, i, itemEmployee.Surname, itemEmployee.Name, 
+                                    item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"), item.Description, item.Id, "Edytuj");
                                 i++;
                             }
                         }
@@ -575,11 +575,11 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
         private void AddAbsence()
         {
             var idEmployee = Guid.Parse(newAbsenceUC.dataGridViewEmployees[0, newAbsenceUC.dataGridViewEmployees.CurrentRow.Index].Value.ToString());
-            int index = _model.GetEmployees().FindIndex(i => i.EmployeeId == idEmployee);
+            int index = _model.GetEmployees().FindIndex(i => i.Id == idEmployee);
             var employee = _model.GetEmployees()[index]; 
             var vacation = new Vacation
             {
-                VacationId = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 Start = newAbsenceUC.dateTimePickerStart.Value,
                 End = newAbsenceUC.dateTimePickerEnd.Value,
                 Description = newAbsenceUC.listViewDescription.SelectedItems[0].Text,
@@ -618,7 +618,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             {
                 if ((item.Section.Name == (string)newAbsenceUC.comboBoxSecitions.SelectedItem) && (item.Section.Name != null))
                 {
-                    newAbsenceUC.dataGridViewEmployees.Rows.Add(item.EmployeeId, i, item.Surname, item.Name);
+                    newAbsenceUC.dataGridViewEmployees.Rows.Add(item.Id, i, item.Surname, item.Name);
                     i++;
                 }
             }
@@ -686,8 +686,8 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             Guid idEmployee = Guid.Parse(vacationPermissionUC.dataGridViewVacationApplications
                 [0, vacationPermissionUC.dataGridViewVacationApplications.CurrentRow.Index].Value.ToString());
 
-            int employeeIndex = _model.GetEmployees().FindIndex(e => e.EmployeeId == idEmployee);
-            int vacationIndex = _model.GetEmployees()[employeeIndex].Vacation.FindIndex(v => v.VacationId == idVacation);
+            int employeeIndex = _model.GetEmployees().FindIndex(e => e.Id == idEmployee);
+            int vacationIndex = _model.GetEmployees()[employeeIndex].Vacation.FindIndex(v => v.Id == idVacation);
             _model.GetEmployees()[employeeIndex].Vacation.RemoveAt(vacationIndex);
 
             DisplayVacationPermisson();
@@ -700,9 +700,9 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             Guid idEmployee = Guid.Parse(vacationPermissionUC.dataGridViewVacationApplications
                 [0, vacationPermissionUC.dataGridViewVacationApplications.CurrentRow.Index].Value.ToString());
 
-            int employeeIndex = _model.GetEmployees().FindIndex(e => e.EmployeeId == idEmployee);
-            int vacationIndex = _model.GetEmployees()[employeeIndex].Vacation.FindIndex(v => v.VacationId == idVacation);
-            var vacationDates = _model.GetEmployees()[employeeIndex].Vacation.Where(v => v.VacationId == idVacation).First();
+            int employeeIndex = _model.GetEmployees().FindIndex(e => e.Id == idEmployee);
+            int vacationIndex = _model.GetEmployees()[employeeIndex].Vacation.FindIndex(v => v.Id == idVacation);
+            var vacationDates = _model.GetEmployees()[employeeIndex].Vacation.Where(v => v.Id == idVacation).First();
 
             if (ValidApproveVacation(_model.GetEmployees()[employeeIndex], vacationDates.Start, vacationDates.End))
             {
@@ -775,8 +775,8 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
                         {
                             if (item.Approve == false)
                             {
-                                vacationPermissionUC.dataGridViewVacationApplications.Rows.Add(itemEmployee.EmployeeId, i, itemEmployee.Surname,
-                                    itemEmployee.Name, item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"), item.Description, item.VacationId);
+                                vacationPermissionUC.dataGridViewVacationApplications.Rows.Add(itemEmployee.Id, i, itemEmployee.Surname,
+                                    itemEmployee.Name, item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"), item.Description, item.Id);
                                 i++;
                             }
                         }
@@ -898,7 +898,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
                     else
                         empper = "przyznano";
 
-                    permissionUC.dataGridViewEmployees.Rows.Add(item.EmployeeId, i, item.Surname, item.Name, 
+                    permissionUC.dataGridViewEmployees.Rows.Add(item.Id, i, item.Surname, item.Name, 
                         vacper, empper);
                     i++;
                 }
@@ -909,7 +909,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
         {
             int rowindex = permissionUC.dataGridViewEmployees.CurrentRow.Index;
             Guid id = Guid.Parse(permissionUC.dataGridViewEmployees[0, permissionUC.dataGridViewEmployees.CurrentRow.Index].Value.ToString());
-            int employeeIndex = _model.GetEmployees().FindIndex(e => e.EmployeeId == id);
+            int employeeIndex = _model.GetEmployees().FindIndex(e => e.Id == id);
 
             if (permissionUC.checkBoxVacations.Checked)
                 _model.GetEmployees()[employeeIndex].VacationPermisson = true;

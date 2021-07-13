@@ -46,8 +46,9 @@ namespace nauka.V3.Views.MainViews.Controller
         private async Task InitView()
         {
             InitAllUserControls();
-            _view.panelMain.Controls["firstViewUC"].BringToFront();
-            
+            InitTabControl();
+            //_view.panelMain.Controls["firstViewUC"].BringToFront();
+
 
             _view.buttonExit.Click += (object sender, EventArgs e) =>
             {
@@ -70,7 +71,7 @@ namespace nauka.V3.Views.MainViews.Controller
             };
 
             #region Left panel
-            _view.userLeftPanelMenuuc1.buttonDashboard.Click += (object sender, EventArgs e) =>
+            /*_view.userLeftPanelMenuuc1.buttonDashboard.Click += (object sender, EventArgs e) =>
             {
                 DisplayDashBoard();
                 _view.panelMain.Controls["DashboardUC"].BringToFront();
@@ -114,7 +115,7 @@ namespace nauka.V3.Views.MainViews.Controller
                 {
                     _view.panelMain.Controls["NoPermissionUC"].BringToFront();
                 }
-            };
+            };*/
             #endregion
 
             #region MenageVacation
@@ -130,8 +131,6 @@ namespace nauka.V3.Views.MainViews.Controller
             };
 
             #endregion
-
-
             await Task.CompletedTask;
         }
 
@@ -144,6 +143,51 @@ namespace nauka.V3.Views.MainViews.Controller
             }
             else
                 await Task.CompletedTask;
+        }
+
+        private void InitTabControl()
+        {
+            _view.tabControl1.TabPages.Clear();
+
+            var tabPage = new TabPage();
+            tabPage.Name = "Dashboard";
+            tabPage.Text = "Tablica";
+            tabPage.Controls.Add(dashboardUC);
+            //tabPage.UseVisualStyleBackColor = true;
+            _view.tabControl1.TabPages.Add(tabPage);
+
+            tabPage = new TabPage();
+            tabPage.Name = "Employee";
+            tabPage.Text = "Dane pracownika";
+            tabPage.Tag = "Employee";
+            tabPage.Controls.Add(singleEmployeeUC);
+            //tabPage.UseVisualStyleBackColor = true;
+            _view.tabControl1.TabPages.Add(tabPage);
+
+            tabPage = new TabPage();
+            tabPage.Name = "Vacations";
+            tabPage.Text = "Urlopy";
+            tabPage.Controls.Add(vacationUC);
+            //tabPage.Tag = "Vacations";
+            //tabPage.UseVisualStyleBackColor = true;
+            _view.tabControl1.TabPages.Add(tabPage);
+
+            tabPage = new TabPage();
+            tabPage.Name = "VacationApplications";
+            tabPage.Text = "Wnioski o urlop";
+            tabPage.Controls.Add(menageVacationApplicationUC);
+            //tabPage.Tag = "VacationsApplications";
+            //tabPage.UseVisualStyleBackColor = true;
+            _view.tabControl1.TabPages.Add(tabPage);
+
+            tabPage = new TabPage();
+            tabPage.Name = "AdministrationPanel";
+            tabPage.Text = "Panel Admnistratora";
+            //if (!_model.Employee.EmployeePermisson || !_model.Employee.VacationPermisson)
+                tabPage.Controls.Add(noPermission);
+            //tabPage.Tag = "AdministrationPanel";
+            //tabPage.UseVisualStyleBackColor = true;
+            _view.tabControl1.TabPages.Add(tabPage);
         }
 
         private void InitAllUserControls()
@@ -219,14 +263,17 @@ namespace nauka.V3.Views.MainViews.Controller
 
         private long CountFreeDays()
         {
-            long freeDaysToUse = _model.Employee.AppSettings.AvaibleVacationDays;
+            DateTime currentYear = DateTime.Now;
+            var currentDaysFree = _model.Employee.AppSettings.Where(ap => ap.Year.ToString("yyyy") == currentYear.ToString("yyyy")).FirstOrDefault();
+            byte thisYearDaysFree = currentDaysFree.AvaibleVacationDays;
+
             long usedDays = 0;
             foreach(var item in _model.Employee.VacationDays)
             {
                 usedDays += item.VacationDays;
             }
 
-            return freeDaysToUse - usedDays;
+            return thisYearDaysFree - usedDays;
         }
 
         #endregion
@@ -244,7 +291,7 @@ namespace nauka.V3.Views.MainViews.Controller
                 {
                     if (item.Approve == true)
                     {
-                        vacationUC.dataGridViewVacations.Rows.Add(item.VacationId, i, item.Description,
+                        vacationUC.dataGridViewVacations.Rows.Add(item.Id, i, item.Description,
                             item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"));
                         i++;
                     }

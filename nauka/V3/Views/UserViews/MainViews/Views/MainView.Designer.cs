@@ -29,9 +29,12 @@ namespace nauka.V3.Views.MianViews
         /// </summary>
         private void InitializeComponent()
         {
-            this.userLeftPanelMenuuc1 = new nauka.V3.Views.UserViews.UserControls.UserLeftPanelMenuUC();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panelBottom.SuspendLayout();
             this.panelTop.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonLogout
@@ -44,15 +47,38 @@ namespace nauka.V3.Views.MianViews
             // 
             // panelTop
             // 
-            this.panelTop.Controls.Add(this.userLeftPanelMenuuc1);
-            this.panelTop.Controls.SetChildIndex(this.userLeftPanelMenuuc1, 0);
+            this.panelTop.Controls.Add(this.tabControl1);
+            this.panelTop.Controls.SetChildIndex(this.tabControl1, 0);
             // 
-            // userLeftPanelMenuuc1
+            // tabControl1
             // 
-            this.userLeftPanelMenuuc1.Location = new System.Drawing.Point(0, 0);
-            this.userLeftPanelMenuuc1.Name = "userLeftPanelMenuuc1";
-            this.userLeftPanelMenuuc1.Size = new System.Drawing.Size(1898, 150);
-            this.userLeftPanelMenuuc1.TabIndex = 1;
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(300, 150);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1598, 780);
+            this.tabControl1.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 34);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1590, 742);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 34);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1590, 742);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // MainView
             // 
@@ -63,6 +89,7 @@ namespace nauka.V3.Views.MianViews
             this.Text = "MainView";
             this.panelBottom.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -70,7 +97,8 @@ namespace nauka.V3.Views.MianViews
 
 
         #endregion
-
-        protected internal UserViews.UserControls.UserLeftPanelMenuUC userLeftPanelMenuuc1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        protected internal System.Windows.Forms.TabControl tabControl1;
     }
 }
