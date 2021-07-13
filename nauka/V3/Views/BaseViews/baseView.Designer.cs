@@ -127,7 +127,7 @@ namespace nauka.V3.BaseViews
         protected internal System.Windows.Forms.Panel panelBottom;
         protected internal System.Windows.Forms.Button buttonLogout;
         protected internal System.Windows.Forms.Button buttonExit;
-        private System.Windows.Forms.Panel panelTop;
+        protected internal System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Label labelTitle;
         protected internal System.Windows.Forms.Panel panelLeftMenu;
         protected internal System.Windows.Forms.Panel panelMain;

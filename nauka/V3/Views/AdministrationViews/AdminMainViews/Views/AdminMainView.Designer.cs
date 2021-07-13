@@ -31,26 +31,27 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
         {
             this.adminLeftPanelMenuuc1 = new nauka.V3.Views.AdministrationViews.UsereControls.AdminLeftPanelMenuUC();
             this.panelBottom.SuspendLayout();
-            this.panelLeftMenu.SuspendLayout();
+            this.panelTop.SuspendLayout();
             this.SuspendLayout();
             // 
-            // buttonCancel
+            // buttonLogout
             // 
             this.buttonLogout.Text = "Wyloguj";
             // 
-            // buttonOK
+            // buttonExit
             // 
             this.buttonExit.Text = "Wyjście";
             // 
-            // panelLeftMenu
+            // panelTop
             // 
-            this.panelLeftMenu.Controls.Add(this.adminLeftPanelMenuuc1);
+            this.panelTop.Controls.Add(this.adminLeftPanelMenuuc1);
+            this.panelTop.Controls.SetChildIndex(this.adminLeftPanelMenuuc1, 0);
             // 
             // adminLeftPanelMenuuc1
             // 
             this.adminLeftPanelMenuuc1.Location = new System.Drawing.Point(0, 0);
             this.adminLeftPanelMenuuc1.Name = "adminLeftPanelMenuuc1";
-            this.adminLeftPanelMenuuc1.Size = new System.Drawing.Size(300, 780);
+            this.adminLeftPanelMenuuc1.Size = new System.Drawing.Size(1898, 150);
             this.adminLeftPanelMenuuc1.TabIndex = 0;
             // 
             // AdminMainView
@@ -61,7 +62,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.Name = "AdminMainView";
             this.Text = "AdminMainView";
             this.panelBottom.ResumeLayout(false);
-            this.panelLeftMenu.ResumeLayout(false);
+            this.panelTop.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

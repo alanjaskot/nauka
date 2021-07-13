@@ -12,6 +12,7 @@ using nauka.V3.Views.AdministrationViews.RegisterVIews.Views;
 using System.Collections.Generic;
 using nauka.V3.Views.AdministrationViews.UserControls;
 using nauka.V3.Resources;
+using nauka.V3.Views.MianViews;
 
 namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 {
@@ -42,6 +43,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
         public async Task InitView()
         {
+            
             #region  inicjalizacja user control
             employeesUC.Dock = DockStyle.Fill;
             _view.panelMain.Controls.Add(employeesUC);
@@ -60,6 +62,9 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
             newAbsenceUC.Dock = DockStyle.Fill;
             _view.panelMain.Controls.Add(newAbsenceUC);
+
+            menageSectionUC.Dock = DockStyle.Fill;
+            _view.panelMain.Controls.Add(menageSectionUC);
 
             #endregion  
 
@@ -97,6 +102,15 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
                 CreateDataGridVacationPermisson();
                 _view.panelMain.Controls["VacationPermissionUC"].BringToFront();
             };
+
+            _view.adminLeftPanelMenuuc1.buttonToEmployee.Click += (object sender, EventArgs e) =>
+            {
+                var currentEmployee = _model.Employee;
+                var viewEmployee = new MainView();
+                viewEmployee.SetObjectToEdit = currentEmployee;
+                viewEmployee.Show();
+                _view.Close();
+                };
 
             #endregion
 
@@ -268,9 +282,6 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             else
                 await Task.CompletedTask;
 
-            menageSectionUC.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(menageSectionUC);
-            SectionDisplayList();
         }
 
         #region Sections functions
@@ -422,12 +433,12 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
         private void DeleteVacations()
         {
-            var idVacation = Guid.Parse(menageVacationsUC.dataGridViewVacations
+            string idEmployee = menageVacationsUC.dataGridViewVacations
+                [0, vacationPermissionUC.dataGridViewVacationApplications.CurrentRow.Index].Value.ToString();
+            Guid idVacation = Guid.Parse(menageVacationsUC.dataGridViewVacations
                 [7, vacationPermissionUC.dataGridViewVacationApplications.CurrentRow.Index].Value.ToString());
-            var idEmployee = Guid.Parse(menageVacationsUC.dataGridViewVacations
-                [0, vacationPermissionUC.dataGridViewVacationApplications.CurrentRow.Index].Value.ToString());
 
-            int employeeIndex = _model.GetEmployees().FindIndex(e => e.EmployeeId == idEmployee);
+            int employeeIndex = _model.GetEmployees().FindIndex(e => e.EmployeeId == Guid.Parse(idEmployee));
             int vacationIndex = _model.GetEmployees()[employeeIndex].Vacation.FindIndex(v => v.VacationId == idVacation);
             _model.GetEmployees()[employeeIndex].Vacation.RemoveAt(vacationIndex);
 
@@ -481,7 +492,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             dgvTextColumn.DataPropertyName = "Id";
             dgvTextColumn.Width = 50;
             dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvTextColumn.Visible = false;
+            dgvTextColumn.Visible = true;
             detailDGV.Columns.Add(dgvTextColumn);
 
             dgvTextColumn = new DataGridViewTextBoxColumn();

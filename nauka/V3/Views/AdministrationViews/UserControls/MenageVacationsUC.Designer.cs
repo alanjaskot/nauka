@@ -32,7 +32,6 @@ namespace nauka.V3.Views.AdministrationViews.UsereControls
             this.dataGridViewVacations = new System.Windows.Forms.DataGridView();
             this.labelSections = new System.Windows.Forms.Label();
             this.buttonNew = new System.Windows.Forms.Button();
-            this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.comboBoxSections = new System.Windows.Forms.ComboBox();
             this.buttonChooseSection = new System.Windows.Forms.Button();
@@ -62,22 +61,12 @@ namespace nauka.V3.Views.AdministrationViews.UsereControls
             // buttonNew
             // 
             this.buttonNew.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonNew.Location = new System.Drawing.Point(1263, 423);
+            this.buttonNew.Location = new System.Drawing.Point(1263, 572);
             this.buttonNew.Name = "buttonNew";
             this.buttonNew.Size = new System.Drawing.Size(239, 55);
             this.buttonNew.TabIndex = 3;
             this.buttonNew.Text = "Dodaj";
             this.buttonNew.UseVisualStyleBackColor = true;
-            // 
-            // buttonEdit
-            // 
-            this.buttonEdit.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonEdit.Location = new System.Drawing.Point(1263, 543);
-            this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(239, 55);
-            this.buttonEdit.TabIndex = 4;
-            this.buttonEdit.Text = "Zmień";
-            this.buttonEdit.UseVisualStyleBackColor = true;
             // 
             // buttonDelete
             // 
@@ -115,7 +104,6 @@ namespace nauka.V3.Views.AdministrationViews.UsereControls
             this.Controls.Add(this.buttonChooseSection);
             this.Controls.Add(this.comboBoxSections);
             this.Controls.Add(this.buttonDelete);
-            this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonNew);
             this.Controls.Add(this.labelSections);
             this.Controls.Add(this.dataGridViewVacations);
@@ -131,7 +119,6 @@ namespace nauka.V3.Views.AdministrationViews.UsereControls
 
         protected internal System.Windows.Forms.DataGridView dataGridViewVacations;
         protected internal System.Windows.Forms.Button buttonNew;
-        protected internal System.Windows.Forms.Button buttonEdit;
         protected internal System.Windows.Forms.Button buttonDelete;
         protected internal System.Windows.Forms.Label labelSections;
         protected internal System.Windows.Forms.ComboBox comboBoxSections;

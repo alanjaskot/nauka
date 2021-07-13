@@ -39,9 +39,9 @@ namespace nauka.V3.Views.UserViews.UserControls
             // buttonDashboard
             // 
             this.buttonDashboard.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonDashboard.Location = new System.Drawing.Point(54, 44);
+            this.buttonDashboard.Location = new System.Drawing.Point(67, 51);
             this.buttonDashboard.Name = "buttonDashboard";
-            this.buttonDashboard.Size = new System.Drawing.Size(206, 50);
+            this.buttonDashboard.Size = new System.Drawing.Size(300, 50);
             this.buttonDashboard.TabIndex = 0;
             this.buttonDashboard.Text = "Kalendarz";
             this.buttonDashboard.UseVisualStyleBackColor = true;
@@ -50,9 +50,9 @@ namespace nauka.V3.Views.UserViews.UserControls
             // buttonEmployee
             // 
             this.buttonEmployee.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonEmployee.Location = new System.Drawing.Point(54, 159);
+            this.buttonEmployee.Location = new System.Drawing.Point(438, 51);
             this.buttonEmployee.Name = "buttonEmployee";
-            this.buttonEmployee.Size = new System.Drawing.Size(206, 50);
+            this.buttonEmployee.Size = new System.Drawing.Size(300, 50);
             this.buttonEmployee.TabIndex = 1;
             this.buttonEmployee.Text = "Pracownik";
             this.buttonEmployee.UseVisualStyleBackColor = true;
@@ -60,9 +60,9 @@ namespace nauka.V3.Views.UserViews.UserControls
             // buttonVacations
             // 
             this.buttonVacations.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonVacations.Location = new System.Drawing.Point(54, 278);
+            this.buttonVacations.Location = new System.Drawing.Point(819, 51);
             this.buttonVacations.Name = "buttonVacations";
-            this.buttonVacations.Size = new System.Drawing.Size(206, 50);
+            this.buttonVacations.Size = new System.Drawing.Size(300, 50);
             this.buttonVacations.TabIndex = 2;
             this.buttonVacations.Text = "Urlopy";
             this.buttonVacations.UseVisualStyleBackColor = true;
@@ -70,9 +70,9 @@ namespace nauka.V3.Views.UserViews.UserControls
             // buttonVacationApplications
             // 
             this.buttonVacationApplications.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonVacationApplications.Location = new System.Drawing.Point(54, 399);
+            this.buttonVacationApplications.Location = new System.Drawing.Point(1194, 51);
             this.buttonVacationApplications.Name = "buttonVacationApplications";
-            this.buttonVacationApplications.Size = new System.Drawing.Size(206, 50);
+            this.buttonVacationApplications.Size = new System.Drawing.Size(300, 50);
             this.buttonVacationApplications.TabIndex = 3;
             this.buttonVacationApplications.Text = "Wnioski o urlop";
             this.buttonVacationApplications.UseVisualStyleBackColor = true;
@@ -80,9 +80,9 @@ namespace nauka.V3.Views.UserViews.UserControls
             // buttonAdministration
             // 
             this.buttonAdministration.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAdministration.Location = new System.Drawing.Point(54, 524);
+            this.buttonAdministration.Location = new System.Drawing.Point(1549, 51);
             this.buttonAdministration.Name = "buttonAdministration";
-            this.buttonAdministration.Size = new System.Drawing.Size(206, 79);
+            this.buttonAdministration.Size = new System.Drawing.Size(300, 50);
             this.buttonAdministration.TabIndex = 4;
             this.buttonAdministration.Text = "Panel Administratora";
             this.buttonAdministration.UseVisualStyleBackColor = true;
@@ -97,7 +97,7 @@ namespace nauka.V3.Views.UserViews.UserControls
             this.Controls.Add(this.buttonEmployee);
             this.Controls.Add(this.buttonDashboard);
             this.Name = "UserLeftPanelMenuUC";
-            this.Size = new System.Drawing.Size(300, 780);
+            this.Size = new System.Drawing.Size(1898, 150);
             this.ResumeLayout(false);
 
         }

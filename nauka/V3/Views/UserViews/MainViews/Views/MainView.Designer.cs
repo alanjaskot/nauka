@@ -31,27 +31,28 @@ namespace nauka.V3.Views.MianViews
         {
             this.userLeftPanelMenuuc1 = new nauka.V3.Views.UserViews.UserControls.UserLeftPanelMenuUC();
             this.panelBottom.SuspendLayout();
-            this.panelLeftMenu.SuspendLayout();
+            this.panelTop.SuspendLayout();
             this.SuspendLayout();
             // 
-            // buttonCancel
+            // buttonLogout
             // 
             this.buttonLogout.Text = "Wyloguj";
             // 
-            // buttonOK
+            // buttonExit
             // 
             this.buttonExit.Text = "Wyjście";
             // 
-            // panelLeftMenu
+            // panelTop
             // 
-            this.panelLeftMenu.Controls.Add(this.userLeftPanelMenuuc1);
+            this.panelTop.Controls.Add(this.userLeftPanelMenuuc1);
+            this.panelTop.Controls.SetChildIndex(this.userLeftPanelMenuuc1, 0);
             // 
             // userLeftPanelMenuuc1
             // 
             this.userLeftPanelMenuuc1.Location = new System.Drawing.Point(0, 0);
             this.userLeftPanelMenuuc1.Name = "userLeftPanelMenuuc1";
-            this.userLeftPanelMenuuc1.Size = new System.Drawing.Size(300, 780);
-            this.userLeftPanelMenuuc1.TabIndex = 0;
+            this.userLeftPanelMenuuc1.Size = new System.Drawing.Size(1898, 150);
+            this.userLeftPanelMenuuc1.TabIndex = 1;
             // 
             // MainView
             // 
@@ -61,7 +62,7 @@ namespace nauka.V3.Views.MianViews
             this.Name = "MainView";
             this.Text = "MainView";
             this.panelBottom.ResumeLayout(false);
-            this.panelLeftMenu.ResumeLayout(false);
+            this.panelTop.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
