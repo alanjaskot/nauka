@@ -9,6 +9,10 @@ namespace nauka.V3.Repository
     {
         public bool Add(Section section);
         public bool Update(Section section);
-        public bool Delete(Guid guid);
+        public bool Delete(Guid sectionId);
+
+        public Section GetSection(Guid sectionID);
+
+        public List<Section> GetSections();
     }
 }

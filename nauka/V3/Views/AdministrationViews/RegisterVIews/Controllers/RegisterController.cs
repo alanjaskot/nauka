@@ -32,7 +32,8 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
             {              
                 if (Validate())
                 {
-                    Add();
+                    RefreshModel();
+                    _view.DialogResult = DialogResult.OK;
                     _view.Close();
                 }
                 else
@@ -47,6 +48,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
 
             _view.Load += (object sender, EventArgs e) =>
             {
+                RefreshView();
                 GetSex();
                 GetSections();
             };
@@ -64,28 +66,53 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
             await Task.CompletedTask;
         }
 
-        private void Add()
+        private void RefreshView()
+        {
+            if(_model.Employee != null)
+            {
+                GetSex();
+                GetSections();
+                _view.textBoxName.Text = _model.Employee.Name;
+                _view.textBoxSurname.Text = _model.Employee.Surname;
+                _view.textBoxUsername.Text = _model.Employee.Username;
+                _view.textBoxPassword.Text = _model.Employee.Password;
+                _view.textBoxEmail.Text = _model.Employee.Email;
+                var appsetting = _model.Employee.AppSettings.Where(ap => ap.Year.ToString("yyyy").Equals(DateTime.Now.ToString("yyyy"))).FirstOrDefault();
+                _view.textBoxAppSetting.Text = appsetting.AvaibleVacationDays.ToString();
+                if (_model.Employee.Sex == 'M')
+                    _view.comboBoxSex.SelectedIndex = 1;
+                if (_model.Employee.Sex == 'K')
+                    _view.comboBoxSex.SelectedIndex = 0;
+
+                _view.comboBoxSection.SelectedItem = _model.Employee.Section.Name;
+            }
+
+        }
+
+        private void RefreshModel()
         {
             var employee = new Employee();
-            employee.Name = _view.textBoxName.Text;
-            employee.Surname = _view.textBoxSurname.Text;
-            employee.Username = _view.textBoxUsername.Text;
-            employee.Password = _view.textBoxPassword.Text;
-            employee.Email = _view.textBoxEmail.Text;
-            employee.AppSettings.AvaibleVacationDays = long.Parse(_view.textBoxAppSetting.Text);
-            employee.EmployeePermisson = false;
-            employee.VacationPermisson = false;
+
+            var vacation = employee.AppSettings.Where(a => a.Year.ToString("yyyy") == (DateTime.Now.ToString("yyyy")));
+
+            _model.Employee.Name = _view.textBoxName.Text;
+            _model.Employee.Surname = _view.textBoxSurname.Text;
+            _model.Employee.Username = _view.textBoxUsername.Text;
+            _model.Employee.Password = _view.textBoxPassword.Text;
+            _model.Employee.Email = _view.textBoxEmail.Text;
+            _model.Employee.AppSettings.Add( new AppSettings { AvaibleVacationDays = byte.Parse(_view.textBoxAppSetting.Text), Year = DateTime.Now });
+            _model.Employee.EmployeePermisson = false;
+            _model.Employee.VacationPermisson = false;
             if (_view.comboBoxSex.SelectedIndex == 1)
-                employee.Sex = 'M';
+                _model.Employee.Sex = 'M';
             if (_view.comboBoxSex.SelectedIndex == 0)
-                employee.Sex = 'K';
+                _model.Employee.Sex = 'K';
 
             var sectionList = _model.GetSections();
             var selectedSection = sectionList.Where(s => s.Name == (string)_view.comboBoxSection.SelectedItem).FirstOrDefault();
-            employee.Section = selectedSection;
-            employee.Vacation = new List<Vacation>();
-            employee.VacationDays = new List<VacationDay>();
-            _model.Add(employee);
+            _model.Employee.Section = selectedSection;
+            _model.Employee.Vacation = new List<Vacation>();
+            _model.Employee.VacationDays = new List<VacationDays>();          
         }
 
         private void GetSex()

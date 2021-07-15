@@ -14,7 +14,7 @@ namespace nauka.V3.Repository
         private IDbContextTransaction _dbContextTransaction;
 
         public DbSet<AppSettings> AppSettings { get; set; }
-        public DbSet<VacationDay> VacationDays { get; set; }
+        public DbSet<VacationDays> VacationDays { get; set; }
         public DbSet<Vacation> Vacations { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<Employee> Employees { get; set; }

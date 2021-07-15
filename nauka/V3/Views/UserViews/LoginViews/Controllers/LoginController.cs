@@ -67,10 +67,11 @@ namespace nauka.V3.Views.UserViews.LoginRegisterViews.Controllers
 
         private void Login()
         {
-            var logedEmployee = _model.GetEmployee().Where(e => (e.Username == login.textBoxUsername.Text)
+            // jkowalski
+            var loggedEmployee = _model.GetEmployee().Where(e => (e.Username == login.textBoxUsername.Text)
                 && (e.Password == login.textBoxPassword.Text)).First();
             var view = new MainView();
-            view.SetObjectToEdit = logedEmployee;
+            view.SetObjectToEdit = loggedEmployee;
             _view.Hide();
             if (view.ShowDialog() == DialogResult.OK)
             {
@@ -81,8 +82,6 @@ namespace nauka.V3.Views.UserViews.LoginRegisterViews.Controllers
         private bool Validate()
         {
             var result = false;
-            /*if (_model.GetEmployee().Where(e => (e.Username == login.textBoxUsername.Text)
-                 && (e.Password == login.textBoxPassword.Text).First*/
             var employees = _model.GetEmployee();
             foreach(var item in employees)
             {
@@ -91,7 +90,6 @@ namespace nauka.V3.Views.UserViews.LoginRegisterViews.Controllers
                 {
                     result = true;
                 }
-
             }
             return result;
         }

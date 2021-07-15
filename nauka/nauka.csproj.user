@@ -49,9 +49,6 @@
     <Compile Update="V3\Views\AdministrationViews\UserControls\MenageVacationsUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\AdministrationViews\UserControls\SectionComboBoxUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="V3\Views\AdministrationViews\UserControls\VacationPermissionUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -71,21 +68,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="V3\Views\UserViews\UserControls\LoginUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\UserViews\UserControls\MenageVacationApplicationUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\UserViews\UserControls\NoPermissionUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\UserViews\UserControls\UserLeftPanelMenuUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\UserViews\UserControls\VacationUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\UserViews\UserControls\SingleEmployeeUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="V3\Views\UserViews\VacationApplicationViews\Views\VacationApplicationView.cs">

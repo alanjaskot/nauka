@@ -36,7 +36,7 @@ namespace nauka.V3.Views.UserViews.UserControls
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "DashboardUC";
-            this.Size = new System.Drawing.Size(1598, 780);
+            this.Size = new System.Drawing.Size(1578, 742);
             this.ResumeLayout(false);
 
         }

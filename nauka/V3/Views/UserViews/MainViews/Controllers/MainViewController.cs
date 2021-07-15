@@ -3,14 +3,10 @@ using nauka.V3.Views.AdministrationViews.AdminMainViews.Views;
 using nauka.V3.Views.LoginRegisterViews.Views;
 using nauka.V3.Views.MainViews.Model;
 using nauka.V3.Views.MianViews;
-using nauka.V3.Views.UserControllers;
 using nauka.V3.Views.UserViews.UserControls;
 using nauka.V3.Views.UserViews.VacationApplicationViews.Views;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,35 +16,59 @@ namespace nauka.V3.Views.MainViews.Controller
     {
         private readonly MainView _view;
         private MainViewModel _model;
-        private Employee employee;
+        
 
-        #region UC
-        FirstViewUC firstViewUC = new FirstViewUC();
-        SingleEmployeeUC singleEmployeeUC = new SingleEmployeeUC();
-        VacationUC vacationUC = new VacationUC();
-        DashboardUC dashboardUC = new DashboardUC();
-        MenageVacationApplicationUC menageVacationApplicationUC = new MenageVacationApplicationUC();
-        NoPermissionUC noPermission = new NoPermissionUC();
-
-        #endregion
-
-        public MainViewController(MainView mainView)
+        public MainViewController(MainView view)
         {
-            _view = mainView;
+            _view = view;
 
             Task.Run(async () =>
             {
                 await InitViewModel();
                 await InitView();
             }).Wait();
+
         }
 
         private async Task InitView()
         {
-            InitAllUserControls();
-            InitTabControl();
-            //_view.panelMain.Controls["firstViewUC"].BringToFront();
+            await InitGridView();
+            await ShowFirstView();
 
+            //wyswietlanie danych po inicjalizacji ObjectSetToEdit
+
+            #region VacationApplication buttons
+
+            _view.tabControlMainView.Click += (object sender, EventArgs e) =>
+            {
+                CloseFirstView();
+                ShowEmployee();
+                DisplayVacations();
+            };
+
+            _view.buttonAddVacApp.Click += (object sender, EventArgs e) =>
+            {
+                AddVacationApplication();
+            };
+
+            _view.buttonDeleteVacApp.Click += (object sender, EventArgs e) =>
+            {
+                DeleteVacationApplication();
+            };
+
+            #endregion
+
+            _view.buttonOk.Click += (object sender, EventArgs e) =>
+            {
+                if (ValidatePermisson())
+                {
+                    var permittedEmployee = _model.Employee;
+                    var view = new AdminMainView();
+                    view.SetObjectToEdit = permittedEmployee;
+                    view.Show();
+                    _view.Close();
+                }
+            };
 
             _view.buttonExit.Click += (object sender, EventArgs e) =>
             {
@@ -70,67 +90,6 @@ namespace nauka.V3.Views.MainViews.Controller
                 }
             };
 
-            #region Left panel
-            /*_view.userLeftPanelMenuuc1.buttonDashboard.Click += (object sender, EventArgs e) =>
-            {
-                DisplayDashBoard();
-                _view.panelMain.Controls["DashboardUC"].BringToFront();
-            };
-
-            _view.userLeftPanelMenuuc1.buttonEmployee.Click += (object sender, EventArgs e) =>
-            {
-                DisplayEmployee();
-                _view.panelMain.Controls["SingleEmployeeUC"].BringToFront();
-            };
-
-            _view.userLeftPanelMenuuc1.buttonVacations.Click += (object sender, EventArgs e) =>
-            {
-                _view.panelMain.Controls["VacationUC"].BringToFront();
-                CreateDataGridVacations();
-                DisplayVacations();
-            };
-
-            _view.userLeftPanelMenuuc1.buttonVacationApplications.Click += (object sender, EventArgs e) =>
-            {
-                CreateDataGridVacationApplication();
-                DisplayVacationApplications();
-                _view.panelMain.Controls["MenageVacationApplicationUC"].BringToFront();
-            };
-
-            _view.userLeftPanelMenuuc1.buttonAdministration.Click += (object sender, EventArgs e) =>
-            {
-                CheckEmployee();
-                if (employee.EmployeePermisson || employee.VacationPermisson)
-                {
-                    var permittedEmployee = _model.Employee;
-                    var view = new AdminMainView();
-                    view.SetObjectToEdit = permittedEmployee;
-                    _view.Hide();
-                    if (view.ShowDialog() == DialogResult.OK)
-                    {
-
-                    }
-                }
-                else
-                {
-                    _view.panelMain.Controls["NoPermissionUC"].BringToFront();
-                }
-            };*/
-            #endregion
-
-            #region MenageVacation
-
-            menageVacationApplicationUC.buttonAdd.Click += (object sender, EventArgs e) =>
-            {
-                AddVacationApplication();
-            };
-
-            menageVacationApplicationUC.buttonDelete.Click += (object sender, EventArgs e) =>
-            {
-                DeleteVacationApplication();
-            };
-
-            #endregion
             await Task.CompletedTask;
         }
 
@@ -145,120 +104,57 @@ namespace nauka.V3.Views.MainViews.Controller
                 await Task.CompletedTask;
         }
 
-        private void InitTabControl()
+        private async Task InitGridView()
         {
-            _view.tabControl1.TabPages.Clear();
+            CreateDataGridVacations();
+            CreateDataGridVacationApplication();
 
-            var tabPage = new TabPage();
-            tabPage.Name = "Dashboard";
-            tabPage.Text = "Tablica";
-            tabPage.Controls.Add(dashboardUC);
-            //tabPage.UseVisualStyleBackColor = true;
-            _view.tabControl1.TabPages.Add(tabPage);
-
-            tabPage = new TabPage();
-            tabPage.Name = "Employee";
-            tabPage.Text = "Dane pracownika";
-            tabPage.Tag = "Employee";
-            tabPage.Controls.Add(singleEmployeeUC);
-            //tabPage.UseVisualStyleBackColor = true;
-            _view.tabControl1.TabPages.Add(tabPage);
-
-            tabPage = new TabPage();
-            tabPage.Name = "Vacations";
-            tabPage.Text = "Urlopy";
-            tabPage.Controls.Add(vacationUC);
-            //tabPage.Tag = "Vacations";
-            //tabPage.UseVisualStyleBackColor = true;
-            _view.tabControl1.TabPages.Add(tabPage);
-
-            tabPage = new TabPage();
-            tabPage.Name = "VacationApplications";
-            tabPage.Text = "Wnioski o urlop";
-            tabPage.Controls.Add(menageVacationApplicationUC);
-            //tabPage.Tag = "VacationsApplications";
-            //tabPage.UseVisualStyleBackColor = true;
-            _view.tabControl1.TabPages.Add(tabPage);
-
-            tabPage = new TabPage();
-            tabPage.Name = "AdministrationPanel";
-            tabPage.Text = "Panel Admnistratora";
-            //if (!_model.Employee.EmployeePermisson || !_model.Employee.VacationPermisson)
-                tabPage.Controls.Add(noPermission);
-            //tabPage.Tag = "AdministrationPanel";
-            //tabPage.UseVisualStyleBackColor = true;
-            _view.tabControl1.TabPages.Add(tabPage);
+            await Task.CompletedTask;
         }
 
-        private void InitAllUserControls()
+        #region FirstView
+        private async Task ShowFirstView()
         {
+            FirstViewUC firstViewUC = new FirstViewUC();
             firstViewUC.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(firstViewUC);
+            _view.tabPageDashboard.Controls.Add(firstViewUC);
+            _view.tabPageDashboard.Controls["firstViewUC"].BringToFront();
 
-            dashboardUC.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(dashboardUC);
-
-            singleEmployeeUC.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(singleEmployeeUC);
-
-            vacationUC.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(vacationUC);
-
-            menageVacationApplicationUC.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(menageVacationApplicationUC);
-
-            noPermission.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(noPermission);
+            await Task.CompletedTask;
         }
 
-        #region Dashboard
-
-        private void DisplayDashBoard()
+        private void CloseFirstView()
         {
-            var vacations = _model.Employee.Vacation;
-            foreach (var vacationDays in vacations)
-            {
-                if (vacationDays.Approve == true)
-                {
-                    var day = vacationDays.Start;
-                    var end = vacationDays.End;
-                    while (day < end)
-                    {
-                        //dashboardUC.monthViewVacations;
-
-                        //this.calendar1.SelectedElementStart.Date" and "this.calendar1.SelectedElementEnd.Date;
-                        day = day.AddDays(1.0);
-                    }
-                }
-            }
-
-
-
+            /*DashboardUC dashboardUC = new DashboardUC();
+            dashboardUC.Dock = DockStyle.Fill;
+            _view.tabPageDashboard.Controls.Add(dashboardUC);
+            _view.tabPageAdminPanel.Controls["dashboardUC"].BringToFront();*/
         }
-
         #endregion
 
         #region Employee functions
-        private void DisplayEmployee()
+        private void ShowEmployee()
         {
-            CheckEmployee();
+            if(_model.Employee != null)
+            {
+                char m = 'M';
+                char k = 'K';
 
-            char m = 'M';
-            char k = 'K';
+                _view.labelNameEmployee.Text = _model.Employee.Name;
+                _view.labelSurnameEmployee.Text = _model.Employee.Surname;
+                _view.labelUsernameEmployee.Text = _model.Employee.Username;
+                if (_model.Employee.Sex == m)
+                    _view.labelSexEmployee.Text = "mężczyzna";
+                if (_model.Employee.Sex == k)
+                    _view.labelSexEmployee.Text = "kobieta";
+                else
+                    _view.labelSexEmployee.Text = "nie podano";
 
-            singleEmployeeUC.labelNameEmployee.Text = employee.Name;
-            singleEmployeeUC.labelSurnameEmployee.Text = _model.Employee.Surname;
-            singleEmployeeUC.labelUsernameEmployee.Text = _model.Employee.Username;
-            if(_model.Employee.Sex.Equals(m))
-                singleEmployeeUC.labelSexEmployee.Text = "mężczyzna";
-            if (_model.Employee.Sex.Equals(k))
-                singleEmployeeUC.labelSexEmployee.Text = "kobieta";
-            else
-                singleEmployeeUC.labelSexEmployee.Text = "nie podano";
+                _view.labelEmailEmployee.Text = _model.Employee.Email;
+                _view.labelSectionEmployee.Text = _model.Employee.Section.Name;
+                _view.labelFreeDays.Text = CountFreeDays().ToString();
+            }
 
-            singleEmployeeUC.labelEmailEmployee.Text = _model.Employee.Email;
-            singleEmployeeUC.labelSectionEmployee.Text = _model.Employee.Section.Name;
-            singleEmployeeUC.labelFreeDays.Text = CountFreeDays().ToString();
         }
 
         private long CountFreeDays()
@@ -268,9 +164,9 @@ namespace nauka.V3.Views.MainViews.Controller
             byte thisYearDaysFree = currentDaysFree.AvaibleVacationDays;
 
             long usedDays = 0;
-            foreach(var item in _model.Employee.VacationDays)
+            foreach (var item in _model.Employee.VacationDays)
             {
-                usedDays += item.VacationDays;
+                usedDays += item.Days;
             }
 
             return thisYearDaysFree - usedDays;
@@ -282,7 +178,7 @@ namespace nauka.V3.Views.MainViews.Controller
 
         private void DisplayVacations()
         {
-            menageVacationApplicationUC.dataGridViewVacAppList.Rows.Clear();
+            _view.dataGridViewVacations.Rows.Clear();
             int i = 1;
             var vacationApplications = _model.Employee.Vacation;
             if (vacationApplications != null)
@@ -291,7 +187,7 @@ namespace nauka.V3.Views.MainViews.Controller
                 {
                     if (item.Approve == true)
                     {
-                        vacationUC.dataGridViewVacations.Rows.Add(item.Id, i, item.Description,
+                        _view.dataGridViewVacations.Rows.Add(item.Id, i, item.Description,
                             item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"));
                         i++;
                     }
@@ -299,15 +195,13 @@ namespace nauka.V3.Views.MainViews.Controller
             }
             else
             {
-                menageVacationApplicationUC.dataGridViewVacAppList.Rows.Add(i, "brak wniosków");
+                _view.dataGridViewVacations.Rows.Add(i, "brak planowanych urlopów");
             }
-
         }
 
         private void CreateDataGridVacations()
         {
-
-            var detailDGV = vacationUC.dataGridViewVacations;
+            var detailDGV = _view.dataGridViewVacations;
 
             detailDGV.AllowUserToAddRows = false;
             detailDGV.AutoGenerateColumns = false;
@@ -368,11 +262,9 @@ namespace nauka.V3.Views.MainViews.Controller
         #endregion
 
         #region MenageVacation
-
         private void CreateDataGridVacationApplication()
         {
-
-            var detailDGV = menageVacationApplicationUC.dataGridViewVacAppList;
+            var detailDGV = _view.dataGridViewVacAppList;
 
             detailDGV.AllowUserToAddRows = false;
             detailDGV.AutoGenerateColumns = false;
@@ -435,8 +327,8 @@ namespace nauka.V3.Views.MainViews.Controller
 
         private void DeleteVacationApplication()
         {
-            var vacationStartToDelete = DateTime.Parse(menageVacationApplicationUC.dataGridViewVacAppList.SelectedCells[2].Value.ToString());
-            var vacationEndToDelete = DateTime.Parse(menageVacationApplicationUC.dataGridViewVacAppList.SelectedCells[3].Value.ToString());
+            var vacationStartToDelete = DateTime.Parse(_view.dataGridViewVacAppList.SelectedCells[2].Value.ToString());
+            var vacationEndToDelete = DateTime.Parse(_view.dataGridViewVacAppList.SelectedCells[3].Value.ToString());
             var vacation = _model.Employee.Vacation.Where(v => (v.Start == vacationStartToDelete) && (v.End == vacationEndToDelete)).ToArray();
             _model.DeleteVacation(vacation[0]);
             DisplayVacationApplications();
@@ -444,7 +336,7 @@ namespace nauka.V3.Views.MainViews.Controller
 
         private void DisplayVacationApplications()
         {
-            menageVacationApplicationUC.dataGridViewVacAppList.Rows.Clear();
+            _view.dataGridViewVacAppList.Rows.Clear();
             int i = 1;
             var vacationApplications = _model.Employee.Vacation;
             if(vacationApplications != null)
@@ -453,24 +345,45 @@ namespace nauka.V3.Views.MainViews.Controller
                 {
                     if (item.Approve == false)
                     {
-                        menageVacationApplicationUC.dataGridViewVacAppList.Rows.Add(i, item.Description, 
+                        _view.dataGridViewVacAppList.Rows.Add(i, item.Description, 
                             item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"));
                         i++;
                     }
                 }
-            }else
+            }
+            else
             {
-                menageVacationApplicationUC.dataGridViewVacAppList.Rows.Add(i, "brak wniosków");
+                _view.dataGridViewVacAppList.Rows.Add(i, "brak wniosków");
             }
             
         }
 
         #endregion
 
-        private void CheckEmployee()
+        #region AdminPanel
+        private bool ValidatePermisson()
         {
-            employee = _model.Employee;
+            var result = false;
+
+            if (_model.Employee.Password.Equals(_view.textBoxPassowrd.Text))
+            {
+                if(_model.Employee.EmployeePermisson || _model.Employee.VacationPermisson)
+                {
+                    result = true;
+                }
+                else
+                {
+                    MessageBox.Show("Brak uprawnień");
+                }
+            }
+            else
+            {
+                MessageBox.Show("hasło nieprawidłowe");
+            }
+
+            return result;
         }
+        #endregion
 
         public Employee SetEployee
         {

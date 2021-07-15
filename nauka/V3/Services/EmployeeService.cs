@@ -11,7 +11,7 @@ namespace nauka.V3.Services
     {
         private List<Employee> _employees;
         private List<Section> _sections;
-        private List<VacationDay> _vacationDays;
+        private List<VacationDays> _vacationDays;
         private List<Vacation> _vacations;
 
         public EmployeeService() { }
@@ -48,11 +48,12 @@ namespace nauka.V3.Services
                 if (_vacationDays == null)
                     await InitVacationDays();
 
+
                 var employees = new List<Employee>
                 {
                     new Employee
                     {
-                        EmployeeId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Name = "Jan",
                         Surname = "Kowalski",
                         Username = "jkowalski",
@@ -63,12 +64,12 @@ namespace nauka.V3.Services
                         EmployeePermisson = true,
                         VacationPermisson = true,
                         Vacation = _vacations,
-                        AppSettings = new AppSettings{ AvaibleVacationDays = 24 },
-                        VacationDays = new List<VacationDay> { new VacationDay { VacationDays = 0 } }
+                        AppSettings = new List<AppSettings> { new AppSettings { AvaibleVacationDays = 24, Year = DateTime.Today } },
+                        VacationDays = new List<VacationDays> { new VacationDays { Days = 0 } }
                     },
                     new Employee
                     {
-                        EmployeeId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Name = "Adam",
                         Surname = "Nowak",
                         Username = "anowak",
@@ -79,12 +80,12 @@ namespace nauka.V3.Services
                         EmployeePermisson = true,
                         VacationPermisson = false,
                         Vacation = new List<Vacation>(),
-                        AppSettings = new AppSettings{ AvaibleVacationDays = 24 },
-                        VacationDays = new List<VacationDay> { new VacationDay { VacationDays = 0 } }
+                        AppSettings = new List<AppSettings> { new AppSettings { AvaibleVacationDays = 24, Year = DateTime.Today } },
+                        VacationDays = new List<VacationDays> { new VacationDays { Days = 0 } }
                     },
                     new Employee
                     {
-                        EmployeeId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Name = "Jaś",
                         Surname = "Kapela",
                         Username = "jkapela",
@@ -95,8 +96,8 @@ namespace nauka.V3.Services
                         EmployeePermisson = false,
                         VacationPermisson = false,
                         Vacation = new List<Vacation>(),
-                        AppSettings = new AppSettings{ AvaibleVacationDays = 24 },
-                        VacationDays = new List<VacationDay> { new VacationDay { VacationDays = 0 } }
+                        AppSettings = new List<AppSettings> { new AppSettings { AvaibleVacationDays = 24, Year = DateTime.Today } },
+                        VacationDays = new List<VacationDays> { new VacationDays { Days = 0 } }
                     }
                 };
                 result = employees;
@@ -145,7 +146,7 @@ namespace nauka.V3.Services
 
         public void Update(Employee employee)
         {
-            int index = _employees.FindIndex(e => e.EmployeeId == employee.EmployeeId);
+            int index = _employees.FindIndex(e => e.Id == employee.Id);
             _employees[index] = employee;
         }
 

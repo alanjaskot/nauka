@@ -8,11 +8,11 @@ namespace nauka.V3.Services
 {
     public class VacationDaysService
     {
-        public VacationDay VacationDay { get; set; }
+        public VacationDays VacationDay { get; set; }
 
-        private List<VacationDay> _vacationDays;
+        private List<VacationDays> _vacationDays;
 
-        public async Task<List<VacationDay>> GetVacationDays()
+        public async Task<List<VacationDays>> GetVacationDays()
         {
             if (_vacationDays == null)
                 await GenerateVacationDays();
@@ -24,19 +24,19 @@ namespace nauka.V3.Services
             
         private async Task GenerateVacationDays()
         {
-            _vacationDays = new List<VacationDay>();
+            _vacationDays = new List<VacationDays>();
 
             await Task.CompletedTask;
         }
 
-        internal async Task Add(VacationDay vacationDays)
+        internal async Task Add(VacationDays vacationDays)
         {
             _vacationDays.Add(vacationDays);
 
             await Task.CompletedTask;
         }
 
-        internal async Task Remove(VacationDay vacationDays)
+        internal async Task Remove(VacationDays vacationDays)
         {
             _vacationDays.Remove(vacationDays);
 

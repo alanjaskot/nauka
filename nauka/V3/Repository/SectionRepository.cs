@@ -29,13 +29,13 @@ namespace nauka.V3.Repository
         public bool Update(Section section)
         {
             var result = false;
-            var userToUpdate = _context.Sections.Where(s => s.Id == section.Id).FirstOrDefault();
-            if(userToUpdate == null)
+            var sectionToUpdate = _context.Sections.Where(s => s.Id == section.Id).FirstOrDefault();
+            if(section == null)
             {
-                _context.Sections.Add(userToUpdate);
+                _context.Sections.Add(section);
                 result = true;
             }
-            if(userToUpdate != null)
+            if(section != null)
             {
                 _context.Sections.Update(section);
                 result = true;

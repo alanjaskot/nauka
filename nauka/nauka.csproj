@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="V2\Views\AppSettings\" />
     <Folder Include="V2\Views\Test\" />
-    <Folder Include="V3\Views\BaseViews\UserController\" />
   </ItemGroup>
 
   <ItemGroup>

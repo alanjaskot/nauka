@@ -38,7 +38,7 @@ namespace nauka.V3.Services
                 {
                     new Vacation()
                     {
-                        VacationId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         Start = DateTime.Parse("01.08.2021"),
                         End = DateTime.Parse("10.08.2021"),
                         Description = "wypoczynkowy",

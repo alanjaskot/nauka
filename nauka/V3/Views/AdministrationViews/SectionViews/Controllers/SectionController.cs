@@ -30,18 +30,34 @@ namespace nauka.V3.Views.AdministrationViews.SectionViews.Controllers
         {
             _view.buttonOk.Click += (object sender, EventArgs e) =>
             {
-                //if (!Validate())
-                Update();
-                AddSection();
-                _view.Close();
+                if (Validate())
+                {
+                    
+                    if (_model.Section.Name != null)
+                    {
+                        RefreshUpdateModel();
+                        _view.DialogResult = DialogResult.OK;
+                        _view.Close();
+                    }
+                        
 
-               // else
-                //    MessageBox.Show("Podana sekcja już istnieje");
+                    if (_model.Section.Name == null)
+                    {
+                        RefreshModel();
+                        _view.DialogResult = DialogResult.OK;
+                        _view.Close();
+                    }         
+                }
+                else
+                {
+                    MessageBox.Show("Proszę uzupełnić nazwę jednostki");
+                }
+                
             };
 
             _view.buttonCancel.Click += (object sender, EventArgs e) =>
             {
-                
+                _view.Close();
             };
 
             await Task.CompletedTask;
@@ -56,28 +72,28 @@ namespace nauka.V3.Views.AdministrationViews.SectionViews.Controllers
                 await Task.CompletedTask;
         }
 
-        private void AddSection()
+        private bool Validate()
         {
-            _model.Save();
+            var result = false;
+            if (_view.textBoxSectionName != null)
+                result = true;
+
+            return result;
+        }   
+
+        private void RefreshModel()
+        {
+            if (_model.Section == null)
+                _model.Section.Id = Guid.NewGuid();
+
+            _model.Section.Name = _view.textBoxSectionName.Text;
         }
 
-        private void Update()
+        private void RefreshUpdateModel()
         {
             _model.Section.Name = _view.textBoxSectionName.Text;
         }
 
-        private bool Validate()
-        {
-            bool result = true;
-            var sectionList = _model.GetSections();
-
-            if (sectionList.Any(s => s.Name == _model.Section.Name))
-            {
-                result = false;
-            }            
-
-            return result;
-        }
 
         public Section SetSection
         {

@@ -48,7 +48,7 @@ namespace nauka.V3.Models
         [Required]
         public List<Vacation> Vacation { get; set; }
         
-        public List<VacationDay> VacationDays { get; set; }
+        public List<VacationDays> VacationDays { get; set; }
         
         public List<AppSettings> AppSettings { get; set; }
 

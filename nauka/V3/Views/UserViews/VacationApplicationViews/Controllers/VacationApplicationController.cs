@@ -19,7 +19,7 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
         public VacationApplicationController(VacationApplicationView view)
         {
             _view = view;
-
+            
             Task.Run(async () =>
             {
                 await InitViewModel();
@@ -44,10 +44,7 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
 
             _view.buttonCancel.Click += (object sender, EventArgs e) =>
             {
-                if (_view.DialogResult == DialogResult.Cancel) 
-                {
-                    _view.Close();
-                }
+                _view.Close();
             };
 
             await Task.CompletedTask;
@@ -62,17 +59,6 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
                 await Task.FromResult(_model);
         }
 
-        private async Task RefreshView()
-        {
-            _view.dateTimePickerStart.Text = _model.Vacation.Start.ToString();
-            _view.dateTimePickerEnd.Text = _model.Vacation.End.ToString();
-            await DisplayDescriptions();
-            _view.comboBoxDescription.Items.Contains(_model.Vacation.Description);
-
-            await Task.CompletedTask;
-        }
-
-
         private bool Validate()
         {
             var result = true;
@@ -86,7 +72,7 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
         {
             var vacation = new Vacation
             {
-                VacationId = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 Start = _view.dateTimePickerStart.Value,
                 End = _view.dateTimePickerEnd.Value,
                 Description = _view.comboBoxDescription.SelectedItem.ToString(),

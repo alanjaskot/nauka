@@ -36,5 +36,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
                 _controller.SetEployee = value;
             }
         }
+
+
     }
 }

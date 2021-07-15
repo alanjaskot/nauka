@@ -25,12 +25,12 @@ namespace nauka.V3.Services
             {
                 new Section
                 {
-                    SectionId = Guid.NewGuid(),
+                    Id = Guid.NewGuid(),
                     Name = "HR"
                 },
                 new Section
                 {
-                    SectionId = Guid.NewGuid(),
+                    Id = Guid.NewGuid(),
                     Name = "IT"
                 }
             };
@@ -43,6 +43,11 @@ namespace nauka.V3.Services
         public void Add(Section section)
         {
             _sections.Add(section);
+        }
+
+        public void Update(Section section)
+        {
+
         }
 
         public void Delete (Section section)

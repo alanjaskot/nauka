@@ -32,14 +32,6 @@ namespace nauka.V3.Views.AdministrationViews.SectionViews.Models
             return result;
         }
 
-        internal void Save()
-        {
-            _sectionService.Add(Section);
-        }
-
-        internal void Delete()
-        {
-            _sectionService.Delete(Section);
-        }
+        
     }
 }

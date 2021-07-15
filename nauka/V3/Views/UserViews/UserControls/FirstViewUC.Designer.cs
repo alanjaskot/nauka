@@ -36,7 +36,7 @@ namespace nauka.V3.Views.UserViews.UserControls
             // 
             this.labelWelcomSign.AutoSize = true;
             this.labelWelcomSign.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelWelcomSign.Location = new System.Drawing.Point(504, 352);
+            this.labelWelcomSign.Location = new System.Drawing.Point(387, 250);
             this.labelWelcomSign.Name = "labelWelcomSign";
             this.labelWelcomSign.Size = new System.Drawing.Size(537, 45);
             this.labelWelcomSign.TabIndex = 0;
@@ -48,7 +48,7 @@ namespace nauka.V3.Views.UserViews.UserControls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.labelWelcomSign);
             this.Name = "FirstViewUC";
-            this.Size = new System.Drawing.Size(1598, 780);
+            this.Size = new System.Drawing.Size(1578, 742);
             this.ResumeLayout(false);
             this.PerformLayout();
 

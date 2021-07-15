@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using nauka.V3.Views.AdministrationViews.UserControls;
 using nauka.V3.Resources;
 using nauka.V3.Views.MianViews;
+using nauka.V3.Views.AdministrationViews.NewAbsenceViews.Views;
 
 namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 {
@@ -27,83 +28,97 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
         private MenageVacationsUC menageVacationsUC = new MenageVacationsUC();
         private VacationPermissionUC vacationPermissionUC = new VacationPermissionUC();
         private MenageSectionUC menageSectionUC = new MenageSectionUC();
-        private SectionComboBoxUC sectionComboBoxUC = new SectionComboBoxUC();
         private NewAbsenceUC newAbsenceUC = new NewAbsenceUC();
 
-        public AdminMainViewController(AdminMainView adminMainView)
+        public AdminMainViewController(AdminMainView view)
         {
-            _view = adminMainView;
-
+            _view = view;
+ 
             Task.Run(async () =>
             {
                 await InitViewModel();
                 await InitView();
+                
             }).Wait();
         }
 
+        
         public async Task InitView()
         {
-            
-            #region  inicjalizacja user control
-            employeesUC.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(employeesUC);
+            await InitListAndDataGrid();
 
-            permissionUC.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(permissionUC);
-
-            menageVacationsUC.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(menageVacationsUC);
-
-            vacationPermissionUC.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(vacationPermissionUC);
-
-            sectionComboBoxUC.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(sectionComboBoxUC);
-
-            newAbsenceUC.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(newAbsenceUC);
-
-            menageSectionUC.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(menageSectionUC);
-
-            #endregion  
-
-            #region leftpanelUC
-            _view.adminLeftPanelMenuuc1.buttonSection.Click += (object sender, EventArgs e) =>
+            _view.tabControlAdmin.Click += (object sender, EventArgs e) => 
             {
-                SectionDisplayList();
-                _view.panelMain.Controls["MenageSectionUC"].BringToFront();
+
             };
 
-            _view.adminLeftPanelMenuuc1.buttonEmployees.Click += (object sender, EventArgs e) =>
+            #region Sections buttons
+
+            _view.buttonAddSection.Click += (object sender, EventArgs e) =>
             {
-                _view.panelMain.Controls["EmployeesUC"].BringToFront();
-                CreateDataGridEmployee();
-                SectionDisplay();
+                AddSection();
             };
 
-            _view.adminLeftPanelMenuuc1.buttonPermission.Click += (object sender, EventArgs e) =>
+            _view.buttonEditSection.Click += (object sender, EventArgs e) =>
             {
-                _view.panelMain.Controls["PermissionUC"].BringToFront();
-                CreateDataGridEmployeePermisson();
-                SectionDisplay();
+                UpdateSection();
             };
 
-            _view.adminLeftPanelMenuuc1.buttonVacations.Click += (object sender, EventArgs e) =>
+            _view.buttonDeleteSection.Click += (object sender, EventArgs e) =>
             {
-                _view.panelMain.Controls["MenageVacationsUC"].BringToFront();
-                CreateDataGridMenageVacation();
-                SectionDisplay();
+                DeleteSection();
             };
 
-            _view.adminLeftPanelMenuuc1.buttonVacationApplications.Click += (object sender, EventArgs e) =>
+            #endregion
+
+            #region MenageEmployees buttons
+
+            _view.buttonDisplayEmployees.Click += (object sender, EventArgs e) =>
             {
-                SectionDisplay();
-                CreateDataGridVacationPermisson();
-                _view.panelMain.Controls["VacationPermissionUC"].BringToFront();
+                DisplayEmployees();
             };
 
-            _view.adminLeftPanelMenuuc1.buttonToEmployee.Click += (object sender, EventArgs e) =>
+            _view.buttonAddEmployee.Click += (object sender, EventArgs e) =>
+            {
+                AddEmployee();
+            };
+
+            _view.buttonUpdateEmployee.Click += (object sender, EventArgs e) =>
+            {
+                UpdateEmployee();
+            };
+
+            _view.buttonDeleteEmployee.Click += (object sender, EventArgs e) =>
+            {
+                DeleteEmployee();
+            };
+
+            #endregion
+
+            #region Absences buttons
+
+            _view.buttonChooseSectionAbsence.Click += (object sender, EventArgs e) =>
+            {
+                DisplayMenageAbsence();
+            };
+
+            _view.buttonAddAbsence.Click += (object sender, EventArgs e) =>
+            {
+                AddAbsence();
+            };
+
+            _view.buttonDeleteAbsence.Click += (object sender, EventArgs e) =>
+            {
+                DeleteAbsence();
+            };
+
+
+
+            #endregion
+
+
+
+            _view.Click += (object sender, EventArgs e) =>
             {
                 var currentEmployee = _model.Employee;
                 var viewEmployee = new MainView();
@@ -112,126 +127,9 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
                 _view.Close();
                 };
 
-            #endregion
 
-            #region   section menager functions
 
-            menageSectionUC.buttonAdd.Click += (object sender, EventArgs e) =>
-            {
-                var newSection = new Section();
-                var view = new SectionView();
-                view.SetObjectToEdit = newSection;
-                if (view.ShowDialog() == DialogResult.OK)
-                {
-                    var newSection2 = view.SetObjectToEdit;
-                    _model.AddSection(newSection2);
-                    SectionDisplay();
-                }
-            };
 
-            menageSectionUC.buttonEdit.Click += (object sender, EventArgs e) =>
-            {
-                var currentSection = _model.GetSections().Where(s => s.Name == menageSectionUC.listViewSections.SelectedItems[0].Text)
-                .FirstOrDefault();
-                var view = new SectionView();
-                view.SetObjectToEdit = currentSection;
-                DeleteSection();
-                if (view.ShowDialog() == DialogResult.OK)
-                {
-
-                }
-            };
-
-            menageSectionUC.buttonDelete.Click += (object sender, EventArgs e) =>
-            {
-                DeleteSection();
-            };
-            #endregion
-
-            #region employeesUC
-
-            employeesUC.buttonDisplayEmployees.Click += (object sender, EventArgs e) =>
-            {
-                DisplayEmployees();
-            };
-
-            employeesUC.buttonAdd.Click += (object sender, EventArgs e) =>
-            {
-                AddEmployee();
-            };
-
-            employeesUC.buttonEdit.Click += (object sender, EventArgs e) =>
-            {
-                EditEmployee();
-            };
-
-            employeesUC.buttonDelete.Click += (object sender, EventArgs e) =>
-            {
-                DeleteEmployee();
-            };
-
-            #endregion
-
-            #region MenageVacation
-
-            menageVacationsUC.buttonChooseSection.Click += (object sender, EventArgs e) =>
-            {
-                DisplayMenageVacation();
-            };
-
-            menageVacationsUC.buttonDelete.Click += (object sender, EventArgs e) =>
-            {
-                DeleteVacations();
-            };
-
-            menageVacationsUC.buttonNew.Click += (object sender, EventArgs e) =>
-            {
-                CreateDataGridEmployeeInAbsence();
-                SectionDisplayList();
-                DisplayDescriptionList();
-                _view.panelMain.Controls["newAbsenceUC"].BringToFront();
-            };
-
-            #endregion
-
-            #region NewAbsence
-
-            newAbsenceUC.buttonSectionChoose.Click += (object sender, EventArgs e) =>
-            {
-                DisplayEmployeesInAbsence();
-            };
-
-            newAbsenceUC.buttonAdd.Click += (object sender, EventArgs e) =>
-            {
-                if (ValidateAbsence())
-                {
-                    AddAbsence();
-                }
-
-                if (!ValidateAbsence())
-                    MessageBox.Show("Proszę wybrać pracownika i wypełnić wszystkie pola");
-            };
-
-            #endregion
-
-            #region VacationPermisson
-
-            vacationPermissionUC.buttonChooseSection.Click += (object sender, EventArgs e) =>
-            {
-                DisplayVacationPermisson();
-            };
-
-            vacationPermissionUC.buttonApprove.Click += (object sender, EventArgs e) =>
-            {
-                ApproveVacation();
-            };
-
-            vacationPermissionUC.buttonDenay.Click += (object sender, EventArgs e) =>
-            {
-                DenayVacation();
-            };
-
-            #endregion
 
             #region Permission
 
@@ -273,6 +171,17 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             await Task.CompletedTask;
         }
 
+        private async Task InitListAndDataGrid()
+        {
+            SectionShowList();
+            ShowSectionsEmployees();
+            CreateDataGridEmployee();
+            ShowSectionAbsence();
+            CreateDataGridMenageAbsence();
+
+            await Task.CompletedTask;
+        }
+
         public async Task InitViewModel()
         {
             if (_model == null)
@@ -285,22 +194,55 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
         }
 
         #region Sections functions
-        private void SectionDisplayList()
+        private void SectionShowList()
         {
-            menageSectionUC.listViewSections.Items.Clear();
+            _view.listViewSections.Items.Clear();
             
             foreach (var item in _model.GetSections())
             {
-                menageSectionUC.listViewSections.Items.Add(item.Name);
+                _view.listViewSections.Items.Add(item.Name);
             }
+        }
+
+        private void AddSection()
+        {
+            var section = new Section();
+            var view = new SectionView();
+            view.SetObjectToEdit = section;
+            view.Show();
+            if (view.DialogResult == DialogResult.OK)
+            {
+                var section2 = view.SetObjectToEdit;
+                _model.AddSection(section2);
+
+                SectionShowList();
+                
+            }
+            SectionShowList();
+        }
+
+        private void UpdateSection()
+        {
+            if(_view.listViewSections.SelectedItems.Count > 0)
+            {
+                var section = _model.GetSections().Where(s => s.Name == _view.listViewSections.SelectedItems[0].Text).FirstOrDefault();
+                var view = new SectionView();
+                view.SetObjectToEdit = section;
+                view.Show();
+                if (view.DialogResult == DialogResult.OK)
+                {
+                    var section2 = view.SetObjectToEdit;
+                    _model.UpdateSection(section2);
+                }
+                SectionShowList();
+            }  
         }
 
         private void DeleteSection()
         {
             var deletedSection = _model.GetSections().Where(s => s.Name == menageSectionUC.listViewSections.SelectedItems[0].Text)
                 .FirstOrDefault();
-            
-            _model.Section = deletedSection;
+
             _model.DeleteSection(deletedSection);
         }
 
@@ -308,33 +250,26 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
         #endregion
 
         #region Employee functions
-        private void SectionDisplay()
+
+        private void ShowSectionsEmployees()
         {
-            employeesUC.comboBoxSections.Items.Clear();
-            vacationPermissionUC.comboBoxSections.Items.Clear();
-            permissionUC.comboBoxSections.Items.Clear();
-            menageVacationsUC.comboBoxSections.Items.Clear();
-            newAbsenceUC.comboBoxSecitions.Items.Clear();
-            foreach (var item in _model.GetSections())
+            _view.comboBoxSections.Items.Clear();
+            foreach(var item in _model.GetSections())
             {
-                employeesUC.comboBoxSections.Items.Add(item.Name);
-                vacationPermissionUC.comboBoxSections.Items.Add(item.Name);
-                permissionUC.comboBoxSections.Items.Add(item.Name);
-                menageVacationsUC.comboBoxSections.Items.Add(item.Name);
-                newAbsenceUC.comboBoxSecitions.Items.Add(item.Name);
+                _view.comboBoxSections.Items.Add(item.Name);
             }
         }
 
         private void DisplayEmployees()
         {
-            employeesUC.dataGridViewEmployees.Rows.Clear();
+            _view.dataGridViewEmployees.Rows.Clear();
             int i = 1;
             var employeeList = _model.GetEmployees();
             foreach(var item in employeeList)
             {
-                if((item.Section.Name == (string)employeesUC.comboBoxSections.SelectedItem) && (item.Section.Name != null))
+                if((item.Section.Name == (string)_view.comboBoxSections.SelectedItem) && (item.Section.Name != null))
                 {
-                    employeesUC.dataGridViewEmployees.Rows.Add(item.Id, i, item.Surname, item.Name);
+                    _view.dataGridViewEmployees.Rows.Add(item.Id, i, item.Surname, item.Name);
                     i++;
                 }
             }
@@ -344,11 +279,17 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
         {
             var newEmployee = new Employee();
             var view = new RegisterView();
+            
             view.SetObjectToEdit = newEmployee;
-            view.DialogResult = DialogResult.OK;
+            if(view.DialogResult == DialogResult.OK)
+            {
+                var newEmployee2 = view.SetObjectToEdit;
+                _model.AddEmployee(newEmployee2);
+            }
+            
         }
 
-        private void EditEmployee()
+        private void UpdateEmployee()
         {
             if (employeesUC.dataGridViewEmployees.CurrentRow != null) 
             {
@@ -360,10 +301,9 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
                 if (view.ShowDialog() == DialogResult.OK)
                 {
                     var selectedEmlpoyee2 = view.SetObjectToEdit;
+                    _model.UpdateEmployee(selectedEmlpoyee2);
                 }
             }
-            
-
         }
 
         private void DeleteEmployee()
@@ -378,7 +318,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
         private void CreateDataGridEmployee()
         {
-            var detailDGV = employeesUC.dataGridViewEmployees;           
+            var detailDGV = _view.dataGridViewEmployees;           
 
             detailDGV.AllowUserToAddRows = false;
             detailDGV.AutoGenerateColumns = false;
@@ -429,28 +369,51 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
         #endregion
 
-        #region MenageVacation functions
+        #region Absences functions
 
-        private void DeleteVacations()
+        private void ShowSectionAbsence()
         {
-            string idEmployee = menageVacationsUC.dataGridViewVacations
-                [0, vacationPermissionUC.dataGridViewVacationApplications.CurrentRow.Index].Value.ToString();
-            Guid idVacation = Guid.Parse(menageVacationsUC.dataGridViewVacations
-                [7, vacationPermissionUC.dataGridViewVacationApplications.CurrentRow.Index].Value.ToString());
+            _view.comboBoxSectionAbsence.Items.Clear();
 
-            int employeeIndex = _model.GetEmployees().FindIndex(e => e.Id == Guid.Parse(idEmployee));
-            int vacationIndex = _model.GetEmployees()[employeeIndex].Vacation.FindIndex(v => v.Id == idVacation);
-            _model.GetEmployees()[employeeIndex].Vacation.RemoveAt(vacationIndex);
-
-            DisplayVacationPermisson();
+            foreach(var item in _model.GetSections())
+            {
+                _view.comboBoxSectionAbsence.Items.Add(item.Name);
+            }
         }
 
-        private void DisplayMenageVacation()
+        private void AddAbsence()
         {
-            menageVacationsUC.dataGridViewVacations.Rows.Clear();
+            Guid idEmployee = Guid.Parse(_view.dataGridViewVacations[0, _view.dataGridViewVacations.CurrentRow.Index].Value.ToString());
+            var employee = new Employee();
+            var view = new NewAbsenceView();
+            view.SetObjectToEdit = employee;
+            if(view.DialogResult == DialogResult.OK)
+            {
+                var employee2 = view.SetObjectToEdit;
+                int index = employee2.Vacation.Count - 1;
+                _model.AddVacation(employee2.Vacation[index]);
+            }
+        }
 
+        private void DeleteAbsence()
+        {
+            Guid idEmployee = Guid.Parse(_view.dataGridViewVacations[0, _view.dataGridViewVacations.CurrentRow.Index].Value.ToString());
+            Guid idVacation = Guid.Parse(_view.dataGridViewVacations[7, _view.dataGridViewVacations.CurrentRow.Index].Value.ToString());
+
+            int employeeIndex = _model.GetEmployees().FindIndex(e => e.Id == idEmployee);
+            var vacation = _model.GetEmployees()[employeeIndex].Vacation.Where(v => v.Id == idVacation).FirstOrDefault();
+
+            _model.DeleteVacation(vacation);
+
+            DisplayMenageAbsence();
+        }
+
+        private void DisplayMenageAbsence()
+        {
+            _view.dataGridViewVacations.Rows.Clear();
+            string today = DateTime.Now.ToString("yyyy");
             int i = 1;
-            var employeeList = _model.GetEmployees().Where(e => e.Section.Name == (string)menageVacationsUC.comboBoxSections.SelectedItem);
+            var employeeList = _model.GetEmployees().Where(e => e.Section.Name == (string)_view.comboBoxSections.SelectedItem);
             if (employeeList != null)
             {
                 foreach (var itemEmployee in employeeList)
@@ -459,10 +422,11 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
                     {
                         foreach (var item in itemEmployee.Vacation)
                         {
-                            if (item.Approve == true)
+                            if ((item.Approve == true) && (item.Start.ToString("yyyy").Equals(today)
+                                || item.End.ToString("yyyy").Equals(today)))
                             {
-                                menageVacationsUC.dataGridViewVacations.Rows.Add(itemEmployee.Id, i, itemEmployee.Surname, itemEmployee.Name, 
-                                    item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"), item.Description, item.Id, "Edytuj");
+                                _view.dataGridViewVacations.Rows.Add(itemEmployee.Id, i, itemEmployee.Surname, itemEmployee.Name, 
+                                    item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"), item.Description, item.Id);
                                 i++;
                             }
                         }
@@ -471,10 +435,10 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             }
         }
 
-        private void CreateDataGridMenageVacation()
+        private void CreateDataGridMenageAbsence()
         {
 
-            var detailDGV = menageVacationsUC.dataGridViewVacations;
+            var detailDGV = _view.dataGridViewVacations;
 
             detailDGV.AllowUserToAddRows = false;
             detailDGV.AutoGenerateColumns = false;
@@ -492,7 +456,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             dgvTextColumn.DataPropertyName = "Id";
             dgvTextColumn.Width = 50;
             dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvTextColumn.Visible = true;
+            dgvTextColumn.Visible = false;
             detailDGV.Columns.Add(dgvTextColumn);
 
             dgvTextColumn = new DataGridViewTextBoxColumn();
@@ -557,125 +521,12 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             dgvTextColumn.Visible = false;
             detailDGV.Columns.Add(dgvTextColumn);
-
-            dgvTextColumn = new DataGridViewButtonColumn();
-            dgvTextColumn.HeaderText = "Edycja";
-            dgvTextColumn.Name = "Edit";
-            dgvTextColumn.DataPropertyName = "Edit";
-            dgvTextColumn.Width = 90;
-            dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvTextColumn.Visible = true;
-            detailDGV.Columns.Add(dgvTextColumn);
         }
 
         #endregion
 
-        #region NewAbsense Functions
 
-        private void AddAbsence()
-        {
-            var idEmployee = Guid.Parse(newAbsenceUC.dataGridViewEmployees[0, newAbsenceUC.dataGridViewEmployees.CurrentRow.Index].Value.ToString());
-            int index = _model.GetEmployees().FindIndex(i => i.Id == idEmployee);
-            var employee = _model.GetEmployees()[index]; 
-            var vacation = new Vacation
-            {
-                Id = Guid.NewGuid(),
-                Start = newAbsenceUC.dateTimePickerStart.Value,
-                End = newAbsenceUC.dateTimePickerEnd.Value,
-                Description = newAbsenceUC.listViewDescription.SelectedItems[0].Text,
-                Approve = true
-            };
-            employee.Vacation.Add(vacation);
-            _model.AddVacation(employee);
-        }
-
-        private bool ValidateAbsence()
-        {
-            var result = true;
-
-            if ((newAbsenceUC.dateTimePickerStart == null) || (newAbsenceUC.dateTimePickerEnd == null)
-                || (newAbsenceUC.listViewDescription.SelectedItems == null))
-                result = false;
-
-            return result;
-        }
-
-        private void DisplayDescriptionList()
-        {
-            newAbsenceUC.listViewDescription.Items.Clear();
-            foreach(var item in VacationDescriptionList.adminDescriptions)
-            {
-                newAbsenceUC.listViewDescription.Items.Add(item);
-            }
-        }
-
-        private void DisplayEmployeesInAbsence()
-        {
-            newAbsenceUC.dataGridViewEmployees.Rows.Clear();
-            int i = 1;
-            var employeeList = _model.GetEmployees();
-            foreach (var item in employeeList)
-            {
-                if ((item.Section.Name == (string)newAbsenceUC.comboBoxSecitions.SelectedItem) && (item.Section.Name != null))
-                {
-                    newAbsenceUC.dataGridViewEmployees.Rows.Add(item.Id, i, item.Surname, item.Name);
-                    i++;
-                }
-            }
-        }
-
-        private void CreateDataGridEmployeeInAbsence()
-        {
-            var detailDGV = newAbsenceUC.dataGridViewEmployees;
-
-            detailDGV.AllowUserToAddRows = false;
-            detailDGV.AutoGenerateColumns = false;
-            detailDGV.RowHeadersVisible = false;
-            detailDGV.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            detailDGV.Columns.Clear();
-            detailDGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            detailDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-            var dgvTextColumn = default(DataGridViewColumn);
-
-            dgvTextColumn = new DataGridViewTextBoxColumn();
-            dgvTextColumn.HeaderText = "Id.";
-            dgvTextColumn.Name = "ID";
-            dgvTextColumn.DataPropertyName = "Id";
-            dgvTextColumn.Width = 45;
-            dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvTextColumn.Visible = false;
-            detailDGV.Columns.Add(dgvTextColumn);
-
-            dgvTextColumn = new DataGridViewTextBoxColumn();
-            dgvTextColumn.HeaderText = "Lp.";
-            dgvTextColumn.Name = "Lp";
-            dgvTextColumn.DataPropertyName = "Lp";
-            dgvTextColumn.Width = 45;
-            dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvTextColumn.Visible = true;
-            detailDGV.Columns.Add(dgvTextColumn);
-
-            dgvTextColumn = new DataGridViewTextBoxColumn();
-            dgvTextColumn.HeaderText = "Nazwisko";
-            dgvTextColumn.Name = "EmployeeSurname";
-            dgvTextColumn.DataPropertyName = "Surname";
-            dgvTextColumn.Width = 200;
-            dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvTextColumn.Visible = true;
-            detailDGV.Columns.Add(dgvTextColumn);
-
-            dgvTextColumn = new DataGridViewTextBoxColumn();
-            dgvTextColumn.HeaderText = "Imie";
-            dgvTextColumn.Name = "EmployeeName";
-            dgvTextColumn.DataPropertyName = "Name";
-            dgvTextColumn.Width = 200;
-            dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvTextColumn.Visible = true;
-            detailDGV.Columns.Add(dgvTextColumn);
-        }
-
-        #endregion
+        
 
         #region VacationPermission
 
@@ -730,8 +581,8 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
                     }
                 }
             }
-            employee.VacationDays.Add(new VacationDay { VacationDays = daysOfVacation });
-            _model.AddVacation(employee);
+            employee.VacationDays.Add(new VacationDays { Days = daysOfVacation });
+            //_model.AddVacation(employee);
         }
 
         private bool ValidApproveVacation(Employee employee, DateTime start, DateTime end)
@@ -1009,4 +860,5 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             }
         }
     }
+
 }
