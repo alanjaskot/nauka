@@ -293,7 +293,6 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
         {
             var newEmployee = new Employee();
             var view = new RegisterView();
-            
             view.SetObjectToEdit = newEmployee;
             if(view.DialogResult == DialogResult.OK)
             {
@@ -396,16 +395,16 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
         private void AddAbsence()
         {
-            Guid idEmployee = Guid.Parse(_view.dataGridViewAbsence[0, _view.dataGridViewAbsence.CurrentRow.Index].Value.ToString());
             var employee = new Employee();
             var view = new NewAbsenceView();
             view.SetObjectToEdit = employee;
-            if(view.DialogResult == DialogResult.OK)
+            view.Show();
+/*            if(view.DialogResult == DialogResult.OK)
             {
                 var employee2 = view.SetObjectToEdit;
                 int index = employee2.Vacation.Count - 1;
                 _model.AddVacation(employee2.Vacation[index]);
-            }
+            }*/
         }
 
         private void DeleteAbsence()
@@ -414,10 +413,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             Guid idVacation = Guid.Parse(_view.dataGridViewAbsence[7, _view.dataGridViewAbsence.CurrentRow.Index].Value.ToString());
 
             var employee = _model.GetEmployees().Where(e => e.Id == idEmployee).FirstOrDefault();
-            var vacation2 = employee.Vacation.Where(v => v.Id == idVacation).FirstOrDefault();
-
-            int employeeIndex = _model.GetEmployees().FindIndex(e => e.Id == idEmployee);
-            var vacation = _model.GetEmployees()[employeeIndex].Vacation.Where(v => v.Id == idVacation).FirstOrDefault();
+            var vacation = employee.Vacation.Where(v => v.Id == idVacation).FirstOrDefault();
 
             _model.DeleteVacation(vacation);
 

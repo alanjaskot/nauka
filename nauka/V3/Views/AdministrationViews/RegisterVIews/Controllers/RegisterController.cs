@@ -48,7 +48,9 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
 
             _view.Load += (object sender, EventArgs e) =>
             {
-                RefreshView();
+                if(_model.Employee != null)
+                    RefreshView();
+                
                 GetSex();
                 GetSections();
             };
