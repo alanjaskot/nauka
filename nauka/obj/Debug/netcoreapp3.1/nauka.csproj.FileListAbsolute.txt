@@ -119,7 +119,6 @@ D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.genruntimeconfig.cache
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.csproj.AssemblyReference.cache
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.UserViews.UserControls.LoginUC.resources
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.LoginRegisterViews.Views.LoginView.resources
-D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.UserViews.UserControls.DashboardUC.resources
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.AdminMainViews.Views.AdminMainView.resources
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.UsereControls.AdminLeftPanelMenuUC.resources
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.UsereControls.MenageSectionUC.resources
@@ -213,3 +212,4 @@ D:\nauka\nauka\nauka\nauka\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Micro
 D:\nauka\nauka\nauka\nauka\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 D:\nauka\nauka\nauka\nauka\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.csproj.CopyComplete
+D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.NewAbsenceViews.Views.NewAbsenceView.resources

@@ -25,6 +25,9 @@
     <Compile Update="V3\Views\AdministrationViews\AdminMainViews\Views\AdminMainView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="V3\Views\AdministrationViews\NewAbsenceViews\Views\NewAbsenceView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="V3\Views\AdministrationViews\RegisterVIews\Views\RegisterView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,9 +63,6 @@
     </Compile>
     <Compile Update="V3\Views\UserViews\MainViews\Views\MainView.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="V3\Views\UserViews\UserControls\DashboardUC.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="V3\Views\UserViews\UserControls\FirstViewUC.cs">
       <SubType>UserControl</SubType>

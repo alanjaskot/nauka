@@ -1,6 +1,7 @@
 ﻿using nauka.V3.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,27 +15,15 @@ namespace nauka.V3.Services
         public async Task<List<Vacation>> GetVacations()
         {
             if (_vacations == null)
-                await GenerateVacations();
+                await InitVacations();
 
-             return _vacations;
-
-            await Task.FromResult(_vacations);
+            return await Task.FromResult(_vacations);
         }
 
-        /*private async Task InitDemo()
-        {
-            if (_vacations == null)
-                GenerateVacations();
-
-            await Task.CompletedTask;
-        }*/
-
-        internal async Task GenerateVacations()
+        internal async Task InitVacations()
         {
             var result = default(List<Vacation>);
-            try
-            {
-                result = new List<Vacation>
+            result = new List<Vacation>
                 {
                     new Vacation()
                     {
@@ -45,14 +34,9 @@ namespace nauka.V3.Services
                         Approve = true
                     }
                 };
-                _vacations = result;
-            }
-            catch
-            {
-                throw;
-            }
-            await Task.CompletedTask;
+            _vacations = result;
 
+            await Task.CompletedTask;
         }
             
         internal void Add(Vacation vacation)
@@ -64,8 +48,9 @@ namespace nauka.V3.Services
 
         internal void Update(Vacation vacation)
         {
-            int vacationId = _vacations.FindIndex(v => v.Id == vacation.Id);
-            _vacations[vacationId] = vacation;
+            var vacationId = _vacations.Where(v => v.Id == vacation.Id).FirstOrDefault();
+            _vacations.Remove(vacationId);
+            _vacations.Add(vacation);
         }
 
         internal void Delete(Vacation vacation)

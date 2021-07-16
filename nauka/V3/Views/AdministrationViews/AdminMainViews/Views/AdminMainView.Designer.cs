@@ -50,7 +50,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.buttonDeleteAbsence = new System.Windows.Forms.Button();
             this.buttonAddAbsence = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridViewVacations = new System.Windows.Forms.DataGridView();
+            this.dataGridViewAbsence = new System.Windows.Forms.DataGridView();
             this.tabPageMenageVacApp = new System.Windows.Forms.TabPage();
             this.buttonMenageAppSection = new System.Windows.Forms.Button();
             this.comboBoxSectionVacApp = new System.Windows.Forms.ComboBox();
@@ -74,7 +74,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.tabPageEmployees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployees)).BeginInit();
             this.tabPageAbsence.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVacations)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAbsence)).BeginInit();
             this.tabPageMenageVacApp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVacApp)).BeginInit();
             this.tabPagePermisson.SuspendLayout();
@@ -273,7 +273,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.tabPageAbsence.Controls.Add(this.buttonDeleteAbsence);
             this.tabPageAbsence.Controls.Add(this.buttonAddAbsence);
             this.tabPageAbsence.Controls.Add(this.label1);
-            this.tabPageAbsence.Controls.Add(this.dataGridViewVacations);
+            this.tabPageAbsence.Controls.Add(this.dataGridViewAbsence);
             this.tabPageAbsence.Location = new System.Drawing.Point(4, 39);
             this.tabPageAbsence.Name = "tabPageAbsence";
             this.tabPageAbsence.Padding = new System.Windows.Forms.Padding(3);
@@ -331,15 +331,15 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.label1.TabIndex = 9;
             this.label1.Text = "Jednostki";
             // 
-            // dataGridViewVacations
+            // dataGridViewAbsence
             // 
-            this.dataGridViewVacations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewVacations.Location = new System.Drawing.Point(94, 88);
-            this.dataGridViewVacations.Name = "dataGridViewVacations";
-            this.dataGridViewVacations.RowHeadersWidth = 62;
-            this.dataGridViewVacations.RowTemplate.Height = 33;
-            this.dataGridViewVacations.Size = new System.Drawing.Size(1000, 625);
-            this.dataGridViewVacations.TabIndex = 8;
+            this.dataGridViewAbsence.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewAbsence.Location = new System.Drawing.Point(94, 88);
+            this.dataGridViewAbsence.Name = "dataGridViewAbsence";
+            this.dataGridViewAbsence.RowHeadersWidth = 62;
+            this.dataGridViewAbsence.RowTemplate.Height = 33;
+            this.dataGridViewAbsence.Size = new System.Drawing.Size(1000, 625);
+            this.dataGridViewAbsence.TabIndex = 8;
             // 
             // tabPageMenageVacApp
             // 
@@ -538,7 +538,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployees)).EndInit();
             this.tabPageAbsence.ResumeLayout(false);
             this.tabPageAbsence.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVacations)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAbsence)).EndInit();
             this.tabPageMenageVacApp.ResumeLayout(false);
             this.tabPageMenageVacApp.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVacApp)).EndInit();
@@ -573,7 +573,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
         protected internal System.Windows.Forms.Button buttonDeleteAbsence;
         protected internal System.Windows.Forms.Button buttonAddAbsence;
         protected internal System.Windows.Forms.Label label1;
-        protected internal System.Windows.Forms.DataGridView dataGridViewVacations;
+        protected internal System.Windows.Forms.DataGridView dataGridViewAbsence;
         protected internal System.Windows.Forms.Button buttonMenageAppSection;
         protected internal System.Windows.Forms.ComboBox comboBoxSectionVacApp;
         protected internal System.Windows.Forms.Button buttonMenageAppDenay;

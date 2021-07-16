@@ -53,9 +53,12 @@ namespace nauka.V3.Views.MainViews.Model
             
         }
 
+        #region Vacation
         internal void DeleteVacation(Vacation vacation)
         {
-            _employeeService.DeleteVacation(Employee, vacation);
+            _vacationService.Delete(vacation);
         }
+
+        #endregion
     }
 }

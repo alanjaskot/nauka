@@ -155,10 +155,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
             #endregion
 
-
-
-
-            #region Exit and logout
+            #region Exit and logout buttons
             _view.buttonExit.Click += (object sender, EventArgs e) => 
             {
                 var result = MessageBox.Show("Czy na pewno chcesz zamknąć program?", "Wyjście", MessageBoxButtons.YesNo);
@@ -179,7 +176,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
                 }
             };
 
-            #endregion
+            #endregion 
 
             await Task.CompletedTask;
         }
@@ -399,7 +396,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
         private void AddAbsence()
         {
-            Guid idEmployee = Guid.Parse(_view.dataGridViewVacations[0, _view.dataGridViewVacations.CurrentRow.Index].Value.ToString());
+            Guid idEmployee = Guid.Parse(_view.dataGridViewAbsence[0, _view.dataGridViewAbsence.CurrentRow.Index].Value.ToString());
             var employee = new Employee();
             var view = new NewAbsenceView();
             view.SetObjectToEdit = employee;
@@ -413,8 +410,11 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
         private void DeleteAbsence()
         {
-            Guid idEmployee = Guid.Parse(_view.dataGridViewVacations[0, _view.dataGridViewVacations.CurrentRow.Index].Value.ToString());
-            Guid idVacation = Guid.Parse(_view.dataGridViewVacations[7, _view.dataGridViewVacations.CurrentRow.Index].Value.ToString());
+            Guid idEmployee = Guid.Parse(_view.dataGridViewAbsence[0, _view.dataGridViewAbsence.CurrentRow.Index].Value.ToString());
+            Guid idVacation = Guid.Parse(_view.dataGridViewAbsence[7, _view.dataGridViewAbsence.CurrentRow.Index].Value.ToString());
+
+            var employee = _model.GetEmployees().Where(e => e.Id == idEmployee).FirstOrDefault();
+            var vacation2 = employee.Vacation.Where(v => v.Id == idVacation).FirstOrDefault();
 
             int employeeIndex = _model.GetEmployees().FindIndex(e => e.Id == idEmployee);
             var vacation = _model.GetEmployees()[employeeIndex].Vacation.Where(v => v.Id == idVacation).FirstOrDefault();
@@ -426,10 +426,10 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
         private void DisplayMenageAbsence()
         {
-            _view.dataGridViewVacations.Rows.Clear();
-            string today = DateTime.Now.ToString("yyyy");
+            _view.dataGridViewAbsence.Rows.Clear();
+           DateTime today = DateTime.Now;
             int i = 1;
-            var employeeList = _model.GetEmployees().Where(e => e.Section.Name == (string)_view.comboBoxSections.SelectedItem);
+            var employeeList = _model.GetEmployees().Where(e => e.Section.Name == (string)_view.comboBoxSectionAbsence.SelectedItem);
             if (employeeList != null)
             {
                 foreach (var itemEmployee in employeeList)
@@ -438,10 +438,9 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
                     {
                         foreach (var item in itemEmployee.Vacation)
                         {
-                            if ((item.Approve == true) && (item.Start.ToString("yyyy").Equals(today)
-                                || item.End.ToString("yyyy").Equals(today)))
+                            if ((item.Approve == true) && (item.End >= today))
                             {
-                                _view.dataGridViewVacations.Rows.Add(itemEmployee.Id, i, itemEmployee.Surname, itemEmployee.Name, 
+                                _view.dataGridViewAbsence.Rows.Add(itemEmployee.Id, i, itemEmployee.Surname, itemEmployee.Name, 
                                     item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"), item.Description, item.Id);
                                 i++;
                             }
@@ -454,7 +453,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
         private void CreateDataGridMenageAbsence()
         {
 
-            var detailDGV = _view.dataGridViewVacations;
+            var detailDGV = _view.dataGridViewAbsence;
 
             detailDGV.AllowUserToAddRows = false;
             detailDGV.AutoGenerateColumns = false;
@@ -537,6 +536,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             dgvTextColumn.Visible = false;
             detailDGV.Columns.Add(dgvTextColumn);
+
         }
 
         #endregion
@@ -562,12 +562,11 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             int employeeIndex = _model.GetEmployees().FindIndex(e => e.Id == idEmployee);
             var vacationDates = _model.GetEmployees()[employeeIndex].Vacation.Where(v => v.Id == idVacation).First();
 
-            var vacation = _model.GetVacations().Where(v => v.Id == idVacation).FirstOrDefault();
 
             if (ValidApproveVacation(_model.GetEmployees()[employeeIndex], vacationDates.Start, vacationDates.End))
             {
-                vacation.Approve = true;
-                _model.UpdateVacation(vacation);
+                vacationDates.Approve = true;
+                _model.UpdateVacation(vacationDates);
                 CountVacationDays(_model.GetEmployees()[employeeIndex], vacationDates.Start, vacationDates.End);
             }
             DisplayVacAppPermissons();

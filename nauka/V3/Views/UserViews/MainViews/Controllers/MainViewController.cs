@@ -329,8 +329,12 @@ namespace nauka.V3.Views.MainViews.Controller
         {
             var vacationStartToDelete = DateTime.Parse(_view.dataGridViewVacAppList.SelectedCells[2].Value.ToString());
             var vacationEndToDelete = DateTime.Parse(_view.dataGridViewVacAppList.SelectedCells[3].Value.ToString());
-            var vacation = _model.Employee.Vacation.Where(v => (v.Start == vacationStartToDelete) && (v.End == vacationEndToDelete)).ToArray();
-            _model.DeleteVacation(vacation[0]);
+
+            var vacation = _model.Employee.Vacation.Where
+                (v => (v.Start.ToString("dd.MM.yyyy") == vacationStartToDelete.ToString("dd.MM.yyyy")) 
+                && (v.End.ToString("dd.MM.yyyy") == vacationEndToDelete.ToString("dd.MM.yyyy"))).FirstOrDefault();
+            int a = 0;
+            _model.DeleteVacation(vacation);
             DisplayVacationApplications();
         }
 
