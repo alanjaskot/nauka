@@ -29,7 +29,7 @@ namespace nauka.V3.Services
             await Task.CompletedTask;
         }*/
 
-        private async Task GenerateVacations()
+        internal async Task GenerateVacations()
         {
             var result = default(List<Vacation>);
             try
@@ -62,9 +62,16 @@ namespace nauka.V3.Services
 
         }
 
+        internal void Update(Vacation vacation)
+        {
+            int vacationId = _vacations.FindIndex(v => v.Id == vacation.Id);
+            _vacations[vacationId] = vacation;
+        }
+
         internal void Delete(Vacation vacation)
         {
             _vacations.Remove(vacation);
         }
+
     }
 }

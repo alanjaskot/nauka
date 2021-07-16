@@ -1,6 +1,7 @@
 ﻿using nauka.V3.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,7 +37,15 @@ namespace nauka.V3.Services
             await Task.CompletedTask;
         }
 
-        internal async Task Remove(VacationDays vacationDays)
+        internal async Task Update(VacationDays vacationDays)
+        {
+            int vacationDaysId = _vacationDays.FindIndex(v => v.Id == vacationDays.Id);
+            _vacationDays[vacationDaysId] = vacationDays;
+
+            await Task.CompletedTask;
+        }
+
+        internal async Task Delete(VacationDays vacationDays)
         {
             _vacationDays.Remove(vacationDays);
 

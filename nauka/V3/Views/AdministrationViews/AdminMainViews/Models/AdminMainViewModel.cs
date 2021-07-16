@@ -13,6 +13,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
         private EmployeeService _employeeService;
         private SectionService _sectionService;
         private VacationService _vacationService;
+        private VacationDaysService _vacationDaysService;
 
         public Employee Employee { get; set; }
         public Section Section { get; set; }
@@ -22,6 +23,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
             _employeeService = ManageService.Employees;
             _sectionService = ManageService.Sections;
             _vacationService = ManageService.Vacations;
+            _vacationDaysService = ManageService.VacationDays;
         }
 
         #region Vacations
@@ -31,9 +33,28 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
             _vacationService.Add(vacation);
         }
 
+        internal void UpdateVacation(Vacation vacation)
+        {
+            _vacationService.Update(vacation);
+        }
+
         internal void DeleteVacation(Vacation vacation)
         {
             _vacationService.Delete(vacation);
+        }
+
+        public List<Vacation> GetVacations()
+        {
+            var result = default(List<Vacation>);
+            try
+            {
+                result = _vacationService.GetVacations().Result;
+            }
+            catch
+            {
+                throw;
+            }
+            return result;
         }
 
         #endregion
@@ -99,6 +120,17 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
         internal void DeleteEmployee(Employee employee)
         {
             _employeeService.Delete(employee);
+        }
+
+        #endregion
+
+        #region VacationDays
+
+        internal async Task DeleteVacationDay(VacationDays vacationDays)
+        {
+            await _vacationDaysService.Delete(vacationDays);
+
+            await Task.CompletedTask;
         }
 
         #endregion

@@ -52,7 +52,21 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewVacations = new System.Windows.Forms.DataGridView();
             this.tabPageMenageVacApp = new System.Windows.Forms.TabPage();
+            this.buttonMenageAppSection = new System.Windows.Forms.Button();
+            this.comboBoxSectionVacApp = new System.Windows.Forms.ComboBox();
+            this.buttonMenageAppDenay = new System.Windows.Forms.Button();
+            this.buttonMenageAppApprove = new System.Windows.Forms.Button();
+            this.labelVacationApplicationSections = new System.Windows.Forms.Label();
+            this.dataGridViewVacApp = new System.Windows.Forms.DataGridView();
             this.tabPagePermisson = new System.Windows.Forms.TabPage();
+            this.buttonChangePermisson = new System.Windows.Forms.Button();
+            this.buttonShowEmployeePermisson = new System.Windows.Forms.Button();
+            this.comboBoxSectionPermisson = new System.Windows.Forms.ComboBox();
+            this.checkBoxEmployee = new System.Windows.Forms.CheckBox();
+            this.checkBoxVacations = new System.Windows.Forms.CheckBox();
+            this.labelPermission = new System.Windows.Forms.Label();
+            this.labelSecionPermisson = new System.Windows.Forms.Label();
+            this.dataGridViewPermisson = new System.Windows.Forms.DataGridView();
             this.panelBottom.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.tabControlAdmin.SuspendLayout();
@@ -61,6 +75,10 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployees)).BeginInit();
             this.tabPageAbsence.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVacations)).BeginInit();
+            this.tabPageMenageVacApp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVacApp)).BeginInit();
+            this.tabPagePermisson.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPermisson)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLogout
@@ -325,6 +343,12 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             // 
             // tabPageMenageVacApp
             // 
+            this.tabPageMenageVacApp.Controls.Add(this.buttonMenageAppSection);
+            this.tabPageMenageVacApp.Controls.Add(this.comboBoxSectionVacApp);
+            this.tabPageMenageVacApp.Controls.Add(this.buttonMenageAppDenay);
+            this.tabPageMenageVacApp.Controls.Add(this.buttonMenageAppApprove);
+            this.tabPageMenageVacApp.Controls.Add(this.labelVacationApplicationSections);
+            this.tabPageMenageVacApp.Controls.Add(this.dataGridViewVacApp);
             this.tabPageMenageVacApp.Location = new System.Drawing.Point(4, 39);
             this.tabPageMenageVacApp.Name = "tabPageMenageVacApp";
             this.tabPageMenageVacApp.Padding = new System.Windows.Forms.Padding(3);
@@ -333,8 +357,78 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.tabPageMenageVacApp.Text = "Wnioski o urlop";
             this.tabPageMenageVacApp.UseVisualStyleBackColor = true;
             // 
+            // buttonMenageAppSection
+            // 
+            this.buttonMenageAppSection.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonMenageAppSection.Location = new System.Drawing.Point(1213, 57);
+            this.buttonMenageAppSection.Name = "buttonMenageAppSection";
+            this.buttonMenageAppSection.Size = new System.Drawing.Size(275, 56);
+            this.buttonMenageAppSection.TabIndex = 14;
+            this.buttonMenageAppSection.Text = "Wybierz dział";
+            this.buttonMenageAppSection.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxSectionVacApp
+            // 
+            this.comboBoxSectionVacApp.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxSectionVacApp.FormattingEnabled = true;
+            this.comboBoxSectionVacApp.Location = new System.Drawing.Point(207, 57);
+            this.comboBoxSectionVacApp.Name = "comboBoxSectionVacApp";
+            this.comboBoxSectionVacApp.Size = new System.Drawing.Size(349, 38);
+            this.comboBoxSectionVacApp.TabIndex = 13;
+            // 
+            // buttonMenageAppDenay
+            // 
+            this.buttonMenageAppDenay.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonMenageAppDenay.Location = new System.Drawing.Point(1213, 623);
+            this.buttonMenageAppDenay.Name = "buttonMenageAppDenay";
+            this.buttonMenageAppDenay.Size = new System.Drawing.Size(275, 56);
+            this.buttonMenageAppDenay.TabIndex = 12;
+            this.buttonMenageAppDenay.Text = "Odmowa";
+            this.buttonMenageAppDenay.UseVisualStyleBackColor = true;
+            // 
+            // buttonMenageAppApprove
+            // 
+            this.buttonMenageAppApprove.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonMenageAppApprove.Location = new System.Drawing.Point(1213, 475);
+            this.buttonMenageAppApprove.Name = "buttonMenageAppApprove";
+            this.buttonMenageAppApprove.Size = new System.Drawing.Size(275, 56);
+            this.buttonMenageAppApprove.TabIndex = 11;
+            this.buttonMenageAppApprove.Text = "Zgoda";
+            this.buttonMenageAppApprove.UseVisualStyleBackColor = true;
+            // 
+            // labelVacationApplicationSections
+            // 
+            this.labelVacationApplicationSections.AutoSize = true;
+            this.labelVacationApplicationSections.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelVacationApplicationSections.Location = new System.Drawing.Point(103, 60);
+            this.labelVacationApplicationSections.Name = "labelVacationApplicationSections";
+            this.labelVacationApplicationSections.Size = new System.Drawing.Size(96, 30);
+            this.labelVacationApplicationSections.TabIndex = 10;
+            this.labelVacationApplicationSections.Text = "Jednoski";
+            // 
+            // dataGridViewVacApp
+            // 
+            this.dataGridViewVacApp.AllowUserToAddRows = false;
+            this.dataGridViewVacApp.AllowUserToDeleteRows = false;
+            this.dataGridViewVacApp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewVacApp.Location = new System.Drawing.Point(103, 148);
+            this.dataGridViewVacApp.Name = "dataGridViewVacApp";
+            this.dataGridViewVacApp.ReadOnly = true;
+            this.dataGridViewVacApp.RowHeadersWidth = 62;
+            this.dataGridViewVacApp.RowTemplate.Height = 33;
+            this.dataGridViewVacApp.Size = new System.Drawing.Size(1000, 531);
+            this.dataGridViewVacApp.TabIndex = 9;
+            // 
             // tabPagePermisson
             // 
+            this.tabPagePermisson.Controls.Add(this.buttonChangePermisson);
+            this.tabPagePermisson.Controls.Add(this.buttonShowEmployeePermisson);
+            this.tabPagePermisson.Controls.Add(this.comboBoxSectionPermisson);
+            this.tabPagePermisson.Controls.Add(this.checkBoxEmployee);
+            this.tabPagePermisson.Controls.Add(this.checkBoxVacations);
+            this.tabPagePermisson.Controls.Add(this.labelPermission);
+            this.tabPagePermisson.Controls.Add(this.labelSecionPermisson);
+            this.tabPagePermisson.Controls.Add(this.dataGridViewPermisson);
             this.tabPagePermisson.Location = new System.Drawing.Point(4, 39);
             this.tabPagePermisson.Name = "tabPagePermisson";
             this.tabPagePermisson.Padding = new System.Windows.Forms.Padding(3);
@@ -342,6 +436,90 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.tabPagePermisson.TabIndex = 4;
             this.tabPagePermisson.Text = "Uprawnienia";
             this.tabPagePermisson.UseVisualStyleBackColor = true;
+            // 
+            // buttonChangePermisson
+            // 
+            this.buttonChangePermisson.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonChangePermisson.Location = new System.Drawing.Point(1226, 610);
+            this.buttonChangePermisson.Name = "buttonChangePermisson";
+            this.buttonChangePermisson.Size = new System.Drawing.Size(236, 66);
+            this.buttonChangePermisson.TabIndex = 17;
+            this.buttonChangePermisson.Text = "Zmień uprawnienia";
+            this.buttonChangePermisson.UseVisualStyleBackColor = true;
+            // 
+            // buttonShowEmployeePermisson
+            // 
+            this.buttonShowEmployeePermisson.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonShowEmployeePermisson.Location = new System.Drawing.Point(1226, 60);
+            this.buttonShowEmployeePermisson.Name = "buttonShowEmployeePermisson";
+            this.buttonShowEmployeePermisson.Size = new System.Drawing.Size(236, 66);
+            this.buttonShowEmployeePermisson.TabIndex = 16;
+            this.buttonShowEmployeePermisson.Text = "Pokaż pracowników";
+            this.buttonShowEmployeePermisson.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxSectionPermisson
+            // 
+            this.comboBoxSectionPermisson.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxSectionPermisson.FormattingEnabled = true;
+            this.comboBoxSectionPermisson.Location = new System.Drawing.Point(307, 60);
+            this.comboBoxSectionPermisson.Name = "comboBoxSectionPermisson";
+            this.comboBoxSectionPermisson.Size = new System.Drawing.Size(349, 38);
+            this.comboBoxSectionPermisson.TabIndex = 15;
+            // 
+            // checkBoxEmployee
+            // 
+            this.checkBoxEmployee.AutoSize = true;
+            this.checkBoxEmployee.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.checkBoxEmployee.Location = new System.Drawing.Point(1249, 451);
+            this.checkBoxEmployee.Name = "checkBoxEmployee";
+            this.checkBoxEmployee.Size = new System.Drawing.Size(180, 36);
+            this.checkBoxEmployee.TabIndex = 14;
+            this.checkBoxEmployee.Text = "   pracownicy";
+            this.checkBoxEmployee.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxVacations
+            // 
+            this.checkBoxVacations.AutoSize = true;
+            this.checkBoxVacations.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.checkBoxVacations.Location = new System.Drawing.Point(1249, 339);
+            this.checkBoxVacations.Name = "checkBoxVacations";
+            this.checkBoxVacations.Size = new System.Drawing.Size(144, 36);
+            this.checkBoxVacations.TabIndex = 13;
+            this.checkBoxVacations.Text = "   wakacje";
+            this.checkBoxVacations.UseVisualStyleBackColor = true;
+            // 
+            // labelPermission
+            // 
+            this.labelPermission.AutoSize = true;
+            this.labelPermission.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelPermission.Location = new System.Drawing.Point(1249, 223);
+            this.labelPermission.Name = "labelPermission";
+            this.labelPermission.Size = new System.Drawing.Size(213, 32);
+            this.labelPermission.TabIndex = 12;
+            this.labelPermission.Text = "Nadaj uprawnienia";
+            // 
+            // labelSecionPermisson
+            // 
+            this.labelSecionPermisson.AutoSize = true;
+            this.labelSecionPermisson.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelSecionPermisson.Location = new System.Drawing.Point(128, 60);
+            this.labelSecionPermisson.Name = "labelSecionPermisson";
+            this.labelSecionPermisson.Size = new System.Drawing.Size(103, 30);
+            this.labelSecionPermisson.TabIndex = 11;
+            this.labelSecionPermisson.Text = "Jednostki";
+            // 
+            // dataGridViewPermisson
+            // 
+            this.dataGridViewPermisson.AllowUserToAddRows = false;
+            this.dataGridViewPermisson.AllowUserToDeleteRows = false;
+            this.dataGridViewPermisson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPermisson.Location = new System.Drawing.Point(307, 146);
+            this.dataGridViewPermisson.Name = "dataGridViewPermisson";
+            this.dataGridViewPermisson.ReadOnly = true;
+            this.dataGridViewPermisson.RowHeadersWidth = 62;
+            this.dataGridViewPermisson.RowTemplate.Height = 33;
+            this.dataGridViewPermisson.Size = new System.Drawing.Size(850, 530);
+            this.dataGridViewPermisson.TabIndex = 10;
             // 
             // AdminMainView
             // 
@@ -361,6 +539,12 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.tabPageAbsence.ResumeLayout(false);
             this.tabPageAbsence.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVacations)).EndInit();
+            this.tabPageMenageVacApp.ResumeLayout(false);
+            this.tabPageMenageVacApp.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVacApp)).EndInit();
+            this.tabPagePermisson.ResumeLayout(false);
+            this.tabPagePermisson.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPermisson)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -390,5 +574,19 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
         protected internal System.Windows.Forms.Button buttonAddAbsence;
         protected internal System.Windows.Forms.Label label1;
         protected internal System.Windows.Forms.DataGridView dataGridViewVacations;
+        protected internal System.Windows.Forms.Button buttonMenageAppSection;
+        protected internal System.Windows.Forms.ComboBox comboBoxSectionVacApp;
+        protected internal System.Windows.Forms.Button buttonMenageAppDenay;
+        protected internal System.Windows.Forms.Button buttonMenageAppApprove;
+        protected internal System.Windows.Forms.Label labelVacationApplicationSections;
+        protected internal System.Windows.Forms.DataGridView dataGridViewVacApp;
+        protected internal System.Windows.Forms.Button buttonChangePermisson;
+        protected internal System.Windows.Forms.Button buttonShowEmployeePermisson;
+        protected internal System.Windows.Forms.ComboBox comboBoxSectionPermisson;
+        protected internal System.Windows.Forms.CheckBox checkBoxEmployee;
+        protected internal System.Windows.Forms.CheckBox checkBoxVacations;
+        private System.Windows.Forms.Label labelPermission;
+        private System.Windows.Forms.Label labelSecionPermisson;
+        protected internal System.Windows.Forms.DataGridView dataGridViewPermisson;
     }
 }

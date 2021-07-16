@@ -1,6 +1,7 @@
 ﻿using nauka.V3.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,7 +48,8 @@ namespace nauka.V3.Services
 
         public void Update(Section section)
         {
-
+            int sectionId = _sections.FindIndex(s => s.Id == section.Id);
+            _sections[sectionId] = section;
         }
 
         public void Delete (Section section)
