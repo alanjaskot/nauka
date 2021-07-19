@@ -28,22 +28,22 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
 
         #region Vacations
 
-        internal void AddVacation(Vacation vacation)
+        internal async Task AddVacation(Vacation vacation)
         {
-            _vacationService.Add(vacation);
+            await _vacationService.Add(vacation);
         }
 
-        internal void UpdateVacation(Vacation vacation)
+        internal async Task UpdateVacation(Vacation vacation)
         {
-            _vacationService.Update(vacation);
+            await _vacationService.Update(vacation);
         }
 
-        internal void DeleteVacation(Vacation vacation)
+        internal async Task DeleteVacation(Vacation vacation)
         {
-            _vacationService.Delete(vacation);
+            await _vacationService.Delete(vacation);
         }
 
-        public List<Vacation> GetVacations()
+        public async Task<List<Vacation>> GetVacations()
         {
             var result = default(List<Vacation>);
             try
@@ -54,29 +54,29 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
             {
                 throw;
             }
-            return result;
+            return await Task.FromResult(result);
         }
 
         #endregion
 
         #region sections
 
-        internal void AddSection(Section section)
+        internal async Task AddSection(Section section)
         {
-            _sectionService.Add(Section);
+            await _sectionService.Add(Section);
         }
 
-        internal void UpdateSection(Section section)
+        internal async Task UpdateSection(Section section)
         {
-            _sectionService.Update(section);
+            await _sectionService.Update(section);
         }
 
-        internal void DeleteSection(Section section)
+        internal async Task DeleteSection(Section section)
         {
-            _sectionService.Delete(Section);
+            await _sectionService.Delete(Section);
         }
         
-        internal List<Section> GetSections()
+        internal async Task<List<Section>> GetSections()
         {
             var result = default(List<Section>);
             try
@@ -87,13 +87,13 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
             {
                 throw;
             }
-            return result;
+            return await Task.FromResult(result);
         }
         #endregion
 
         #region Employees
 
-        internal List<Employee> GetEmployees()
+        internal async Task<List<Employee>> GetEmployees()
         {
             var result = default(List<Employee>);
             try
@@ -104,22 +104,22 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
             {
                 throw;
             }
-            return result;
+            return await Task.FromResult(result);
         }
 
-        internal void AddEmployee(Employee employee)
+        internal async Task AddEmployee(Employee employee)
         {
-            _employeeService.Add(employee);
+            await _employeeService.Add(employee);
         }
 
-        internal void UpdateEmployee(Employee employee)
+        internal async Task UpdateEmployee(Employee employee)
         {
-            _employeeService.Update(employee);
+            await _employeeService.Update(employee);
         }
 
-        internal void DeleteEmployee(Employee employee)
+        internal async Task DeleteEmployee(Employee employee)
         {
-            _employeeService.Delete(employee);
+            await _employeeService.Delete(employee);
         }
 
         #endregion
@@ -129,8 +129,16 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
         internal async Task DeleteVacationDay(VacationDays vacationDays)
         {
             await _vacationDaysService.Delete(vacationDays);
+        }
 
-            await Task.CompletedTask;
+        internal async Task AddVacationDays(VacationDays vacationDays)
+        {
+            await _vacationDaysService.Add(vacationDays);
+        }
+
+        internal async Task UpdateVacationDays(VacationDays vacationDays)
+        {
+            await _vacationDaysService.Update(vacationDays);
         }
 
         #endregion

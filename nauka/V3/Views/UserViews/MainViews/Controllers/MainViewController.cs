@@ -12,11 +12,10 @@ using System.Windows.Forms;
 
 namespace nauka.V3.Views.MainViews.Controller
 {
-    class MainViewController
+    public class MainViewController
     {
         private readonly MainView _view;
         private MainViewModel _model;
-        
 
         public MainViewController(MainView view)
         {
@@ -33,9 +32,6 @@ namespace nauka.V3.Views.MainViews.Controller
         private async Task InitView()
         {
             await InitGridView();
-            await ShowFirstView();
-
-            //wyswietlanie danych po inicjalizacji ObjectSetToEdit
 
             #region VacationApplication buttons
 
@@ -152,24 +148,62 @@ namespace nauka.V3.Views.MainViews.Controller
 
                 _view.labelEmailEmployee.Text = _model.Employee.Email;
                 _view.labelSectionEmployee.Text = _model.Employee.Section.Name;
-                _view.labelFreeDays.Text = CountFreeDays().ToString();
+                _view.labelFreeDays.Text = CountCurrentFreeDays().ToString();
+                _view.labelLastYearFreeDays.Text = CountLastYearFreeDays().ToString();
             }
 
         }
 
-        private long CountFreeDays()
+        private byte CountLastYearFreeDays()
         {
-            DateTime currentYear = DateTime.Now;
-            var currentDaysFree = _model.Employee.AppSettings.Where(ap => ap.Year.ToString("yyyy") == currentYear.ToString("yyyy")).FirstOrDefault();
-            byte thisYearDaysFree = currentDaysFree.AvaibleVacationDays;
-
-            long usedDays = 0;
-            foreach (var item in _model.Employee.VacationDays)
+            byte result = 0;
+            DateTime lastYear = DateTime.Now;
+            lastYear.AddYears(-1);
+            byte daysToUse = _model.Employee.AppSettings.AvaibleVacationDays;
+            byte usedDays = 0;
+            if(daysToUse > 0)
             {
-                usedDays += item.Days;
+                foreach (var item in _model.Employee.VacationDaysId)
+                {
+                    foreach (var it in _model.GetVacationDays())
+                    {
+                        if (it.Year.ToString("yyyy").Equals(lastYear.ToString("yyyy")))
+                        {
+                            if (item == it.Id)
+                                usedDays += (byte)it.Days;
+                        }
+                    }
+                }
+                result = (byte)(daysToUse - usedDays);
             }
 
-            return thisYearDaysFree - usedDays;
+            return result;
+            
+        }
+
+        private byte CountCurrentFreeDays()
+        {
+            byte result = 0;
+            string currentYear = DateTime.Now.ToString("yyyy");
+            byte daysToUse = _model.Employee.AppSettings.AvaibleVacationDays;
+            byte usedDays = 0;
+            if(daysToUse > 0)
+            {
+                foreach (var item in _model.Employee.VacationDaysId)
+                {
+                    foreach (var it in _model.GetVacationDays())
+                    {
+                        if (it.Year.ToString("yyyy").Equals(currentYear))
+                        {
+                            if (item == it.Id)
+                                usedDays += (byte)it.Days;
+                        }
+                    }
+                }
+
+                result = (byte)(daysToUse - usedDays);
+            }
+            return result;
         }
 
         #endregion
@@ -180,16 +214,20 @@ namespace nauka.V3.Views.MainViews.Controller
         {
             _view.dataGridViewVacations.Rows.Clear();
             int i = 1;
-            var vacationApplications = _model.Employee.Vacation;
+            var vacationApplications = _model.GetVacations();
             if (vacationApplications != null)
             {
                 foreach (var item in vacationApplications)
                 {
-                    if (item.Approve == true)
+                    foreach(var it in _model.Employee.VacationId)
+                    if(item.Id == it)
                     {
-                        _view.dataGridViewVacations.Rows.Add(item.Id, i, item.Description,
-                            item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"));
-                        i++;
+                         if (item.Approve == true)
+                         {
+                                _view.dataGridViewVacations.Rows.Add(item.Id, i, item.Description,
+                                item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"));
+                                i++;
+                         }
                     }
                 }
             }
@@ -311,13 +349,23 @@ namespace nauka.V3.Views.MainViews.Controller
             dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             dgvTextColumn.Visible = true;
             detailDGV.Columns.Add(dgvTextColumn);
+
+            dgvTextColumn = new DataGridViewTextBoxColumn();
+            dgvTextColumn.HeaderText = "Id";
+            dgvTextColumn.Name = "Id";
+            dgvTextColumn.DataPropertyName = "Id";
+            dgvTextColumn.Width = 140;
+            dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dgvTextColumn.Visible = false;
+            detailDGV.Columns.Add(dgvTextColumn);
         }
 
         private void AddVacationApplication()
         {
-            var vacationApplcation = _model.Employee;
+            var vacationApplcation = new Vacation();
             var view = new VacationApplicationView();
             view.SetObjectToEdit = vacationApplcation;
+            view.SetEmployee = _model.Employee;
             if (view.ShowDialog() == DialogResult.OK)
             {
 
@@ -327,14 +375,12 @@ namespace nauka.V3.Views.MainViews.Controller
 
         private void DeleteVacationApplication()
         {
-            var vacationStartToDelete = DateTime.Parse(_view.dataGridViewVacAppList.SelectedCells[2].Value.ToString());
-            var vacationEndToDelete = DateTime.Parse(_view.dataGridViewVacAppList.SelectedCells[3].Value.ToString());
+            Guid vacationID = Guid.Parse(_view.dataGridViewVacAppList.SelectedCells[4].Value.ToString());
 
-            var vacation = _model.Employee.Vacation.Where
-                (v => (v.Start.ToString("dd.MM.yyyy") == vacationStartToDelete.ToString("dd.MM.yyyy")) 
-                && (v.End.ToString("dd.MM.yyyy") == vacationEndToDelete.ToString("dd.MM.yyyy"))).FirstOrDefault();
-            int a = 0;
+            var vacation = _model.GetVacations().Where(v => v.Id == vacationID).FirstOrDefault();
             _model.DeleteVacation(vacation);
+            _model.Employee.VacationId.Remove(vacationID);
+            _model.UpdateEmployee(_model.Employee);
             DisplayVacationApplications();
         }
 
@@ -342,7 +388,7 @@ namespace nauka.V3.Views.MainViews.Controller
         {
             _view.dataGridViewVacAppList.Rows.Clear();
             int i = 1;
-            var vacationApplications = _model.Employee.Vacation;
+            var vacationApplications = _model.GetVacations();
             if(vacationApplications != null)
             {
                 foreach (var item in vacationApplications)
@@ -350,7 +396,7 @@ namespace nauka.V3.Views.MainViews.Controller
                     if (item.Approve == false)
                     {
                         _view.dataGridViewVacAppList.Rows.Add(i, item.Description, 
-                            item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"));
+                            item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"), item.Id);
                         i++;
                     }
                 }

@@ -23,7 +23,19 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Views
             _controller = new VacationApplicationController(this);
         }
 
-        public Employee SetObjectToEdit
+        public Vacation SetObjectToEdit
+        {
+            get
+            {
+                return _controller.SetVacation;
+            }
+            set
+            {
+                _controller.SetVacation = value;
+            }
+        }
+
+        public Employee SetEmployee
         {
             get
             {

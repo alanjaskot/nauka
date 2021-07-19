@@ -41,20 +41,25 @@ namespace nauka.V3.Services
             await Task.CompletedTask;
         }
 
-        public void Add(Section section)
+        public async Task Add(Section section)
         {
             _sections.Add(section);
+
+            await Task.CompletedTask;
         }
 
-        public void Update(Section section)
+        public async Task Update(Section section)
         {
             int sectionId = _sections.FindIndex(s => s.Id == section.Id);
             _sections[sectionId] = section;
+
+            await Task.CompletedTask;
         }
 
-        public void Delete (Section section)
+        public async Task Delete (Section section)
         {
             _sections.Remove(section);
+            await Task.CompletedTask;
         }
     }
 }

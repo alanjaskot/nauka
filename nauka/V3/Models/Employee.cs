@@ -46,11 +46,12 @@ namespace nauka.V3.Models
         public Section Section { get; set; }
         
         [Required]
-        public List<Vacation> Vacation { get; set; }
+        public List<Guid> VacationId { get; set; }
         
-        public List<VacationDays> VacationDays { get; set; }
+        public List<Guid> VacationDaysId { get; set; }
         
-        public List<AppSettings> AppSettings { get; set; }
+        [Required]
+        public AppSettings AppSettings { get; set; }
 
 
     }

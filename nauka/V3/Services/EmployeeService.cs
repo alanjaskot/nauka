@@ -16,14 +16,6 @@ namespace nauka.V3.Services
 
         public EmployeeService() { }
 
-        public async Task<List<Employee>> GetEmployees()
-        {
-            if(_employees == null)
-                await InitDemos();
-
-            return _employees;
-        }
-
         private async Task InitDemos()
         {
             if(_employees == null)
@@ -63,9 +55,9 @@ namespace nauka.V3.Services
                         Section = _sections.Where(s => s.Name == "HR").FirstOrDefault(),
                         EmployeePermisson = true,
                         VacationPermisson = true,
-                        Vacation = _vacations,
-                        AppSettings = new List<AppSettings> { new AppSettings { AvaibleVacationDays = 24, Year = DateTime.Today } },
-                        VacationDays = new List<VacationDays> { new VacationDays { Days = 0 } }
+                        VacationId = new List<Guid> { },
+                        AppSettings = new AppSettings{ AvaibleVacationDays =24 },
+                        VacationDaysId = new List<Guid> { },
                     },
                     new Employee
                     {
@@ -79,26 +71,11 @@ namespace nauka.V3.Services
                         Section = _sections.Where(s => s.Name == "HR").FirstOrDefault(),
                         EmployeePermisson = true,
                         VacationPermisson = false,
-                        Vacation = new List<Vacation>(),
-                        AppSettings = new List<AppSettings> { new AppSettings { AvaibleVacationDays = 24, Year = DateTime.Today } },
-                        VacationDays = new List<VacationDays> { new VacationDays { Days = 0 } }
+                        VacationId = new List<Guid>(),
+                        AppSettings = new AppSettings { AvaibleVacationDays = 20 },
+                        VacationDaysId = new List<Guid> {}
                     },
-                    new Employee
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = "Jaś",
-                        Surname = "Kapela",
-                        Username = "jkapela",
-                        Password = "321",
-                        Email = "j.kapela@aa.a",
-                        Sex = 'M',
-                        Section = _sections.Where(s => s.Name == "IT").FirstOrDefault(),
-                        EmployeePermisson = false,
-                        VacationPermisson = false,
-                        Vacation = new List<Vacation>(),
-                        AppSettings = new List<AppSettings> { new AppSettings { AvaibleVacationDays = 24, Year = DateTime.Today } },
-                        VacationDays = new List<VacationDays> { new VacationDays { Days = 0 } }
-                    }
+
                 };
                 result = employees;
             }
@@ -133,31 +110,31 @@ namespace nauka.V3.Services
             await Task.CompletedTask;
         }
 
-        public List<Vacation> GetVacations()
-        {
-            return _vacations;
-            //await Task.CompletedTask;
-        }
-
-        public void Add(Employee employee)
+        public async Task Add(Employee employee)
         {
             _employees.Add(employee);
+            await Task.CompletedTask;
         }
 
-        public void Update(Employee employee)
+        public async Task Update(Employee employee)
         {
             int index = _employees.FindIndex(e => e.Id == employee.Id);
             _employees[index] = employee;
+            await Task.CompletedTask;
         }
 
-        public void Delete(Employee employee)
+        public async Task Delete(Employee employee)
         {
-            _employees.Remove(employee);
+            _employees.Remove(employee);         
+            await Task.CompletedTask;
         }
 
-        public void DeleteVacation(Employee employee, Vacation vacation)
+        public async Task<List<Employee>> GetEmployees()
         {
-            employee.Vacation.Remove(vacation);
+            if (_employees == null)
+                await InitDemos();
+
+            return _employees;
         }
     }
 }

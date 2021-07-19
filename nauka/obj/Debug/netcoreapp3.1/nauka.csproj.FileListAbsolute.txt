@@ -120,13 +120,7 @@ D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.csproj.AssemblyReferenc
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.UserViews.UserControls.LoginUC.resources
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.LoginRegisterViews.Views.LoginView.resources
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.AdminMainViews.Views.AdminMainView.resources
-D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.UsereControls.AdminLeftPanelMenuUC.resources
-D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.UsereControls.MenageSectionUC.resources
-D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.UsereControls.EmployeesUC.resources
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.RegisterVIews.Views.RegisterView.resources
-D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.UsereControls.PermissionUC.resources
-D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.UsereControls.MenageVacationsUC.resources
-D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.UsereControls.VacationPermissionUC.resources
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.SectionViews.SectionViews.SectionView.resources
 E:\dev\nauka\nauka\bin\Debug\netcoreapp3.1\nauka.exe
 E:\dev\nauka\nauka\bin\Debug\netcoreapp3.1\nauka.deps.json
@@ -171,7 +165,6 @@ E:\dev\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.pdb
 E:\dev\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.genruntimeconfig.cache
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.UserViews.VacationApplicationViews.Views.VacationApplicationView.resources
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.UserViews.UserControls.FirstViewUC.resources
-D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.UserControls.NewAbsenceUC.resources
 D:\nauka\nauka\nauka\nauka\bin\Debug\netcoreapp3.1\Humanizer.dll
 D:\nauka\nauka\nauka\nauka\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 D:\nauka\nauka\nauka\nauka\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll

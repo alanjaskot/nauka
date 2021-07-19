@@ -9,29 +9,32 @@ namespace nauka.V3.Services
 {
     public class VacationDaysService
     {
-        public VacationDays VacationDay { get; set; }
-
         private List<VacationDays> _vacationDays;
+
+        public VacationDaysService()
+        {
+            _vacationDays = new List<VacationDays>();
+        }
 
         public async Task<List<VacationDays>> GetVacationDays()
         {
             if (_vacationDays == null)
                 await GenerateVacationDays();
 
-            return _vacationDays;
-
-            await Task.CompletedTask;
+            return await Task.FromResult(_vacationDays);
         }
             
         private async Task GenerateVacationDays()
         {
-            _vacationDays = new List<VacationDays>();
+            _vacationDays = default(List<VacationDays>);
 
             await Task.CompletedTask;
         }
 
         internal async Task Add(VacationDays vacationDays)
         {
+            if (_vacationDays == null)
+                _vacationDays = new List<VacationDays>();
             _vacationDays.Add(vacationDays);
 
             await Task.CompletedTask;

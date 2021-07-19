@@ -9,19 +9,22 @@ namespace nauka.V3.Views.MainViews.Model
 {
     public class MainViewModel
     {
+        public Employee Employee { get; set; }
+        public Vacation Vacation { get; set; }
+        public VacationDays VacationDays { get; set; }
+
         private EmployeeService _employeeService;
         private SectionService _sectionService;
         private VacationService _vacationService;
-
+        private VacationDaysService _vacationDayService;
 
         public MainViewModel()
         {
             _employeeService = ManageService.Employees;
             _sectionService = ManageService.Sections;
             _vacationService = ManageService.Vacations;
+            _vacationDayService = ManageService.VacationDays;
         }
-
-        public Employee Employee { get; set; }
 
         internal List<Section> GetSections()
         {
@@ -37,12 +40,28 @@ namespace nauka.V3.Views.MainViews.Model
             return result;
         }
 
+        internal List<VacationDays> GetVacationDays()
+        {
+            var result = default(List<VacationDays>);
+            try
+            {
+                result = _vacationDayService.GetVacationDays().Result;
+            }
+            catch
+            {
+                throw;
+            }
+            return result;
+        }
+
+        #region Vacation
+
         internal List<Vacation> GetVacations()
         {
             var result = default(List<Vacation>);
             try
             {
-                result = _employeeService.GetVacations();
+                result = _vacationService.GetVacations().Result;
             }
             catch
             {
@@ -50,15 +69,19 @@ namespace nauka.V3.Views.MainViews.Model
             }
 
             return result;
-            
         }
 
-        #region Vacation
         internal void DeleteVacation(Vacation vacation)
         {
             _vacationService.Delete(vacation);
         }
 
         #endregion
+
+        internal void UpdateEmployee(Employee employee)
+        {
+            _employeeService.Update(employee);
+        }
+
     }
 }

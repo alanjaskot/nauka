@@ -19,20 +19,52 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
         {
             _view = registerView;
 
+            // tu robisz osobny watek 
+            // robisz go asychrnonicze
+            // musiz poczekac az sie zrobi czyli na konwu .Wait
+            // jaktego nie ma to wotek startuje i sobie sam mysli 
+            // ale ty chcesz tego uzyc wczesniej niz wotek to zrobil :) 
+
+            //ok, czyli musi byc wait, zeby skonczyly sie ladowac watki?
+            // to zalezy, w tym przyadku tak, bo on musi zrobic to co robi, 
+            // ale niekiedy  w asysnc await mielisz dane, wtedy gui zyje, a dane sie miela, wtedy nie ma wait
+            // zalezy od konkrentego przypadku
+            // tu robilesz obiekt ktory dalej byl potrzebny i trzeba czekac 
+
+            //ok, jak ponaprawiam, co trzeba i bedzie dobrze dzialac, to podpiac wszystko do bazy danych?
+            // no mozesz zrobic, a robisz przez ef core czy reczenie 
+            //chcialem prze ef core
+            // ok, zrob, zoabczymy co wyjdzie 
+            // popracuje jeszcze nad gui 
+            // bo malo czytalene, bardzo skupione to jest 
+            // masz caly erran :) 
+            //ok powieksze wszystko i rozloze bardziej na caly ekran :)
+
+            // moze nie byc caly ekran ale wieksze, ty masz inne perspektywe bo masz za duzy tv :) 
+            // popracuj z dokowanie, do lwej pracwej, tak ze zwiekszasz okno i to sie skaluje,
+            // albo daj panel i na panu ukladaj 
+            // a panel zawsze na stroku ekranyu czyli formy 
+            // ok :). Narazie to jest wsadzone w te kilka paneli i na glownym robie, ale pozmieniam to w takim razie
+
+            // musisz pamietac ze mozesz miec kilka apek, i jak wrocisz do tego za pol roku to musisz wiedziec jak to jest zrobione 
+             // ;) 
+             //ok :)
             Task.Run(async () =>
             {
                 await InitViewModel();
                 await InitView();
-            });
+            }).Wait();
         }
 
         private async Task InitView()
         {
             _view.buttonOk.Click += (object sender, EventArgs e) =>
-            {              
+            {
+                RefreshView();
+                RefreshModel();
                 if (Validate())
                 {
-                    RefreshModel();
+                    
                     _view.DialogResult = DialogResult.OK;
                     _view.Close();
                 }
@@ -42,8 +74,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
 
             _view.buttonCancel.Click += (object sender, EventArgs e) =>
             {
-                if(_view.DialogResult == DialogResult.Cancel)
-                    _view.Close();
+                _view.Close();
             };
 
             _view.Load += (object sender, EventArgs e) =>
@@ -60,10 +91,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
 
         private async Task InitViewModel()
         {
-            if (_model == null)
-            {
-                _model = new RegisterModel();
-            }
+            _model = new RegisterModel();
 
             await Task.CompletedTask;
         }
@@ -79,8 +107,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
                 _view.textBoxUsername.Text = _model.Employee.Username;
                 _view.textBoxPassword.Text = _model.Employee.Password;
                 _view.textBoxEmail.Text = _model.Employee.Email;
-                var appsetting = _model.Employee.AppSettings.Where(ap => ap.Year.ToString("yyyy").Equals(DateTime.Now.ToString("yyyy"))).FirstOrDefault();
-                _view.textBoxAppSetting.Text = appsetting.AvaibleVacationDays.ToString();
+                _view.textBoxAppSetting.Text = _model.Employee.AppSettings.AvaibleVacationDays.ToString();
                 if (_model.Employee.Sex == 'M')
                     _view.comboBoxSex.SelectedIndex = 1;
                 if (_model.Employee.Sex == 'K')
@@ -88,21 +115,31 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
 
                 _view.comboBoxSection.SelectedItem = _model.Employee.Section.Name;
             }
-
         }
 
         private void RefreshModel()
         {
-            var employee = new Employee();
-
-            var vacation = employee.AppSettings.Where(a => a.Year.ToString("yyyy") == (DateTime.Now.ToString("yyyy")));
-
+            GetSex();
+            GetSections();
             _model.Employee.Name = _view.textBoxName.Text;
             _model.Employee.Surname = _view.textBoxSurname.Text;
             _model.Employee.Username = _view.textBoxUsername.Text;
             _model.Employee.Password = _view.textBoxPassword.Text;
             _model.Employee.Email = _view.textBoxEmail.Text;
-            _model.Employee.AppSettings.Add( new AppSettings { AvaibleVacationDays = byte.Parse(_view.textBoxAppSetting.Text), Year = DateTime.Now });
+            if (_model.Employee.AppSettings == null)
+                _model.Employee.AppSettings = new AppSettings { AvaibleVacationDays = byte.Parse(_view.textBoxAppSetting.Text) };
+            else
+            {
+                try
+                {
+                    _model.Employee.AppSettings.AvaibleVacationDays = byte.Parse(_view.textBoxAppSetting.Text);
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+                
             _model.Employee.EmployeePermisson = false;
             _model.Employee.VacationPermisson = false;
             if (_view.comboBoxSex.SelectedIndex == 1)
@@ -113,8 +150,11 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
             var sectionList = _model.GetSections();
             var selectedSection = sectionList.Where(s => s.Name == (string)_view.comboBoxSection.SelectedItem).FirstOrDefault();
             _model.Employee.Section = selectedSection;
-            _model.Employee.Vacation = new List<Vacation>();
-            _model.Employee.VacationDays = new List<VacationDays>();          
+            if(_model.Employee.VacationId == null)
+                _model.Employee.VacationId = new List<Guid>();
+
+            if(_model.Employee.VacationDaysId == null)
+                _model.Employee.VacationDaysId = new List<Guid>();          
         }
 
         private void GetSex()
@@ -137,17 +177,15 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
         private bool Validate()
         {
             var result = true;
-            if ((_view.textBoxName == null) || (_view.textBoxSurname == null)
-                || (_view.textBoxUsername == null) || (_view.textBoxPassword == null)
-                || (_view.textBoxEmail == null) || (_view.comboBoxSection.SelectedItem == null)
-                || (_view.comboBoxSex.SelectedItem == null) || (_view.textBoxAppSetting == null))              
+            if ((_view.textBoxName.Text == null) || (_view.textBoxSurname.Text == null)
+                || (_view.textBoxUsername.Text == null) || (_view.textBoxPassword.Text == null)
+                || (_view.textBoxEmail == null) || (_view.textBoxAppSetting.Text == null))              
             {
                 result = false;
             }
 
             return result;
         }
-
 
         public Employee SetEmployee
         {
@@ -160,6 +198,5 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
                 _model.Employee = value;
             }
         }
-
     }
 }

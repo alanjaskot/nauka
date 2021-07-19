@@ -23,39 +23,51 @@ namespace nauka.V3.Services
         internal async Task InitVacations()
         {
             var result = default(List<Vacation>);
-            result = new List<Vacation>
-                {
-                    new Vacation()
-                    {
-                        Id = Guid.NewGuid(),
-                        Start = DateTime.Parse("01.08.2021"),
-                        End = DateTime.Parse("10.08.2021"),
-                        Description = "wypoczynkowy",
-                        Approve = true
-                    }
-                };
+            result = new List<Vacation>{};
             _vacations = result;
 
             await Task.CompletedTask;
         }
             
-        internal void Add(Vacation vacation)
+        internal async Task Add(Vacation vacation)
         {
-            if (_vacations != null)
-                _vacations.Add(vacation);
+            //  aczemu nie zadziaalo oddanie 
+            // robisz juz update 
+            // a gdzie dodanie 
+            // problemem jest na pacztek ze nie dodaje sie add 
+            // gdzie to oddajesz
+            //moj blad, ja przypisuje odrazu wakacje do pracownika przy dodawaniu
+            // czyli bledna logica 
+            //  masz dodac wakacje 
+            // i id wakacje dodac do pracowanika 
+            // ?? 
+            //ok, juz rozumiem to juz wiem co trzeba zrobic, moge jeszcze pokazac druga rzecz?
+            // ok pokaz
 
-        }
+            if (_vacations == null)
+                Task.Run(async () =>
+                {
+                    await InitVacations();
+                }).Wait();
 
-        internal void Update(Vacation vacation)
-        {
-            var vacationId = _vacations.Where(v => v.Id == vacation.Id).FirstOrDefault();
-            _vacations.Remove(vacationId);
             _vacations.Add(vacation);
+
+            await Task.CompletedTask;
         }
 
-        internal void Delete(Vacation vacation)
+        internal async Task Update(Vacation vacation)
+        {
+            int vacationIndex = _vacations.FindIndex(v => v.Id == vacation.Id);
+            _vacations[vacationIndex] = vacation;
+
+            await Task.CompletedTask;
+        }
+
+        internal async Task Delete(Vacation vacation)
         {
             _vacations.Remove(vacation);
+
+            await Task.CompletedTask;
         }
 
     }

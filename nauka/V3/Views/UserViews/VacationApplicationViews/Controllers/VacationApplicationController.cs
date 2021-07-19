@@ -29,11 +29,15 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
 
         private async Task InitView()
         {
+            await DisplayDescriptions();
+
             _view.buttonOk.Click += (object sender, EventArgs e) =>
             {
                 if (Validate())
                 {
-                    Add();
+                    RefreshModel();
+                    _model.Employee.VacationId.Add(_model.Vacation.Id);
+                    _model.Add(_model.Vacation, _model.Employee);
                     _view.Close();
                 }
                 else
@@ -51,12 +55,9 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
         }
 
         private async Task InitViewModel()
-        {
-            await DisplayDescriptions();
-            if (_model == null)
-                _model = new VacationApplicationModel();
-            else
-                await Task.FromResult(_model);
+        {    
+            _model = new VacationApplicationModel();
+            await Task.CompletedTask;
         }
 
         private bool Validate()
@@ -68,17 +69,13 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
             return result;
         }
 
-        private void Add()
+        private void RefreshModel()
         {
-            var vacation = new Vacation
-            {
-                Id = Guid.NewGuid(),
-                Start = _view.dateTimePickerStart.Value,
-                End = _view.dateTimePickerEnd.Value,
-                Description = _view.comboBoxDescription.SelectedItem.ToString(),
-                Approve = false
-            };
-            _model.Employee.Vacation.Add(vacation);
+            _model.Vacation.Id = Guid.NewGuid();
+            _model.Vacation.Start = _view.dateTimePickerStart.Value;
+            _model.Vacation.End = _view.dateTimePickerEnd.Value;
+            _model.Vacation.Description = _view.comboBoxDescription.SelectedItem.ToString();
+            _model.Vacation.Approve = false;            
         }
 
         private async Task DisplayDescriptions()
@@ -90,6 +87,18 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
                 _view.comboBoxDescription.Items.Add(item);
             }
             await Task.CompletedTask;
+        }
+
+        public Vacation SetVacation
+        {
+            get
+            {
+                return _model.Vacation;
+            }
+            set
+            {
+                _model.Vacation = value;
+            }
         }
 
         public Employee SetEmployee

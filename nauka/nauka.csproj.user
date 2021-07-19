@@ -34,27 +34,6 @@
     <Compile Update="V3\Views\AdministrationViews\SectionViews\Views\SectionView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="V3\Views\AdministrationViews\UserControls\AdminLeftPanelMenuUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\AdministrationViews\UserControls\MenageSectionUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\AdministrationViews\UserControls\EmployeesUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\AdministrationViews\UserControls\NewAbsenceUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\AdministrationViews\UserControls\PermissionUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\AdministrationViews\UserControls\MenageVacationsUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="V3\Views\AdministrationViews\UserControls\VacationPermissionUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="V3\Views\BaseViews\baseView.cs">
       <SubType>Form</SubType>
     </Compile>

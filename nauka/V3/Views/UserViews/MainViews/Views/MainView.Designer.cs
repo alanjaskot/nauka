@@ -59,6 +59,8 @@ namespace nauka.V3.Views.MianViews
             this.labelSex = new System.Windows.Forms.Label();
             this.tabPageDashboard = new System.Windows.Forms.TabPage();
             this.tabControlMainView = new System.Windows.Forms.TabControl();
+            this.labelFreeDayLestYear = new System.Windows.Forms.Label();
+            this.labelLastYearFreeDays = new System.Windows.Forms.Label();
             this.panelBottom.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.tabPageAdminPanel.SuspendLayout();
@@ -78,9 +80,15 @@ namespace nauka.V3.Views.MianViews
             // 
             this.buttonExit.Text = "Wyjście";
             // 
+            // panelLeftMenu
+            // 
+            this.panelLeftMenu.Size = new System.Drawing.Size(192, 780);
+            // 
             // panelMain
             // 
             this.panelMain.Controls.Add(this.tabControlMainView);
+            this.panelMain.Location = new System.Drawing.Point(192, 150);
+            this.panelMain.Size = new System.Drawing.Size(1706, 780);
             // 
             // tabPageAdminPanel
             // 
@@ -225,6 +233,8 @@ namespace nauka.V3.Views.MianViews
             // 
             // tabPageEmployee
             // 
+            this.tabPageEmployee.Controls.Add(this.labelLastYearFreeDays);
+            this.tabPageEmployee.Controls.Add(this.labelFreeDayLestYear);
             this.tabPageEmployee.Controls.Add(this.labelFreeDays);
             this.tabPageEmployee.Controls.Add(this.labelName);
             this.tabPageEmployee.Controls.Add(this.labelSurnameEmployee);
@@ -251,7 +261,7 @@ namespace nauka.V3.Views.MianViews
             // labelFreeDays
             // 
             this.labelFreeDays.AutoSize = true;
-            this.labelFreeDays.Location = new System.Drawing.Point(411, 531);
+            this.labelFreeDays.Location = new System.Drawing.Point(1078, 70);
             this.labelFreeDays.Name = "labelFreeDays";
             this.labelFreeDays.Size = new System.Drawing.Size(0, 30);
             this.labelFreeDays.TabIndex = 40;
@@ -269,7 +279,7 @@ namespace nauka.V3.Views.MianViews
             // labelSurnameEmployee
             // 
             this.labelSurnameEmployee.AutoSize = true;
-            this.labelSurnameEmployee.Location = new System.Drawing.Point(411, 143);
+            this.labelSurnameEmployee.Location = new System.Drawing.Point(498, 143);
             this.labelSurnameEmployee.Name = "labelSurnameEmployee";
             this.labelSurnameEmployee.Size = new System.Drawing.Size(0, 30);
             this.labelSurnameEmployee.TabIndex = 33;
@@ -278,16 +288,16 @@ namespace nauka.V3.Views.MianViews
             // 
             this.labelFreeDaysLeft.AutoSize = true;
             this.labelFreeDaysLeft.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelFreeDaysLeft.Location = new System.Drawing.Point(249, 531);
+            this.labelFreeDaysLeft.Location = new System.Drawing.Point(783, 70);
             this.labelFreeDaysLeft.Name = "labelFreeDaysLeft";
-            this.labelFreeDaysLeft.Size = new System.Drawing.Size(107, 30);
+            this.labelFreeDaysLeft.Size = new System.Drawing.Size(227, 30);
             this.labelFreeDaysLeft.TabIndex = 39;
-            this.labelFreeDaysLeft.Text = "wolne dni";
+            this.labelFreeDaysLeft.Text = "wolne dni w tym roku:";
             // 
             // labelUsernameEmployee
             // 
             this.labelUsernameEmployee.AutoSize = true;
-            this.labelUsernameEmployee.Location = new System.Drawing.Point(411, 296);
+            this.labelUsernameEmployee.Location = new System.Drawing.Point(498, 296);
             this.labelUsernameEmployee.Name = "labelUsernameEmployee";
             this.labelUsernameEmployee.Size = new System.Drawing.Size(0, 30);
             this.labelUsernameEmployee.TabIndex = 34;
@@ -305,7 +315,7 @@ namespace nauka.V3.Views.MianViews
             // labelNameEmployee
             // 
             this.labelNameEmployee.AutoSize = true;
-            this.labelNameEmployee.Location = new System.Drawing.Point(411, 70);
+            this.labelNameEmployee.Location = new System.Drawing.Point(498, 70);
             this.labelNameEmployee.Name = "labelNameEmployee";
             this.labelNameEmployee.Size = new System.Drawing.Size(0, 30);
             this.labelNameEmployee.TabIndex = 32;
@@ -314,7 +324,7 @@ namespace nauka.V3.Views.MianViews
             // 
             this.labelSectionEmployee.AutoSize = true;
             this.labelSectionEmployee.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSectionEmployee.Location = new System.Drawing.Point(411, 227);
+            this.labelSectionEmployee.Location = new System.Drawing.Point(498, 227);
             this.labelSectionEmployee.Name = "labelSectionEmployee";
             this.labelSectionEmployee.Size = new System.Drawing.Size(0, 30);
             this.labelSectionEmployee.TabIndex = 38;
@@ -322,7 +332,7 @@ namespace nauka.V3.Views.MianViews
             // labelEmailEmployee
             // 
             this.labelEmailEmployee.AutoSize = true;
-            this.labelEmailEmployee.Location = new System.Drawing.Point(411, 375);
+            this.labelEmailEmployee.Location = new System.Drawing.Point(498, 375);
             this.labelEmailEmployee.Name = "labelEmailEmployee";
             this.labelEmailEmployee.Size = new System.Drawing.Size(0, 30);
             this.labelEmailEmployee.TabIndex = 35;
@@ -353,14 +363,14 @@ namespace nauka.V3.Views.MianViews
             this.labelSection.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelSection.Location = new System.Drawing.Point(249, 227);
             this.labelSection.Name = "labelSection";
-            this.labelSection.Size = new System.Drawing.Size(60, 30);
+            this.labelSection.Size = new System.Drawing.Size(109, 30);
             this.labelSection.TabIndex = 37;
-            this.labelSection.Text = "Dział";
+            this.labelSection.Text = "Jednostka";
             // 
             // labelSexEmployee
             // 
             this.labelSexEmployee.AutoSize = true;
-            this.labelSexEmployee.Location = new System.Drawing.Point(411, 458);
+            this.labelSexEmployee.Location = new System.Drawing.Point(498, 447);
             this.labelSexEmployee.Name = "labelSexEmployee";
             this.labelSexEmployee.Size = new System.Drawing.Size(0, 30);
             this.labelSexEmployee.TabIndex = 36;
@@ -399,6 +409,25 @@ namespace nauka.V3.Views.MianViews
             this.tabControlMainView.SelectedIndex = 0;
             this.tabControlMainView.Size = new System.Drawing.Size(1586, 780);
             this.tabControlMainView.TabIndex = 0;
+            // 
+            // labelFreeDayLestYear
+            // 
+            this.labelFreeDayLestYear.AutoSize = true;
+            this.labelFreeDayLestYear.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelFreeDayLestYear.Location = new System.Drawing.Point(783, 161);
+            this.labelFreeDayLestYear.Name = "labelFreeDayLestYear";
+            this.labelFreeDayLestYear.Size = new System.Drawing.Size(241, 30);
+            this.labelFreeDayLestYear.TabIndex = 41;
+            this.labelFreeDayLestYear.Text = "wolne dni za zeszły rok:";
+            // 
+            // labelLastYearFreeDays
+            // 
+            this.labelLastYearFreeDays.AutoSize = true;
+            this.labelLastYearFreeDays.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelLastYearFreeDays.Location = new System.Drawing.Point(1078, 161);
+            this.labelLastYearFreeDays.Name = "labelLastYearFreeDays";
+            this.labelLastYearFreeDays.Size = new System.Drawing.Size(0, 30);
+            this.labelLastYearFreeDays.TabIndex = 42;
             // 
             // MainView
             // 
@@ -458,5 +487,7 @@ namespace nauka.V3.Views.MianViews
         protected internal System.Windows.Forms.Button buttonOk;
         protected internal System.Windows.Forms.TextBox textBoxPassowrd;
         protected internal System.Windows.Forms.Label labelPassword;
+        protected internal System.Windows.Forms.Label labelLastYearFreeDays;
+        protected internal System.Windows.Forms.Label labelFreeDayLestYear;
     }
 }

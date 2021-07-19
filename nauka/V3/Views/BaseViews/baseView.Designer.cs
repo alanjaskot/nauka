@@ -94,15 +94,15 @@ namespace nauka.V3.BaseViews
             this.panelLeftMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeftMenu.Location = new System.Drawing.Point(0, 150);
             this.panelLeftMenu.Name = "panelLeftMenu";
-            this.panelLeftMenu.Size = new System.Drawing.Size(300, 780);
+            this.panelLeftMenu.Size = new System.Drawing.Size(183, 780);
             this.panelLeftMenu.TabIndex = 2;
             // 
             // panelMain
             // 
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(300, 150);
+            this.panelMain.Location = new System.Drawing.Point(183, 150);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1598, 780);
+            this.panelMain.Size = new System.Drawing.Size(1715, 780);
             this.panelMain.TabIndex = 3;
             // 
             // baseView
