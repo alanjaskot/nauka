@@ -163,7 +163,7 @@ namespace nauka.V3.Views.MainViews.Controller
             byte usedDays = 0;
             if(daysToUse > 0)
             {
-                foreach (var item in _model.Employee.VacationDaysId)
+                foreach (var item in _model.Employee.VacationDays)
                 {
                     foreach (var it in _model.GetVacationDays())
                     {
@@ -189,7 +189,7 @@ namespace nauka.V3.Views.MainViews.Controller
             byte usedDays = 0;
             if(daysToUse > 0)
             {
-                foreach (var item in _model.Employee.VacationDaysId)
+                foreach (var item in _model.Employee.VacationDays)
                 {
                     foreach (var it in _model.GetVacationDays())
                     {
@@ -219,7 +219,7 @@ namespace nauka.V3.Views.MainViews.Controller
             {
                 foreach (var item in vacationApplications)
                 {
-                    foreach(var it in _model.Employee.VacationId)
+                    foreach(var it in _model.Employee.Vacations)
                     if(item.Id == it)
                     {
                          if (item.Approve == true)
@@ -379,7 +379,7 @@ namespace nauka.V3.Views.MainViews.Controller
 
             var vacation = _model.GetVacations().Where(v => v.Id == vacationID).FirstOrDefault();
             _model.DeleteVacation(vacation);
-            _model.Employee.VacationId.Remove(vacationID);
+            _model.Employee.Vacations.Remove(vacationID);
             _model.UpdateEmployee(_model.Employee);
             DisplayVacationApplications();
         }

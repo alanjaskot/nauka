@@ -151,10 +151,10 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
             var selectedSection = sectionList.Where(s => s.Name == (string)_view.comboBoxSection.SelectedItem).FirstOrDefault();
             _model.Employee.Section = selectedSection;
             if(_model.Employee.VacationId == null)
-                _model.Employee.VacationId = new List<Guid>();
+                _model.Employee.Vacations = new List<Guid>();
 
             if(_model.Employee.VacationDaysId == null)
-                _model.Employee.VacationDaysId = new List<Guid>();          
+                _model.Employee.VacationDays = new List<Guid>();          
         }
 
         private void GetSex()

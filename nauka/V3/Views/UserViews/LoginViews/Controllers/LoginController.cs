@@ -69,7 +69,7 @@ namespace nauka.V3.Views.UserViews.LoginRegisterViews.Controllers
         {
             // jkowalski
             var loggedEmployee = _model.GetEmployee().Where(e => (e.Username == login.textBoxUsername.Text)
-                && (e.Password == login.textBoxPassword.Text)).First();
+                && (e.Password == login.textBoxPassword.Text)).FirstOrDefault();
             var view = new MainView();
             view.SetObjectToEdit = loggedEmployee;
             _view.Hide();

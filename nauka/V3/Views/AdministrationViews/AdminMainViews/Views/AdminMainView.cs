@@ -37,6 +37,5 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             }
         }
 
-
     }
 }

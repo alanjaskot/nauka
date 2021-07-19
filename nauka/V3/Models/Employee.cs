@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 
@@ -9,6 +10,7 @@ namespace nauka.V3.Models
     public class Employee: IEntity<Guid>
     {
         [Key]
+        [StringLength(36)]
         public Guid Id { get; set; }
        
         [Required]
@@ -42,15 +44,19 @@ namespace nauka.V3.Models
         [Required]
         public bool VacationPermisson { get; set; }
         
-        [Required]
+        
+        [StringLength(36)]
+        public Guid? SectionId { get; set; }
+
+        
         public Section Section { get; set; }
         
-        [Required]
-        public List<Guid> VacationId { get; set; }
+        public List<VacationOfEmployee> VacationOfEmployees { get; set; }
+
+
+        [StringLength(36)]
+        public Guid? AppSetting { get; set; }
         
-        public List<Guid> VacationDaysId { get; set; }
-        
-        [Required]
         public AppSettings AppSettings { get; set; }
 
 

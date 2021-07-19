@@ -51,9 +51,12 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             // comboBoxSex
             // 
+            this.comboBoxSex.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxSex.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxSex.FormattingEnabled = true;
-            this.comboBoxSex.Location = new System.Drawing.Point(284, 556);
+            this.comboBoxSex.Location = new System.Drawing.Point(263, 555);
             this.comboBoxSex.Name = "comboBoxSex";
             this.comboBoxSex.Size = new System.Drawing.Size(377, 38);
             this.comboBoxSex.TabIndex = 27;
@@ -61,58 +64,79 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             // comboBoxSection
             // 
+            this.comboBoxSection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxSection.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxSection.FormattingEnabled = true;
-            this.comboBoxSection.Location = new System.Drawing.Point(284, 484);
+            this.comboBoxSection.Location = new System.Drawing.Point(263, 483);
             this.comboBoxSection.Name = "comboBoxSection";
             this.comboBoxSection.Size = new System.Drawing.Size(377, 38);
             this.comboBoxSection.TabIndex = 26;
             // 
             // textBoxPassword
             // 
+            this.textBoxPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxPassword.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxPassword.Location = new System.Drawing.Point(284, 261);
+            this.textBoxPassword.Location = new System.Drawing.Point(263, 260);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(377, 37);
             this.textBoxPassword.TabIndex = 25;
             // 
             // textBoxEmail
             // 
+            this.textBoxEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxEmail.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxEmail.Location = new System.Drawing.Point(284, 335);
+            this.textBoxEmail.Location = new System.Drawing.Point(263, 334);
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(377, 37);
             this.textBoxEmail.TabIndex = 24;
             // 
             // textBoxUsername
             // 
+            this.textBoxUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxUsername.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxUsername.Location = new System.Drawing.Point(284, 189);
+            this.textBoxUsername.Location = new System.Drawing.Point(263, 188);
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(377, 37);
             this.textBoxUsername.TabIndex = 23;
             // 
             // textBoxSurname
             // 
+            this.textBoxSurname.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSurname.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxSurname.Location = new System.Drawing.Point(284, 119);
+            this.textBoxSurname.Location = new System.Drawing.Point(263, 118);
             this.textBoxSurname.Name = "textBoxSurname";
             this.textBoxSurname.Size = new System.Drawing.Size(377, 37);
             this.textBoxSurname.TabIndex = 22;
             // 
             // textBoxName
             // 
+            this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxName.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxName.Location = new System.Drawing.Point(284, 47);
+            this.textBoxName.Location = new System.Drawing.Point(263, 46);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(377, 37);
             this.textBoxName.TabIndex = 21;
             // 
             // labelSex
             // 
+            this.labelSex.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSex.AutoSize = true;
             this.labelSex.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSex.Location = new System.Drawing.Point(57, 559);
+            this.labelSex.Location = new System.Drawing.Point(36, 558);
             this.labelSex.Name = "labelSex";
             this.labelSex.Size = new System.Drawing.Size(54, 30);
             this.labelSex.TabIndex = 20;
@@ -120,9 +144,12 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             // labelEmail
             // 
+            this.labelEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelEmail.AutoSize = true;
             this.labelEmail.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelEmail.Location = new System.Drawing.Point(57, 338);
+            this.labelEmail.Location = new System.Drawing.Point(36, 337);
             this.labelEmail.Name = "labelEmail";
             this.labelEmail.Size = new System.Drawing.Size(74, 30);
             this.labelEmail.TabIndex = 19;
@@ -130,9 +157,12 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             // labelSection
             // 
+            this.labelSection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSection.AutoSize = true;
             this.labelSection.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSection.Location = new System.Drawing.Point(51, 487);
+            this.labelSection.Location = new System.Drawing.Point(30, 486);
             this.labelSection.Name = "labelSection";
             this.labelSection.Size = new System.Drawing.Size(58, 30);
             this.labelSection.TabIndex = 18;
@@ -140,9 +170,12 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             // labelPassword
             // 
+            this.labelPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelPassword.AutoSize = true;
             this.labelPassword.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelPassword.Location = new System.Drawing.Point(51, 264);
+            this.labelPassword.Location = new System.Drawing.Point(30, 263);
             this.labelPassword.Name = "labelPassword";
             this.labelPassword.Size = new System.Drawing.Size(64, 30);
             this.labelPassword.TabIndex = 17;
@@ -150,9 +183,12 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             // labelUserName
             // 
+            this.labelUserName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelUserName.AutoSize = true;
             this.labelUserName.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelUserName.Location = new System.Drawing.Point(51, 192);
+            this.labelUserName.Location = new System.Drawing.Point(30, 191);
             this.labelUserName.Name = "labelUserName";
             this.labelUserName.Size = new System.Drawing.Size(121, 30);
             this.labelUserName.TabIndex = 16;
@@ -160,9 +196,12 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             // labelSurname
             // 
+            this.labelSurname.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSurname.AutoSize = true;
             this.labelSurname.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSurname.Location = new System.Drawing.Point(51, 122);
+            this.labelSurname.Location = new System.Drawing.Point(30, 121);
             this.labelSurname.Name = "labelSurname";
             this.labelSurname.Size = new System.Drawing.Size(100, 30);
             this.labelSurname.TabIndex = 15;
@@ -170,9 +209,12 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             // labelName
             // 
+            this.labelName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelName.AutoSize = true;
             this.labelName.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelName.Location = new System.Drawing.Point(51, 50);
+            this.labelName.Location = new System.Drawing.Point(30, 49);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(54, 30);
             this.labelName.TabIndex = 14;
@@ -180,8 +222,11 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             // buttonOk
             // 
+            this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOk.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonOk.Location = new System.Drawing.Point(136, 662);
+            this.buttonOk.Location = new System.Drawing.Point(115, 661);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(153, 57);
             this.buttonOk.TabIndex = 28;
@@ -190,8 +235,11 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             // buttonCancel
             // 
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonCancel.Location = new System.Drawing.Point(363, 662);
+            this.buttonCancel.Location = new System.Drawing.Point(342, 661);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(153, 57);
             this.buttonCancel.TabIndex = 29;
@@ -200,17 +248,23 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             // textBoxAppSetting
             // 
+            this.textBoxAppSetting.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxAppSetting.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxAppSetting.Location = new System.Drawing.Point(334, 409);
+            this.textBoxAppSetting.Location = new System.Drawing.Point(313, 408);
             this.textBoxAppSetting.Name = "textBoxAppSetting";
             this.textBoxAppSetting.Size = new System.Drawing.Size(327, 37);
             this.textBoxAppSetting.TabIndex = 31;
             // 
             // labelFreeDays
             // 
+            this.labelFreeDays.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelFreeDays.AutoSize = true;
             this.labelFreeDays.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelFreeDays.Location = new System.Drawing.Point(57, 412);
+            this.labelFreeDays.Location = new System.Drawing.Point(36, 411);
             this.labelFreeDays.Name = "labelFreeDays";
             this.labelFreeDays.Size = new System.Drawing.Size(245, 30);
             this.labelFreeDays.TabIndex = 30;
@@ -220,7 +274,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(701, 800);
+            this.ClientSize = new System.Drawing.Size(678, 794);
             this.Controls.Add(this.textBoxAppSetting);
             this.Controls.Add(this.labelFreeDays);
             this.Controls.Add(this.buttonCancel);
@@ -239,6 +293,8 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             this.Controls.Add(this.labelUserName);
             this.Controls.Add(this.labelSurname);
             this.Controls.Add(this.labelName);
+            this.MaximumSize = new System.Drawing.Size(700, 850);
+            this.MinimumSize = new System.Drawing.Size(700, 850);
             this.Name = "RegisterView";
             this.Text = "RegisterView";
             this.ResumeLayout(false);

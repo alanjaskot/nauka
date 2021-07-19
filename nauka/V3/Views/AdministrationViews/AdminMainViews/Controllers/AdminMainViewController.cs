@@ -407,7 +407,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
             var employee = _model.GetEmployees().Result.Where(e => e.Id == idEmployee).FirstOrDefault();
             var vacation = _model.GetVacations().Result.Where(v => v.Id == idVacation).FirstOrDefault();
-            employee.VacationId.Remove(idVacation);
+            employee.Vacations.Remove(idVacation);
 
             await _model.DeleteVacation(vacation);
             await _model.UpdateEmployee(employee);
@@ -428,7 +428,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             {
                 foreach(var item in employeeList)
                 {
-                    foreach(var itemVacId in item.VacationId)
+                    foreach(var itemVacId in item.Vacations)
                     {
                         foreach(var itemVacation in vacationApprovedList)
                         {
@@ -546,7 +546,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             Guid idVacation = Guid.Parse(_view.dataGridViewVacApp[7, _view.dataGridViewVacApp.CurrentRow.Index].Value.ToString());
             Guid idEmployee = Guid.Parse(_view.dataGridViewVacApp[0, _view.dataGridViewVacApp.CurrentRow.Index].Value.ToString());
             var employee = _model.GetEmployees().Result.Where(e => e.Id == idEmployee).FirstOrDefault();
-            employee.VacationId.Remove(idVacation);
+            employee.Vacations.Remove(idVacation);
 
             await _model.DeleteVacation(_model.GetVacations().Result.Where(v => v.Id == idVacation).FirstOrDefault());
             await _model.UpdateEmployee(employee);
@@ -602,7 +602,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
         {
             var result = true;
 
-            foreach(var itemEmployeeVacation in employee.VacationId)
+            foreach(var itemEmployeeVacation in employee.Vacations)
             {
                 foreach (var item in _model.GetVacations().Result)
                 {
@@ -646,7 +646,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
                 {
                     if (itemEmployee.VacationId != null)
                     {
-                        foreach(var itemId in itemEmployee.VacationId.ToList())
+                        foreach(var itemId in itemEmployee.Vacations.ToList())
                         {
                             foreach(var item in _model.GetVacations().Result)
                             {

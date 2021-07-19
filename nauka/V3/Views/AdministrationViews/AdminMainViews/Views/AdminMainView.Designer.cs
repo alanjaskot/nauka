@@ -52,12 +52,13 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewAbsence = new System.Windows.Forms.DataGridView();
             this.tabPageMenageVacApp = new System.Windows.Forms.TabPage();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.buttonMenageAppSection = new System.Windows.Forms.Button();
+            this.dataGridViewVacApp = new System.Windows.Forms.DataGridView();
             this.comboBoxSectionVacApp = new System.Windows.Forms.ComboBox();
             this.buttonMenageAppDenay = new System.Windows.Forms.Button();
             this.buttonMenageAppApprove = new System.Windows.Forms.Button();
             this.labelVacationApplicationSections = new System.Windows.Forms.Label();
-            this.dataGridViewVacApp = new System.Windows.Forms.DataGridView();
             this.tabPagePermisson = new System.Windows.Forms.TabPage();
             this.buttonChangePermisson = new System.Windows.Forms.Button();
             this.buttonShowEmployeePermisson = new System.Windows.Forms.Button();
@@ -81,17 +82,37 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPermisson)).BeginInit();
             this.SuspendLayout();
             // 
+            // panelBottom
+            // 
+            this.panelBottom.Location = new System.Drawing.Point(0, 750);
+            this.panelBottom.Size = new System.Drawing.Size(1578, 94);
+            // 
             // buttonLogout
             // 
+            this.buttonLogout.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonLogout.Location = new System.Drawing.Point(1123, 27);
+            this.buttonLogout.Size = new System.Drawing.Size(135, 45);
             this.buttonLogout.Text = "Wyloguj";
             // 
             // buttonExit
             // 
+            this.buttonExit.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonExit.Location = new System.Drawing.Point(1345, 27);
+            this.buttonExit.Size = new System.Drawing.Size(135, 45);
             this.buttonExit.Text = "Wyjście";
+            // 
+            // panelTop
+            // 
+            this.panelTop.Size = new System.Drawing.Size(1578, 150);
+            // 
+            // panelLeftMenu
+            // 
+            this.panelLeftMenu.Size = new System.Drawing.Size(183, 600);
             // 
             // panelMain
             // 
             this.panelMain.Controls.Add(this.tabControlAdmin);
+            this.panelMain.Size = new System.Drawing.Size(1395, 600);
             // 
             // tabControlAdmin
             // 
@@ -103,9 +124,10 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.tabControlAdmin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlAdmin.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tabControlAdmin.Location = new System.Drawing.Point(0, 0);
+            this.tabControlAdmin.Margin = new System.Windows.Forms.Padding(3, 3, 5, 5);
             this.tabControlAdmin.Name = "tabControlAdmin";
             this.tabControlAdmin.SelectedIndex = 0;
-            this.tabControlAdmin.Size = new System.Drawing.Size(1598, 780);
+            this.tabControlAdmin.Size = new System.Drawing.Size(1395, 600);
             this.tabControlAdmin.TabIndex = 0;
             // 
             // tabPageSections
@@ -117,42 +139,58 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.tabPageSections.Controls.Add(this.listViewSections);
             this.tabPageSections.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tabPageSections.Location = new System.Drawing.Point(4, 39);
+            this.tabPageSections.Margin = new System.Windows.Forms.Padding(3, 3, 5, 5);
             this.tabPageSections.Name = "tabPageSections";
-            this.tabPageSections.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSections.Size = new System.Drawing.Size(1590, 737);
+            this.tabPageSections.Padding = new System.Windows.Forms.Padding(3, 3, 5, 5);
+            this.tabPageSections.Size = new System.Drawing.Size(1387, 557);
             this.tabPageSections.TabIndex = 0;
             this.tabPageSections.Text = "Jednostki";
             this.tabPageSections.UseVisualStyleBackColor = true;
             // 
             // buttonDeleteSection
             // 
-            this.buttonDeleteSection.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonDeleteSection.Location = new System.Drawing.Point(1001, 500);
+            this.buttonDeleteSection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDeleteSection.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonDeleteSection.Location = new System.Drawing.Point(1001, 487);
             this.buttonDeleteSection.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonDeleteSection.MaximumSize = new System.Drawing.Size(260, 60);
+            this.buttonDeleteSection.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonDeleteSection.Name = "buttonDeleteSection";
-            this.buttonDeleteSection.Size = new System.Drawing.Size(218, 89);
+            this.buttonDeleteSection.Size = new System.Drawing.Size(200, 40);
             this.buttonDeleteSection.TabIndex = 9;
             this.buttonDeleteSection.Text = "Usuń jednostkę";
             this.buttonDeleteSection.UseVisualStyleBackColor = true;
             // 
             // buttonEditSection
             // 
-            this.buttonEditSection.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonEditSection.Location = new System.Drawing.Point(1001, 308);
+            this.buttonEditSection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEditSection.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonEditSection.Location = new System.Drawing.Point(1001, 218);
             this.buttonEditSection.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonEditSection.MaximumSize = new System.Drawing.Size(260, 60);
+            this.buttonEditSection.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonEditSection.Name = "buttonEditSection";
-            this.buttonEditSection.Size = new System.Drawing.Size(218, 89);
+            this.buttonEditSection.Size = new System.Drawing.Size(200, 40);
             this.buttonEditSection.TabIndex = 8;
             this.buttonEditSection.Text = "Zmień nazwę";
             this.buttonEditSection.UseVisualStyleBackColor = true;
             // 
             // buttonAddSection
             // 
-            this.buttonAddSection.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonAddSection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAddSection.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonAddSection.Location = new System.Drawing.Point(1001, 122);
             this.buttonAddSection.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonAddSection.MaximumSize = new System.Drawing.Size(260, 60);
+            this.buttonAddSection.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonAddSection.Name = "buttonAddSection";
-            this.buttonAddSection.Size = new System.Drawing.Size(218, 89);
+            this.buttonAddSection.Size = new System.Drawing.Size(200, 40);
             this.buttonAddSection.TabIndex = 7;
             this.buttonAddSection.Text = "Nowa jednostka";
             this.buttonAddSection.UseVisualStyleBackColor = true;
@@ -173,9 +211,11 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.listViewSections.HideSelection = false;
             this.listViewSections.Location = new System.Drawing.Point(372, 122);
             this.listViewSections.Margin = new System.Windows.Forms.Padding(4);
+            this.listViewSections.MaximumSize = new System.Drawing.Size(310, 450);
+            this.listViewSections.MinimumSize = new System.Drawing.Size(310, 400);
             this.listViewSections.Name = "listViewSections";
             this.listViewSections.ShowGroups = false;
-            this.listViewSections.Size = new System.Drawing.Size(309, 569);
+            this.listViewSections.Size = new System.Drawing.Size(310, 400);
             this.listViewSections.TabIndex = 5;
             this.listViewSections.UseCompatibleStateImageBehavior = false;
             this.listViewSections.View = System.Windows.Forms.View.List;
@@ -192,17 +232,22 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.tabPageEmployees.Location = new System.Drawing.Point(4, 39);
             this.tabPageEmployees.Name = "tabPageEmployees";
             this.tabPageEmployees.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEmployees.Size = new System.Drawing.Size(1590, 737);
+            this.tabPageEmployees.Size = new System.Drawing.Size(1707, 737);
             this.tabPageEmployees.TabIndex = 1;
             this.tabPageEmployees.Text = "Pracownicy";
             this.tabPageEmployees.UseVisualStyleBackColor = true;
             // 
             // buttonUpdateEmployee
             // 
-            this.buttonUpdateEmployee.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonUpdateEmployee.Location = new System.Drawing.Point(757, 447);
+            this.buttonUpdateEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonUpdateEmployee.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonUpdateEmployee.Location = new System.Drawing.Point(851, 372);
+            this.buttonUpdateEmployee.MaximumSize = new System.Drawing.Size(260, 60);
+            this.buttonUpdateEmployee.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonUpdateEmployee.Name = "buttonUpdateEmployee";
-            this.buttonUpdateEmployee.Size = new System.Drawing.Size(262, 82);
+            this.buttonUpdateEmployee.Size = new System.Drawing.Size(200, 40);
             this.buttonUpdateEmployee.TabIndex = 15;
             this.buttonUpdateEmployee.Text = "Edytuj pracownika";
             this.buttonUpdateEmployee.UseVisualStyleBackColor = true;
@@ -212,36 +257,53 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.comboBoxSections.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxSections.FormattingEnabled = true;
             this.comboBoxSections.Location = new System.Drawing.Point(184, 63);
+            this.comboBoxSections.MaximumSize = new System.Drawing.Size(370, 0);
+            this.comboBoxSections.MinimumSize = new System.Drawing.Size(370, 0);
             this.comboBoxSections.Name = "comboBoxSections";
-            this.comboBoxSections.Size = new System.Drawing.Size(349, 38);
+            this.comboBoxSections.Size = new System.Drawing.Size(370, 38);
             this.comboBoxSections.TabIndex = 14;
             // 
             // buttonDisplayEmployees
             // 
-            this.buttonDisplayEmployees.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonDisplayEmployees.Location = new System.Drawing.Point(757, 63);
+            this.buttonDisplayEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDisplayEmployees.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonDisplayEmployees.Location = new System.Drawing.Point(609, 59);
+            this.buttonDisplayEmployees.MaximumSize = new System.Drawing.Size(260, 60);
+            this.buttonDisplayEmployees.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonDisplayEmployees.Name = "buttonDisplayEmployees";
-            this.buttonDisplayEmployees.Size = new System.Drawing.Size(262, 82);
+            this.buttonDisplayEmployees.Size = new System.Drawing.Size(200, 40);
             this.buttonDisplayEmployees.TabIndex = 13;
             this.buttonDisplayEmployees.Text = "Pokaż pracowników";
             this.buttonDisplayEmployees.UseVisualStyleBackColor = true;
             // 
             // buttonDeleteEmployee
             // 
-            this.buttonDeleteEmployee.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonDeleteEmployee.Location = new System.Drawing.Point(757, 577);
+            this.buttonDeleteEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDeleteEmployee.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonDeleteEmployee.Location = new System.Drawing.Point(851, 460);
+            this.buttonDeleteEmployee.MaximumSize = new System.Drawing.Size(260, 60);
+            this.buttonDeleteEmployee.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonDeleteEmployee.Name = "buttonDeleteEmployee";
-            this.buttonDeleteEmployee.Size = new System.Drawing.Size(262, 82);
+            this.buttonDeleteEmployee.Size = new System.Drawing.Size(200, 40);
             this.buttonDeleteEmployee.TabIndex = 12;
             this.buttonDeleteEmployee.Text = "Usuń pracownika";
             this.buttonDeleteEmployee.UseVisualStyleBackColor = true;
             // 
             // buttonAddEmployee
             // 
-            this.buttonAddEmployee.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAddEmployee.Location = new System.Drawing.Point(757, 312);
+            this.buttonAddEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAddEmployee.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonAddEmployee.Location = new System.Drawing.Point(851, 286);
+            this.buttonAddEmployee.MaximumSize = new System.Drawing.Size(260, 60);
+            this.buttonAddEmployee.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonAddEmployee.Name = "buttonAddEmployee";
-            this.buttonAddEmployee.Size = new System.Drawing.Size(262, 82);
+            this.buttonAddEmployee.Size = new System.Drawing.Size(200, 40);
             this.buttonAddEmployee.TabIndex = 11;
             this.buttonAddEmployee.Text = "Nowy pracownik";
             this.buttonAddEmployee.UseVisualStyleBackColor = true;
@@ -259,11 +321,13 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             // dataGridViewEmployees
             // 
             this.dataGridViewEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewEmployees.Location = new System.Drawing.Point(184, 159);
+            this.dataGridViewEmployees.Location = new System.Drawing.Point(54, 130);
+            this.dataGridViewEmployees.MaximumSize = new System.Drawing.Size(500, 450);
+            this.dataGridViewEmployees.MinimumSize = new System.Drawing.Size(500, 400);
             this.dataGridViewEmployees.Name = "dataGridViewEmployees";
             this.dataGridViewEmployees.RowHeadersWidth = 150;
             this.dataGridViewEmployees.RowTemplate.Height = 33;
-            this.dataGridViewEmployees.Size = new System.Drawing.Size(450, 500);
+            this.dataGridViewEmployees.Size = new System.Drawing.Size(500, 400);
             this.dataGridViewEmployees.TabIndex = 9;
             // 
             // tabPageAbsence
@@ -277,7 +341,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.tabPageAbsence.Location = new System.Drawing.Point(4, 39);
             this.tabPageAbsence.Name = "tabPageAbsence";
             this.tabPageAbsence.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAbsence.Size = new System.Drawing.Size(1590, 737);
+            this.tabPageAbsence.Size = new System.Drawing.Size(1707, 737);
             this.tabPageAbsence.TabIndex = 2;
             this.tabPageAbsence.Text = "Absencje pracowników";
             this.tabPageAbsence.UseVisualStyleBackColor = true;
@@ -285,9 +349,11 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             // buttonChooseSectionAbsence
             // 
             this.buttonChooseSectionAbsence.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonChooseSectionAbsence.Location = new System.Drawing.Point(1258, 88);
+            this.buttonChooseSectionAbsence.Location = new System.Drawing.Point(894, 21);
+            this.buttonChooseSectionAbsence.MaximumSize = new System.Drawing.Size(260, 40);
+            this.buttonChooseSectionAbsence.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonChooseSectionAbsence.Name = "buttonChooseSectionAbsence";
-            this.buttonChooseSectionAbsence.Size = new System.Drawing.Size(239, 55);
+            this.buttonChooseSectionAbsence.Size = new System.Drawing.Size(200, 40);
             this.buttonChooseSectionAbsence.TabIndex = 13;
             this.buttonChooseSectionAbsence.Text = "Pokaż";
             this.buttonChooseSectionAbsence.UseVisualStyleBackColor = true;
@@ -313,10 +379,15 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             // 
             // buttonAddAbsence
             // 
+            this.buttonAddAbsence.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAddAbsence.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAddAbsence.Location = new System.Drawing.Point(1258, 547);
+            this.buttonAddAbsence.Location = new System.Drawing.Point(1116, 498);
+            this.buttonAddAbsence.MaximumSize = new System.Drawing.Size(260, 60);
+            this.buttonAddAbsence.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonAddAbsence.Name = "buttonAddAbsence";
-            this.buttonAddAbsence.Size = new System.Drawing.Size(239, 55);
+            this.buttonAddAbsence.Size = new System.Drawing.Size(200, 40);
             this.buttonAddAbsence.TabIndex = 10;
             this.buttonAddAbsence.Text = "Dodaj";
             this.buttonAddAbsence.UseVisualStyleBackColor = true;
@@ -335,63 +406,108 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             // 
             this.dataGridViewAbsence.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewAbsence.Location = new System.Drawing.Point(94, 88);
+            this.dataGridViewAbsence.MaximumSize = new System.Drawing.Size(1000, 500);
+            this.dataGridViewAbsence.MinimumSize = new System.Drawing.Size(1000, 450);
             this.dataGridViewAbsence.Name = "dataGridViewAbsence";
             this.dataGridViewAbsence.RowHeadersWidth = 62;
             this.dataGridViewAbsence.RowTemplate.Height = 33;
-            this.dataGridViewAbsence.Size = new System.Drawing.Size(1000, 625);
+            this.dataGridViewAbsence.Size = new System.Drawing.Size(1000, 450);
             this.dataGridViewAbsence.TabIndex = 8;
             // 
             // tabPageMenageVacApp
             // 
+            this.tabPageMenageVacApp.Controls.Add(this.comboBox1);
             this.tabPageMenageVacApp.Controls.Add(this.buttonMenageAppSection);
+            this.tabPageMenageVacApp.Controls.Add(this.dataGridViewVacApp);
             this.tabPageMenageVacApp.Controls.Add(this.comboBoxSectionVacApp);
             this.tabPageMenageVacApp.Controls.Add(this.buttonMenageAppDenay);
             this.tabPageMenageVacApp.Controls.Add(this.buttonMenageAppApprove);
             this.tabPageMenageVacApp.Controls.Add(this.labelVacationApplicationSections);
-            this.tabPageMenageVacApp.Controls.Add(this.dataGridViewVacApp);
             this.tabPageMenageVacApp.Location = new System.Drawing.Point(4, 39);
             this.tabPageMenageVacApp.Name = "tabPageMenageVacApp";
             this.tabPageMenageVacApp.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMenageVacApp.Size = new System.Drawing.Size(1590, 737);
+            this.tabPageMenageVacApp.Size = new System.Drawing.Size(1707, 737);
             this.tabPageMenageVacApp.TabIndex = 3;
             this.tabPageMenageVacApp.Text = "Wnioski o urlop";
             this.tabPageMenageVacApp.UseVisualStyleBackColor = true;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.Location = new System.Drawing.Point(165, 57);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(610, 38);
+            this.comboBox1.TabIndex = 0;
+            // 
             // buttonMenageAppSection
             // 
-            this.buttonMenageAppSection.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonMenageAppSection.Location = new System.Drawing.Point(1213, 57);
+            this.buttonMenageAppSection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonMenageAppSection.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonMenageAppSection.Location = new System.Drawing.Point(835, 55);
+            this.buttonMenageAppSection.MaximumSize = new System.Drawing.Size(260, 60);
+            this.buttonMenageAppSection.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonMenageAppSection.Name = "buttonMenageAppSection";
-            this.buttonMenageAppSection.Size = new System.Drawing.Size(275, 56);
+            this.buttonMenageAppSection.Size = new System.Drawing.Size(200, 40);
             this.buttonMenageAppSection.TabIndex = 14;
             this.buttonMenageAppSection.Text = "Wybierz dział";
             this.buttonMenageAppSection.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewVacApp
+            // 
+            this.dataGridViewVacApp.AllowUserToAddRows = false;
+            this.dataGridViewVacApp.AllowUserToDeleteRows = false;
+            this.dataGridViewVacApp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewVacApp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewVacApp.Location = new System.Drawing.Point(35, 132);
+            this.dataGridViewVacApp.MaximumSize = new System.Drawing.Size(1000, 450);
+            this.dataGridViewVacApp.MinimumSize = new System.Drawing.Size(1000, 400);
+            this.dataGridViewVacApp.Name = "dataGridViewVacApp";
+            this.dataGridViewVacApp.ReadOnly = true;
+            this.dataGridViewVacApp.RowHeadersWidth = 62;
+            this.dataGridViewVacApp.RowTemplate.Height = 33;
+            this.dataGridViewVacApp.Size = new System.Drawing.Size(1000, 400);
+            this.dataGridViewVacApp.TabIndex = 9;
+            // 
             // comboBoxSectionVacApp
             // 
+            this.comboBoxSectionVacApp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxSectionVacApp.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxSectionVacApp.FormattingEnabled = true;
-            this.comboBoxSectionVacApp.Location = new System.Drawing.Point(207, 57);
+            this.comboBoxSectionVacApp.Location = new System.Drawing.Point(250, 57);
             this.comboBoxSectionVacApp.Name = "comboBoxSectionVacApp";
-            this.comboBoxSectionVacApp.Size = new System.Drawing.Size(349, 38);
+            this.comboBoxSectionVacApp.Size = new System.Drawing.Size(0, 38);
             this.comboBoxSectionVacApp.TabIndex = 13;
             // 
             // buttonMenageAppDenay
             // 
-            this.buttonMenageAppDenay.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonMenageAppDenay.Location = new System.Drawing.Point(1213, 623);
+            this.buttonMenageAppDenay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonMenageAppDenay.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonMenageAppDenay.Location = new System.Drawing.Point(1158, 492);
+            this.buttonMenageAppDenay.MaximumSize = new System.Drawing.Size(260, 60);
+            this.buttonMenageAppDenay.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonMenageAppDenay.Name = "buttonMenageAppDenay";
-            this.buttonMenageAppDenay.Size = new System.Drawing.Size(275, 56);
+            this.buttonMenageAppDenay.Size = new System.Drawing.Size(200, 40);
             this.buttonMenageAppDenay.TabIndex = 12;
             this.buttonMenageAppDenay.Text = "Odmowa";
             this.buttonMenageAppDenay.UseVisualStyleBackColor = true;
             // 
             // buttonMenageAppApprove
             // 
-            this.buttonMenageAppApprove.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonMenageAppApprove.Location = new System.Drawing.Point(1213, 475);
+            this.buttonMenageAppApprove.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonMenageAppApprove.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonMenageAppApprove.Location = new System.Drawing.Point(1158, 344);
+            this.buttonMenageAppApprove.MaximumSize = new System.Drawing.Size(260, 60);
+            this.buttonMenageAppApprove.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonMenageAppApprove.Name = "buttonMenageAppApprove";
-            this.buttonMenageAppApprove.Size = new System.Drawing.Size(275, 56);
+            this.buttonMenageAppApprove.Size = new System.Drawing.Size(200, 40);
             this.buttonMenageAppApprove.TabIndex = 11;
             this.buttonMenageAppApprove.Text = "Zgoda";
             this.buttonMenageAppApprove.UseVisualStyleBackColor = true;
@@ -400,24 +516,11 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             // 
             this.labelVacationApplicationSections.AutoSize = true;
             this.labelVacationApplicationSections.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelVacationApplicationSections.Location = new System.Drawing.Point(103, 60);
+            this.labelVacationApplicationSections.Location = new System.Drawing.Point(35, 60);
             this.labelVacationApplicationSections.Name = "labelVacationApplicationSections";
             this.labelVacationApplicationSections.Size = new System.Drawing.Size(96, 30);
             this.labelVacationApplicationSections.TabIndex = 10;
             this.labelVacationApplicationSections.Text = "Jednoski";
-            // 
-            // dataGridViewVacApp
-            // 
-            this.dataGridViewVacApp.AllowUserToAddRows = false;
-            this.dataGridViewVacApp.AllowUserToDeleteRows = false;
-            this.dataGridViewVacApp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewVacApp.Location = new System.Drawing.Point(103, 148);
-            this.dataGridViewVacApp.Name = "dataGridViewVacApp";
-            this.dataGridViewVacApp.ReadOnly = true;
-            this.dataGridViewVacApp.RowHeadersWidth = 62;
-            this.dataGridViewVacApp.RowTemplate.Height = 33;
-            this.dataGridViewVacApp.Size = new System.Drawing.Size(1000, 531);
-            this.dataGridViewVacApp.TabIndex = 9;
             // 
             // tabPagePermisson
             // 
@@ -432,27 +535,37 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.tabPagePermisson.Location = new System.Drawing.Point(4, 39);
             this.tabPagePermisson.Name = "tabPagePermisson";
             this.tabPagePermisson.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePermisson.Size = new System.Drawing.Size(1590, 737);
+            this.tabPagePermisson.Size = new System.Drawing.Size(1707, 737);
             this.tabPagePermisson.TabIndex = 4;
             this.tabPagePermisson.Text = "Uprawnienia";
             this.tabPagePermisson.UseVisualStyleBackColor = true;
             // 
             // buttonChangePermisson
             // 
+            this.buttonChangePermisson.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonChangePermisson.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonChangePermisson.Location = new System.Drawing.Point(1226, 610);
+            this.buttonChangePermisson.Location = new System.Drawing.Point(1045, 487);
+            this.buttonChangePermisson.MaximumSize = new System.Drawing.Size(260, 60);
+            this.buttonChangePermisson.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonChangePermisson.Name = "buttonChangePermisson";
-            this.buttonChangePermisson.Size = new System.Drawing.Size(236, 66);
+            this.buttonChangePermisson.Size = new System.Drawing.Size(200, 40);
             this.buttonChangePermisson.TabIndex = 17;
             this.buttonChangePermisson.Text = "Zmień uprawnienia";
             this.buttonChangePermisson.UseVisualStyleBackColor = true;
             // 
             // buttonShowEmployeePermisson
             // 
+            this.buttonShowEmployeePermisson.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonShowEmployeePermisson.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonShowEmployeePermisson.Location = new System.Drawing.Point(1226, 60);
+            this.buttonShowEmployeePermisson.Location = new System.Drawing.Point(722, 34);
+            this.buttonShowEmployeePermisson.MaximumSize = new System.Drawing.Size(260, 60);
+            this.buttonShowEmployeePermisson.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonShowEmployeePermisson.Name = "buttonShowEmployeePermisson";
-            this.buttonShowEmployeePermisson.Size = new System.Drawing.Size(236, 66);
+            this.buttonShowEmployeePermisson.Size = new System.Drawing.Size(200, 40);
             this.buttonShowEmployeePermisson.TabIndex = 16;
             this.buttonShowEmployeePermisson.Text = "Pokaż pracowników";
             this.buttonShowEmployeePermisson.UseVisualStyleBackColor = true;
@@ -461,16 +574,16 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             // 
             this.comboBoxSectionPermisson.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxSectionPermisson.FormattingEnabled = true;
-            this.comboBoxSectionPermisson.Location = new System.Drawing.Point(307, 60);
+            this.comboBoxSectionPermisson.Location = new System.Drawing.Point(173, 36);
             this.comboBoxSectionPermisson.Name = "comboBoxSectionPermisson";
-            this.comboBoxSectionPermisson.Size = new System.Drawing.Size(349, 38);
+            this.comboBoxSectionPermisson.Size = new System.Drawing.Size(531, 38);
             this.comboBoxSectionPermisson.TabIndex = 15;
             // 
             // checkBoxEmployee
             // 
             this.checkBoxEmployee.AutoSize = true;
             this.checkBoxEmployee.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkBoxEmployee.Location = new System.Drawing.Point(1249, 451);
+            this.checkBoxEmployee.Location = new System.Drawing.Point(1045, 341);
             this.checkBoxEmployee.Name = "checkBoxEmployee";
             this.checkBoxEmployee.Size = new System.Drawing.Size(180, 36);
             this.checkBoxEmployee.TabIndex = 14;
@@ -481,7 +594,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             // 
             this.checkBoxVacations.AutoSize = true;
             this.checkBoxVacations.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkBoxVacations.Location = new System.Drawing.Point(1249, 339);
+            this.checkBoxVacations.Location = new System.Drawing.Point(1045, 229);
             this.checkBoxVacations.Name = "checkBoxVacations";
             this.checkBoxVacations.Size = new System.Drawing.Size(144, 36);
             this.checkBoxVacations.TabIndex = 13;
@@ -492,7 +605,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             // 
             this.labelPermission.AutoSize = true;
             this.labelPermission.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelPermission.Location = new System.Drawing.Point(1249, 223);
+            this.labelPermission.Location = new System.Drawing.Point(1045, 133);
             this.labelPermission.Name = "labelPermission";
             this.labelPermission.Size = new System.Drawing.Size(213, 32);
             this.labelPermission.TabIndex = 12;
@@ -502,7 +615,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             // 
             this.labelSecionPermisson.AutoSize = true;
             this.labelSecionPermisson.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSecionPermisson.Location = new System.Drawing.Point(128, 60);
+            this.labelSecionPermisson.Location = new System.Drawing.Point(63, 39);
             this.labelSecionPermisson.Name = "labelSecionPermisson";
             this.labelSecionPermisson.Size = new System.Drawing.Size(103, 30);
             this.labelSecionPermisson.TabIndex = 11;
@@ -512,20 +625,27 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             // 
             this.dataGridViewPermisson.AllowUserToAddRows = false;
             this.dataGridViewPermisson.AllowUserToDeleteRows = false;
+            this.dataGridViewPermisson.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewPermisson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewPermisson.Location = new System.Drawing.Point(307, 146);
+            this.dataGridViewPermisson.Location = new System.Drawing.Point(63, 109);
+            this.dataGridViewPermisson.MaximumSize = new System.Drawing.Size(640, 450);
+            this.dataGridViewPermisson.MinimumSize = new System.Drawing.Size(640, 400);
             this.dataGridViewPermisson.Name = "dataGridViewPermisson";
             this.dataGridViewPermisson.ReadOnly = true;
             this.dataGridViewPermisson.RowHeadersWidth = 62;
             this.dataGridViewPermisson.RowTemplate.Height = 33;
-            this.dataGridViewPermisson.Size = new System.Drawing.Size(850, 530);
+            this.dataGridViewPermisson.Size = new System.Drawing.Size(640, 400);
             this.dataGridViewPermisson.TabIndex = 10;
             // 
             // AdminMainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1898, 1024);
+            this.ClientSize = new System.Drawing.Size(1578, 844);
+            this.MaximumSize = new System.Drawing.Size(1850, 1000);
+            this.MinimumSize = new System.Drawing.Size(1600, 900);
             this.Name = "AdminMainView";
             this.Text = "AdminMainView";
             this.panelBottom.ResumeLayout(false);
@@ -588,5 +708,6 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
         private System.Windows.Forms.Label labelPermission;
         private System.Windows.Forms.Label labelSecionPermisson;
         protected internal System.Windows.Forms.DataGridView dataGridViewPermisson;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

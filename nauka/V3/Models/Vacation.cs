@@ -8,6 +8,7 @@ namespace nauka.V3.Models
     public class Vacation: IEntity<Guid>
     {
         [Key]
+        [StringLength(36)]
         public Guid Id { get; set; }
 
         [Required]
@@ -23,5 +24,7 @@ namespace nauka.V3.Models
 
         [Required]
         public bool Approve { get; set; }
+
+        public List<VacationOfEmployee> VacationOfEmployees { get; set; }
     }
 }

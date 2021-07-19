@@ -36,7 +36,7 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
                 if (Validate())
                 {
                     RefreshModel();
-                    _model.Employee.VacationId.Add(_model.Vacation.Id);
+                    _model.Employee.Vacations.Add(_model.Vacation.Id);
                     _model.Add(_model.Vacation, _model.Employee);
                     _view.Close();
                 }

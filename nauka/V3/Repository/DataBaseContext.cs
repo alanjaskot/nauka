@@ -18,6 +18,7 @@ namespace nauka.V3.Repository
         public DbSet<Vacation> Vacations { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<VacationOfEmployee> VacationOfEmployees { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,6 +31,13 @@ namespace nauka.V3.Repository
             connectionString.TrustServerCertificate = false;
 
             optionsBuilder.UseSqlServer(connectionString.ConnectionString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder model)
+        {
+            model.Entity<VacationOfEmployee>()
+                .HasKey(voe => new { voe.EmployeeId, voe.VacationId });
+
         }
 
         public async Task InitTransaction()

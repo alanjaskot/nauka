@@ -55,9 +55,9 @@ namespace nauka.V3.Services
                         Section = _sections.Where(s => s.Name == "HR").FirstOrDefault(),
                         EmployeePermisson = true,
                         VacationPermisson = true,
-                        VacationId = new List<Guid> { },
+                        Vacations = new List<Guid> { },
                         AppSettings = new AppSettings{ AvaibleVacationDays =24 },
-                        VacationDaysId = new List<Guid> { },
+                        VacationDays = new List<Guid> { },
                     },
                     new Employee
                     {
@@ -71,9 +71,9 @@ namespace nauka.V3.Services
                         Section = _sections.Where(s => s.Name == "HR").FirstOrDefault(),
                         EmployeePermisson = true,
                         VacationPermisson = false,
-                        VacationId = new List<Guid>(),
+                        Vacations = new List<Guid>(),
                         AppSettings = new AppSettings { AvaibleVacationDays = 20 },
-                        VacationDaysId = new List<Guid> {}
+                        VacationDays = new List<Guid> {}
                     },
 
                 };
