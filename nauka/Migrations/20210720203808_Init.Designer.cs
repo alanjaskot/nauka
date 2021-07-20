@@ -9,7 +9,7 @@ using nauka.V3.Repository;
 namespace nauka.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20210720135836_Init")]
+    [Migration("20210720203808_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

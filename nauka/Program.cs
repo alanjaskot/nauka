@@ -29,7 +29,7 @@ namespace nauka
             {
                 case DialogResult.Yes:
                     
-                    ManageService.Init();
+                    //ManageService.Init();
                     view = new V3.Views.LoginRegisterViews.Views.LoginView();
                     break;
                 default:

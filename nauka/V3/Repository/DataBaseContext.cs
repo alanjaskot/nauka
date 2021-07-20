@@ -26,7 +26,7 @@ namespace nauka.V3.Repository
         {
             var folder = Environment.SpecialFolder.LocalApplicationData;
             var path = Environment.GetFolderPath(folder);
-            DbPath = $"{path}{System.IO.Path.DirectorySeparatorChar}AppForVacations.db";
+            DbPath = $"AppForVacations.db";
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -157,7 +157,7 @@ namespace nauka.V3.Repository
 
             #endregion
 
-            #region Relation 1:N 
+            #region Relation 1:N and N:N
 
             model.Entity<Employee>()
                 .HasOne(e => e.Section)

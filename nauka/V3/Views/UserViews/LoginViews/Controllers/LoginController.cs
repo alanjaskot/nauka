@@ -1,4 +1,5 @@
 ﻿using nauka.V3.Models;
+using nauka.V3.Services;
 using nauka.V3.Views.LoginRegisterViews.Views;
 using nauka.V3.Views.MianViews;
 using nauka.V3.Views.UserViews.LoginViews.Model;
@@ -17,8 +18,7 @@ namespace nauka.V3.Views.UserViews.LoginRegisterViews.Controllers
         private readonly LoginView _view;
         private LoginModel _model;
         LoginUC login = new LoginUC();
-
-        
+      
 
         public LoginController(LoginView loginRegisterView)
         {
@@ -43,9 +43,7 @@ namespace nauka.V3.Views.UserViews.LoginRegisterViews.Controllers
 
         private async Task InitView()
         {
-            login.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(login);
-            await Task.CompletedTask;
+            await InitUserController();
 
             _view.buttonExit.Click += (object sender, EventArgs e) =>
             {
@@ -63,6 +61,14 @@ namespace nauka.V3.Views.UserViews.LoginRegisterViews.Controllers
                 if (e.KeyChar == (char)Keys.Enter) 
                     Login();
             };
+        }
+
+        private async Task InitUserController()
+        {
+            login.Dock = DockStyle.Fill;
+            _view.panelMain.Controls.Add(login);
+
+            await Task.CompletedTask;
         }
 
         private void Login()
