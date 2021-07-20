@@ -8,8 +8,8 @@ namespace nauka.V3.Repository
     public interface ISectionRepository
     {
         public bool Add(Section section);
-        public bool Update(Section section);
-        public bool Delete(Guid sectionId);
+        public bool Update(Guid sectionId, Section section);
+        public bool Delete(Section section);
 
         public Section GetSection(Guid sectionID);
 

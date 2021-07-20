@@ -1,4 +1,5 @@
 ﻿using nauka.V3.Models;
+using nauka.V3.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,57 +10,66 @@ namespace nauka.V3.Services
 {
     public class SectionService
     {
-        private List<Section> _sections;
-        public SectionService() { }
+        //private List<Section> _sections;
+        private SectionRepository _repository;
+        private DataBaseContext _context;
+
+        public SectionService(){ }
+
+        public SectionService(DataBaseContext context, SectionRepository repository) 
+        {
+            _repository = repository;
+            _context = context;
+        }
 
         public async Task<List<Section>> GetSections()
         {
-            if (_sections == null)
+            if (_repository.GetSections() == null)
                 await InitSections();
 
-            return await Task.FromResult(_sections);
+            return await Task.FromResult(_repository.GetSections());
         }
 
         private async Task InitSections()
         {
-            var sections = new List<Section>
+            var section = new Section
             {
-                new Section
-                {
                     Id = Guid.NewGuid(),
                     Name = "HR"
-                },
-                new Section
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "IT"
-                }
             };
-
-            _sections = sections;
+            if (_repository.Add(section))
+                _context.SaveChanges();
 
             await Task.CompletedTask;
         }
 
         public async Task Add(Section section)
         {
-            _sections.Add(section);
+            if (_repository.Add(section))
+                _context.SaveChanges();
 
             await Task.CompletedTask;
         }
 
-        public async Task Update(Section section)
+        public async Task Update(Guid sectionId, Section section)
         {
-            int sectionId = _sections.FindIndex(s => s.Id == section.Id);
-            _sections[sectionId] = section;
+
+            if (_repository.Update(sectionId, section))
+                _context.SaveChanges();
 
             await Task.CompletedTask;
         }
 
         public async Task Delete (Section section)
         {
-            _sections.Remove(section);
+            if (_repository.Delete(section))
+                _context.SaveChanges();
             await Task.CompletedTask;
+        }
+
+        public async Task<Section> GetSection(Guid sectionId)
+        {
+            return await Task.FromResult(_repository.GetSection(sectionId));
         }
     }
 }

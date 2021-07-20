@@ -14,6 +14,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
         private SectionService _sectionService;
         private VacationService _vacationService;
         private VacationDaysService _vacationDaysService;
+        private Vacation_EmployeeServices _vacation_EmployeeService;
 
         public Employee Employee { get; set; }
         public Section Section { get; set; }
@@ -24,6 +25,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
             _sectionService = ManageService.Sections;
             _vacationService = ManageService.Vacations;
             _vacationDaysService = ManageService.VacationDays;
+            _vacation_EmployeeService = ManageService.Vacation_EmployeeServices;
         }
 
         #region Vacations
@@ -33,9 +35,9 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
             await _vacationService.Add(vacation);
         }
 
-        internal async Task UpdateVacation(Vacation vacation)
+        internal async Task UpdateVacation(Guid vacationId, Vacation vacation)
         {
-            await _vacationService.Update(vacation);
+            await _vacationService.Update(vacationId, vacation);
         }
 
         internal async Task DeleteVacation(Vacation vacation)
@@ -66,9 +68,9 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
             await _sectionService.Add(Section);
         }
 
-        internal async Task UpdateSection(Section section)
+        internal async Task UpdateSection(Guid sectionId, Section section)
         {
-            await _sectionService.Update(section);
+            await _sectionService.Update(sectionId, section);
         }
 
         internal async Task DeleteSection(Section section)
@@ -112,9 +114,9 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
             await _employeeService.Add(employee);
         }
 
-        internal async Task UpdateEmployee(Employee employee)
+        internal async Task UpdateEmployee(Guid employeeId, Employee employee)
         {
-            await _employeeService.Update(employee);
+            await _employeeService.Update(employeeId, employee);
         }
 
         internal async Task DeleteEmployee(Employee employee)
@@ -136,10 +138,30 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
             await _vacationDaysService.Add(vacationDays);
         }
 
-        internal async Task UpdateVacationDays(VacationDays vacationDays)
+        internal async Task UpdateVacationDays(Guid vacationDaysId, VacationDays vacationDays)
         {
-            await _vacationDaysService.Update(vacationDays);
+            await _vacationDaysService.Update(vacationDaysId, vacationDays);
         }
+
+        #endregion
+
+        #region Vacation_Employee
+
+        internal async Task AddVacation_Employee(Vacation_Employee vacation_Employee)
+        {
+            await _vacation_EmployeeService.Add(vacation_Employee);
+        }
+
+        internal async Task DeleteVacationEmployee(Vacation_Employee vacation_Employee)
+        {
+            await _vacation_EmployeeService.Delete(vacation_Employee);
+        }
+
+        internal async Task<List<Vacation_Employee>> GetVacation_Employees()
+        {
+            return await Task.FromResult(_vacation_EmployeeService.GetVacation_Employees().Result);
+        }
+
 
         #endregion
     }

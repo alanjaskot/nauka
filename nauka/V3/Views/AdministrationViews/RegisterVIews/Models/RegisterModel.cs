@@ -3,6 +3,7 @@ using nauka.V3.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Models
 {
@@ -18,7 +19,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Models
             _sectionService = ManageService.Sections;
         }
 
-        internal List<Employee> GetEmployees()
+        internal async Task<List<Employee>> GetEmployees()
         {
             var result = default(List<Employee>);
             try
@@ -29,10 +30,10 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Models
             {
                 throw;
             }
-            return result;
+            return await Task.FromResult(result);
         }
 
-        internal List<Section> GetSections()
+        internal async Task<List<Section>> GetSections()
         {
             var result = default(List<Section>);
             try
@@ -43,12 +44,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Models
             {
                 throw;
             }
-            return result;
-        }
-
-        internal void Add(Employee employee)
-        {
-            _service.Add(employee);
+            return await Task.FromResult(result);
         }
 
     }

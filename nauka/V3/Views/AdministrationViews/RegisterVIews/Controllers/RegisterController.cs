@@ -148,13 +148,13 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
                 _model.Employee.Sex = 'K';
 
             var sectionList = _model.GetSections();
-            var selectedSection = sectionList.Where(s => s.Name == (string)_view.comboBoxSection.SelectedItem).FirstOrDefault();
+            var selectedSection = sectionList.Result.Where(s => s.Name == (string)_view.comboBoxSection.SelectedItem).FirstOrDefault();
             _model.Employee.Section = selectedSection;
-            if(_model.Employee.VacationId == null)
+            /*if(_model.Employee.VacationId == null)
                 _model.Employee.Vacations = new List<Guid>();
 
             if(_model.Employee.VacationDaysId == null)
-                _model.Employee.VacationDays = new List<Guid>();          
+                _model.Employee.VacationDays = new List<Guid>();*/          
         }
 
         private void GetSex()
@@ -167,7 +167,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
         private void GetSections()
         {
             _view.comboBoxSection.Items.Clear();
-            var sectionList = _model.GetSections();
+            var sectionList = _model.GetSections().Result;
             foreach (var item in sectionList)
             {
                 _view.comboBoxSection.Items.Add(item.Name);

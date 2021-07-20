@@ -1,4 +1,5 @@
 ﻿using nauka.V3.Models;
+using nauka.V3.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,41 +10,47 @@ namespace nauka.V3.Services
 {
     public class EmployeeService
     {
-        private List<Employee> _employees;
+        /*private List<Employee> _employees;
         private List<Section> _sections;
         private List<VacationDays> _vacationDays;
-        private List<Vacation> _vacations;
+        private List<Vacation> _vacations;*/
 
-        public EmployeeService() { }
+
+        private DataBaseContext _context;
+        private EmployeeRepository _repository;
+
+        public EmployeeService(){ }
+
+        public EmployeeService(DataBaseContext context, EmployeeRepository repository) 
+        {
+            _context = context;
+            _repository = repository;
+        }
 
         private async Task InitDemos()
         {
-            if(_employees == null)
-            {
-                _employees = await GenerateDemos();
-            }
+            if(_repository.GetEmployees() == null)
+                await GenerateDemos();
+            
             await Task.CompletedTask;
         }
 
-        private async Task <List<Employee>> GenerateDemos()
+        private async Task GenerateDemos()
         {
-            var result = default(List<Employee>);
             try
             {
 
-                if (_sections == null)
+                /*if (_sections == null)
                     await InitSection();
 
                 if (_vacations == null)
                     await InitVacation();
 
                 if (_vacationDays == null)
-                    await InitVacationDays();
+                    await InitVacationDays();*/
 
 
-                var employees = new List<Employee>
-                {
-                    new Employee
+                var employee = new Employee
                     {
                         Id = Guid.NewGuid(),
                         Name = "Jan",
@@ -52,41 +59,23 @@ namespace nauka.V3.Services
                         Password = "123",
                         Email = "j.kowalski@aa.a",
                         Sex = 'M',
-                        Section = _sections.Where(s => s.Name == "HR").FirstOrDefault(),
+                        Section = _context.Sections.Where(s => s.Name == "HR").FirstOrDefault(),
                         EmployeePermisson = true,
                         VacationPermisson = true,
-                        Vacations = new List<Guid> { },
                         AppSettings = new AppSettings{ AvaibleVacationDays =24 },
-                        VacationDays = new List<Guid> { },
-                    },
-                    new Employee
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = "Adam",
-                        Surname = "Nowak",
-                        Username = "anowak",
-                        Password = "123",
-                        Email = "a.nowak@aa.a",
-                        Sex = 'M',
-                        Section = _sections.Where(s => s.Name == "HR").FirstOrDefault(),
-                        EmployeePermisson = true,
-                        VacationPermisson = false,
-                        Vacations = new List<Guid>(),
-                        AppSettings = new AppSettings { AvaibleVacationDays = 20 },
-                        VacationDays = new List<Guid> {}
-                    },
 
                 };
-                result = employees;
+                if (_repository.Add(employee))
+                    _context.SaveChanges();
             }
             catch
             {
                 throw;
             }
-            return await Task.FromResult(result);
+            await Task.CompletedTask;
         }
 
-        private async Task InitSection()
+       /* private async Task InitSection()
         {
             var _sectionService = new SectionService();
             _sections = await _sectionService.GetSections();
@@ -108,33 +97,42 @@ namespace nauka.V3.Services
             _vacations = await _vacationService.GetVacations() ;
 
             await Task.CompletedTask;
-        }
+        }*/
 
         public async Task Add(Employee employee)
         {
-            _employees.Add(employee);
+            if (_repository.Add(employee))
+                _context.SaveChanges();
             await Task.CompletedTask;
         }
 
-        public async Task Update(Employee employee)
+        public async Task Update(Guid employeeId, Employee employee)
         {
-            int index = _employees.FindIndex(e => e.Id == employee.Id);
-            _employees[index] = employee;
+            if (_repository.Update(employeeId, employee))
+                _context.SaveChanges();
+
             await Task.CompletedTask;
         }
 
         public async Task Delete(Employee employee)
         {
-            _employees.Remove(employee);         
+            if (_repository.Delete(employee))
+                _context.SaveChanges();
+
             await Task.CompletedTask;
+        }
+
+        public async Task<Employee> GetEmployee(Guid employeeId)
+        {
+            return await Task.FromResult(_repository.GetEmployee(employeeId));
         }
 
         public async Task<List<Employee>> GetEmployees()
         {
-            if (_employees == null)
+            if (_repository.GetEmployees() == null)
                 await InitDemos();
 
-            return _employees;
+            return await Task.FromResult(_repository.GetEmployees());
         }
     }
 }

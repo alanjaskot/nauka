@@ -12,19 +12,32 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Models
         public Employee Employee { get; set; }
         public Vacation Vacation { get; set; }
 
-        private EmployeeService _serviceEmployee;
-        private VacationService _serviceVacation;
+        private Vacation_EmployeeServices _vacation_employeeService;
+        private EmployeeService _employeeService;
+        private VacationService _vacationService;
 
         public VacationApplicationModel()
         {
-            _serviceEmployee = ManageService.Employees;
-            _serviceVacation = ManageService.Vacations;
+            _employeeService = ManageService.Employees;
+            _vacationService = ManageService.Vacations;
+            _vacation_employeeService = ManageService.Vacation_EmployeeServices;
         }
 
-        internal async Task Add(Vacation vacation, Employee employee)
+        internal async Task AddVacation(Vacation vacation)
         {
-            await _serviceVacation.Add(vacation);
-            await _serviceEmployee.Update(employee);
+            await _vacationService.Add(vacation);
         }
+
+        internal async Task UpdateEmployee(Guid employeeId, Employee employee)
+        {
+            await _employeeService.Update(employeeId, employee);
+        }
+
+        internal async Task AddVacation_Employee(Vacation_Employee vacation_Employee)
+        {
+            await _vacation_employeeService.Add(vacation_Employee);
+        }
+
+
     }
 }

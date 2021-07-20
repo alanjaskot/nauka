@@ -26,16 +26,16 @@ namespace nauka.V3.Repository
             return result;
         }
 
-        public bool Update(Section section)
+        public bool Update(Guid sectionId, Section section)
         {
             var result = false;
-            var sectionToUpdate = _context.Sections.Where(s => s.Id == section.Id).FirstOrDefault();
-            if(section == null)
+            var sectionTemp = _context.Sections.Where(s => s.Id == sectionId).FirstOrDefault();
+            if(sectionTemp == null)
             {
                 _context.Sections.Add(section);
                 result = true;
             }
-            if(section != null)
+            if(sectionTemp != null)
             {
                 _context.Sections.Update(section);
                 result = true;
@@ -44,11 +44,10 @@ namespace nauka.V3.Repository
             return result;
         }
 
-        public bool Delete(Guid guid)
+        public bool Delete(Section section)
         {
             var result = false;
-            var section = _context.Sections.Where(s => s.Id == guid).FirstOrDefault();
-            
+                        
             if (section != null)
             {
                 _context.Sections.Remove(section);

@@ -3,6 +3,7 @@ using nauka.V3.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace nauka.V3.Views.AdministrationViews.SectionViews.Models
 {
@@ -17,7 +18,7 @@ namespace nauka.V3.Views.AdministrationViews.SectionViews.Models
 
         public Section Section { get; set; }
 
-        internal List<Section> GetSections()
+        internal async Task<List<Section>> GetSections()
         {
             var result = default(List<Section>);
             try
@@ -29,7 +30,7 @@ namespace nauka.V3.Views.AdministrationViews.SectionViews.Models
                 throw;
             }
 
-            return result;
+            return await Task.FromResult(result);
         }
 
         

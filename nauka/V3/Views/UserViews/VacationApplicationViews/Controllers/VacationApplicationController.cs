@@ -15,6 +15,7 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
     {
         private readonly VacationApplicationView _view;
         private VacationApplicationModel _model;
+        
 
         public VacationApplicationController(VacationApplicationView view)
         {
@@ -36,8 +37,7 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
                 if (Validate())
                 {
                     RefreshModel();
-                    _model.Employee.Vacations.Add(_model.Vacation.Id);
-                    _model.Add(_model.Vacation, _model.Employee);
+                    Add();
                     _view.Close();
                 }
                 else
@@ -67,6 +67,24 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
                 (_view.comboBoxDescription == null))
                 result = false;
             return result;
+        }
+
+        private async Task Add()
+        {         
+            var vacation_employee = new Vacation_Employee
+            {
+                Id = Guid.NewGuid(),
+                VacationId = _model.Vacation.Id,
+                EmployeeId = _model.Employee.Id
+            };
+
+            var employee = _model.Employee;
+            
+            await _model.AddVacation(_model.Vacation);
+            employee.Vacation_Employees.Add(vacation_employee);
+            await _model.UpdateEmployee(employee.Id, employee);
+            await _model.AddVacation_Employee(vacation_employee);
+
         }
 
         private void RefreshModel()

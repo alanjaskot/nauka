@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace nauka.V3.Models
@@ -10,13 +11,12 @@ namespace nauka.V3.Models
         [Key]
         [StringLength(36)]
         public Guid Id { get; set; }
-
-        [Required]
         public byte AvaibleVacationDays { get; set; }
-
-        [Required]
+       
         [StringLength(36)]
-        public Guid? EmployeeId { get; set; }
+        public Guid EmployeeId { get; set; }
+        [ForeignKey(nameof(EmployeeId))]
+        public Employee Employee { get; set; }
 
 
     }

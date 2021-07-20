@@ -9,27 +9,27 @@ namespace nauka.V3.Views.UserViews.LoginViews.Model
 {
     public class LoginModel
     {
-        //private EmployeeService _employeeService;
+        private EmployeeService _employeeService;
 
         public LoginModel()
         {
-            //_employeeService = MenageService.Employees;
+            _employeeService = ManageService.Employees;
         }
 
         public Employee Employee { get; set; }
 
-        internal List<Employee> GetEmployee()
+        internal async Task<List<Employee>> GetEmployees()
         {
             var result = default(List<Employee>);
             try
             {
-                result = ManageService.Employees.GetEmployees().Result;
+                result = _employeeService.GetEmployees().Result;
             }
             catch
             {
                 throw;
             }
-            return result;
+            return await Task.FromResult(result);
         }
     }
 

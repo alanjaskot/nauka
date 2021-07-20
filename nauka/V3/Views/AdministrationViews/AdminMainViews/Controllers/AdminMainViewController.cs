@@ -239,7 +239,8 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
                 if (view.DialogResult == DialogResult.OK)
                 {
                     var section2 = view.SetObjectToEdit;
-                    await _model.UpdateSection(section2);
+                    var section2Id = section2.Id;
+                    await _model.UpdateSection(section2Id, section2);
                 }
                 await SectionShowList ();
             }  
@@ -247,10 +248,10 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
         private async Task DeleteSection()
         {
-            var deletedSection = _model.GetSections().Result.Where(s => s.Name == _view.listViewSections.SelectedItems[0].Text)
+            var deleteSection = _model.GetSections().Result.Where(s => s.Name == _view.listViewSections.SelectedItems[0].Text)
                 .FirstOrDefault();
 
-            await _model.DeleteSection(deletedSection);
+            await _model.DeleteSection(deleteSection);
         }
 
 
@@ -303,13 +304,14 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             if (_view.dataGridViewEmployees.CurrentRow != null) 
             {
                 Guid id = Guid.Parse(_view.dataGridViewEmployees[0, _view.dataGridViewEmployees.CurrentRow.Index].Value.ToString());
-                var employeeToEdit = _model.GetEmployees().Result.Where(e => e.Id == id).FirstOrDefault();
+                var employeeToUpdate = _model.GetEmployees().Result.Where(e => e.Id == id).FirstOrDefault();
                 var view = new RegisterView();
-                view.SetObjectToEdit = employeeToEdit;
+                view.SetObjectToEdit = employeeToUpdate;
                 if (view.ShowDialog() == DialogResult.OK)
                 {
-                    var selectedEmlpoyee2 = view.SetObjectToEdit;
-                    await _model.UpdateEmployee(selectedEmlpoyee2);
+                    var employeeToUpdate2 = view.SetObjectToEdit;
+                    var employeeToUpdate2Id = employeeToUpdate2.Id;
+                    await _model.UpdateEmployee(employeeToUpdate2Id, employeeToUpdate2);
                 }
             }
         }
@@ -407,10 +409,10 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
             var employee = _model.GetEmployees().Result.Where(e => e.Id == idEmployee).FirstOrDefault();
             var vacation = _model.GetVacations().Result.Where(v => v.Id == idVacation).FirstOrDefault();
-            employee.Vacations.Remove(idVacation);
-
+            var vacation_employee = _model.GetVacation_Employees().Result.Where(voe => voe.VacationId == idVacation).FirstOrDefault();
+ 
+            await _model.DeleteVacationEmployee(vacation_employee);
             await _model.DeleteVacation(vacation);
-            await _model.UpdateEmployee(employee);
 
             await DisplayMenageAbsence ();
         }
@@ -428,14 +430,14 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             {
                 foreach(var item in employeeList)
                 {
-                    foreach(var itemVacId in item.Vacations)
+                    foreach(var itemVacEmp in _model.GetVacation_Employees().Result)
                     {
                         foreach(var itemVacation in vacationApprovedList)
                         {
-                            if(itemVacId == itemVacation.Id)
+                            if(itemVacEmp.VacationId == itemVacation.Id && item.Id == itemVacEmp.EmployeeId)
                             {
                                 _view.dataGridViewAbsence.Rows.Add(item.Id, i, item.Surname, item.Name, itemVacation.Start.ToString("dd.MM.yyyy"),
-                                    itemVacation.End.ToString("dd.MM.yyyy"), itemVacation.Description, itemVacId);
+                                    itemVacation.End.ToString("dd.MM.yyyy"), itemVacation.Description, itemVacation.Id);
                                 i++;
                             }
                             
@@ -545,11 +547,14 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
         {
             Guid idVacation = Guid.Parse(_view.dataGridViewVacApp[7, _view.dataGridViewVacApp.CurrentRow.Index].Value.ToString());
             Guid idEmployee = Guid.Parse(_view.dataGridViewVacApp[0, _view.dataGridViewVacApp.CurrentRow.Index].Value.ToString());
+            var vacation_employee = _model.GetVacation_Employees().Result
+                .Where(voe => voe.VacationId == idVacation && voe.EmployeeId == idEmployee).FirstOrDefault(); 
             var employee = _model.GetEmployees().Result.Where(e => e.Id == idEmployee).FirstOrDefault();
-            employee.Vacations.Remove(idVacation);
 
+            employee.Vacation_Employees.Remove(vacation_employee);
+            await _model.DeleteVacationEmployee(vacation_employee);
             await _model.DeleteVacation(_model.GetVacations().Result.Where(v => v.Id == idVacation).FirstOrDefault());
-            await _model.UpdateEmployee(employee);
+            await _model.UpdateEmployee(idEmployee, employee);
 
             await DisplayVacAppPermissons ();
         }
@@ -566,7 +571,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             if (ValidApproveVacation(employee, vacation))
             {
                 vacation.Approve = true;
-                await _model.UpdateVacation(vacation);
+                await _model.UpdateVacation(idVacation, vacation);
                 await CountVacationDays(employee, vacation);
             }
             await DisplayVacAppPermissons ();
@@ -594,19 +599,21 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
                 VacationId = vacation.Id
             };
 
+            vacation.VacationDaysId = vacationDays.Id;
+
             await _model.AddVacationDays(vacationDays);
-            
+            await _model.UpdateVacation(vacation.Id, vacation);
         }
 
         private bool ValidApproveVacation(Employee employee, Vacation vacation)
         {
             var result = true;
 
-            foreach(var itemEmployeeVacation in employee.Vacations)
+            foreach(var itemEmployeeVacation in _model.GetVacation_Employees().Result.Where(voe => voe.EmployeeId == employee.Id))
             {
                 foreach (var item in _model.GetVacations().Result)
                 {
-                    if(item.Id == itemEmployeeVacation && item.Id != vacation.Id)
+                    if(item.Id == itemEmployeeVacation.VacationId && item.Id != vacation.Id)
                     {
                         if ((vacation.Start >= item.Start) && (vacation.End <= item.End))
                         {
@@ -640,24 +647,22 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             
             int i = 1;
             var employeeList = _model.GetEmployees().Result.Where(e => e.Section.Name == (string)_view.comboBoxSectionVacApp.SelectedItem);
+            employeeList = employeeList.Where(e => e.Vacation_Employees != null);
             if(employeeList != null)
             {
                 foreach(var itemEmployee in employeeList)
                 {
-                    if (itemEmployee.VacationId != null)
+                    foreach(var itemVacEmp in _model.GetVacation_Employees().Result.Where(voe => voe.EmployeeId == itemEmployee.Id))
                     {
-                        foreach(var itemId in itemEmployee.Vacations.ToList())
+                        foreach (var item in _model.GetVacations().Result)
                         {
-                            foreach(var item in _model.GetVacations().Result)
+                            if ((itemVacEmp.VacationId == item.Id) && (item.Approve == false))
                             {
-                                if((itemId == item.Id) && (item.Approve == false))
-                                {
-                                    _view.dataGridViewVacApp.Rows.Add(itemEmployee.Id, i, itemEmployee.Surname, itemEmployee.Name,
-                                        item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"), item.Description, item.Id);
-                                    i++;
-                                }
-                                    
+                                _view.dataGridViewVacApp.Rows.Add(itemEmployee.Id, i, itemEmployee.Surname, itemEmployee.Name,
+                                    item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"), item.Description, item.Id);
+                                i++;
                             }
+
                         }
                     }
                 }
@@ -786,7 +791,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             else
                 employee.EmployeePermisson = false;
 
-            await _model.UpdateEmployee(employee);
+            await _model.UpdateEmployee(employeeId, employee);
             await DisplayEmployeesPermisson();
         }
 

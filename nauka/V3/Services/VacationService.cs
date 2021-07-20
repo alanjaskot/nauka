@@ -1,4 +1,5 @@
 ﻿using nauka.V3.Models;
+using nauka.V3.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,22 +10,42 @@ namespace nauka.V3.Services
 {
     public class VacationService
     {
-        private List<Vacation> _vacations;
-        public VacationService(){}
+        //private List<Vacation> _vacations;
+        private DataBaseContext _context;
+        private VacationRepository _repository;
+
+        public VacationService(){ }
+
+        public VacationService(DataBaseContext context, VacationRepository repository)
+        {
+            _context = context;
+            _repository = repository;
+        }
 
         public async Task<List<Vacation>> GetVacations()
         {
-            if (_vacations == null)
+            if (_repository.GetVacations() == null)
                 await InitVacations();
 
-            return await Task.FromResult(_vacations);
+            return await Task.FromResult(_repository.GetVacations());
         }
-
+        
         internal async Task InitVacations()
         {
-            var result = default(List<Vacation>);
-            result = new List<Vacation>{};
-            _vacations = result;
+            DateTime start = DateTime.Now;
+            DateTime end = DateTime.Now;
+            end = end.AddDays(2);
+            var vacation = new Vacation
+            {
+                Id = Guid.NewGuid(),
+                Start = start,
+                End = end,
+                Approve = true,
+                Description = "wypoczynkowy"
+            };
+            if (_repository.Add(vacation))
+                _context.SaveChanges();
+
 
             await Task.CompletedTask;
         }
@@ -44,30 +65,39 @@ namespace nauka.V3.Services
             //ok, juz rozumiem to juz wiem co trzeba zrobic, moge jeszcze pokazac druga rzecz?
             // ok pokaz
 
-            if (_vacations == null)
-                Task.Run(async () =>
-                {
-                    await InitVacations();
-                }).Wait();
+            /* if (_vacations == null)
+                 Task.Run(async () =>
+                 {
+                     await InitVacations();
+                 }).Wait();
 
-            _vacations.Add(vacation);
+             _vacations.Add(vacation);*/
+
+            if (_repository.Add(vacation))
+                _context.SaveChanges();
 
             await Task.CompletedTask;
         }
 
-        internal async Task Update(Vacation vacation)
+        internal async Task Update(Guid vacationId, Vacation vacation)
         {
-            int vacationIndex = _vacations.FindIndex(v => v.Id == vacation.Id);
-            _vacations[vacationIndex] = vacation;
+            if (_repository.Update(vacationId, vacation))
+                _context.SaveChanges();
 
             await Task.CompletedTask;
         }
 
         internal async Task Delete(Vacation vacation)
         {
-            _vacations.Remove(vacation);
+            if (_repository.Delete(vacation))
+                _context.SaveChanges();
 
             await Task.CompletedTask;
+        }
+
+        internal async Task<Vacation> GetVacation(Guid vacationId)
+        {
+            return await Task.FromResult(_repository.GetVacation(vacationId));
         }
 
     }

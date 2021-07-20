@@ -161,21 +161,29 @@ namespace nauka.V3.Views.MainViews.Controller
             lastYear.AddYears(-1);
             byte daysToUse = _model.Employee.AppSettings.AvaibleVacationDays;
             byte usedDays = 0;
+            var employeeVacations = _model.GetVacation_Employees().Result.Where(voe => voe.EmployeeId == _model.Employee.Id);
+            var employeeVacationDates = _model.GetVacations().Result.Where(v => v.Start.ToString("yyyy") == lastYear.ToString("yyyy"));
             if(daysToUse > 0)
             {
-                foreach (var item in _model.Employee.VacationDays)
+                foreach (var itemVacation in employeeVacations)
                 {
-                    foreach (var it in _model.GetVacationDays())
+                    foreach (var item in employeeVacationDates)
                     {
-                        if (it.Year.ToString("yyyy").Equals(lastYear.ToString("yyyy")))
+                        if(item.Id == itemVacation.VacationId)
                         {
-                            if (item == it.Id)
-                                usedDays += (byte)it.Days;
-                        }
-                    }
+                            foreach (var it in _model.GetVacationDays().Result)
+                            {
+                                if (itemVacation.VacationId == item.Id)
+                                {
+                                    usedDays += (byte)it.Days;
+                                }
+                            }
+                        }  
+                    }   
                 }
                 result = (byte)(daysToUse - usedDays);
             }
+            
 
             return result;
             
@@ -187,20 +195,26 @@ namespace nauka.V3.Views.MainViews.Controller
             string currentYear = DateTime.Now.ToString("yyyy");
             byte daysToUse = _model.Employee.AppSettings.AvaibleVacationDays;
             byte usedDays = 0;
-            if(daysToUse > 0)
+            var employeeVacations = _model.GetVacation_Employees().Result.Where(voe => voe.EmployeeId == _model.Employee.Id);
+            var employeeVacationDates = _model.GetVacations().Result.Where(v => v.Start.ToString("yyyy") == currentYear);
+            if (daysToUse > 0)
             {
-                foreach (var item in _model.Employee.VacationDays)
+                foreach (var itemVacation in employeeVacations)
                 {
-                    foreach (var it in _model.GetVacationDays())
+                    foreach (var item in employeeVacationDates)
                     {
-                        if (it.Year.ToString("yyyy").Equals(currentYear))
+                        if (item.Id == itemVacation.VacationId)
                         {
-                            if (item == it.Id)
-                                usedDays += (byte)it.Days;
+                            foreach (var it in _model.GetVacationDays().Result)
+                            {
+                                if (itemVacation.VacationId == item.Id)
+                                {
+                                    usedDays += (byte)it.Days;
+                                }
+                            }
                         }
                     }
                 }
-
                 result = (byte)(daysToUse - usedDays);
             }
             return result;
@@ -210,31 +224,32 @@ namespace nauka.V3.Views.MainViews.Controller
 
         #region Vacation functions
 
-        private void DisplayVacations()
+        private async Task DisplayVacations()
         {
-            _view.dataGridViewVacations.Rows.Clear();
-            int i = 1;
-            var vacationApplications = _model.GetVacations();
-            if (vacationApplications != null)
-            {
-                foreach (var item in vacationApplications)
-                {
-                    foreach(var it in _model.Employee.Vacations)
-                    if(item.Id == it)
-                    {
-                         if (item.Approve == true)
-                         {
-                                _view.dataGridViewVacations.Rows.Add(item.Id, i, item.Description,
-                                item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"));
-                                i++;
-                         }
-                    }
-                }
-            }
-            else
-            {
-                _view.dataGridViewVacations.Rows.Add(i, "brak planowanych urlopów");
-            }
+            var employeeVacation = _model.GetVacation_Employees().Result.Where(voe => voe.EmployeeId == _model.Employee.Id);
+             _view.dataGridViewVacations.Rows.Clear();
+             int i = 1;
+             if (_model.GetVacations().Result != null)
+             {
+                 foreach (var item in _model.GetVacations().Result)
+                 {
+                     foreach(var it in employeeVacation)
+                     if(item.Id == it.VacationId)
+                     {
+                          if (item.Approve == true)
+                          {
+                                 _view.dataGridViewVacations.Rows.Add(item.Id, i, item.Description,
+                                 item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"));
+                                 i++;
+                          }
+                     }
+                 }
+             }
+             else
+             {
+                 _view.dataGridViewVacations.Rows.Add(i, "brak planowanych urlopów");
+             }
+            await Task.CompletedTask;
         }
 
         private void CreateDataGridVacations()
@@ -373,14 +388,19 @@ namespace nauka.V3.Views.MainViews.Controller
             DisplayVacationApplications();
         }
 
-        private void DeleteVacationApplication()
+        private async Task DeleteVacationApplication()
         {
             Guid vacationID = Guid.Parse(_view.dataGridViewVacAppList.SelectedCells[4].Value.ToString());
+            var vacation_employee = _model.GetVacation_Employees().Result
+                .Where(voe => voe.EmployeeId == _model.Employee.Id && voe.VacationId == vacationID).FirstOrDefault();         
+            var vacation = _model.GetVacations().Result.Where(v => v.Id == vacationID).FirstOrDefault();
+            var employee = _model.Employee;
+            employee.Vacation_Employees.Remove(vacation_employee);
 
-            var vacation = _model.GetVacations().Where(v => v.Id == vacationID).FirstOrDefault();
-            _model.DeleteVacation(vacation);
-            _model.Employee.Vacations.Remove(vacationID);
-            _model.UpdateEmployee(_model.Employee);
+            await _model.DeleteVacation(vacation);
+            await _model.UpdateEmployee(_model.Employee.Id, employee);
+            await _model.DeleteVacation_Employee(vacation_employee);
+
             DisplayVacationApplications();
         }
 
@@ -388,18 +408,25 @@ namespace nauka.V3.Views.MainViews.Controller
         {
             _view.dataGridViewVacAppList.Rows.Clear();
             int i = 1;
-            var vacationApplications = _model.GetVacations();
-            if(vacationApplications != null)
+            if(_model.GetVacations().Result != null)
             {
-                foreach (var item in vacationApplications)
+                foreach (var itemEmp in _model.GetVacation_Employees().Result)
                 {
-                    if (item.Approve == false)
+                    foreach (var item in _model.GetVacations().Result)
                     {
-                        _view.dataGridViewVacAppList.Rows.Add(i, item.Description, 
-                            item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"), item.Id);
-                        i++;
+                        if (itemEmp.VacationId == item.Id && item.Approve == false)
+                        {
+                            _view.dataGridViewVacAppList.Rows.Add(i, item.Description,
+                                item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"), item.Id);
+                            i++;
+                        }
+                        else
+                        {
+                            _view.dataGridViewVacAppList.Rows.Add(i, "brak wniosków");
+                        }
                     }
                 }
+                
             }
             else
             {
