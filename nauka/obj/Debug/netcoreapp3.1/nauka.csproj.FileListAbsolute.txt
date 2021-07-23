@@ -117,7 +117,6 @@ D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.dll
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.pdb
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.genruntimeconfig.cache
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.csproj.AssemblyReference.cache
-D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.UserViews.UserControls.LoginUC.resources
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.LoginRegisterViews.Views.LoginView.resources
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.AdminMainViews.Views.AdminMainView.resources
 D:\nauka\nauka\nauka\nauka\obj\Debug\netcoreapp3.1\nauka.V3.Views.AdministrationViews.RegisterVIews.Views.RegisterView.resources
@@ -229,3 +228,4 @@ D:\nauka\nauka\nauka\nauka\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\e_sql
 D:\nauka\nauka\nauka\nauka\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\e_sqlite3.dll
 D:\nauka\nauka\nauka\nauka\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
 D:\nauka\nauka\nauka\nauka\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
+D:\nauka\nauka\nauka\nauka\bin\Debug\netcoreapp3.1\NLog.dll

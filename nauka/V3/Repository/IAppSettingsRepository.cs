@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace nauka.V3.Repository
 {
@@ -10,6 +11,8 @@ namespace nauka.V3.Repository
         public bool Add(AppSettings appSettings);
         public bool Update(Guid appSettingsId, AppSettings appSettings);
         public bool Delete(AppSettings appSettings);
-        public AppSettings GetAppSetting(Guid appSettingsId);
+       // public async Task<AppSettings> GetAppSetting(Guid appSettingsId);
+       // public async Task<List<AppSettings>> GetAppSettings();
+
     }
 }

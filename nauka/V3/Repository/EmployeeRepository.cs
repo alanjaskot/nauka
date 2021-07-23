@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace nauka.V3.Repository
 {
@@ -11,7 +12,7 @@ namespace nauka.V3.Repository
         private DataBaseContext _context;
 
         public EmployeeRepository(DataBaseContext context)
-        {
+        { 
             _context = context;
         }
 
@@ -66,7 +67,16 @@ namespace nauka.V3.Repository
 
         public List<Employee> GetEmployees()
         {
-            return _context.Employees.ToList();
+            var result = default(List<Employee>);
+            try
+            {
+                var test = _context.Employees;
+                result = test.ToList();
+            }
+            catch
+            {
+            }
+            return result;
         }
     }
 }

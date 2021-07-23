@@ -6,6 +6,7 @@ using nauka.V3.Views.MianViews;
 using nauka.V3.Views.UserViews.UserControls;
 using nauka.V3.Views.UserViews.VacationApplicationViews.Views;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +17,8 @@ namespace nauka.V3.Views.MainViews.Controller
     {
         private readonly MainView _view;
         private MainViewModel _model;
+
+        private static NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
         public MainViewController(MainView view)
         {
@@ -31,7 +34,7 @@ namespace nauka.V3.Views.MainViews.Controller
 
         private async Task InitView()
         {
-            await InitGridView();
+            InitGridView();
 
             #region VacationApplication buttons
 
@@ -65,6 +68,12 @@ namespace nauka.V3.Views.MainViews.Controller
                     _view.Close();
                 }
             };
+
+            _view.Load += (object sender, EventArgs e) =>
+            {
+                Task.Run(async () => await InitList());
+            };
+
 
             _view.buttonExit.Click += (object sender, EventArgs e) =>
             {
@@ -100,12 +109,18 @@ namespace nauka.V3.Views.MainViews.Controller
                 await Task.CompletedTask;
         }
 
-        private async Task InitGridView()
+        private async Task InitList()
+        {
+            await DisplayVacationApplications();
+            await DisplayVacations();
+
+            await Task.CompletedTask;
+        }
+
+        private void InitGridView()
         {
             CreateDataGridVacations();
             CreateDataGridVacationApplication();
-
-            await Task.CompletedTask;
         }
 
         #region FirstView
@@ -131,124 +146,129 @@ namespace nauka.V3.Views.MainViews.Controller
         #region Employee functions
         private void ShowEmployee()
         {
-            if(_model.Employee != null)
-            {
-                char m = 'M';
-                char k = 'K';
 
-                _view.labelNameEmployee.Text = _model.Employee.Name;
-                _view.labelSurnameEmployee.Text = _model.Employee.Surname;
-                _view.labelUsernameEmployee.Text = _model.Employee.Username;
-                if (_model.Employee.Sex == m)
-                    _view.labelSexEmployee.Text = "mężczyzna";
-                if (_model.Employee.Sex == k)
-                    _view.labelSexEmployee.Text = "kobieta";
-                else
-                    _view.labelSexEmployee.Text = "nie podano";
+                if (_model.Employee != null)
+                {
+                    char m = 'M';
+                    char k = 'K';
 
-                _view.labelEmailEmployee.Text = _model.Employee.Email;
-                _view.labelSectionEmployee.Text = _model.Employee.Section.Name;
-                _view.labelFreeDays.Text = CountCurrentFreeDays().ToString();
-                _view.labelLastYearFreeDays.Text = CountLastYearFreeDays().ToString();
-            }
+                    _view.labelNameEmployee.Text = _model.Employee.Name;
+                    _view.labelSurnameEmployee.Text = _model.Employee.Surname;
+                    _view.labelUsernameEmployee.Text = _model.Employee.Username;
+                    _view.labelEmailEmployee.Text = _model.Employee.Email;
+                    if (_model.Employee.Sex == m)
+                        _view.labelSexEmployee.Text = "mężczyzna";
+                    if (_model.Employee.Sex == k)
+                        _view.labelSexEmployee.Text = "kobieta";
+                    else
+                        _view.labelSexEmployee.Text = "nie podano";
+                    
+                    var section = _model.GetSections().Result.Where(s => s.Id == _model.Employee.SectionId).FirstOrDefault();
+                    _view.labelSectionEmployee.Text = section.Name;
 
+                    byte currentYearFreeDays = CountCurrentFreeDays();
+                    _view.labelFreeDays.Text = currentYearFreeDays.ToString();                   
+                    byte lastYearFreeDays = CountLastYearFreeDays();
+                    _view.labelLastYearFreeDays.Text = lastYearFreeDays.ToString();
+                }
         }
 
         private byte CountLastYearFreeDays()
         {
             byte result = 0;
-            DateTime lastYear = DateTime.Now;
-            lastYear.AddYears(-1);
-            byte daysToUse = _model.Employee.AppSettings.AvaibleVacationDays;
-            byte usedDays = 0;
-            var employeeVacations = _model.GetVacation_Employees().Result.Where(voe => voe.EmployeeId == _model.Employee.Id);
-            var employeeVacationDates = _model.GetVacations().Result.Where(v => v.Start.ToString("yyyy") == lastYear.ToString("yyyy"));
-            if(daysToUse > 0)
+            var lastYear = DateTime.Now;
+            lastYear = lastYear.AddYears(-1);
+
+            byte usedDays = CountUsedDays(lastYear);
+            byte daysToUse = GetFreeDays();
+
+            if (daysToUse > 0)
             {
-                foreach (var itemVacation in employeeVacations)
-                {
-                    foreach (var item in employeeVacationDates)
-                    {
-                        if(item.Id == itemVacation.VacationId)
-                        {
-                            foreach (var it in _model.GetVacationDays().Result)
-                            {
-                                if (itemVacation.VacationId == item.Id)
-                                {
-                                    usedDays += (byte)it.Days;
-                                }
-                            }
-                        }  
-                    }   
-                }
                 result = (byte)(daysToUse - usedDays);
             }
-            
 
             return result;
-            
         }
 
         private byte CountCurrentFreeDays()
         {
             byte result = 0;
-            string currentYear = DateTime.Now.ToString("yyyy");
-            byte daysToUse = _model.Employee.AppSettings.AvaibleVacationDays;
-            byte usedDays = 0;
-            var employeeVacations = _model.GetVacation_Employees().Result.Where(voe => voe.EmployeeId == _model.Employee.Id);
-            var employeeVacationDates = _model.GetVacations().Result.Where(v => v.Start.ToString("yyyy") == currentYear);
-            if (daysToUse > 0)
-            {
-                foreach (var itemVacation in employeeVacations)
+
+            byte usedDays = CountUsedDays(DateTime.Now);
+            byte daysToUse = GetFreeDays();
+            
+                if (daysToUse > 0)
                 {
-                    foreach (var item in employeeVacationDates)
-                    {
-                        if (item.Id == itemVacation.VacationId)
-                        {
-                            foreach (var it in _model.GetVacationDays().Result)
-                            {
-                                if (itemVacation.VacationId == item.Id)
-                                {
-                                    usedDays += (byte)it.Days;
-                                }
-                            }
-                        }
-                    }
+                    result = (byte)(daysToUse - usedDays);
                 }
-                result = (byte)(daysToUse - usedDays);
-            }
+
             return result;
         }
 
+        private byte GetFreeDays()
+        {
+            try
+            {
+                var appSetting = Task.Run(async () => await _model.GetAppSetting(_model.Employee.AppSettinsgId)).Result;
+                return appSetting.AvaibleVacationDays;
+            }
+            catch (Exception)
+            {
+                _logger.Error("MainView");
+                return 0;
+            }            
+        }
+
+        private byte CountUsedDays(DateTime year)
+        {
+            byte usedDays = 0;
+            var employeeVacations = GetVacation_Employees();
+            var employeeVacationDates = GetVacationDays();
+            foreach (var itemV in employeeVacations)
+            {
+                foreach (var itemVD in employeeVacationDates)
+                {
+                    if (itemV.VacationId == itemVD.VacationId)
+                    {
+                        usedDays += (byte)itemVD.Days;
+                    }
+                }
+            }
+            return usedDays;
+        }
+        
         #endregion
 
         #region Vacation functions
 
         private async Task DisplayVacations()
         {
-            var employeeVacation = _model.GetVacation_Employees().Result.Where(voe => voe.EmployeeId == _model.Employee.Id);
-             _view.dataGridViewVacations.Rows.Clear();
-             int i = 1;
-             if (_model.GetVacations().Result != null)
-             {
-                 foreach (var item in _model.GetVacations().Result)
-                 {
-                     foreach(var it in employeeVacation)
-                     if(item.Id == it.VacationId)
-                     {
-                          if (item.Approve == true)
-                          {
-                                 _view.dataGridViewVacations.Rows.Add(item.Id, i, item.Description,
-                                 item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"));
-                                 i++;
-                          }
-                     }
-                 }
-             }
-             else
-             {
-                 _view.dataGridViewVacations.Rows.Add(i, "brak planowanych urlopów");
-             }
+            _view.dataGridViewVacations.Rows.Clear();
+            int i = 1;
+            var employeeVacation = GetVacation_Employees();
+            var vacationList = GetVacations();
+
+            if (vacationList != null)
+            {
+                foreach (var item in vacationList)
+                {
+                    foreach (var it in employeeVacation)
+                        if (item.Id == it.VacationId)
+                        {
+                            if (item.Approve == true)
+                            {
+                                _view.dataGridViewVacations.Rows.Add(item.Id, i, item.Description,
+                                item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"));
+                                i++;
+                            }
+                        }
+                }
+            }
+            else
+            {
+                _view.dataGridViewVacations.Rows.Add(i, "brak planowanych urlopów");
+            }
+
             await Task.CompletedTask;
         }
 
@@ -314,7 +334,7 @@ namespace nauka.V3.Views.MainViews.Controller
 
         #endregion
 
-        #region MenageVacation
+        #region MenageVacationApp
         private void CreateDataGridVacationApplication()
         {
             var detailDGV = _view.dataGridViewVacAppList;
@@ -375,63 +395,90 @@ namespace nauka.V3.Views.MainViews.Controller
             detailDGV.Columns.Add(dgvTextColumn);
         }
 
-        private void AddVacationApplication()
+        private async Task AddVacationApplication()
         {
+
             var vacationApplcation = new Vacation();
             var view = new VacationApplicationView();
             view.SetObjectToEdit = vacationApplcation;
             view.SetEmployee = _model.Employee;
-            if (view.ShowDialog() == DialogResult.OK)
+            view.ShowDialog();
+            if(view.DialogResult == DialogResult.OK)
             {
-
+                view.SetEmployee = _model.Employee;
+                
             }
-            DisplayVacationApplications();
+                
+   
+            await DisplayVacationApplications();
+
+            await Task.CompletedTask;
         }
 
         private async Task DeleteVacationApplication()
         {
             Guid vacationID = Guid.Parse(_view.dataGridViewVacAppList.SelectedCells[4].Value.ToString());
-            var vacation_employee = _model.GetVacation_Employees().Result
-                .Where(voe => voe.EmployeeId == _model.Employee.Id && voe.VacationId == vacationID).FirstOrDefault();         
-            var vacation = _model.GetVacations().Result.Where(v => v.Id == vacationID).FirstOrDefault();
-            var employee = _model.Employee;
-            employee.Vacation_Employees.Remove(vacation_employee);
+            var vacation_employeeList = GetVacation_Employees();
+            var vacation_employee = default(Vacation_Employee);
+            try
+            {
+                vacation_employee = vacation_employeeList.Where(voe => voe.EmployeeId == _model.Employee.Id && voe.VacationId == vacationID).FirstOrDefault();
+            }
+            catch (Exception er)
+            {
+                _logger.Error("DeleteVacationApplication" + er);
+                vacation_employee = null;
+            }
+     
+            var vacationList = GetVacations();
+            var vacation = default(Vacation);
+            try
+            {
+                vacation = vacationList.Where(v => v.Id == vacationID).FirstOrDefault();
+                var employee = _model.Employee;
 
-            await _model.DeleteVacation(vacation);
-            await _model.UpdateEmployee(_model.Employee.Id, employee);
-            await _model.DeleteVacation_Employee(vacation_employee);
-
-            DisplayVacationApplications();
+                if (vacation_employee != null)
+                    await _model.DeleteVacation_Employee(vacation_employee);
+                await _model.DeleteVacation(vacation);
+                await _model.UpdateEmployee(_model.Employee.Id, employee);
+            }
+            catch (Exception er)
+            {
+                _logger.Error("DeleteVacationApplication" + er);
+                vacation = null; 
+            }
+            await DisplayVacationApplications();
         }
 
-        private void DisplayVacationApplications()
+        private async Task DisplayVacationApplications()
         {
             _view.dataGridViewVacAppList.Rows.Clear();
             int i = 1;
-            if(_model.GetVacations().Result != null)
-            {
-                foreach (var itemEmp in _model.GetVacation_Employees().Result)
+            var vacationList = GetVacations();
+            var vacation_employeeList = GetVacation_Employees();
+                if (vacationList != null)
                 {
-                    foreach (var item in _model.GetVacations().Result)
+                    foreach (var itemVE in vacation_employeeList)
                     {
-                        if (itemEmp.VacationId == item.Id && item.Approve == false)
+                        foreach (var itemV in vacationList)
                         {
-                            _view.dataGridViewVacAppList.Rows.Add(i, item.Description,
-                                item.Start.ToString("dd.MM.yyyy"), item.End.ToString("dd.MM.yyyy"), item.Id);
-                            i++;
-                        }
-                        else
-                        {
-                            _view.dataGridViewVacAppList.Rows.Add(i, "brak wniosków");
+                            if (itemVE.VacationId == itemV.Id && itemV.Approve == false)
+                            {
+                                _view.dataGridViewVacAppList.Rows.Add(i, itemV.Description,
+                                    itemV.Start.ToString("dd.MM.yyyy"), itemV.End.ToString("dd.MM.yyyy"), itemV.Id);
+                                i++;
+                            }
                         }
                     }
+
                 }
-                
-            }
-            else
-            {
-                _view.dataGridViewVacAppList.Rows.Add(i, "brak wniosków");
-            }
+                else
+                {
+                    _view.dataGridViewVacAppList.Rows.Add(i, "brak wniosków");
+                }
+
+                await Task.CompletedTask;
+            
             
         }
 
@@ -442,24 +489,74 @@ namespace nauka.V3.Views.MainViews.Controller
         {
             var result = false;
 
-            if (_model.Employee.Password.Equals(_view.textBoxPassowrd.Text))
-            {
-                if(_model.Employee.EmployeePermisson || _model.Employee.VacationPermisson)
+                if (_model.Employee.Password.Equals(_view.textBoxPassowrd.Text))
                 {
-                    result = true;
+                    if (_model.Employee.EmployeePermisson || _model.Employee.VacationPermisson)
+                    {
+                        result = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Brak uprawnień");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Brak uprawnień");
+                    MessageBox.Show("hasło nieprawidłowe");
                 }
-            }
-            else
-            {
-                MessageBox.Show("hasło nieprawidłowe");
-            }
 
             return result;
         }
+        #endregion
+
+        # region AllUsedFunctions
+
+        private List<Vacation_Employee> GetVacation_Employees()
+        {
+            var result = default(List<Vacation_Employee>);
+            try
+            {
+                var list = _model.GetVacation_Employees().Result;
+                result = list.Where(voe => voe.EmployeeId == _model.Employee.Id).ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("GetVacation_Employee" + ex);
+                return null;
+            }
+        }
+
+        private List<VacationDays> GetVacationDays()
+        {
+            var result = default(List<VacationDays>);
+            try
+            {
+                result = _model.GetVacationDays().Result.ToList();
+                return result;
+            }
+            catch (Exception er)
+            {
+                _logger.Error("GetVacationDays" + er);
+                return null;
+            }
+        }
+
+        private List<Vacation> GetVacations()
+        {
+            var result = default(List<Vacation>);
+            try
+            {      
+                result = _model.GetVacations().Result;
+                return result;
+            }
+            catch (Exception er)
+            {
+                _logger.Error("GetVacationDays" + er);
+                return null;
+            }
+        }
+
         #endregion
 
         public Employee SetEployee

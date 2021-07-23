@@ -17,12 +17,11 @@ namespace nauka.V3.Views.UserViews.LoginRegisterViews.Controllers
     {
         private readonly LoginView _view;
         private LoginModel _model;
-        LoginUC login = new LoginUC();
       
 
-        public LoginController(LoginView loginRegisterView)
+        public LoginController(LoginView view)
         {
-            _view = loginRegisterView;
+            _view = view;
 
             Task.Run(async () =>
             {
@@ -43,9 +42,8 @@ namespace nauka.V3.Views.UserViews.LoginRegisterViews.Controllers
 
         private async Task InitView()
         {
-            await InitUserController();
 
-            _view.buttonExit.Click += (object sender, EventArgs e) =>
+            _view.buttonOk.Click += (object sender, EventArgs e) =>
             {
                 if (Validate())
                 {
@@ -56,44 +54,43 @@ namespace nauka.V3.Views.UserViews.LoginRegisterViews.Controllers
                 
             };
 
-            login.textBoxPassword.KeyPress += (object sender, KeyPressEventArgs e) =>
+            _view.textBoxPassword.KeyPress += (object sender, KeyPressEventArgs e) =>
             {
                 if (e.KeyChar == (char)Keys.Enter) 
                     Login();
             };
-        }
-
-        private async Task InitUserController()
-        {
-            login.Dock = DockStyle.Fill;
-            _view.panelMain.Controls.Add(login);
-
             await Task.CompletedTask;
         }
 
-        private void Login()
+        private async Task Login()
         {
-            // jkowalski
-            var loggedEmployee = _model.GetEmployees().Result.Where(e => (e.Username == login.textBoxUsername.Text)
-                && (e.Password == login.textBoxPassword.Text)).FirstOrDefault();
-            var view = new MainView();
-            view.SetObjectToEdit = loggedEmployee;
-            _view.Hide();
-            if (view.ShowDialog() == DialogResult.OK)
-            {
-                
-            }
+                    var loggedEmployee = _model.GetEmployees().Result
+                        .Where(e => e.Username == _view.textBoxUsername.Text && e.Password == _view.textBoxPassword.Text).FirstOrDefault();
+                    if (loggedEmployee != null)
+                    {
+                        var view = new MainView();
+                        view.SetObjectToEdit = loggedEmployee;
+                        view.Show();
+                        _view.Hide();
+                    }
+
+            await Task.CompletedTask;
         }
 
         private bool Validate()
         {
             var result = false;
 
+                var username1 = _model.GetEmployees().Result
+                .Where(e => e.Username == _view.textBoxUsername.Text && e.Password == _view.textBoxPassword.Text).FirstOrDefault();
+                string username = username1.Username;
+                string password = username1.Password;
 
-            if ((login.textBoxUsername.Text != null) && (login.textBoxPassword.Text != null))
-            {
+                if ((_view.textBoxUsername.Text == username) && (_view.textBoxPassword.Text == password))
+                {
                     result = true;
-            }
+                }
+
             
             return result;
         }

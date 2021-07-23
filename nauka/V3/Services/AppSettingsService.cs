@@ -19,9 +19,31 @@ namespace nauka.V3.Services
             _context = context;
             _repository = repository;
         }
-        public async Task GetAppSetting(Guid appSettingsId)
+
+        public async Task<List<AppSettings>> GetAppSettings()
         {
-            await Task.FromResult(_repository.GetAppSetting(appSettingsId)); 
+            try
+            {
+                return await Task.FromResult(_repository.GetAppSettings().Result);
+            }
+            catch
+            {
+                throw;
+            }
+            
+        }
+
+        public async Task<AppSettings> GetAppSetting(Guid appSettingsId)
+        {
+            try
+            {
+                return await Task.FromResult(await _repository.GetAppSetting(appSettingsId));
+            }
+            catch
+            {
+                throw;
+            }
+            
         }
 
         public async Task Add(AppSettings appSettings)

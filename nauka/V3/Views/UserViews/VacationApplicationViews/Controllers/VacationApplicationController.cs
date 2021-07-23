@@ -15,7 +15,8 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
     {
         private readonly VacationApplicationView _view;
         private VacationApplicationModel _model;
-        
+        private static NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
+
 
         public VacationApplicationController(VacationApplicationView view)
         {
@@ -30,7 +31,7 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
 
         private async Task InitView()
         {
-            await DisplayDescriptions();
+            DisplayDescriptions();
 
             _view.buttonOk.Click += (object sender, EventArgs e) =>
             {
@@ -51,6 +52,7 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
                 _view.Close();
             };
 
+
             await Task.CompletedTask;
         }
 
@@ -63,40 +65,66 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
         private bool Validate()
         {
             var result = true;
-            if((_view.dateTimePickerStart.Value < DateTime.Now) || (_view.dateTimePickerEnd.Value < _view.dateTimePickerStart.Value) ||
+            try
+            {
+                if ((_view.dateTimePickerStart.Value < DateTime.Now) || (_view.dateTimePickerEnd.Value < _view.dateTimePickerStart.Value) ||
                 (_view.comboBoxDescription == null))
+                    result = false;
+            }
+            catch(Exception er)
+            {
+                _logger.Error("Validate " + er);
                 result = false;
+            }
+            
             return result;
         }
 
         private async Task Add()
-        {         
-            var vacation_employee = new Vacation_Employee
+        {
+            var vacation_employee = default(Vacation_Employee);
+            if (_model.Vacation != null)
             {
-                Id = Guid.NewGuid(),
-                VacationId = _model.Vacation.Id,
-                EmployeeId = _model.Employee.Id
-            };
-
-            var employee = _model.Employee;
-            
-            await _model.AddVacation(_model.Vacation);
-            employee.Vacation_Employees.Add(vacation_employee);
-            await _model.UpdateEmployee(employee.Id, employee);
-            await _model.AddVacation_Employee(vacation_employee);
-
+                vacation_employee = new Vacation_Employee
+                {
+                    Id = Guid.NewGuid(),
+                    VacationId = _model.Vacation.Id,
+                    EmployeeId = _model.Employee.Id
+                };
+            }
+            if (vacation_employee != null)
+            {
+                try
+                {
+                    await _model.AddVacation(_model.Vacation);
+                    await _model.AddVacation_Employee(vacation_employee);
+                }
+                catch (Exception er)
+                {
+                    _logger.Error("Add" + er);
+                }
+            }
         }
 
         private void RefreshModel()
         {
-            _model.Vacation.Id = Guid.NewGuid();
-            _model.Vacation.Start = _view.dateTimePickerStart.Value;
-            _model.Vacation.End = _view.dateTimePickerEnd.Value;
-            _model.Vacation.Description = _view.comboBoxDescription.SelectedItem.ToString();
-            _model.Vacation.Approve = false;            
+            try
+            {
+                _model.Vacation.Id = Guid.NewGuid();
+                _model.Vacation.Start = _view.dateTimePickerStart.Value;
+                _model.Vacation.End = _view.dateTimePickerEnd.Value;
+                _model.Vacation.Description = _view.comboBoxDescription.SelectedItem.ToString();
+                _model.Vacation.Approve = false;
+            }
+            catch (Exception er)
+            {
+                _logger.Error("RefreshModel " + er);
+                _model.Vacation = null;
+            }
+            
         }
 
-        private async Task DisplayDescriptions()
+        private void DisplayDescriptions()
         {
             _view.comboBoxDescription.Items.Clear();
             var descriptions = VacationDescriptionList.employeeDescriptions;
@@ -104,7 +132,6 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Controllers
             {
                 _view.comboBoxDescription.Items.Add(item);
             }
-            await Task.CompletedTask;
         }
 
         public Vacation SetVacation

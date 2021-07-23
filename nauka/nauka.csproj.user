@@ -46,9 +46,6 @@
     <Compile Update="V3\Views\UserViews\UserControls\FirstViewUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="V3\Views\UserViews\UserControls\LoginUC.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="V3\Views\UserViews\VacationApplicationViews\Views\VacationApplicationView.cs">
       <SubType>Form</SubType>
     </Compile>

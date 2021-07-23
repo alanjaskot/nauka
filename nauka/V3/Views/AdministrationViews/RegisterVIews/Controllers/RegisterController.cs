@@ -14,6 +14,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
     {
         private readonly RegisterView _view;
         private RegisterModel _model;
+        private NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
         public RegisterController(RegisterView registerView)
         {
@@ -53,18 +54,17 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
             {
                 await InitViewModel();
                 await InitView();
-            }).Wait();
+            }).Wait();           
         }
 
         private async Task InitView()
         {
+            InitLists();
             _view.buttonOk.Click += (object sender, EventArgs e) =>
             {
-                RefreshView();
-                RefreshModel();
                 if (Validate())
                 {
-                    
+                    RefreshModel();
                     _view.DialogResult = DialogResult.OK;
                     _view.Close();
                 }
@@ -74,16 +74,12 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
 
             _view.buttonCancel.Click += (object sender, EventArgs e) =>
             {
-                _view.Close();
+                _view.DialogResult = DialogResult.Cancel;
             };
 
             _view.Load += (object sender, EventArgs e) =>
             {
-                if(_model.Employee != null)
-                    RefreshView();
-                
-                GetSex();
-                GetSections();
+                Task.Run(async() => await RefreshView());
             };
 
             await Task.CompletedTask;
@@ -96,92 +92,150 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
             await Task.CompletedTask;
         }
 
-        private void RefreshView()
+        private void InitLists()
         {
-            if(_model.Employee != null)
-            {
-                GetSex();
-                GetSections();
-                _view.textBoxName.Text = _model.Employee.Name;
-                _view.textBoxSurname.Text = _model.Employee.Surname;
-                _view.textBoxUsername.Text = _model.Employee.Username;
-                _view.textBoxPassword.Text = _model.Employee.Password;
-                _view.textBoxEmail.Text = _model.Employee.Email;
-                _view.textBoxAppSetting.Text = _model.Employee.AppSettings.AvaibleVacationDays.ToString();
-                if (_model.Employee.Sex == 'M')
-                    _view.comboBoxSex.SelectedIndex = 1;
-                if (_model.Employee.Sex == 'K')
-                    _view.comboBoxSex.SelectedIndex = 0;
+            GetSex();
+            Task.Run(async () => await GetSectionsList());
+        }
 
-                _view.comboBoxSection.SelectedItem = _model.Employee.Section.Name;
+        private async Task RefreshView()
+        {
+            try
+            {
+                if (_model.Employee != null)
+                {
+                    _view.textBoxName.Text = _model.Employee.Name;
+                    _view.textBoxSurname.Text = _model.Employee.Surname;
+                    _view.textBoxUsername.Text = _model.Employee.Username;
+                    _view.textBoxPassword.Text = _model.Employee.Password;
+                    _view.textBoxEmail.Text = _model.Employee.Email;
+                    if (_model.Employee.Sex == 'M')
+                        _view.comboBoxSex.SelectedIndex = 1;
+                    if (_model.Employee.Sex == 'K')
+                        _view.comboBoxSex.SelectedIndex = 0;
+                    if (_model.Employee.SectionId != null)
+                        _view.comboBoxSection.SelectedItem = _model.Employee.Section.Name;
+                    if (_model.Employee.AppSettinsgId != null)
+                    {
+                        var appSetting = _model.GetAppSettings().Result.Where(ap => ap.Id == _model.Employee.AppSettinsgId).FirstOrDefault();
+                        _view.textBoxAppSetting.Text = appSetting.AvaibleVacationDays.ToString();
+                    }
+                }
             }
+            catch
+            {
+                throw;
+            }
+            await Task.CompletedTask;
         }
 
         private void RefreshModel()
         {
-            GetSex();
-            GetSections();
-            _model.Employee.Name = _view.textBoxName.Text;
-            _model.Employee.Surname = _view.textBoxSurname.Text;
-            _model.Employee.Username = _view.textBoxUsername.Text;
-            _model.Employee.Password = _view.textBoxPassword.Text;
-            _model.Employee.Email = _view.textBoxEmail.Text;
-            if (_model.Employee.AppSettings == null)
-                _model.Employee.AppSettings = new AppSettings { AvaibleVacationDays = byte.Parse(_view.textBoxAppSetting.Text) };
-            else
-            {
-                try
-                {
-                    _model.Employee.AppSettings.AvaibleVacationDays = byte.Parse(_view.textBoxAppSetting.Text);
-                }
-                catch
-                {
-                    throw;
-                }
-            }
-                
-            _model.Employee.EmployeePermisson = false;
-            _model.Employee.VacationPermisson = false;
-            if (_view.comboBoxSex.SelectedIndex == 1)
-                _model.Employee.Sex = 'M';
-            if (_view.comboBoxSex.SelectedIndex == 0)
-                _model.Employee.Sex = 'K';
+            
+                var employee = new Employee();
+                if (_model.Employee.Id == Guid.Parse("00000000-0000-0000-0000-000000000000")) 
+                    employee.Id = Guid.NewGuid();
+                employee.Name = _view.textBoxName.Text;
+                employee.Surname = _view.textBoxSurname.Text;
+                employee.Username = _view.textBoxUsername.Text;
+                employee.Password = _view.textBoxPassword.Text;
+                employee.Email = _view.textBoxEmail.Text;
+                employee.EmployeePermisson = false;
+                employee.VacationPermisson = false;
+                var sectionList = _model.GetSections();
+                var selectedSection = sectionList.Result.Where(s => s.Name == (string)_view.comboBoxSection.SelectedItem).FirstOrDefault();
+                employee.Section = selectedSection;
+                employee.SectionId = selectedSection.Id;
+                int sex = _view.comboBoxSex.SelectedIndex;
+                if (sex == 1)
+                    employee.Sex = 'M';
+                if (sex == 0)
+                    employee.Sex = 'K';
 
-            var sectionList = _model.GetSections();
-            var selectedSection = sectionList.Result.Where(s => s.Name == (string)_view.comboBoxSection.SelectedItem).FirstOrDefault();
-            _model.Employee.Section = selectedSection;
-            /*if(_model.Employee.VacationId == null)
-                _model.Employee.Vacations = new List<Guid>();
+                if (_model.Employee.AppSettings == null)
+                {
+                    employee.AppSettings = new AppSettings
+                    {
+                        Id = Guid.NewGuid(),
+                        AvaibleVacationDays = byte.Parse(_view.textBoxAppSetting.Text),
+                        EmployeeId = employee.Id
+                    };
+                    employee.AppSettinsgId = employee.AppSettings.Id;
+                }
+                    
+                else
+                    employee.AppSettings.AvaibleVacationDays = byte.Parse(_view.textBoxAppSetting.Text);
 
-            if(_model.Employee.VacationDaysId == null)
-                _model.Employee.VacationDays = new List<Guid>();*/          
+                _model.Employee = employee; 
         }
 
         private void GetSex()
         {
-            _view.comboBoxSex.Items.Clear();
-            _view.comboBoxSex.Items.Add("kobieta");
-            _view.comboBoxSex.Items.Add("mężczyzna");
+            try
+            {
+                _view.comboBoxSex.Items.Clear();
+
+                _view.comboBoxSex.Items.Add("ustaw");
+                _view.comboBoxSex.Items.Add("kobieta");
+                _view.comboBoxSex.Items.Add("mężczyzna");
+
+                _view.comboBoxSex.SelectedIndex = 0;
+            }
+            catch
+            {
+                throw;
+            }
+            
         }
 
-        private void GetSections()
+        private async Task GetSectionsList()
         {
-            _view.comboBoxSection.Items.Clear();
-            var sectionList = _model.GetSections().Result;
-            foreach (var item in sectionList)
+            try
             {
-                _view.comboBoxSection.Items.Add(item.Name);
+                _view.comboBoxSection.Items.Clear();
+                var sectionList = _model.GetSections().Result;
+
+                _view.comboBoxSection.Items.Add("ustaw");
+
+                foreach (var item in sectionList)
+                {
+                    _view.comboBoxSection.Items.Add(item.Name);
+                }
+
+                _view.comboBoxSection.SelectedIndex = 0;
             }
+            catch
+            {
+                throw;
+            }
+            await Task.CompletedTask;
         }
 
         private bool Validate()
-        {
+       {
             var result = true;
-            if ((_view.textBoxName.Text == null) || (_view.textBoxSurname.Text == null)
-                || (_view.textBoxUsername.Text == null) || (_view.textBoxPassword.Text == null)
-                || (_view.textBoxEmail == null) || (_view.textBoxAppSetting.Text == null))              
+            try
             {
-                result = false;
+                if (_view.textBoxSurname == null)
+                    result = false;
+                if (_view.textBoxName == null)
+                    result = false;
+                if (_view.textBoxUsername == null)
+                    result = false;
+                if (_view.textBoxPassword == null)
+                    result = false;
+                if (_view.textBoxEmail.Text == null)
+                    result = false;
+                if (_view.textBoxAppSetting.Text == null)
+                    result = false;
+                if (_view.comboBoxSection.SelectedIndex < 1)
+                    result = false;
+                if (_view.comboBoxSex.SelectedIndex < 1)
+                    result = false;
+            }
+            catch
+            {
+                throw;
             }
 
             return result;
@@ -200,3 +254,16 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
         }
     }
 }
+
+// tak jest lepiej bo robisz nowy model
+// jak bedziesz chail to pczytaj o niemutowalnych obiektach,
+// moze zrozumiesz cos 
+// to jest o tyle fajne ze masz za kazdym razem nowy obiekt :) 
+// nie wiem czy rozumiesz to 
+// tak, ze wywoluje tymczasowy obiekt w varze, ktory potem przypisuje
+// do wlasciwego obiektu
+// tak to ci teraz pokazalem - ale idzie zrobic innym model nie mutowalny zaraz poszukam i sobie pczytasz 
+//ok:)
+// dobra musze cos zrobic, jak znajde to ci na fb wysle :) 
+// baw sie dalej 
+// ok

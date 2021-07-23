@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace nauka.V3.Repository
 {
@@ -17,12 +18,21 @@ namespace nauka.V3.Repository
 
         public bool Add(Vacation vacation)
         {
-            var result = false;         
-           if(vacation != null)
+            var result = false;
+            try
             {
-                _context.Vacations.Add(vacation);
-                result = true;
+                if (vacation != null)
+                {
+                    _context.Vacations.Add(vacation);
+                    result = true;
+                }
             }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
+            }
+            
+           
 
             return result;
         }

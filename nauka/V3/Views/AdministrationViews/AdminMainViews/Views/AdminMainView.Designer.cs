@@ -52,7 +52,6 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewAbsence = new System.Windows.Forms.DataGridView();
             this.tabPageMenageVacApp = new System.Windows.Forms.TabPage();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.buttonMenageAppSection = new System.Windows.Forms.Button();
             this.dataGridViewVacApp = new System.Windows.Forms.DataGridView();
             this.comboBoxSectionVacApp = new System.Windows.Forms.ComboBox();
@@ -369,10 +368,15 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             // 
             // buttonDeleteAbsence
             // 
+            this.buttonDeleteAbsence.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonDeleteAbsence.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonDeleteAbsence.Location = new System.Drawing.Point(1258, 658);
+            this.buttonDeleteAbsence.Location = new System.Drawing.Point(1113, 498);
+            this.buttonDeleteAbsence.MaximumSize = new System.Drawing.Size(240, 60);
+            this.buttonDeleteAbsence.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonDeleteAbsence.Name = "buttonDeleteAbsence";
-            this.buttonDeleteAbsence.Size = new System.Drawing.Size(239, 55);
+            this.buttonDeleteAbsence.Size = new System.Drawing.Size(200, 40);
             this.buttonDeleteAbsence.TabIndex = 11;
             this.buttonDeleteAbsence.Text = "Usuń";
             this.buttonDeleteAbsence.UseVisualStyleBackColor = true;
@@ -383,7 +387,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonAddAbsence.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAddAbsence.Location = new System.Drawing.Point(1116, 498);
+            this.buttonAddAbsence.Location = new System.Drawing.Point(1113, 426);
             this.buttonAddAbsence.MaximumSize = new System.Drawing.Size(260, 60);
             this.buttonAddAbsence.MinimumSize = new System.Drawing.Size(200, 40);
             this.buttonAddAbsence.Name = "buttonAddAbsence";
@@ -416,7 +420,6 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             // 
             // tabPageMenageVacApp
             // 
-            this.tabPageMenageVacApp.Controls.Add(this.comboBox1);
             this.tabPageMenageVacApp.Controls.Add(this.buttonMenageAppSection);
             this.tabPageMenageVacApp.Controls.Add(this.dataGridViewVacApp);
             this.tabPageMenageVacApp.Controls.Add(this.comboBoxSectionVacApp);
@@ -430,13 +433,6 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.tabPageMenageVacApp.TabIndex = 3;
             this.tabPageMenageVacApp.Text = "Wnioski o urlop";
             this.tabPageMenageVacApp.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Location = new System.Drawing.Point(165, 57);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(610, 38);
-            this.comboBox1.TabIndex = 0;
             // 
             // buttonMenageAppSection
             // 
@@ -477,9 +473,11 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxSectionVacApp.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxSectionVacApp.FormattingEnabled = true;
-            this.comboBoxSectionVacApp.Location = new System.Drawing.Point(250, 57);
+            this.comboBoxSectionVacApp.Location = new System.Drawing.Point(164, 57);
+            this.comboBoxSectionVacApp.MaximumSize = new System.Drawing.Size(650, 0);
+            this.comboBoxSectionVacApp.MinimumSize = new System.Drawing.Size(630, 0);
             this.comboBoxSectionVacApp.Name = "comboBoxSectionVacApp";
-            this.comboBoxSectionVacApp.Size = new System.Drawing.Size(0, 38);
+            this.comboBoxSectionVacApp.Size = new System.Drawing.Size(630, 38);
             this.comboBoxSectionVacApp.TabIndex = 13;
             // 
             // buttonMenageAppDenay
@@ -535,7 +533,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.tabPagePermisson.Location = new System.Drawing.Point(4, 39);
             this.tabPagePermisson.Name = "tabPagePermisson";
             this.tabPagePermisson.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePermisson.Size = new System.Drawing.Size(1707, 737);
+            this.tabPagePermisson.Size = new System.Drawing.Size(1387, 557);
             this.tabPagePermisson.TabIndex = 4;
             this.tabPagePermisson.Text = "Uprawnienia";
             this.tabPagePermisson.UseVisualStyleBackColor = true;
@@ -630,13 +628,13 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewPermisson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPermisson.Location = new System.Drawing.Point(63, 109);
-            this.dataGridViewPermisson.MaximumSize = new System.Drawing.Size(640, 450);
-            this.dataGridViewPermisson.MinimumSize = new System.Drawing.Size(640, 400);
+            this.dataGridViewPermisson.MaximumSize = new System.Drawing.Size(850, 450);
+            this.dataGridViewPermisson.MinimumSize = new System.Drawing.Size(850, 400);
             this.dataGridViewPermisson.Name = "dataGridViewPermisson";
             this.dataGridViewPermisson.ReadOnly = true;
             this.dataGridViewPermisson.RowHeadersWidth = 62;
             this.dataGridViewPermisson.RowTemplate.Height = 33;
-            this.dataGridViewPermisson.Size = new System.Drawing.Size(640, 400);
+            this.dataGridViewPermisson.Size = new System.Drawing.Size(850, 400);
             this.dataGridViewPermisson.TabIndex = 10;
             // 
             // AdminMainView
@@ -708,6 +706,5 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
         private System.Windows.Forms.Label labelPermission;
         private System.Windows.Forms.Label labelSecionPermisson;
         protected internal System.Windows.Forms.DataGridView dataGridViewPermisson;
-        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

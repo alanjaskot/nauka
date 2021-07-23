@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using nauka.V3.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,9 +12,11 @@ namespace nauka.V3.Repository
 {
     public class DataBaseContext: DbContext
     {
+        private readonly string _databaseFileName = "AppForVacations.db";
+
         private IDbContextTransaction _dbContextTransaction;
 
-        public String DbPath { get; private set; }
+        public String _dbPath { get; private set; }
 
         public DbSet<AppSettings> AppSettings { get; set; }
         public DbSet<VacationDays> VacationDays { get; set; }
@@ -21,16 +24,22 @@ namespace nauka.V3.Repository
         public DbSet<Section> Sections { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Vacation_Employee> VacationOfEmployees { get; set; }
-
+        
+        
         public DataBaseContext()
         {
-            var folder = Environment.SpecialFolder.LocalApplicationData;
-            var path = Environment.GetFolderPath(folder);
-            DbPath = $"AppForVacations.db";
+        }
+
+        public DataBaseContext(DbContextOptions options) : base(options)
+        {
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            var appFolder = AppDomain.CurrentDomain.BaseDirectory;//  Environment.SpecialFolder.LocalApplicationData;
+            var databasePath = Path.Combine(appFolder, _databaseFileName);
+            _dbPath = databasePath;
+      
             var connectionString = new SqlConnectionStringBuilder();
             connectionString.DataSource = "DESKTOP-VV2EGSU";
             connectionString.InitialCatalog = "nauka-urlopy";
@@ -40,7 +49,7 @@ namespace nauka.V3.Repository
             connectionString.TrustServerCertificate = false;
 
             //optionsBuilder.UseSqlServer(connectionString.ConnectionString);
-            optionsBuilder.UseSqlite($"Data Source={DbPath}");
+            optionsBuilder.UseSqlite($"Data Source={_dbPath}");
         }
 
         protected override void OnModelCreating(ModelBuilder model)

@@ -23,7 +23,7 @@ namespace nauka.V3.Views.UserViews.LoginViews.Model
             var result = default(List<Employee>);
             try
             {
-                result = _employeeService.GetEmployees().Result;
+                result = await _employeeService.GetEmployees();
             }
             catch
             {

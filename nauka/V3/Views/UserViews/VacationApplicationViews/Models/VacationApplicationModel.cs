@@ -25,17 +25,41 @@ namespace nauka.V3.Views.UserViews.VacationApplicationViews.Models
 
         internal async Task AddVacation(Vacation vacation)
         {
-            await _vacationService.Add(vacation);
+            try
+            {
+                await _vacationService.Add(vacation);
+            }
+            catch
+            {
+                throw;
+            }
+            
         }
 
         internal async Task UpdateEmployee(Guid employeeId, Employee employee)
         {
-            await _employeeService.Update(employeeId, employee);
+            try
+            {
+                await _employeeService.Update(employeeId, employee);
+            }
+            catch
+            {
+                throw;
+            }
+            
         }
 
         internal async Task AddVacation_Employee(Vacation_Employee vacation_Employee)
         {
-            await _vacation_employeeService.Add(vacation_Employee);
+            try
+            {
+                await _vacation_employeeService.Add(vacation_Employee);
+            }
+            catch
+            {
+                throw;
+            }
+            
         }
 
 

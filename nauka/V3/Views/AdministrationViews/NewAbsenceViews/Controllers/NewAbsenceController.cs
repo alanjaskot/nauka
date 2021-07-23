@@ -37,14 +37,14 @@ namespace nauka.V3.Views.AdministrationViews.NewAbsenceViews.Controllers
 
         private async Task InitView()
         {
-            ShowSection();
+            await ShowSection();
             CreateDataGridViewEmployees();
             ShowDescriptionList();
 
             _view.buttonSectionChoose.Click += (object sender, EventArgs e) =>
             {
                 if(_view.comboBoxSecitions.SelectedIndex > -1)
-                    ShowEmployees();
+                    Task.Run(async () => await ShowEmployees());
             };
 
             _view.buttonAdd.Click += (object sender, EventArgs e) =>
@@ -53,7 +53,7 @@ namespace nauka.V3.Views.AdministrationViews.NewAbsenceViews.Controllers
                 {
                     if (Validate())
                     {
-                        AddAbsence();
+                        Task.Run(async () => await AddAbsence());
                         _view.DialogResult = DialogResult.OK;
                         _view.Close();
                     }
@@ -81,162 +81,214 @@ namespace nauka.V3.Views.AdministrationViews.NewAbsenceViews.Controllers
         private bool Validate()
         {
             var result = true;
+            try
+            {
+                if (_view.dataGridViewEmployees.CurrentRow.Index > -1)
+                    result = false;
 
-            //if(_view.dataGridViewEmployees.CurrentRow.Index > -1)
-             //   result = false;
+                if (_view.dateTimePickerStart.Value == null)
+                    result = false;
 
-            if(_view.dateTimePickerStart.Value == null)
-                result = false;
+                if (_view.dateTimePickerEnd.Value == null)
+                    result = false;
 
-            if (_view.dateTimePickerEnd.Value == null)
-                result = false;
-
-            if (_view.listViewDescription.SelectedItems == null)
-                result = false;
+                if (_view.listViewDescription.SelectedItems == null)
+                    result = false;
+            }
+            catch
+            {
+                throw;
+            }
 
             return result;
         }
 
         private bool ValidateDate()
         {
-            Guid idEmployee = Guid.Parse(_view.dataGridViewEmployees[0, _view.dataGridViewEmployees.CurrentRow.Index].Value.ToString());
-            var employee = _model.GetEmployees().Result.Where(e => e.Id == idEmployee).FirstOrDefault();
             var result = true;
-            foreach(var itemVacEmp in _model.GetVacation_Employees().Result)
+            try
             {
-                if(itemVacEmp.EmployeeId == idEmployee)
-                {
-                    foreach (var item in _model.GetVacations().Result)
-                    {
-                        if ((itemVacEmp.VacationId == item.Id) && (item.Approve == true))
-                        {
-                            if ((_view.dateTimePickerStart.Value >= item.Start) && (_view.dateTimePickerStart.Value <= item.End))
-                                result = false;
+                Guid idEmployee = Guid.Parse(_view.dataGridViewEmployees[0, _view.dataGridViewEmployees.CurrentRow.Index].Value.ToString());
+                var employee = _model.GetEmployees().Result.Where(e => e.Id == idEmployee).FirstOrDefault();
 
-                            if ((_view.dateTimePickerEnd.Value >= item.Start) && (_view.dateTimePickerEnd.Value <= item.End))
-                                result = false;
-                            if ((_view.dateTimePickerStart.Value < item.Start) && (_view.dateTimePickerEnd.Value > item.End))
+                foreach (var itemVacEmp in _model.GetVacation_Employees().Result)
+                {
+                    if (itemVacEmp.EmployeeId == idEmployee)
+                    {
+                        foreach (var item in _model.GetVacations().Result)
+                        {
+                            if ((itemVacEmp.VacationId == item.Id) && (item.Approve == true))
                             {
-                                result = false;
+                                if ((_view.dateTimePickerStart.Value >= item.Start) && (_view.dateTimePickerStart.Value <= item.End))
+                                    result = false;
+
+                                if ((_view.dateTimePickerEnd.Value >= item.Start) && (_view.dateTimePickerEnd.Value <= item.End))
+                                    result = false;
+                                if ((_view.dateTimePickerStart.Value < item.Start) && (_view.dateTimePickerEnd.Value > item.End))
+                                {
+                                    result = false;
+                                }
                             }
                         }
                     }
+
                 }
-                
             }
+            catch
+            {
+                throw;
+            }
+            
             return result;
         }
 
         private async Task AddAbsence()
         {
-            Guid idEmployee = Guid.Parse(_view.dataGridViewEmployees[0, _view.dataGridViewEmployees.CurrentRow.Index].Value.ToString());
-            var employee = _model.GetEmployees().Result.Where(e => e.Id == idEmployee).FirstOrDefault();
-            var newVacation = new Vacation
+            try
             {
-                Id = Guid.NewGuid(),
-                Start = _view.dateTimePickerStart.Value,
-                End = _view.dateTimePickerEnd.Value,
-                Approve = true,
-                Description = _view.listViewDescription.SelectedItems[0].Text
-            };
-            var vacation_Employee = new Vacation_Employee
+                Guid idEmployee = Guid.Parse(_view.dataGridViewEmployees[0, _view.dataGridViewEmployees.CurrentRow.Index].Value.ToString());
+                var employee = _model.GetEmployees().Result.Where(e => e.Id == idEmployee).FirstOrDefault();
+                var newVacation = new Vacation
+                {
+                    Id = Guid.NewGuid(),
+                    Start = _view.dateTimePickerStart.Value,
+                    End = _view.dateTimePickerEnd.Value,
+                    Approve = true,
+                    Description = _view.listViewDescription.SelectedItems[0].Text
+                };
+                var vacation_Employee = new Vacation_Employee
+                {
+                    Id = Guid.NewGuid(),
+                    EmployeeId = idEmployee,
+                    VacationId = newVacation.Id
+                };
+
+                await _model.AddVacation(newVacation);
+                await _model.AddVacation_Employee(vacation_Employee);
+                await _model.UpdateEmployee(idEmployee, employee);
+            }
+            catch
             {
-                Id = Guid.NewGuid(),
-                EmployeeId = idEmployee,
-                VacationId = newVacation.Id
-            };
+                throw;
+            }
+            
 
-            employee.Vacation_Employees.Add(vacation_Employee);
-                      
-            await _model.AddVacation(newVacation);
-            await _model.AddVacation_Employee(vacation_Employee);
-            await _model.UpdateEmployee(idEmployee, employee);
-
+            await Task.CompletedTask;
         }
 
         private void ShowDescriptionList()
         {
-            _view.listViewDescription.Items.Clear();
-            foreach(var item in VacationDescriptionList.adminDescriptions)
+            try
             {
-                _view.listViewDescription.Items.Add(item);
-            }
-        }
-
-        private void ShowEmployees()
-        {
-            _view.dataGridViewEmployees.Rows.Clear();
-            string sectionName = _view.comboBoxSecitions.SelectedItem.ToString();
-            int i = 1;
-            if(_model.GetEmployees() != null)
-            {
-                foreach (var item in _model.GetEmployees().Result.Where(e => e.Section.Name == sectionName))
+                _view.listViewDescription.Items.Clear();
+                foreach (var item in VacationDescriptionList.adminDescriptions)
                 {
-                    _view.dataGridViewEmployees.Rows.Add(item.Id, i, item.Surname, item.Name);
-                    i++;
+                    _view.listViewDescription.Items.Add(item);
                 }
             }
-            
+            catch
+            {
+                throw;
+            } 
+        }
+
+        private async Task ShowEmployees()
+        {
+            try
+            {
+                _view.dataGridViewEmployees.Rows.Clear();
+                string sectionName = _view.comboBoxSecitions.SelectedItem.ToString();
+                int i = 1;
+                if (_model.GetEmployees() != null)
+                {
+                    foreach (var item in _model.GetEmployees().Result.Where(e => e.Section.Name == sectionName))
+                    {
+                        _view.dataGridViewEmployees.Rows.Add(item.Id, i, item.Surname, item.Name);
+                        i++;
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            await Task.CompletedTask;
         }
 
         private void CreateDataGridViewEmployees()
         {
-            var detailDGV = _view.dataGridViewEmployees;
+            try
+            {
+                var detailDGV = _view.dataGridViewEmployees;
 
-            detailDGV.AllowUserToAddRows = false;
-            detailDGV.AutoGenerateColumns = false;
-            detailDGV.RowHeadersVisible = false;
-            detailDGV.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            detailDGV.Columns.Clear();
-            detailDGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            detailDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                detailDGV.AllowUserToAddRows = false;
+                detailDGV.AutoGenerateColumns = false;
+                detailDGV.RowHeadersVisible = false;
+                detailDGV.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                detailDGV.Columns.Clear();
+                detailDGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                detailDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            var dgvTextColumn = default(DataGridViewColumn);
+                var dgvTextColumn = default(DataGridViewColumn);
 
-            dgvTextColumn = new DataGridViewTextBoxColumn();
-            dgvTextColumn.HeaderText = "Id.";
-            dgvTextColumn.Name = "ID";
-            dgvTextColumn.DataPropertyName = "Id";
-            dgvTextColumn.Width = 45;
-            dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvTextColumn.Visible = false;
-            detailDGV.Columns.Add(dgvTextColumn);
+                dgvTextColumn = new DataGridViewTextBoxColumn();
+                dgvTextColumn.HeaderText = "Id.";
+                dgvTextColumn.Name = "ID";
+                dgvTextColumn.DataPropertyName = "Id";
+                dgvTextColumn.Width = 45;
+                dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dgvTextColumn.Visible = false;
+                detailDGV.Columns.Add(dgvTextColumn);
 
-            dgvTextColumn = new DataGridViewTextBoxColumn();
-            dgvTextColumn.HeaderText = "Lp.";
-            dgvTextColumn.Name = "ID";
-            dgvTextColumn.DataPropertyName = "Id";
-            dgvTextColumn.Width = 45;
-            dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvTextColumn.Visible = true;
-            detailDGV.Columns.Add(dgvTextColumn);
+                dgvTextColumn = new DataGridViewTextBoxColumn();
+                dgvTextColumn.HeaderText = "Lp.";
+                dgvTextColumn.Name = "ID";
+                dgvTextColumn.DataPropertyName = "Id";
+                dgvTextColumn.Width = 45;
+                dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dgvTextColumn.Visible = true;
+                detailDGV.Columns.Add(dgvTextColumn);
 
-            dgvTextColumn = new DataGridViewTextBoxColumn();
-            dgvTextColumn.HeaderText = "Nazwisko";
-            dgvTextColumn.Name = "EmployeeSurname";
-            dgvTextColumn.DataPropertyName = "Surname";
-            dgvTextColumn.Width = 200;
-            dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvTextColumn.Visible = true;
-            detailDGV.Columns.Add(dgvTextColumn);
+                dgvTextColumn = new DataGridViewTextBoxColumn();
+                dgvTextColumn.HeaderText = "Nazwisko";
+                dgvTextColumn.Name = "EmployeeSurname";
+                dgvTextColumn.DataPropertyName = "Surname";
+                dgvTextColumn.Width = 200;
+                dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dgvTextColumn.Visible = true;
+                detailDGV.Columns.Add(dgvTextColumn);
 
-            dgvTextColumn = new DataGridViewTextBoxColumn();
-            dgvTextColumn.HeaderText = "Imie";
-            dgvTextColumn.Name = "EmployeeName";
-            dgvTextColumn.DataPropertyName = "Name";
-            dgvTextColumn.Width = 200;
-            dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvTextColumn.Visible = true;
-            detailDGV.Columns.Add(dgvTextColumn);
+                dgvTextColumn = new DataGridViewTextBoxColumn();
+                dgvTextColumn.HeaderText = "Imie";
+                dgvTextColumn.Name = "EmployeeName";
+                dgvTextColumn.DataPropertyName = "Name";
+                dgvTextColumn.Width = 200;
+                dgvTextColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dgvTextColumn.Visible = true;
+                detailDGV.Columns.Add(dgvTextColumn);
+            }
+            catch
+            {
+                throw;
+            }
+            
         }
 
-        private void ShowSection()
+        private async Task ShowSection()
         {
-            _view.comboBoxSecitions.Items.Clear();
-            foreach(var item in _model.GetSections().Result)
+            try
             {
-                _view.comboBoxSecitions.Items.Add(item.Name);
+                _view.comboBoxSecitions.Items.Clear();
+                foreach (var item in _model.GetSections().Result)
+                {
+                    _view.comboBoxSecitions.Items.Add(item.Name);
+                }
             }
+            catch
+            {
+                throw;
+            }
+            await Task.CompletedTask;
         }
 
         public Employee SetEmployee

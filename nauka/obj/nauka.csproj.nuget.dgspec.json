@@ -61,6 +61,18 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.8, )"
+            },
+            "NLog": {
+              "target": "Package",
+              "version": "[4.7.10, )"
+            },
+            "NLog.Config": {
+              "target": "Package",
+              "version": "[4.7.10, )"
+            },
+            "NLog.Schema": {
+              "target": "Package",
+              "version": "[4.7.10, )"
             }
           },
           "imports": [

@@ -65,7 +65,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
 
         internal async Task AddSection(Section section)
         {
-            await _sectionService.Add(Section);
+            await _sectionService.Add(section);
         }
 
         internal async Task UpdateSection(Guid sectionId, Section section)
@@ -75,7 +75,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
 
         internal async Task DeleteSection(Section section)
         {
-            await _sectionService.Delete(Section);
+            await _sectionService.Delete(section);
         }
         
         internal async Task<List<Section>> GetSections()

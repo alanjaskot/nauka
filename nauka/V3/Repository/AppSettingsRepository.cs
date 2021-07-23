@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace nauka.V3.Repository
 {
@@ -56,9 +57,14 @@ namespace nauka.V3.Repository
             return result;
         }
 
-        public AppSettings GetAppSetting(Guid appSettingsId)
+        public async Task<AppSettings> GetAppSetting(Guid appSettingsId)
         {
-            return _context.AppSettings.Where(ap => ap.Id == appSettingsId).FirstOrDefault();
+            return await Task.FromResult(_context.AppSettings.Where(ap => ap.Id == appSettingsId).FirstOrDefault());
+        }
+
+        public async Task<List<AppSettings>> GetAppSettings()
+        {
+            return await Task.FromResult(_context.AppSettings.ToList());
         }
     }
 }

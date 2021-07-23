@@ -97,7 +97,15 @@ namespace nauka.V3.Services
 
         internal async Task<Vacation> GetVacation(Guid vacationId)
         {
-            return await Task.FromResult(_repository.GetVacation(vacationId));
+            try
+            {
+                return await Task.FromResult(_repository.GetVacation(vacationId));
+            }
+            catch
+            {
+                throw;
+            }
+            
         }
 
     }

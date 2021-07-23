@@ -14,6 +14,7 @@ namespace nauka.V3.Views.AdministrationViews.SectionViews.Controllers
     {
         private readonly SectionView _view;
         private SectionModel _model;
+        private static NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
         public SectionController(SectionView sectionView)
         {
@@ -21,8 +22,8 @@ namespace nauka.V3.Views.AdministrationViews.SectionViews.Controllers
 
             Task.Run(async () =>
             {
-                await InitView();
                 await InitViewModel();
+                await InitView();
             }).Wait();
         }
 
@@ -30,29 +31,12 @@ namespace nauka.V3.Views.AdministrationViews.SectionViews.Controllers
         {
             _view.buttonOk.Click += (object sender, EventArgs e) =>
             {
+                UpdateModel();
                 if (Validate())
                 {
-                    
-                    if (_model.Section.Name != null)
-                    {
-                        RefreshUpdateModel();
-                        _view.DialogResult = DialogResult.OK;
-                        _view.Close();
-                    }
-                        
-
-                    if (_model.Section.Name == null)
-                    {
-                        RefreshModel();
-                        _view.DialogResult = DialogResult.OK;
-                        _view.Close();
-                    }         
+                    _view.DialogResult = DialogResult.OK;
+                    _view.Close();
                 }
-                else
-                {
-                    MessageBox.Show("Proszę uzupełnić nazwę jednostki");
-                }
-                
             };
 
             _view.buttonCancel.Click += (object sender, EventArgs e) =>
@@ -60,38 +44,58 @@ namespace nauka.V3.Views.AdministrationViews.SectionViews.Controllers
                 _view.Close();
             };
 
+            _view.Load += (object sender, EventArgs e) =>
+            {
+                RefreshView();
+            };
+
             await Task.CompletedTask;
         }
+
 
         private async Task InitViewModel()
         {
             if (_model == null)
                 _model = new SectionModel();
 
-            else
-                await Task.CompletedTask;
+            await Task.CompletedTask;
         }
 
         private bool Validate()
         {
             var result = false;
-            if (_view.textBoxSectionName != null)
-                result = true;
+            try
+            {
+                if (_view.textBoxSectionName != null)
+                    result = true;
+            }
+            catch (Exception er)
+            {
+                _logger.Error("Validate " + er);
+            } 
+            
 
             return result;
         }   
 
-        private void RefreshModel()
+        private void RefreshView()
         {
-            if (_model.Section == null)
-                _model.Section.Id = Guid.NewGuid();
-
-            _model.Section.Name = _view.textBoxSectionName.Text;
+            if ((_model.Section != null) && (_model.Section.Name != null))
+                    _view.textBoxSectionName.Text = _model.Section.Name;
         }
 
-        private void RefreshUpdateModel()
+        private void UpdateModel()
         {
-            _model.Section.Name = _view.textBoxSectionName.Text;
+            if (_model.Section.Id == Guid.Empty)
+                _model.Section.Id = Guid.NewGuid();
+            try
+            {
+                _model.Section.Name = _view.textBoxSectionName.Text;
+            }
+            catch (Exception er)
+            {
+                _logger.Error("UpdateModel" + er);
+            }           
         }
 
 
