@@ -14,9 +14,7 @@ namespace nauka.V3.Views.MainViews.Model
         public Vacation Vacation { get; set; }
         public VacationDays VacationDays { get; set; }
         public Vacation_Employee Vacation_Employee { get; set; }
-        public AppSettings AppSettings { get; set; }
 
-        private AppSettingsService _appSettingsService;
         private EmployeeService _employeeService;
         private SectionService _sectionService;
         private VacationService _vacationService;
@@ -30,7 +28,6 @@ namespace nauka.V3.Views.MainViews.Model
             _vacationService = ManageService.Vacations;
             _vacationDayService = ManageService.VacationDays;
             _vacation_EmployeeServices = ManageService.Vacation_EmployeeServices;
-            _appSettingsService = ManageService.AppSettings;
         }
 
         internal async Task<List<Section>> GetSections()
@@ -102,9 +99,5 @@ namespace nauka.V3.Views.MainViews.Model
 
         #endregion
 
-        internal async Task<AppSettings> GetAppSetting(Guid appSettingId)
-        {
-            return await Task.FromResult(await _appSettingsService.GetAppSetting(appSettingId));
-        }
     }
 }

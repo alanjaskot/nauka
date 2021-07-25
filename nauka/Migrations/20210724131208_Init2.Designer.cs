@@ -2,24 +2,52 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using nauka.V3.Repository;
 
 namespace nauka.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210724131208_Init2")]
+    partial class Init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.8");
 
+            modelBuilder.Entity("nauka.V3.Models.AppSettings", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("TEXT");
+
+                    b.Property<byte>("AvaibleVacationDays")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("EmployeeId")
+                        .HasMaxLength(36)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId")
+                        .IsUnique();
+
+                    b.ToTable("AppSettings");
+                });
+
             modelBuilder.Entity("nauka.V3.Models.Employee", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("AppSettinsgId")
                         .HasMaxLength(36)
                         .HasColumnType("TEXT");
 
@@ -31,9 +59,6 @@ namespace nauka.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("EmployeePermisson")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<byte>("ExtraFreeDays")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -65,9 +90,6 @@ namespace nauka.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("VacationPermisson")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<byte>("YearsOfExpirence")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -167,6 +189,17 @@ namespace nauka.Migrations
                     b.ToTable("VacationOfEmployees");
                 });
 
+            modelBuilder.Entity("nauka.V3.Models.AppSettings", b =>
+                {
+                    b.HasOne("nauka.V3.Models.Employee", "Employee")
+                        .WithOne("AppSettings")
+                        .HasForeignKey("nauka.V3.Models.AppSettings", "EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("nauka.V3.Models.Employee", b =>
                 {
                     b.HasOne("nauka.V3.Models.Section", "Section")
@@ -210,6 +243,8 @@ namespace nauka.Migrations
 
             modelBuilder.Entity("nauka.V3.Models.Employee", b =>
                 {
+                    b.Navigation("AppSettings");
+
                     b.Navigation("Vacation_Employees");
                 });
 

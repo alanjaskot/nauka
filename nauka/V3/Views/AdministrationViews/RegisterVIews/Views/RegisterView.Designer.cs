@@ -45,8 +45,10 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             this.labelName = new System.Windows.Forms.Label();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.textBoxAppSetting = new System.Windows.Forms.TextBox();
+            this.textBoxExtraFreeDays = new System.Windows.Forms.TextBox();
             this.labelFreeDays = new System.Windows.Forms.Label();
+            this.labelDateOfHire = new System.Windows.Forms.Label();
+            this.dateTimePickerHireDate = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // comboBoxSex
@@ -56,7 +58,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxSex.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxSex.FormattingEnabled = true;
-            this.comboBoxSex.Location = new System.Drawing.Point(263, 555);
+            this.comboBoxSex.Location = new System.Drawing.Point(269, 621);
             this.comboBoxSex.Name = "comboBoxSex";
             this.comboBoxSex.Size = new System.Drawing.Size(377, 38);
             this.comboBoxSex.TabIndex = 27;
@@ -69,7 +71,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxSection.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxSection.FormattingEnabled = true;
-            this.comboBoxSection.Location = new System.Drawing.Point(263, 483);
+            this.comboBoxSection.Location = new System.Drawing.Point(269, 549);
             this.comboBoxSection.Name = "comboBoxSection";
             this.comboBoxSection.Size = new System.Drawing.Size(377, 38);
             this.comboBoxSection.TabIndex = 26;
@@ -136,7 +138,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSex.AutoSize = true;
             this.labelSex.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSex.Location = new System.Drawing.Point(36, 558);
+            this.labelSex.Location = new System.Drawing.Point(42, 624);
             this.labelSex.Name = "labelSex";
             this.labelSex.Size = new System.Drawing.Size(54, 30);
             this.labelSex.TabIndex = 20;
@@ -162,7 +164,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSection.AutoSize = true;
             this.labelSection.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelSection.Location = new System.Drawing.Point(30, 486);
+            this.labelSection.Location = new System.Drawing.Point(36, 552);
             this.labelSection.Name = "labelSection";
             this.labelSection.Size = new System.Drawing.Size(58, 30);
             this.labelSection.TabIndex = 18;
@@ -226,7 +228,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOk.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonOk.Location = new System.Drawing.Point(115, 661);
+            this.buttonOk.Location = new System.Drawing.Point(128, 708);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(153, 57);
             this.buttonOk.TabIndex = 28;
@@ -239,23 +241,23 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonCancel.Location = new System.Drawing.Point(342, 661);
+            this.buttonCancel.Location = new System.Drawing.Point(355, 708);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(153, 57);
             this.buttonCancel.TabIndex = 29;
             this.buttonCancel.Text = "Anuluj";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
-            // textBoxAppSetting
+            // textBoxExtraFreeDays
             // 
-            this.textBoxAppSetting.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.textBoxExtraFreeDays.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxAppSetting.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxAppSetting.Location = new System.Drawing.Point(313, 408);
-            this.textBoxAppSetting.Name = "textBoxAppSetting";
-            this.textBoxAppSetting.Size = new System.Drawing.Size(327, 37);
-            this.textBoxAppSetting.TabIndex = 31;
+            this.textBoxExtraFreeDays.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxExtraFreeDays.Location = new System.Drawing.Point(313, 408);
+            this.textBoxExtraFreeDays.Name = "textBoxExtraFreeDays";
+            this.textBoxExtraFreeDays.Size = new System.Drawing.Size(327, 37);
+            this.textBoxExtraFreeDays.TabIndex = 31;
             // 
             // labelFreeDays
             // 
@@ -266,16 +268,39 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
             this.labelFreeDays.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelFreeDays.Location = new System.Drawing.Point(36, 411);
             this.labelFreeDays.Name = "labelFreeDays";
-            this.labelFreeDays.Size = new System.Drawing.Size(245, 30);
+            this.labelFreeDays.Size = new System.Drawing.Size(161, 30);
             this.labelFreeDays.TabIndex = 30;
-            this.labelFreeDays.Text = "przysługujące dni wolne";
+            this.labelFreeDays.Text = "extra dni wolne";
+            // 
+            // labelDateOfHire
+            // 
+            this.labelDateOfHire.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelDateOfHire.AutoSize = true;
+            this.labelDateOfHire.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelDateOfHire.Location = new System.Drawing.Point(36, 482);
+            this.labelDateOfHire.Name = "labelDateOfHire";
+            this.labelDateOfHire.Size = new System.Drawing.Size(150, 30);
+            this.labelDateOfHire.TabIndex = 32;
+            this.labelDateOfHire.Text = "data zatrudnia";
+            // 
+            // dateTimePickerHireDate
+            // 
+            this.dateTimePickerHireDate.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dateTimePickerHireDate.Location = new System.Drawing.Point(269, 477);
+            this.dateTimePickerHireDate.Name = "dateTimePickerHireDate";
+            this.dateTimePickerHireDate.Size = new System.Drawing.Size(371, 37);
+            this.dateTimePickerHireDate.TabIndex = 33;
             // 
             // RegisterView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(678, 794);
-            this.Controls.Add(this.textBoxAppSetting);
+            this.Controls.Add(this.dateTimePickerHireDate);
+            this.Controls.Add(this.labelDateOfHire);
+            this.Controls.Add(this.textBoxExtraFreeDays);
             this.Controls.Add(this.labelFreeDays);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
@@ -320,7 +345,9 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Views
         private System.Windows.Forms.Label labelName;
         protected internal System.Windows.Forms.Button buttonOk;
         protected internal System.Windows.Forms.Button buttonCancel;
-        protected internal System.Windows.Forms.TextBox textBoxAppSetting;
+        protected internal System.Windows.Forms.TextBox textBoxExtraFreeDays;
         private System.Windows.Forms.Label labelFreeDays;
+        protected internal System.Windows.Forms.Label labelDateOfHire;
+        protected internal System.Windows.Forms.DateTimePicker dateTimePickerHireDate;
     }
 }

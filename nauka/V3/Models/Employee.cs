@@ -7,7 +7,7 @@ using System.Text;
 
 namespace nauka.V3.Models
 {
-    public class Employee: IEntity<Guid>
+    public class Employee: ICloneable
     {
 
         [StringLength(36)]
@@ -32,17 +32,121 @@ namespace nauka.V3.Models
         public char Sex { get; set; }
         public bool EmployeePermisson { get; set; }
         public bool VacationPermisson { get; set; }
+        public DateTime DateOfHire { get; set; }
+        public byte YearsOfExpirence { get; set; }
+        public byte ExtraFreeDays { get; set; }
                  
         //relation properties
         [StringLength(36)]
-        public Guid? SectionId { get; set; }     
+        public Guid SectionId { get;  set; }     
         public Section Section { get; set; }
         
         public List<Vacation_Employee> Vacation_Employees { get; set; }
-       
-        [StringLength(36)]
-        public virtual Guid AppSettinsgId { get; set; }
-        public AppSettings AppSettings { get; set; } // a po co tu appsettings 
+
+
+        //
+        // Functions
+        //
+        public byte GetYearsOfExpirence() 
+        {
+            DateTime currentYear = DateTime.Now;
+            byte yearsInCompany = (byte)(currentYear.Year - DateOfHire.Year);
+
+            return (byte)(YearsOfExpirence + yearsInCompany);
+        }
+
+        public Employee AddSurname (string surname)
+        {
+            var _emplyee = (Employee)MemberwiseClone();
+            _emplyee.Surname = surname;
+            return _emplyee;
+        }
+
+        public Employee AddName(string name)
+        {
+            var _employee = (Employee)MemberwiseClone();
+            _employee.Name = name;
+            return _employee;
+        }
+
+        public Employee AddUsername(string username)
+        {
+            var _employee = (Employee)MemberwiseClone();
+            _employee.Username = username;
+            return _employee;
+        }
+
+        public Employee AddPassword(string password)
+        {
+            var _employee = (Employee)MemberwiseClone();
+            _employee.Password = password;
+            return _employee;
+        }
+
+        public Employee AddEmail(string email)
+        {
+            var _employee = (Employee)MemberwiseClone();
+            _employee.Email = email;
+            return _employee;
+        }
+
+        public Employee AddSex(char sex)
+        {
+            var _employee = (Employee)MemberwiseClone();
+            _employee.Sex = sex;
+            return _employee;
+        }
+
+        public Employee AddEmployeePermisson(bool employeePermisson)
+        {
+            var _employee = (Employee)MemberwiseClone();
+            _employee.EmployeePermisson = employeePermisson;
+            return _employee;
+        }
+
+        public Employee AddVacationPermisson(bool vacationPermisson)
+        {
+            var _employee = (Employee)MemberwiseClone();
+            _employee.VacationPermisson = vacationPermisson;
+            return _employee;
+        }
+
+        public Employee AddDateOfHire(DateTime dateOfHire)
+        {
+            var _employee = (Employee)MemberwiseClone();
+            _employee.DateOfHire = dateOfHire;
+            return _employee;
+        }
+
+        public Employee AddYearsOfExperience(byte yearsOfExperience)
+        {
+            var _employee = (Employee)MemberwiseClone();
+            _employee.YearsOfExpirence = yearsOfExperience;
+            return _employee;
+        }
+
+        public Employee AddExtraFreeDays(byte extraFreeDays)
+        {
+            var _employee = (Employee)MemberwiseClone();
+            _employee.ExtraFreeDays = extraFreeDays;
+            return _employee;
+        }
+
+        public Employee AddSectionId(Guid sectionId)
+        {
+            var _employee = (Employee)MemberwiseClone();
+            _employee.SectionId = sectionId;
+            return _employee;
+        }
+
+        public Object Clone()
+        {
+            var _employee = (Employee)this.MemberwiseClone();
+            return _employee;
+        }
+
+
+        // a po co tu appsettings 
         //dalem dni wolne od pracy
         // hm, ale co tam ma byc ilosc dnia i cos jeszcze ?? a co z innymi jak bedzie kilka ?? 
         //to jest przypisane 1:1, kazdy pracownik ma swoje wlasne dni

@@ -115,11 +115,6 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
                         _view.comboBoxSex.SelectedIndex = 0;
                     if (_model.Employee.SectionId != null)
                         _view.comboBoxSection.SelectedItem = _model.Employee.Section.Name;
-                    if (_model.Employee.AppSettinsgId != null)
-                    {
-                        var appSetting = _model.GetAppSettings().Result.Where(ap => ap.Id == _model.Employee.AppSettinsgId).FirstOrDefault();
-                        _view.textBoxAppSetting.Text = appSetting.AvaibleVacationDays.ToString();
-                    }
                 }
             }
             catch
@@ -131,42 +126,39 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
 
         private void RefreshModel()
         {
-            
-                var employee = new Employee();
-                if (_model.Employee.Id == Guid.Parse("00000000-0000-0000-0000-000000000000")) 
-                    employee.Id = Guid.NewGuid();
-                employee.Name = _view.textBoxName.Text;
-                employee.Surname = _view.textBoxSurname.Text;
-                employee.Username = _view.textBoxUsername.Text;
-                employee.Password = _view.textBoxPassword.Text;
-                employee.Email = _view.textBoxEmail.Text;
-                employee.EmployeePermisson = false;
-                employee.VacationPermisson = false;
+            try
+            {
+                char sex = 'a';
+                int sexIndex = _view.comboBoxSex.SelectedIndex;
+                if (sexIndex == 2)
+                    sex = 'M';
+                if (sexIndex == 1)
+                    sex = 'K';
+
+                var _employee = (Employee)_model.Employee.Clone();
+
                 var sectionList = _model.GetSections();
                 var selectedSection = sectionList.Result.Where(s => s.Name == (string)_view.comboBoxSection.SelectedItem).FirstOrDefault();
-                employee.Section = selectedSection;
-                employee.SectionId = selectedSection.Id;
-                int sex = _view.comboBoxSex.SelectedIndex;
-                if (sex == 1)
-                    employee.Sex = 'M';
-                if (sex == 0)
-                    employee.Sex = 'K';
 
-                if (_model.Employee.AppSettings == null)
-                {
-                    employee.AppSettings = new AppSettings
-                    {
-                        Id = Guid.NewGuid(),
-                        AvaibleVacationDays = byte.Parse(_view.textBoxAppSetting.Text),
-                        EmployeeId = employee.Id
-                    };
-                    employee.AppSettinsgId = employee.AppSettings.Id;
-                }
-                    
-                else
-                    employee.AppSettings.AvaibleVacationDays = byte.Parse(_view.textBoxAppSetting.Text);
-
-                _model.Employee = employee; 
+                if (_model.Employee.Id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+                    _employee.Id = Guid.NewGuid();
+                _employee.AddName(_view.textBoxName.Text)
+                    .AddSurname(_view.textBoxSurname.Text)
+                    .AddUsername(_view.textBoxUsername.Text)
+                    .AddPassword(_view.textBoxPassword.Text)
+                    .AddEmail(_view.textBoxEmail.Text)
+                    .AddSex(sex)
+                    .AddDateOfHire(_view.dateTimePickerHireDate.Value)
+                    .AddExtraFreeDays(byte.Parse(_view.textBoxExtraFreeDays.Text))
+                    .AddSectionId(selectedSection.Id);
+                _model.Employee = (Employee)_employee.Clone();
+            }
+            catch (Exception er)
+            {
+                _logger.Error("Refresh model " + er.Message);
+                
+            }
+            
         }
 
         private void GetSex()
@@ -226,7 +218,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
                     result = false;
                 if (_view.textBoxEmail.Text == null)
                     result = false;
-                if (_view.textBoxAppSetting.Text == null)
+                if (_view.dateTimePickerHireDate.Value == null)
                     result = false;
                 if (_view.comboBoxSection.SelectedIndex < 1)
                     result = false;

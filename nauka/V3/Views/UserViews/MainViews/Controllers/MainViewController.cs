@@ -166,21 +166,21 @@ namespace nauka.V3.Views.MainViews.Controller
                     var section = _model.GetSections().Result.Where(s => s.Id == _model.Employee.SectionId).FirstOrDefault();
                     _view.labelSectionEmployee.Text = section.Name;
 
-                    byte currentYearFreeDays = CountCurrentFreeDays();
+                    byte currentYearFreeDays = CalculateCurrentFreeDays();
                     _view.labelFreeDays.Text = currentYearFreeDays.ToString();                   
-                    byte lastYearFreeDays = CountLastYearFreeDays();
+                    byte lastYearFreeDays = CalculateLastYearFreeDays();
                     _view.labelLastYearFreeDays.Text = lastYearFreeDays.ToString();
                 }
         }
 
-        private byte CountLastYearFreeDays()
+        private byte CalculateLastYearFreeDays()
         {
             byte result = 0;
             var lastYear = DateTime.Now;
             lastYear = lastYear.AddYears(-1);
 
             byte usedDays = CountUsedDays(lastYear);
-            byte daysToUse = GetFreeDays();
+            byte daysToUse = CountLastYearFreeDays();
 
             if (daysToUse > 0)
             {
@@ -190,12 +190,12 @@ namespace nauka.V3.Views.MainViews.Controller
             return result;
         }
 
-        private byte CountCurrentFreeDays()
+        private byte CalculateCurrentFreeDays()
         {
             byte result = 0;
 
             byte usedDays = CountUsedDays(DateTime.Now);
-            byte daysToUse = GetFreeDays();
+            byte daysToUse = CountCurrentFreeDays();
             
                 if (daysToUse > 0)
                 {
@@ -205,18 +205,75 @@ namespace nauka.V3.Views.MainViews.Controller
             return result;
         }
 
-        private byte GetFreeDays()
+        private byte CountCurrentFreeDays()
         {
-            try
+            int yearsOfExperience = _model.Employee.GetYearsOfExpirence();
+            DateTime currentYear = DateTime.Now;
+            DateTime dateOfHire = _model.Employee.DateOfHire;
+            DateTime lastYear = DateTime.Now.AddYears(-1);
+            DateTime twoYearsAgo = DateTime.Now.AddYears(-2);
+            DateTime tenYearsAgo = DateTime.Now.AddYears(-10);
+
+            byte result = 0;
+            
+            if (yearsOfExperience >= 10)
+                result = 26;
+
+            if ((yearsOfExperience > 2) && (yearsOfExperience < 10))
+                result = 20;
+
+            if (dateOfHire.Year == currentYear.Year)
             {
-                var appSetting = Task.Run(async () => await _model.GetAppSetting(_model.Employee.AppSettinsgId)).Result;
-                return appSetting.AvaibleVacationDays;
+                double freeDays = 0;
+                while(dateOfHire < DateTime.Now)
+                {
+                    if(yearsOfExperience >= 10)
+                        freeDays += 2.16;
+                    if (yearsOfExperience < 10)
+                        freeDays += 1.66;
+                    dateOfHire = dateOfHire.AddMonths(1);
+                }
+                result = (byte)Math.Ceiling(freeDays);
             }
-            catch (Exception)
+
+            return result;
+        }
+
+        private byte CountLastYearFreeDays()
+        {
+            byte result = 0;
+            int yearsOfExperience = _model.Employee.GetYearsOfExpirence();
+            DateTime dateOfHire = _model.Employee.DateOfHire;
+            DateTime lastYear = DateTime.Now.AddYears(-1);
+            
+            if ((yearsOfExperience >= 10) && (dateOfHire.Year < lastYear.Year))
+                result = 26;
+
+            if ((yearsOfExperience >= 2) && (yearsOfExperience < 10) && (dateOfHire.Year < lastYear.Year))
+                result = 20;
+
+            if ((dateOfHire.Year == lastYear.Year) && (yearsOfExperience < 2))
             {
-                _logger.Error("MainView");
-                return 0;
-            }            
+                double freeDays = 0;
+                DateTime endOfYear = new DateTime(lastYear.Year, 12, 31);
+                while (dateOfHire < DateTime.Now)
+                {
+                    freeDays += 1.66;
+                    dateOfHire = dateOfHire.AddMonths(1);
+                }
+                result = (byte)Math.Ceiling(freeDays);
+            }
+            else
+            {
+                DateTime endOfYear = new DateTime(lastYear.Year, 12, 31);
+                while (dateOfHire < DateTime.Now)
+                {
+                    result += 2;
+                    dateOfHire = dateOfHire.AddMonths(1);
+                }
+            }
+
+            return result;
         }
 
         private byte CountUsedDays(DateTime year)

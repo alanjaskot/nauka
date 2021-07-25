@@ -18,7 +18,6 @@ namespace nauka.V3.Repository
 
         public String _dbPath { get; private set; }
 
-        public DbSet<AppSettings> AppSettings { get; set; }
         public DbSet<VacationDays> VacationDays { get; set; }
         public DbSet<Vacation> Vacations { get; set; }
         public DbSet<Section> Sections { get; set; }
@@ -56,8 +55,6 @@ namespace nauka.V3.Repository
         {
 
             #region Primary Keys
-            model.Entity<AppSettings>()
-                .HasKey(ap => ap.Id);
 
             model.Entity<Section>()
                 .HasKey(s => s.Id);
@@ -76,14 +73,6 @@ namespace nauka.V3.Repository
             #endregion
 
             #region Properties
-
-            model.Entity<AppSettings>()
-                .Property(ap => ap.AvaibleVacationDays)
-                .IsRequired();
-
-            model.Entity<AppSettings>()
-                .Property(ap => ap.EmployeeId)
-                .IsRequired();
 
             model.Entity<Section>()
                 .Property(s => s.Name)
@@ -121,6 +110,14 @@ namespace nauka.V3.Repository
             model.Entity<Employee>()
                 .Property(e => e.EmployeePermisson)
                 .IsRequired();
+
+            model.Entity<Employee>()
+                .Property(e => e.DateOfHire)
+                .IsRequired();
+
+            model.Entity<Employee>()
+                .Property(e => e.YearsOfExpirence)
+                .IsRequired();
             #endregion
 
             #region Vacation properties
@@ -157,11 +154,6 @@ namespace nauka.V3.Repository
                 .HasOne(vd => vd.Vacation)
                 .WithOne(v => v.VacationDays)
                 .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired();
-
-            model.Entity<Employee>()
-                .HasOne(e => e.AppSettings)
-                .WithOne(ap => ap.Employee)
                 .IsRequired();
 
             #endregion

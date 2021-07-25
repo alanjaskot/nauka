@@ -303,28 +303,41 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
         private async Task ShowSectionsEmployees()
         {
             _view.comboBoxSections.Items.Clear();
+            _view.comboBoxSections.Items.Add("ustaw");
             foreach (var item in _model.GetSections().Result)
             {
                 _view.comboBoxSections.Items.Add(item.Name);
             }
+            _view.comboBoxSections.SelectedIndex = 0;
 
             await Task.CompletedTask;
         }
 
         private async Task DisplayEmployees()
         {
-
-                _view.dataGridViewEmployees.Rows.Clear();
-                int i = 1;
-                var employeeList = _model.GetEmployees().Result;
-                foreach (var item in employeeList)
+            _view.dataGridViewEmployees.Rows.Clear();
+            int i = 1;
+            try
+            {
+                string sectionName = _view.comboBoxSections.GetItemText(_view.comboBoxSections.SelectedItem);
+            }
+            catch(Exception er)
+            {
+                MessageBox.Show(er.Message);
+            }
+            
+            int a = 0;
+            var section = _model.GetSections().Result.Where(s => s.Name == _view.comboBoxSections.SelectedItem.ToString()).FirstOrDefault();
+            var employeeList = _model.GetEmployees().Result;
+            
+            foreach (var item in employeeList)
+            {
+                if (item.SectionId == section.Id)
                 {
-                    if ((item.Section.Name == (string)_view.comboBoxSections.SelectedItem) && (item.Section.Name != null))
-                    {
-                        _view.dataGridViewEmployees.Rows.Add(item.Id, i, item.Surname, item.Name);
-                        i++;
-                    }
+                    _view.dataGridViewEmployees.Rows.Add(item.Id, i, item.Surname, item.Name);
+                    i++;
                 }
+            }
 
             await Task.CompletedTask;
         }
@@ -720,8 +733,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
         private bool ValidApproveVacation(Employee employee, Vacation vacation)
         {
             var result = true;
-            try
-            {
+
                 foreach (var itemEmployeeVacation in _model.GetVacation_Employees().Result.Where(voe => voe.EmployeeId == employee.Id))
                 {
                     foreach (var item in _model.GetVacations().Result)
@@ -751,19 +763,12 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
                         }
                     }
                 }
-            }
-            catch
-            {
-                throw;
-            }
             
             return result;
         }
 
         private async Task DisplayVacAppPermissons()
         {
-            try
-            {
                 _view.dataGridViewVacApp.Rows.Clear();
 
                 int i = 1;
@@ -789,11 +794,6 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
                     }
                 }
-            }
-            catch
-            {
-                throw;
-            }
 
             await Task.CompletedTask;
         }

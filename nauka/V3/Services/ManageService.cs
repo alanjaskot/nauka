@@ -8,7 +8,6 @@ namespace nauka.V3.Services
 {
     public static class ManageService
     {
-        public static AppSettingsService AppSettings { get; set; }
         public static EmployeeService Employees { get; set; }
         public static SectionService Sections { get; set; }
         public static VacationService Vacations { get; set; }
@@ -21,14 +20,12 @@ namespace nauka.V3.Services
             DataBaseContext context = new DataBaseContext();
             context.Database.Migrate();
 
-            AppSettingsRepository appRepository = new AppSettingsRepository(context);
             EmployeeRepository employeeRepository = new EmployeeRepository(context);
             SectionRepository sectionRepository = new SectionRepository(context);
             VacationRepository vacationRepository = new VacationRepository(context);
             VacationDaysRepository vacationDaysRepository = new VacationDaysRepository(context);
             Vacation_EmployeeRepository vacation_EmployeeRepository = new Vacation_EmployeeRepository(context);
 
-            AppSettings = new AppSettingsService(context, appRepository);
             Employees = new EmployeeService(context, employeeRepository);
             Sections = new SectionService(context, sectionRepository);
             Vacations = new VacationService(context, vacationRepository);
