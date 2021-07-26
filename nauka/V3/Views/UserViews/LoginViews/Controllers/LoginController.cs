@@ -62,33 +62,26 @@ namespace nauka.V3.Views.UserViews.LoginRegisterViews.Controllers
             await Task.CompletedTask;
         }
 
-        private async Task Login()
+        private void Login()
         {
-                    var loggedEmployee = _model.GetEmployees().Result
-                        .Where(e => e.Username == _view.textBoxUsername.Text && e.Password == _view.textBoxPassword.Text).FirstOrDefault();
-                    if (loggedEmployee != null)
-                    {
-                        var view = new MainView();
-                        view.SetObjectToEdit = loggedEmployee;
-                        view.Show();
-                        _view.Hide();
-                    }
-
-            await Task.CompletedTask;
+            var loggedEmployee = _model.GetEmployees().Result
+                .Where(e => e.Username == _view.textBoxUsername.Text && e.Password == _view.textBoxPassword.Text).FirstOrDefault();
+            if (loggedEmployee != null)
+            {
+                var view = new MainView();
+                view.SetObjectToEdit = loggedEmployee;
+                view.Show();
+                _view.Hide();
+            }
         }
 
         private bool Validate()
         {
-            var result = false;
+            var result = true;
 
-                var username1 = _model.GetEmployees().Result
-                .Where(e => e.Username == _view.textBoxUsername.Text && e.Password == _view.textBoxPassword.Text).FirstOrDefault();
-                string username = username1.Username;
-                string password = username1.Password;
-
-                if ((_view.textBoxUsername.Text == username) && (_view.textBoxPassword.Text == password))
+                if ((_view.textBoxUsername.Text == null) || (_view.textBoxPassword.Text == null))
                 {
-                    result = true;
+                    result = false;
                 }
 
             

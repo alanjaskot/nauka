@@ -23,7 +23,7 @@ namespace nauka.V3.Repository
         public DbSet<Section> Sections { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Vacation_Employee> VacationOfEmployees { get; set; }
-        
+        //public DbSet<NLogModel> NlogModels { get; set; }
         
         public DataBaseContext()
         {

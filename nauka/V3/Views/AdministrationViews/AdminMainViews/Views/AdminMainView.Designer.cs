@@ -231,7 +231,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Views
             this.tabPageEmployees.Location = new System.Drawing.Point(4, 39);
             this.tabPageEmployees.Name = "tabPageEmployees";
             this.tabPageEmployees.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEmployees.Size = new System.Drawing.Size(1387, 557);
+            this.tabPageEmployees.Size = new System.Drawing.Size(1707, 737);
             this.tabPageEmployees.TabIndex = 1;
             this.tabPageEmployees.Text = "Pracownicy";
             this.tabPageEmployees.UseVisualStyleBackColor = true;

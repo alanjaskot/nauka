@@ -79,7 +79,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
 
             _view.Load += (object sender, EventArgs e) =>
             {
-                Task.Run(async() => await RefreshView());
+                RefreshView();
             };
 
             await Task.CompletedTask;
@@ -98,7 +98,7 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
             Task.Run(async () => await GetSectionsList());
         }
 
-        private async Task RefreshView()
+        private void RefreshView()
         {
             try
             {
@@ -109,19 +109,26 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
                     _view.textBoxUsername.Text = _model.Employee.Username;
                     _view.textBoxPassword.Text = _model.Employee.Password;
                     _view.textBoxEmail.Text = _model.Employee.Email;
+                    _view.textBoxYearsOfExperience.Text = _model.Employee.GetYearsOfExpirence().ToString();
+                    if(_model.Employee.DateOfHire > DateTime.MinValue && _model.Employee.DateOfHire < DateTime.MinValue)
+                        _view.dateTimePickerHireDate.Value = _model.Employee.DateOfHire;
                     if (_model.Employee.Sex == 'M')
-                        _view.comboBoxSex.SelectedIndex = 1;
+                        _view.comboBoxSex.SelectedIndex = 2;
                     if (_model.Employee.Sex == 'K')
-                        _view.comboBoxSex.SelectedIndex = 0;
-                    if (_model.Employee.SectionId != null)
-                        _view.comboBoxSection.SelectedItem = _model.Employee.Section.Name;
+                        _view.comboBoxSex.SelectedIndex = 1;
+                    
+                    if (_model.Employee.SectionId != Guid.Empty)
+                    {
+                        var section = _model.GetSections().Result.Where(s => s.Id == _model.Employee.SectionId).FirstOrDefault();
+                        _view.comboBoxSection.SelectedItem = section.Name;
+                    }
+                        
                 }
             }
             catch
             {
                 throw;
             }
-            await Task.CompletedTask;
         }
 
         private void RefreshModel()
@@ -139,26 +146,45 @@ namespace nauka.V3.Views.AdministrationViews.RegisterVIews.Controllers
 
                 var sectionList = _model.GetSections();
                 var selectedSection = sectionList.Result.Where(s => s.Name == (string)_view.comboBoxSection.SelectedItem).FirstOrDefault();
+                byte extraDays = 0;
+                try
+                {
+                    extraDays = byte.Parse(_view.textBoxExtraFreeDays.Text);
+                }
+                catch (InvalidCastException err)
+                {
+                    MessageBox.Show("Proszę wypełnić pole 'dodatkowe dni' wolne tylko pełnymi liczbami " + err.InnerException);
+                    _logger.Error(err.Message);
+                }
+                
 
-                if (_model.Employee.Id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
-                    _employee.Id = Guid.NewGuid();
-                _employee.AddName(_view.textBoxName.Text)
-                    .AddSurname(_view.textBoxSurname.Text)
-                    .AddUsername(_view.textBoxUsername.Text)
-                    .AddPassword(_view.textBoxPassword.Text)
-                    .AddEmail(_view.textBoxEmail.Text)
-                    .AddSex(sex)
-                    .AddDateOfHire(_view.dateTimePickerHireDate.Value)
-                    .AddExtraFreeDays(byte.Parse(_view.textBoxExtraFreeDays.Text))
-                    .AddSectionId(selectedSection.Id);
+                try
+                {
+                    /*if (_employee.Id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+                    _employee = _employee.Id = Guid.NewGuid();*/
+                    _employee = _employee.AddName(_view.textBoxName.Text)
+                            .AddSurname(_view.textBoxSurname.Text)
+                            .AddUsername(_view.textBoxUsername.Text)
+                            .AddPassword(_view.textBoxPassword.Text)
+                            .AddEmail(_view.textBoxEmail.Text)
+                            .AddSex(sex)
+                            .AddYearsOfExperience(byte.Parse(_view.textBoxYearsOfExperience.Text))
+                            .AddDateOfHire(_view.dateTimePickerHireDate.Value)
+                            .AddExtraFreeDays(extraDays)
+                            .AddSectionId(selectedSection.Id);
+                }
+                catch (Exception er) 
+                {
+                    _logger.Error(er.Message);
+                }
+                
                 _model.Employee = (Employee)_employee.Clone();
             }
             catch (Exception er)
             {
                 _logger.Error("Refresh model " + er.Message);
-                
+                MessageBox.Show(er.Message);
             }
-            
         }
 
         private void GetSex()

@@ -41,7 +41,7 @@ namespace nauka.V3.Repository
             if(employeeTemp != null)
             {
                 _context.Employees.Update(employee);
-                result = true;
+                result = true;  
             }
 
             return result;

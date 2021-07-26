@@ -63,7 +63,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             _view.buttonDisplayEmployees.Click += (object sender, EventArgs e) =>
             {
                 if (_model.Employee.EmployeePermisson == true)
-                    Task.Run(async () => await DisplayEmployees());
+                    DisplayEmployees();
                 else
                     MessageBox.Show("Brak uprawnień");
             };
@@ -75,7 +75,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
             _view.buttonUpdateEmployee.Click += (object sender, EventArgs e) =>
             {
-                Task.Run(async () => await UpdateEmployee());
+                UpdateEmployee();
             };
 
             _view.buttonDeleteEmployee.Click += (object sender, EventArgs e) =>
@@ -112,14 +112,14 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             _view.buttonMenageAppSection.Click += (object sender, EventArgs e) =>
             {
                 if (_model.Employee.VacationPermisson == true)
-                    Task.Run(async () => await DisplayVacAppPermissons()) ;
+                    DisplayVacAppPermissons();
                 else
                     MessageBox.Show("Brak uprawnień");
             };
 
             _view.buttonMenageAppApprove.Click += (object sender, EventArgs e) =>
             {
-                Task.Run(async () => await ApproveVacation()) ;
+                ApproveVacation();
             };
 
             _view.buttonMenageAppDenay.Click += (object sender, EventArgs e) =>
@@ -133,12 +133,12 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
             _view.buttonShowEmployeePermisson.Click += (object sender, EventArgs e) =>
             {
-                Task.Run(async () => await DisplayEmployeesPermisson());
+                DisplayEmployeesPermisson();
             };
 
             _view.buttonChangePermisson.Click += (object sender, EventArgs e) =>
             {
-                Task.Run(async () => await ChangePermission());
+                ChangePermission();
             };
 
             #endregion
@@ -199,6 +199,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             {
                 throw;
             }
+            await Task.CompletedTask;
         }
         private void InitDataGrids()
         {
@@ -317,16 +318,7 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
         {
             _view.dataGridViewEmployees.Rows.Clear();
             int i = 1;
-            try
-            {
-                string sectionName = _view.comboBoxSections.GetItemText(_view.comboBoxSections.SelectedItem);
-            }
-            catch(Exception er)
-            {
-                MessageBox.Show(er.Message);
-            }
-            
-            int a = 0;
+            string sectionName = _view.comboBoxSections.GetItemText(_view.comboBoxSections.SelectedItem);
             var section = _model.GetSections().Result.Where(s => s.Name == _view.comboBoxSections.SelectedItem.ToString()).FirstOrDefault();
             var employeeList = _model.GetEmployees().Result;
             

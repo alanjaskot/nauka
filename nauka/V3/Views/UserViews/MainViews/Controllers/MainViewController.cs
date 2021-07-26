@@ -149,16 +149,14 @@ namespace nauka.V3.Views.MainViews.Controller
 
                 if (_model.Employee != null)
                 {
-                    char m = 'M';
-                    char k = 'K';
 
                     _view.labelNameEmployee.Text = _model.Employee.Name;
                     _view.labelSurnameEmployee.Text = _model.Employee.Surname;
                     _view.labelUsernameEmployee.Text = _model.Employee.Username;
                     _view.labelEmailEmployee.Text = _model.Employee.Email;
-                    if (_model.Employee.Sex == m)
+                    if (_model.Employee.Sex == 'M')
                         _view.labelSexEmployee.Text = "mężczyzna";
-                    if (_model.Employee.Sex == k)
+                    if (_model.Employee.Sex == 'K')
                         _view.labelSexEmployee.Text = "kobieta";
                     else
                         _view.labelSexEmployee.Text = "nie podano";
@@ -210,28 +208,24 @@ namespace nauka.V3.Views.MainViews.Controller
             int yearsOfExperience = _model.Employee.GetYearsOfExpirence();
             DateTime currentYear = DateTime.Now;
             DateTime dateOfHire = _model.Employee.DateOfHire;
-            DateTime lastYear = DateTime.Now.AddYears(-1);
-            DateTime twoYearsAgo = DateTime.Now.AddYears(-2);
-            DateTime tenYearsAgo = DateTime.Now.AddYears(-10);
+            DateTime startOfYear = new DateTime(currentYear.Year, 1, 1);
 
             byte result = 0;
             
-            if (yearsOfExperience >= 10)
+            if ((yearsOfExperience >= 10) && (currentYear.Year - dateOfHire.Year > 0))
                 result = 26;
-
-            if ((yearsOfExperience > 2) && (yearsOfExperience < 10))
+            else if ((yearsOfExperience > 2) && (yearsOfExperience < 10) && (currentYear.Year - dateOfHire.Year > 0))
                 result = 20;
-
-            if (dateOfHire.Year == currentYear.Year)
+            else
             {
                 double freeDays = 0;
-                while(dateOfHire < DateTime.Now)
+                while(startOfYear < DateTime.Now)
                 {
                     if(yearsOfExperience >= 10)
                         freeDays += 2.16;
                     if (yearsOfExperience < 10)
                         freeDays += 1.66;
-                    dateOfHire = dateOfHire.AddMonths(1);
+                    startOfYear = startOfYear.AddMonths(1);
                 }
                 result = (byte)Math.Ceiling(freeDays);
             }
@@ -245,31 +239,28 @@ namespace nauka.V3.Views.MainViews.Controller
             int yearsOfExperience = _model.Employee.GetYearsOfExpirence();
             DateTime dateOfHire = _model.Employee.DateOfHire;
             DateTime lastYear = DateTime.Now.AddYears(-1);
-            
-            if ((yearsOfExperience >= 10) && (dateOfHire.Year < lastYear.Year))
-                result = 26;
-
-            if ((yearsOfExperience >= 2) && (yearsOfExperience < 10) && (dateOfHire.Year < lastYear.Year))
-                result = 20;
-
-            if ((dateOfHire.Year == lastYear.Year) && (yearsOfExperience < 2))
+            if (lastYear.Year -_model.Employee.DateOfHire.Year < 0)
             {
-                double freeDays = 0;
-                DateTime endOfYear = new DateTime(lastYear.Year, 12, 31);
-                while (dateOfHire < DateTime.Now)
-                {
-                    freeDays += 1.66;
-                    dateOfHire = dateOfHire.AddMonths(1);
-                }
-                result = (byte)Math.Ceiling(freeDays);
+                result = 0;
             }
             else
             {
-                DateTime endOfYear = new DateTime(lastYear.Year, 12, 31);
-                while (dateOfHire < DateTime.Now)
+                if ((yearsOfExperience >= 10) && (dateOfHire.Year < lastYear.Year))
+                    result = 26;
+
+                if ((yearsOfExperience >= 2) && (yearsOfExperience < 10) && (dateOfHire.Year < lastYear.Year))
+                    result = 20;
+
+                if ((dateOfHire.Year == lastYear.Year) && (yearsOfExperience < 10))
                 {
-                    result += 2;
-                    dateOfHire = dateOfHire.AddMonths(1);
+                    double freeDays = 0;
+                    DateTime endOfYear = new DateTime(lastYear.Year, 12, 31);
+                    while (dateOfHire < endOfYear)
+                    {
+                        freeDays += 1.66;
+                        dateOfHire = dateOfHire.AddMonths(1);
+                    }
+                    result = (byte)Math.Ceiling(freeDays);
                 }
             }
 
