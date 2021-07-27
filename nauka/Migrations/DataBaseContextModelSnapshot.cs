@@ -23,6 +23,9 @@ namespace nauka.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("TEXT");
 
+                    b.Property<byte>("CurrentFreeDays")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("DateOfHire")
                         .HasColumnType("TEXT");
 
@@ -36,6 +39,9 @@ namespace nauka.Migrations
                     b.Property<byte>("ExtraFreeDays")
                         .HasColumnType("INTEGER");
 
+                    b.Property<byte>("LastYearFreeDays")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30)
@@ -46,8 +52,7 @@ namespace nauka.Migrations
                         .HasMaxLength(16)
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("SectionId")
-                        .IsRequired()
+                    b.Property<Guid>("SectionId")
                         .HasMaxLength(36)
                         .HasColumnType("TEXT");
 

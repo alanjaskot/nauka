@@ -86,6 +86,7 @@ namespace nauka.V3.Models
                 }
                 result = (byte)Math.Ceiling(freeDays);
             }
+            CurrentFreeDays = result;
 
             return result;
         }
@@ -122,9 +123,13 @@ namespace nauka.V3.Models
                 if ((yearsOfExperience >= 2) && (yearsOfExperience < 10) && (dateOfHire.Year < lastYear.Year))
                     result = 20;
             }
-
+            LastYearFreeDays = result;
             return result;
         }
+
+        //
+        // For Cloning Functions
+        //
 
         public Employee AddSurname (string surname)
         {
