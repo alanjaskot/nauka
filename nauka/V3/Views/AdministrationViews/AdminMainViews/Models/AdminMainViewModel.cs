@@ -143,6 +143,20 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Models
             await _vacationDaysService.Update(vacationDaysId, vacationDays);
         }
 
+        internal async Task<List<VacationDays>> GetVacationDays()
+        {
+            var result = default(List<VacationDays>);
+            try
+            {
+                result = _vacationDaysService.GetVacationDays().Result;
+            }
+            catch
+            {
+                throw;
+            }
+            return await Task.FromResult(result);
+        }
+
         #endregion
 
         #region Vacation_Employee

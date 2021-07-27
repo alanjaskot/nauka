@@ -674,9 +674,12 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
 
                 if (ValidApproveVacation(employee, vacation))
                 {
-                    vacation.Approve = true;
-                    await _model.UpdateVacation(idVacation, vacation);
-                    await CountVacationDays(employee, vacation);
+                    if(await CountVacationDays(employee, vacation))
+                    {
+                        vacation.Approve = true;
+                        await _model.UpdateVacation(idVacation, vacation);
+                    }
+
                 }
             }
             catch
@@ -687,13 +690,14 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
             await DisplayVacAppPermissons ();
         }
 
-        private async Task CountVacationDays(Employee employee, Vacation vacation)
+        private async Task<bool> CountVacationDays(Employee employee, Vacation vacation)
         {
+            var result = false;
             try
             {
                 long daysOfVacation = 0;
                 DateTime day = vacation.Start;
-
+                //zliczanie wolnych dni do akceptacji
                 while (day <= vacation.End)
                 {
                     if ((day.DayOfWeek != DayOfWeek.Saturday) && (day.DayOfWeek != DayOfWeek.Sunday))
@@ -702,60 +706,84 @@ namespace nauka.V3.Views.AdministrationViews.AdminMainViews.Controller
                     }
                     day = day.AddDays(1.0);
                 }
-
-                var vacationDays = new VacationDays
+                
+                //zliczanie już wykorzystanych dni
+                byte usedDays = 0;
+                var employeeVacations = _model.GetVacation_Employees().Result.Where(voe => voe.EmployeeId == employee.Id).ToList();
+                var vacationDaysList = _model.GetVacationDays().Result;
+                foreach (var itemVOE in employeeVacations)
                 {
-                    Id = Guid.NewGuid(),
-                    Days = daysOfVacation,
-                    Year = DateTime.Now,
-                    VacationId = vacation.Id
-                };
+                    foreach (var itemVD in vacationDaysList)
+                    {
+                        if ((itemVOE.VacationId == itemVD.VacationId) && (itemVD.Year.Year == DateTime.Now.Year))
+                        {
+                            usedDays += (byte)itemVD.Days;
+                        }
+                    }
+                }
+                var allUsedDays = daysOfVacation + usedDays;
 
-                vacation.VacationDaysId = vacationDays.Id;
+                //jeżeli ilość dni się zgadza, to dodaj wszystko
+                if((employee.GetCurrentFreeDays() - allUsedDays) >= 0)
+                {
+                    var vacationDays = new VacationDays
+                    {
+                        Id = Guid.NewGuid(),
+                        Days = daysOfVacation,
+                        Year = DateTime.Now,
+                        VacationId = vacation.Id
+                    };
 
-                await _model.AddVacationDays(vacationDays);
-                await _model.UpdateVacation(vacation.Id, vacation);
+                    vacation.VacationDaysId = vacationDays.Id;
+
+                    await _model.AddVacationDays(vacationDays);
+                    await _model.UpdateVacation(vacation.Id, vacation);
+
+                    result = true;
+                }
+
+                
             }
             catch
             {
                 throw;
-            } 
+            }
+            return result;
         }
 
         private bool ValidApproveVacation(Employee employee, Vacation vacation)
         {
             var result = true;
 
-                foreach (var itemEmployeeVacation in _model.GetVacation_Employees().Result.Where(voe => voe.EmployeeId == employee.Id))
+            foreach (var itemEmployeeVacation in _model.GetVacation_Employees().Result.Where(voe => voe.EmployeeId == employee.Id))
+            {
+                foreach (var item in _model.GetVacations().Result)
                 {
-                    foreach (var item in _model.GetVacations().Result)
+                    if (item.Id == itemEmployeeVacation.VacationId && item.Id != vacation.Id)
                     {
-                        if (item.Id == itemEmployeeVacation.VacationId && item.Id != vacation.Id)
+                        if ((vacation.Start >= item.Start) && (vacation.End <= item.End))
                         {
-                            if ((vacation.Start >= item.Start) && (vacation.End <= item.End))
-                            {
-                                result = false;
-                                MessageBox.Show("Wniosek pokrywa się z innym urlopem");
-                                break;
-                            }
+                            result = false;
+                            MessageBox.Show("Wniosek pokrywa się z innym urlopem");
+                            break;
+                        }
 
-                            if ((vacation.End >= item.Start) && (vacation.End <= item.End))
-                            {
-                                result = false;
-                                MessageBox.Show("Wniosek pokrywa się z innym urlopem");
-                                break;
-                            }
+                        if ((vacation.End >= item.Start) && (vacation.End <= item.End))
+                        {
+                            result = false;
+                            MessageBox.Show("Wniosek pokrywa się z innym urlopem");
+                            break;
+                        }
 
-                            if ((vacation.Start < item.Start) && (vacation.End > item.End))
-                            {
-                                result = false;
-                                MessageBox.Show("Wniosek pokrywa się z innym urlopem");
-                                break;
-                            }
+                        if ((vacation.Start < item.Start) && (vacation.End > item.End))
+                        {
+                            result = false;
+                            MessageBox.Show("Wniosek pokrywa się z innym urlopem");
+                            break;
                         }
                     }
                 }
-            
+            }
             return result;
         }
 

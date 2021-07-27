@@ -34,6 +34,8 @@ namespace nauka.V3.Models
         public bool VacationPermisson { get; set; }
         public DateTime DateOfHire { get; set; }
         public byte YearsOfExpirence { get; set; }
+        public byte CurrentFreeDays { get; private set; }
+        public byte LastYearFreeDays { get; private set; }
         public byte ExtraFreeDays { get; set; }
                  
         //relation properties
@@ -53,6 +55,75 @@ namespace nauka.V3.Models
             byte yearsInCompany = (byte)(currentYear.Year - DateOfHire.Year);
 
             return (byte)(YearsOfExpirence + yearsInCompany);
+        }
+
+        public byte GetCurrentFreeDays()
+        {
+            int yearsOfExperience = GetYearsOfExpirence();
+            DateTime currentYear = DateTime.Now;
+            DateTime dateOfHire = DateOfHire;
+            DateTime startOfYear = new DateTime(currentYear.Year, 1, 1);
+
+            byte result = 0;
+
+            if(currentYear.Year - dateOfHire.Year > 0)
+            {
+                if (yearsOfExperience >= 10)
+                    result = 26;
+                if (yearsOfExperience < 10)
+                    result = 20;
+            }          
+            else
+            {
+                double freeDays = 0;
+                while (startOfYear <= DateTime.Now)
+                {
+                    if (yearsOfExperience >= 10)
+                        freeDays += 2.16;
+                    if (yearsOfExperience < 10)
+                        freeDays += 1.66;
+                    startOfYear = startOfYear.AddMonths(1);
+                }
+                result = (byte)Math.Ceiling(freeDays);
+            }
+
+            return result;
+        }
+
+        public byte GetLastYearFreeDays()
+        {
+            byte result = 0;
+            int yearsOfExperience = GetYearsOfExpirence();
+            DateTime dateOfHire = DateOfHire;
+            DateTime lastYear = DateTime.Now.AddYears(-1);
+            if (lastYear.Year - DateOfHire.Year < 0)
+            {
+                result = 0;
+            }
+            else if (dateOfHire.Year == lastYear.Year)
+            {
+                double freeDays = 0;
+                DateTime endOfYear = new DateTime(lastYear.Year, 12, 31);
+                while (dateOfHire < endOfYear)
+                {
+                    if(yearsOfExperience < 10)
+                        freeDays += 1.66;
+                    if (yearsOfExperience >= 10)
+                        freeDays += 2.16;
+                    dateOfHire = dateOfHire.AddMonths(1);
+                }
+                result = (byte)Math.Ceiling(freeDays);
+            }
+            else
+            {
+                if ((yearsOfExperience >= 10) && (dateOfHire.Year < lastYear.Year))
+                    result = 26;
+
+                if ((yearsOfExperience >= 2) && (yearsOfExperience < 10) && (dateOfHire.Year < lastYear.Year))
+                    result = 20;
+            }
+
+            return result;
         }
 
         public Employee AddSurname (string surname)
