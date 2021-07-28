@@ -1,0 +1,16 @@
+2021-07-28 11:07:00.7786|INFO|nauka.Program|Nlog config work
+2021-07-28 11:07:01.6204|DEBUG|nauka.Program|Test debug
+2021-07-28 11:07:01.6735|INFO|nauka.Program|Test info
+2021-07-28 11:07:01.7151|WARN|nauka.Program|Test Warn
+2021-07-28 11:13:48.9658|INFO|nauka.Program|Nlog config work
+2021-07-28 11:13:49.2771|DEBUG|nauka.Program|Test debug
+2021-07-28 11:13:49.3549|INFO|nauka.Program|Test info
+2021-07-28 11:13:49.4453|WARN|nauka.Program|Test Warn
+2021-07-28 11:15:14.4019|INFO|nauka.Program|Nlog config work
+2021-07-28 11:15:14.6709|DEBUG|nauka.Program|Test debug
+2021-07-28 11:15:14.7351|INFO|nauka.Program|Test info
+2021-07-28 11:15:14.7921|WARN|nauka.Program|Test Warn
+2021-07-28 11:27:10.6146|INFO|nauka.Program|Nlog config work
+2021-07-28 11:27:10.9017|DEBUG|nauka.Program|Test debug
+2021-07-28 11:27:10.9587|INFO|nauka.Program|Test info
+2021-07-28 11:27:11.0160|WARN|nauka.Program|Test Warn
